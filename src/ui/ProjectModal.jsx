@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Loading from "./Loading";
+import { useState, useEffect, useRef } from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -15,7 +17,6 @@ const StyledModal = styled.div`
   backdrop-filter: blur(4px);
 
   .overlay {
-    content: "";
     width: 100%;
     height: 100%;
     top: 0;
@@ -54,13 +55,20 @@ const StyledModal = styled.div`
     }
   }
 
-  iframe {
+  .content {
     width: 90%;
     height: 80%;
     background-color: ${({ theme }) => theme.cardBg};
     color: #000;
     border-radius: var(--borderRadiusSmall);
     border: solid var(--strokeWidth) ${({ theme }) => theme.cyan};
+    position: relative;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   }
 
   > a {
@@ -71,6 +79,29 @@ const StyledModal = styled.div`
 `;
 
 const ProjectModal = ({ projectSrc, closeProjectModal }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const iframeRef = useRef();
+
+  useEffect(() => {
+    iframeRef.current.addEventListener("load", () => {
+      setIsLoading(false);
+    });
+
+    document.body.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeProjectModal();
+    });
+
+    return () => {
+      iframeRef.current?.removeEventListener("load", () => {
+        setIsLoading(false);
+      });
+
+      document.body.removeEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeProjectModal();
+      });
+    };
+  }, []);
+
   return (
     <StyledModal
       as={motion.div}
@@ -83,7 +114,10 @@ const ProjectModal = ({ projectSrc, closeProjectModal }) => {
         <span></span>
         <span></span>
       </button>
-      <iframe src={projectSrc} frameborder="0"></iframe>
+      <div className="content">
+        <iframe src={projectSrc} ref={iframeRef}></iframe>
+        {isLoading ? <Loading /> : null}
+      </div>
       <a href={projectSrc} target="_blank">
         Open in a new tab
       </a>
