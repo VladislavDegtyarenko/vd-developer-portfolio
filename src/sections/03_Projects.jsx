@@ -13,6 +13,7 @@ import OcularImg from "./../assets/projects/3-ocular.jpg";
 import HisImg from "./../assets/projects/4-his.jpg";
 import PasGenImg from "./../assets/projects/5-pasgen.jpg";
 import ClockImg from "./../assets/projects/6-clock.jpg";
+import TenziesImg from "./../assets/projects/7-tenzies.jpg";
 
 import { useState, useRef } from "react";
 
@@ -72,6 +73,13 @@ const projectsData = [
       "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
     previewLink: "https://vladislavdegtyarenko.github.io/preact-password-generator/",
     codeLink: "https://github.com/VladislavDegtyarenko/preact-password-generator",
+  },
+  {
+    img: TenziesImg,
+    title: "Tenzies Game",
+    description: "A simple tenzies game built using React",
+    previewLink: "https://vladislavdegtyarenko.github.io/react-tenzies/",
+    codeLink: "https://github.com/VladislavDegtyarenko/react-tenzies",
   },
 ];
 
