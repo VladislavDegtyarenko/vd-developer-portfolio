@@ -46,7 +46,7 @@ const projectsData = [
     img: OcularImg,
     title: "Ocular",
     description:
-      'Delivered front-end development for "Ocular" medical center website, providing a seamless user experience for adult and pediatric ophthalmology patients.',
+      'Delivered front-end for "Ocular" medical center website, providing a seamless user experience for ophthalmology patients.',
     previewLink: "https://ocular.com.ua/",
     codeLink: "https://github.com/VladislavDegtyarenko/Ocular",
   },
@@ -62,7 +62,7 @@ const projectsData = [
     img: ClockImg,
     title: "Alarms & Clock Clone",
     description:
-      'Windows 10 "Alarms & Clock" app clone created with ReactJS, React Router, CSS Modules, Framer Motion, and FluentUI library. A feature-rich and visually appealing digital clock application.',
+      'Windows 10 "Alarms & Clock" app clone created with ReactJS, Framer Motion, and FluentUI library',
     previewLink: "https://vladislavdegtyarenko.github.io/react-windows-clock-clone/",
     codeLink: "https://github.com/VladislavDegtyarenko/react-windows-clock-clone",
   },
