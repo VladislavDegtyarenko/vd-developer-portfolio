@@ -91,13 +91,27 @@ const StyledMain = styled(Section)`
       }
     }
 
-    &__scroll {
-      margin: 64px auto 0;
+    &__scroll-btn {
       display: block;
+      margin: 64px auto 0;
+      padding: 0;
       position: absolute;
-      left: 50%;
+      left: calc(50% - 1em);
       bottom: 40px;
-      transform: translate(-50%, -50%);
+      width: 2em;
+      height: 2em;
+      font-size: 1em;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--duration);
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      &:hover {
+        transform: translateY(0.125em);
+      }
     }
   }
 
@@ -143,7 +157,9 @@ const Main = () => {
               </Fade>
             </div>
             <Fade triggerOnce delay={1500}>
-              <img className="main__scroll" src={ScrollDownIcon} alt="" />
+              <a href="#about" className="main__scroll-btn">
+                <img src={ScrollDownIcon} alt="" />
+              </a>
             </Fade>
           </div>
         </Container>
