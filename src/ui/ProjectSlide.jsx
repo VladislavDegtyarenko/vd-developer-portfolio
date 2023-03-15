@@ -52,7 +52,7 @@ const StyledSlide = styled.div`
       color: ${({ theme }) => theme.grey};
       cursor: pointer;
       transition: background-color var(--duration), color var(--duration);
-
+      border: none;
       &:hover {
         color: #dddcdc;
       }
