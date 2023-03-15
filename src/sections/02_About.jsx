@@ -19,6 +19,7 @@ import FigmaIcon from "./../assets/Icons/Figma.svg";
 import SalesforceIcon from "./../assets/Icons/Salesforce.svg";
 import TailwindIcon from "./../assets/Icons/Tailwind.svg";
 import BootstrapIcon from "./../assets/Icons/Bootstrap.svg";
+import ViteIcon from "./../assets/Icons/Vitejs-logo.svg";
 
 import { Fade } from "react-awesome-reveal";
 
@@ -68,7 +69,13 @@ const skillsData = [
     icon: GitIcon,
     title: "Git",
     description:
-      "Familiar with Git, able to effectively manage code changes and collaborate with teams.",
+      "Able to effectively manage code changes and collaborate with teams using version control systems.",
+  },
+  {
+    icon: ViteIcon,
+    title: "Bundling Tools",
+    description:
+      "Familiar with frontend bundling tools such as Vite, Rollup, Webpack, Gulp.",
   },
   {
     icon: FigmaIcon,
