@@ -4,7 +4,7 @@ import SectionDivider from "./../ui/SectionDivider";
 import Container from "../ui/Container";
 import { H1, H2, P1 } from "./../ui/Text";
 import Photo from "./../assets/photo.png";
-import ScrollDownIcon from "./../assets/Icons/Scroll Down.svg";
+import ScrollDownIcon from "../assets/Icons/Scroll Down.jsx";
 
 import { Fade } from "react-awesome-reveal";
 
@@ -101,11 +101,13 @@ const StyledMain = styled(Section)`
       width: 2em;
       height: 2em;
       font-size: 1em;
+      color: ${({ theme }) => theme.cyan};
       background-color: transparent;
       border: none;
       cursor: pointer;
       transition: transform var(--duration);
-      img {
+      img,
+      svg {
         width: 100%;
         height: 100%;
       }
@@ -158,7 +160,7 @@ const Main = () => {
             </div>
             <Fade triggerOnce delay={1500}>
               <a href="#about" className="main__scroll-btn">
-                <img src={ScrollDownIcon} alt="" />
+                <ScrollDownIcon />
               </a>
             </Fade>
           </div>
