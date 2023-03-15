@@ -6,6 +6,7 @@ import MoonIcon from "../assets/Icons/Moon";
 const StyledToggle = styled.label`
   position: relative;
   display: inline-block;
+  align-self: center;
   width: 4em;
   height: 2em;
   /* border: solid 1px #35353533; */

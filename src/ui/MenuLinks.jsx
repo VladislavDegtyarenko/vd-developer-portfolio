@@ -7,7 +7,6 @@ const StyledLinks = styled.ul`
   align-items: ${({ isMobile }) => (isMobile ? "center" : "stretch")};
   gap: ${({ isMobile }) => (isMobile ? "5vh" : "3em")};
   justify-content: center;
-  height: 100%;
 
   li {
     list-style-type: none;

@@ -10,6 +10,7 @@ const Button = styled.button`
   display: none;
   width: 2em;
   height: 2em;
+  align-self: center;
 
   @media screen and (max-width: 991.98px) {
     display: flex;
