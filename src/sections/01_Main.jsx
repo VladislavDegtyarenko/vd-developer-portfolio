@@ -8,6 +8,8 @@ import ScrollDownIcon from "./../assets/Icons/Scroll Down.svg";
 
 import { Fade } from "react-awesome-reveal";
 
+import bg from "../assets/bg.jpg";
+
 const StyledMain = styled(Section)`
   /* scroll-margin-top: 200px; */
 
@@ -17,6 +19,22 @@ const StyledMain = styled(Section)`
   flex-direction: column;
   justify-content: center;
   position: relative;
+  background: transparent;
+  z-index: 1;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 70%, ${({ theme }) => theme.bg} 100%),
+      url(${bg}) center center/cover no-repeat;
+    opacity: 0.2;
+    z-index: -1;
+  }
 
   .main {
     &__inner {
