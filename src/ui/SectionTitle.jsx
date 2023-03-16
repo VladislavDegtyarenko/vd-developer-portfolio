@@ -7,6 +7,7 @@ const StyledSectionTitle = styled(H2)`
   display: flex;
   justify-content: center;
   position: relative;
+  text-align: center;
   span {
     padding-bottom: 14px;
     position: relative;
