@@ -6,6 +6,7 @@ const darkTheme = {
   cyan: "#1B9AAA",
   grey: "#B1B1B1",
   fg: "#F8F8F8",
+  white: "#F8F8F8",
 };
 
 const lightTheme = {
@@ -14,6 +15,7 @@ const lightTheme = {
   cyan: "#1B9AAA",
   grey: "#5d5c5c",
   fg: "#353535",
+  white: "#F8F8F8",
 };
 
 function StyledThemeProvider({ children, isDarkMode }) {

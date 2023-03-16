@@ -11,7 +11,7 @@ import LinkedInIcon from "./../assets/social/LinkedInIcon.jsx";
 import GitHubIcon from "./../assets/social/GitHubIcon.jsx";
 import TelegramIcon from "./../assets/social/TelegramIcon.jsx";
 import EmailIcon from "../assets/social/EmailIcon.jsx";
-
+import DownloadIcon from "../assets/Icons/Download.jsx";
 import { Fade } from "react-awesome-reveal";
 
 const StyledContact = styled(Section)`
@@ -49,6 +49,32 @@ const StyledContact = styled(Section)`
       > * {
         width: 100%;
         height: 100%;
+      }
+    }
+    &__download-cv {
+      display: flex;
+      justify-content: center;
+      margin-top: 3em;
+      a {
+        display: flex;
+        align-items: center;
+        color: ${({ theme }) => theme.cyan};
+        text-decoration: none;
+        border-radius: var(--borderRadiusSmall);
+        border: solid var(--strokeWidth) ${({ theme }) => theme.cyan};
+        font-weight: 700;
+        font-size: 1em;
+        padding: 1em 2em;
+        transition: all var(--duration);
+        &:hover {
+          color: ${({ theme }) => theme.white};
+          background-color: ${({ theme }) => theme.cyan};
+        }
+        svg {
+          width: 1em;
+          height: 1em;
+          margin-right: 0.5em;
+        }
       }
     }
   }
@@ -110,6 +136,12 @@ const Contact = () => {
                 <EmailIcon />
               </a>
             </Fade>
+          </div>
+          <div className="contact__download-cv">
+            <a href="Vladyslav_Dihtiarenko_CV_Feb23.pdf" target="_blank">
+              <DownloadIcon />
+              Download CV
+            </a>
           </div>
         </Container>
       </StyledContact>
