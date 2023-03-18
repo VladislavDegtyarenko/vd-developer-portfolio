@@ -81,6 +81,38 @@ const StyledContact = styled(Section)`
 `;
 
 const Contact = () => {
+  const contactLinkButtons = [
+    {
+      href: "https://www.facebook.com/vladislav.degtyarenko.1996",
+      ariaLabel: "Contact me via Facebook",
+      icon: FacebookIcon,
+    },
+    {
+      href: "https://www.instagram.com/vladislavdegtyarenko/",
+      ariaLabel: "Contact me on Instagram",
+      icon: InstagramIcon,
+    },
+    {
+      href: "https://www.linkedin.com/in/vladislavdegtyarenko/",
+      ariaLabel: "Visit my LinkedIn profile",
+      icon: LinkedInIcon,
+    },
+    {
+      href: "https://github.com/VladislavDegtyarenko/",
+      ariaLabel: "Check out my GitHub profile",
+      icon: GitHubIcon,
+    },
+    {
+      href: "https://t.me/Vladislav_Degtyarenko",
+      ariaLabel: "Message me on Telegram",
+      icon: TelegramIcon,
+    },
+    {
+      href: "mailto:vladislavdegtyarenko@gmail.com",
+      ariaLabel: "Email me",
+      icon: EmailIcon,
+    },
+  ];
   return (
     <>
       <StyledContact id="contact">
@@ -93,48 +125,20 @@ const Contact = () => {
           </SectionSubtitle>
           <div className="contact__wrapper">
             <Fade triggerOnce cascade damping={0.1}>
-              <a
-                href="https://www.facebook.com/vladislav.degtyarenko.1996"
-                className="contact__link"
-                target="_blank"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href="https://www.instagram.com/vladislavdegtyarenko/"
-                className="contact__link"
-                target="_blank"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/vladislavdegtyarenko/"
-                className="contact__link"
-                target="_blank"
-              >
-                <LinkedInIcon />
-              </a>
-              <a
-                href="https://github.com/VladislavDegtyarenko/"
-                className="contact__link"
-                target="_blank"
-              >
-                <GitHubIcon />
-              </a>
-              <a
-                href="https://t.me/Vladislav_Degtyarenko"
-                className="contact__link"
-                target="_blank"
-              >
-                <TelegramIcon />
-              </a>
-              <a
-                href="mailto:vladislavdegtyarenko@gmail.com"
-                className="contact__link"
-                target="_blank"
-              >
-                <EmailIcon />
-              </a>
+              {contactLinkButtons.map(({ href, ariaLabel, icon }) => {
+                const Icon = icon;
+
+                return (
+                  <a
+                    href={href}
+                    className="contact__link"
+                    target="_blank"
+                    aria-label={ariaLabel}
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
             </Fade>
           </div>
           <div className="contact__download-cv">

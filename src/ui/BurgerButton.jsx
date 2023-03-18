@@ -32,7 +32,7 @@ const Button = styled.button`
 
 const BurgerButton = ({ isOpen, toggleMenu }) => {
   return (
-    <Button className="burger" onClick={toggleMenu}>
+    <Button className="burger" onClick={toggleMenu} aria-label="menu">
       <BurgerMenuIcon isOpen={isOpen} />
     </Button>
   );

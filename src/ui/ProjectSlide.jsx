@@ -89,7 +89,7 @@ const ProjectSlide = ({
         <img src={img} alt="" loading="lazy" />
       </div>
       <div className="slide__main">
-        <H4>{title}</H4>
+        <H4 as="h3">{title}</H4>
         <P1 className="slide__descr">{description}</P1>
         <div className="slide__buttons">
           {previewLink && previewLink.length > 0 ? (

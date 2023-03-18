@@ -46,10 +46,10 @@ const StyledCard = styled.div`
   }
 `;
 
-const SkillCard = ({ icon, title, description }) => {
+const SkillCard = ({ icon, alt, title, description }) => {
   return (
     <StyledCard>
-      <img className="icon" src={icon} alt="" />
+      <img className="icon" src={icon} alt={alt} />
 
       <div className="text">
         <H4 className="text__title">{title}</H4>

@@ -159,7 +159,7 @@ const Main = () => {
               </Fade>
             </div>
             <Fade triggerOnce delay={1500}>
-              <a href="#about" className="main__scroll-btn">
+              <a href="#about" className="main__scroll-btn" aria-label="scroll down">
                 <ScrollDownIcon />
               </a>
             </Fade>

@@ -93,7 +93,14 @@ const experienceData = [
     chips: ["Ukraine", "Remote", "Full-time"],
     description:
       "At Astound Commerce, I collaborated with experienced managers and developers on a large project, utilizing technologies such as TypeScript, SFCC, React, and Next.js, and got competence in unit testing.",
-    icons: [TSIcon, ReactIcon, NextIcon, SalesforceIcon, TailwindIcon, JestIcon],
+    icons: [
+      { src: TSIcon, alt: "Typescript" },
+      { src: ReactIcon, alt: "React.js" },
+      { src: NextIcon, alt: "Next.js" },
+      { src: SalesforceIcon, alt: "Salesforce" },
+      { src: TailwindIcon, alt: "Tailwind CSS" },
+      { src: JestIcon, alt: "Jest" },
+    ],
   },
   {
     timerange: "nov 20 — sep 21",
@@ -102,7 +109,12 @@ const experienceData = [
     chips: ["Ukraine", "Remote", "Part-time"],
     description:
       "Provided top-notch frontend development in a range of projects, from landing pages to multi-page websites, resulting in happy clients.",
-    icons: [HTMLIcon, CSSIcon, JSIcon, BootstrapIcon],
+    icons: [
+      { src: HTMLIcon, alt: "HTML" },
+      { src: CSSIcon, alt: "CSS" },
+      { src: JSIcon, alt: "Javascript" },
+      { src: BootstrapIcon, alt: "Bootstrap" },
+    ],
   },
   {
     timerange: "feb 20 — sep 21",
@@ -191,6 +203,7 @@ const About = () => {
                   {skillsData.map(({ icon, title, description }) => (
                     <SkillCard
                       icon={icon}
+                      alt={title}
                       title={title}
                       description={description}
                       key={title}

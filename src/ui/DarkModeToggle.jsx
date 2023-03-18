@@ -81,14 +81,8 @@ const StyledToggle = styled.label`
 
 function DarkModeToggle({ isDarkMode, toggleDarkMode }) {
   return (
-    <StyledToggle>
-      <input
-        type="checkbox"
-        checked={isDarkMode}
-        onChange={toggleDarkMode}
-        name=""
-        id=""
-      />
+    <StyledToggle aria-label={`switch to ${isDarkMode ? "light" : "dark"} theme`}>
+      <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
       <span className="slider"></span>
       <MoonIcon />
       <SunIcon />

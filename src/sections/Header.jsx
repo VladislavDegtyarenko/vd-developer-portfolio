@@ -148,6 +148,7 @@ const Header = ({
                 toggleMenu();
               }
             }}
+            aria-label="logo, click to scroll to top"
           >
             <Logo />
           </a>

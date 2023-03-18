@@ -6,6 +6,7 @@ const EmailIcon = () => {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      alt="email"
     >
       <g clipPath="url(#clip0_61_536)">
         <path

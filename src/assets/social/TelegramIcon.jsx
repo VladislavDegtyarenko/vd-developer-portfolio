@@ -6,6 +6,7 @@ const TelegramIcon = () => {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      alt="telegram"
     >
       <g clipPath="url(#clip0_61_510)">
         <path

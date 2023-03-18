@@ -6,6 +6,7 @@ const LinkedInIcon = () => {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      alt="linkedin"
     >
       <g clipPath="url(#clip0_61_468)">
         <rect x="3" y="3" width="26" height="26" stroke="currentColor" strokeWidth="6" />

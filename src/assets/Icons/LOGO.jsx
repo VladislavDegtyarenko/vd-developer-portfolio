@@ -7,6 +7,7 @@ const Logo = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="logo"
+      alt="logo, click to scroll up"
     >
       <mask
         id="mask0_68_511"

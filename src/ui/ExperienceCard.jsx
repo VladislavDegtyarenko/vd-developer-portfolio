@@ -80,8 +80,8 @@ const ExperienceCard = ({
       </div>
       {icons && icons.length > 0 ? (
         <div className="icons">
-          {icons.map((icon) => (
-            <Icon key={`${company} ${icon}`} src={icon} />
+          {icons.map(({ src, alt }) => (
+            <Icon key={`${company} ${alt}`} src={src} alt={alt} />
           ))}
         </div>
       ) : null}
