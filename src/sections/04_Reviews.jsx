@@ -19,7 +19,6 @@ const StyledReviews = styled(Section)`
       margin-top: 48px;
       padding: 32px;
       background: ${({ theme }) => theme.cardBg};
-      border: 4px solid rgba(27, 154, 170, 0.2);
       border-radius: var(--borderRadiusNormal);
 
       @media screen and (max-width: 991.98px) {
