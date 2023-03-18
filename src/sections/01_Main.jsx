@@ -3,7 +3,7 @@ import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import Container from "../ui/Container";
 import { H1, H2, P1 } from "./../ui/Text";
-import Photo from "./../assets/photo.png";
+// import Photo from "./../assets/photo.png";
 import ScrollDownIcon from "../assets/Icons/Scroll Down.jsx";
 
 import { Fade } from "react-awesome-reveal";
@@ -153,7 +153,7 @@ const Main = () => {
               <Fade triggerOnce delay={500}>
                 <div className="main__photo">
                   <div className="main__photo_inner">
-                    <img src={Photo} alt="" />
+                    <img src="photo.png" alt="" />
                   </div>
                 </div>
               </Fade>
