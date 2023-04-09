@@ -61,7 +61,7 @@ const skillsData = [
     icon: ViteIcon,
     title: "Bundling Tools",
     description:
-      "Familiar with frontend bundling tools such as Vite, Rollup, Webpack, Gulp.",
+      "Familiar with frontend bundling tools such as Vite, Rollup, Webpack, Gulp and PostCSS",
   },
   {
     icon: FigmaIcon,
