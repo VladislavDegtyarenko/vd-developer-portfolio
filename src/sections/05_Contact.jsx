@@ -5,14 +5,10 @@ import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
 import SectionSubtitle from "../ui/SectionSubtitle";
 
-import FacebookIcon from "./../assets/social/FacebookIcon.jsx";
-import InstagramIcon from "./../assets/social/InstagramIcon.jsx";
-import LinkedInIcon from "./../assets/social/LinkedInIcon.jsx";
-import GitHubIcon from "./../assets/social/GitHubIcon.jsx";
-import TelegramIcon from "./../assets/social/TelegramIcon.jsx";
-import EmailIcon from "../assets/social/EmailIcon.jsx";
 import DownloadIcon from "../assets/Icons/Download.jsx";
 import { Fade } from "react-awesome-reveal";
+
+import contactBtns from "../data/contactBtns";
 
 const StyledContact = styled(Section)`
   .contact {
@@ -81,38 +77,6 @@ const StyledContact = styled(Section)`
 `;
 
 const Contact = () => {
-  const contactLinkButtons = [
-    {
-      href: "https://www.facebook.com/vladislav.degtyarenko.1996",
-      ariaLabel: "Contact me via Facebook",
-      icon: FacebookIcon,
-    },
-    {
-      href: "https://www.instagram.com/vladislavdegtyarenko/",
-      ariaLabel: "Contact me on Instagram",
-      icon: InstagramIcon,
-    },
-    {
-      href: "https://www.linkedin.com/in/vladislavdegtyarenko/",
-      ariaLabel: "Visit my LinkedIn profile",
-      icon: LinkedInIcon,
-    },
-    {
-      href: "https://github.com/VladislavDegtyarenko/",
-      ariaLabel: "Check out my GitHub profile",
-      icon: GitHubIcon,
-    },
-    {
-      href: "https://t.me/Vladislav_Degtyarenko",
-      ariaLabel: "Message me on Telegram",
-      icon: TelegramIcon,
-    },
-    {
-      href: "mailto:vladislavdegtyarenko@gmail.com",
-      ariaLabel: "Email me",
-      icon: EmailIcon,
-    },
-  ];
   return (
     <>
       <StyledContact id="contact">
@@ -125,7 +89,7 @@ const Contact = () => {
           </SectionSubtitle>
           <div className="contact__wrapper">
             <Fade triggerOnce cascade damping={0.1}>
-              {contactLinkButtons.map(({ href, ariaLabel, icon }) => {
+              {contactBtns.map(({ href, ariaLabel, icon }) => {
                 const Icon = icon;
 
                 return (
