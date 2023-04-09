@@ -106,7 +106,7 @@ const Contact = () => {
             </Fade>
           </div>
           <div className="contact__download-cv">
-            <a href="Vladyslav_Dihtiarenko_CV_Mar23.pdf" target="_blank">
+            <a href="Vladyslav Dihtiarenko CV Mar23_compressed.pdf" target="_blank">
               <DownloadIcon />
               Download CV
             </a>
