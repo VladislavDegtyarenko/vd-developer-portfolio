@@ -9,7 +9,7 @@ const StyledExpCard = styled.div`
   gap: 16px;
   padding: 24px;
   border-radius: var(--borderRadiusNormal);
-  border: solid var(--strokeWidth) ${({ theme }) => theme.cardBg};
+  background-color: ${({ theme }) => theme.cardBg};
 
   .info {
     display: grid;
@@ -48,7 +48,7 @@ const Chip = styled(P2)`
   display: inline-block;
   border-radius: 16px;
   padding: 4px 8px;
-  background-color: ${({ theme }) => theme.cardBg};
+  background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.grey};
 `;
 
