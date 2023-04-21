@@ -1,13 +1,17 @@
+import { useRef, useLayoutEffect } from "react";
+
 import styled from "styled-components";
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
-import SectionSubtitle from "../ui/SectionSubtitle";
+import SectionDescription from "../ui/SectionDescription";
 
 import DownloadIcon from "../assets/Icons/Download.jsx";
-import { Fade } from "react-awesome-reveal";
 
+import animateFromBottom from "../animations/animateFromBottom";
+
+// Data
 import contactBtns from "../data/contactBtns";
 
 const StyledContact = styled(Section)`
@@ -77,35 +81,47 @@ const StyledContact = styled(Section)`
 `;
 
 const Contact = () => {
+  const iconsRef = useRef();
+  const downloadBtnRef = useRef();
+
+  useLayoutEffect(() => {
+    animateFromBottom([iconsRef.current.children, downloadBtnRef.current], {
+      stagger: 0.1,
+    });
+  }, []);
   return (
     <>
       <StyledContact id="contact">
         <Container>
           <SectionTitle>Get in Touch</SectionTitle>
-          <SectionSubtitle className="contact__descr">
+          <SectionDescription className="contact__descr">
             Interested in working with me or hiring me for your next project? Drop me a
-            line and let's make it happen. <br /> <br /> Get in touch today and let's
-            bring your ideas to life.
-          </SectionSubtitle>
-          <div className="contact__wrapper">
-            <Fade triggerOnce cascade damping={0.1}>
-              {contactBtns.map(({ href, ariaLabel, icon }) => {
-                const Icon = icon;
+            line and let's make it happen.
+          </SectionDescription>
+          <SectionDescription
+            className="contact__descr"
+            animationOptions={{ delay: 0.15 }}
+          >
+            Get in touch today and let's bring your ideas to life.
+          </SectionDescription>
+          <div className="contact__wrapper" ref={iconsRef}>
+            {contactBtns.map(({ href, ariaLabel, icon }) => {
+              const Icon = icon;
 
-                return (
-                  <a
-                    href={href}
-                    className="contact__link"
-                    target="_blank"
-                    aria-label={ariaLabel}
-                  >
-                    <Icon />
-                  </a>
-                );
-              })}
-            </Fade>
+              return (
+                <a
+                  href={href}
+                  className="contact__link"
+                  target="_blank"
+                  aria-label={ariaLabel}
+                  key={href}
+                >
+                  <Icon />
+                </a>
+              );
+            })}
           </div>
-          <div className="contact__download-cv">
+          <div className="contact__download-cv" ref={downloadBtnRef}>
             <a href="Vladyslav Dihtiarenko CV Mar23_compressed.pdf" target="_blank">
               <DownloadIcon />
               Download CV

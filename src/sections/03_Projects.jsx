@@ -3,7 +3,7 @@ import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
-import SectionSubtitle from "../ui/SectionSubtitle";
+import SectionSubtitle from "../ui/SectionDescription";
 import ArrowIcon from "../assets/Icons/Arrow.jsx";
 import ProjectSlide from "../ui/ProjectSlide";
 

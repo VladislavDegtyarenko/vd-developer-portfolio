@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { H4, P2 } from "./Text";
 
+import { useRef, useLayoutEffect } from "react";
+import animateFromBottom from "../animations/animateFromBottom";
+
 const StyledCard = styled.div`
   display: grid;
   align-self: start;
@@ -46,9 +49,15 @@ const StyledCard = styled.div`
   }
 `;
 
-const SkillCard = ({ icon, alt, title, description }) => {
+const SkillCard = ({ icon, alt, title, description, animationOptions }) => {
+  const ref = useRef();
+
+  useLayoutEffect(() => {
+    animateFromBottom(ref.current, animationOptions);
+  }, []);
+
   return (
-    <StyledCard>
+    <StyledCard ref={ref}>
       <img className="icon" src={icon} alt={alt} />
 
       <div className="text">

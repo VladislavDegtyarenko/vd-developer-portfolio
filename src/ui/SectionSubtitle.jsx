@@ -1,29 +1,28 @@
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
-import { P1 } from "./Text";
+import textByChars from "../functions/textByChars";
+import { H3 } from "./Text";
 
-import { Fade } from "react-awesome-reveal";
+import animateSectionTitle from "../animations/animateSectionTitle";
 
-const StyledSectionSubtitle = styled(P1)`
-  text-align: center;
-  padding: 0 80px;
-  color: ${({ theme }) => theme.grey};
-  margin-top: 40px;
-
+const StyledSectionSubtitle = styled(H3)`
+  overflow: hidden;
   @media screen and (max-width: 991.98px) {
-    padding: 0 40px;
-  }
-
-  @media screen and (max-width: 767.98px) {
-    padding: 0;
+    text-align: center;
   }
 `;
 
-const SectionSubtltle = ({ children }) => {
-  return (
-    <Fade triggerOnce>
-      <StyledSectionSubtitle>{children}</StyledSectionSubtitle>
-    </Fade>
-  );
+const SectionSubtitle = ({ children }) => {
+  const ref = useRef();
+  const titleByChars = textByChars(children);
+
+  const { animateTitle } = animateSectionTitle(ref);
+
+  useLayoutEffect(() => {
+    animateTitle("*", {}, { delay: 0.15 });
+  }, []);
+
+  return <StyledSectionSubtitle ref={ref}>{titleByChars}</StyledSectionSubtitle>;
 };
 
-export default SectionSubtltle;
+export default SectionSubtitle;

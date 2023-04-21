@@ -1,14 +1,13 @@
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import Container from "../ui/Container";
 import { H1, H2, P1 } from "./../ui/Text";
-// import Photo from "./../assets/photo.png";
 import ScrollDownIcon from "../assets/Icons/Scroll Down.jsx";
-
-import { Fade } from "react-awesome-reveal";
-
 import bg from "../assets/bg.jpg";
+
+import animateMain from "../animations/animateMain";
 
 const StyledMain = styled(Section)`
   /* scroll-margin-top: 200px; */
@@ -131,38 +130,40 @@ const StyledMain = styled(Section)`
 `;
 
 const Main = () => {
+  const homeRef = useRef();
+  const { animateMainElements, animateInfoText } = animateMain(homeRef);
+
+  useLayoutEffect(() => {
+    animateMainElements();
+    animateInfoText();
+  }, []);
+
   return (
     <>
-      <StyledMain id="home">
+      <StyledMain id="home" ref={homeRef}>
         <Container>
           <div className="main">
             <div className=" main__inner">
               <div className="main__info">
-                <Fade triggerOnce cascade damping="0.5">
-                  <H1>Hello,</H1>
-                  <H2>
-                    I am <span className="accent">Vladyslav</span>, <br />
-                    Frontend Developer
-                  </H2>
-                  <P1 className="description">
-                    Based in <span>Kyiv, Ukraine</span>, I'm passionate about creating
-                    engaging, digital experiences on the web.
-                  </P1>
-                </Fade>
+                <H1>Hello,</H1>
+                <H2>
+                  I am <span className="accent">Vladyslav</span>, <br />
+                  Frontend Developer
+                </H2>
+                <P1 className="description">
+                  Based in <span>Kyiv, Ukraine</span>, I'm passionate about creating
+                  engaging, digital experiences on the web.
+                </P1>
               </div>
-              <Fade triggerOnce delay={500}>
-                <div className="main__photo">
-                  <div className="main__photo_inner">
-                    <img src="photo.png" alt="" />
-                  </div>
+              <div className="main__photo">
+                <div className="main__photo_inner">
+                  <img src="photo.png" alt="" />
                 </div>
-              </Fade>
+              </div>
             </div>
-            <Fade triggerOnce delay={1500}>
-              <a href="#about" className="main__scroll-btn" aria-label="scroll down">
-                <ScrollDownIcon />
-              </a>
-            </Fade>
+            <a href="#about" className="main__scroll-btn" aria-label="scroll down">
+              <ScrollDownIcon />
+            </a>
           </div>
         </Container>
       </StyledMain>

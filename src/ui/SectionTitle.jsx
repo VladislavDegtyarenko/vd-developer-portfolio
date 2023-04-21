@@ -1,36 +1,50 @@
 import styled from "styled-components";
 import { H2 } from "./Text";
+import { useLayoutEffect, useRef } from "react";
 
-import { Fade } from "react-awesome-reveal";
+import textByChars from "./../functions/textByChars";
+import animateSectionTitle from "../animations/animateSectionTitle";
 
 const StyledSectionTitle = styled(H2)`
   display: flex;
   justify-content: center;
+
   position: relative;
-  text-align: center;
-  span {
+  h2 {
+    font-size: 1em;
+    line-height: 1;
     padding-bottom: 14px;
     position: relative;
-
-    &:after {
-      content: "";
-      background-color: ${({ theme }) => theme.cyan};
-      height: var(--strokeWidth);
-      width: calc(100% - 32px);
-      position: absolute;
-      bottom: 0;
-      left: 16px;
-    }
+    overflow: hidden;
+  }
+  .line {
+    background-color: ${({ theme }) => theme.cyan};
+    height: var(--strokeWidth);
+    width: calc(100% - 32px);
+    left: 16px;
+    position: relative;
+    display: block;
   }
 `;
 
 const SectionTitle = ({ children, id }) => {
+  const ref = useRef();
+  const titleByChars = textByChars(children);
+
+  const { animateTitle, animateLine } = animateSectionTitle(ref);
+
+  useLayoutEffect(() => {
+    animateTitle("h2 > *");
+    animateLine();
+  }, []);
+
   return (
-    <Fade triggerOnce>
-      <StyledSectionTitle id={id}>
-        <span>{children}</span>
-      </StyledSectionTitle>
-    </Fade>
+    <StyledSectionTitle id={id} ref={ref} as="div">
+      <div>
+        <h2>{titleByChars}</h2>
+        <div className="line"></div>
+      </div>
+    </StyledSectionTitle>
   );
 };
 

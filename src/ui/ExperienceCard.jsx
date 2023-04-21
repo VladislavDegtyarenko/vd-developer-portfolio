@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { H4, P1, P2 } from "./Text";
 
+import { useRef, useLayoutEffect } from "react";
+import animateFromBottom from "../animations/animateFromBottom";
+
 const StyledExpCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,9 +63,16 @@ const Icon = styled.img`
 
 const ExperienceCard = ({
   experience: { timerange, position, company, chips, description, icons },
+  animationOptions,
 }) => {
+  const ref = useRef();
+
+  useLayoutEffect(() => {
+    animateFromBottom(ref.current, animationOptions);
+  }, []);
+
   return (
-    <StyledExpCard>
+    <StyledExpCard ref={ref}>
       <div className="info">
         <div className="time-range">
           <P2>{timerange}</P2>

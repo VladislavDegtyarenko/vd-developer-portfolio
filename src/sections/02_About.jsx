@@ -1,26 +1,25 @@
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
+
+// UI
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
+import SectionSubtitle from "../ui/SectionSubtitle";
 import Container from "../ui/Container";
 import { H3 } from "./../ui/Text";
 import SkillCard from "../ui/SkillCard";
 import ExperienceCard from "../ui/ExperienceCard";
 
-import { Fade } from "react-awesome-reveal";
-
+// Data
 import skillsData from "../data/skills";
 import experienceData from "../data/experience";
 
+// Styled
 const StyledAbout = styled(Section)`
   .about {
     &__subsection {
       margin-top: 48px;
-      &_title {
-        @media screen and (max-width: 991.98px) {
-          text-align: center;
-        }
-      }
     }
     &__skills-wrapper {
       margin-top: 42px;
@@ -50,46 +49,49 @@ const StyledAbout = styled(Section)`
   }
 `;
 
+// Component
 const About = () => {
+  const aboutRef = useRef();
+
+  useLayoutEffect(() => {}, []);
+
   return (
     <>
       <StyledAbout id="about">
         <Container>
           <SectionTitle>About</SectionTitle>
-          <Fade triggerOnce cascade damping="1">
-            <div className="about__subsection">
-              <H3 className="about__subsection_title">Skills</H3>
+          <div className="about__subsection">
+            <SectionSubtitle>Skills</SectionSubtitle>
 
-              <div className="about__skills-wrapper">
-                <Fade triggerOnce cascade damping="0.1">
-                  {skillsData.map(({ icon, title, description }) => (
-                    <SkillCard
-                      icon={icon}
-                      alt={title}
-                      title={title}
-                      description={description}
-                      key={title}
-                    />
-                  ))}
-                </Fade>
-              </div>
+            <div className="about__skills-wrapper">
+              {skillsData.map(({ icon, title, description }, key) => (
+                <SkillCard
+                  icon={icon}
+                  alt={title}
+                  title={title}
+                  description={description}
+                  key={title}
+                  animationOptions={{
+                    delay: 0.15 * (key % 3),
+                  }}
+                />
+              ))}
             </div>
+          </div>
 
-            <div className="about__subsection">
-              <H3 className="about__subsection_title">Working Experience</H3>
-              <div className="about__experience-wrapper">
-                <Fade triggerOnce cascade damping="0.1">
-                  {experienceData.map((experience) => (
-                    <ExperienceCard
-                      // prettier-ignore
-                      key={experience.company}
-                      experience={experience}
-                    />
-                  ))}
-                </Fade>
-              </div>
+          <div className="about__subsection">
+            <SectionSubtitle>Working Experience</SectionSubtitle>
+
+            <div className="about__experience-wrapper">
+              {experienceData.map((experience) => (
+                <ExperienceCard
+                  // prettier-ignore
+                  key={experience.company}
+                  experience={experience}
+                />
+              ))}
             </div>
-          </Fade>
+          </div>
         </Container>
       </StyledAbout>
       <Container>
