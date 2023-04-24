@@ -69,9 +69,12 @@ const StyledMain = styled(Section)`
         flex-shrink: 0;
         position: relative;
         background-color: ${({ theme }) => theme.bg};
+        overflow: hidden;
+        filter: saturate(0.8);
         img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
       }
 
@@ -157,7 +160,7 @@ const Main = () => {
               </div>
               <div className="main__photo">
                 <div className="main__photo_inner">
-                  <img src="photo.png" alt="" />
+                  <img src="photo.jpg" alt="" />
                 </div>
               </div>
             </div>
