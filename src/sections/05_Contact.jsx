@@ -114,6 +114,7 @@ const Contact = () => {
                   className="contact__link"
                   target="_blank"
                   aria-label={ariaLabel}
+                  title={ariaLabel}
                   key={href}
                 >
                   <Icon />
@@ -122,7 +123,11 @@ const Contact = () => {
             })}
           </div>
           <div className="contact__download-cv" ref={downloadBtnRef}>
-            <a href="Vladyslav Dihtiarenko CV Mar23_compressed.pdf" target="_blank">
+            <a
+              href="Vladyslav Dihtiarenko CV Mar23_compressed.pdf"
+              title={"Get my CV in PDF format"}
+              target="_blank"
+            >
               <DownloadIcon />
               Download CV
             </a>

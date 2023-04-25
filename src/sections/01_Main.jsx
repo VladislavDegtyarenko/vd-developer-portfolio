@@ -164,7 +164,12 @@ const Main = () => {
                 </div>
               </div>
             </div>
-            <a href="#about" className="main__scroll-btn" aria-label="scroll down">
+            <a
+              href="#about"
+              className="main__scroll-btn"
+              aria-label="scroll down"
+              title="scroll down"
+            >
               <ScrollDownIcon />
             </a>
           </div>

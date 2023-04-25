@@ -58,7 +58,7 @@ const SkillCard = ({ icon, alt, title, description, animationOptions }) => {
 
   return (
     <StyledCard ref={ref}>
-      <img className="icon" src={icon} alt={alt} />
+      <img className="icon" src={icon} alt={alt} title={alt} />
 
       <div className="text">
         <H4 className="text__title">{title}</H4>

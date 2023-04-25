@@ -1,5 +1,4 @@
 function textByChars(text) {
-  console.log('text: ', text);
   if (!text) return;
   if (text?.trim().length === 0) return text;
 
