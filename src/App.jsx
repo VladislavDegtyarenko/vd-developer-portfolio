@@ -14,6 +14,7 @@ import MobileMenu from "./sections/MobileMenu";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import ProjectModal from "./ui/ProjectModal";
+import BackToTopBtn from "./ui/BackToTopBtn";
 
 const StyledApp = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -129,6 +130,8 @@ const App = () => {
             <ProjectModal projectSrc={projectSrc} closeProjectModal={closeProjectModal} />
           )}
         </AnimatePresence>
+
+        <BackToTopBtn />
       </StyledApp>
     </ThemeProvider>
   );

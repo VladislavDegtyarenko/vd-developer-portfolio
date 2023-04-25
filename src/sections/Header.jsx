@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
   padding: 1.5em 0;
   position: fixed;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
   box-shadow: 0 0 8px #35353555;
   /* background-color: #050505bb; */
   backdrop-filter: blur(8px);

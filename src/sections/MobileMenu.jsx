@@ -14,7 +14,7 @@ const StyledMenu = styled.div`
   width: 100%;
   height: 100%;
   height: 100svh;
-  z-index: 1;
+  z-index: 2;
   backdrop-filter: blur(4px);
 
   &:after {
