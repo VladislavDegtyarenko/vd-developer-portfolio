@@ -15,7 +15,10 @@ const Footer = () => {
     <StyledFooter>
       <Container>
         <Fade triggerOnce>
-          <P2>© Copyright 2023 | Vladyslav Dihtiarenko | All Rights Reserved</P2>
+          <P2>
+            © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All Rights
+            Reserved
+          </P2>
         </Fade>
       </Container>
     </StyledFooter>
