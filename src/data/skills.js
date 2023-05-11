@@ -3,6 +3,7 @@ import CSSIcon from "./../assets/Icons/CSS.svg";
 import JSIcon from "./../assets/Icons/JS.svg";
 import ReactIcon from "./../assets/Icons/React.svg";
 import NextIcon from "./../assets/Icons/Next.svg";
+import ReduxIcon from "./../assets/Icons/Redux.svg";
 import TSIcon from "./../assets/Icons/TS.svg";
 import JestIcon from "./../assets/Icons/Jest.svg";
 import GitIcon from "./../assets/Icons/Git.svg";
@@ -40,6 +41,13 @@ const skillsData = [
     description:
       "Experienced in Next.js, delivering fast and scalable websites, including server-side rendering.",
   },
+  {
+    icon: ReduxIcon,
+    title: "Redux",
+    description:
+      "Integrating Redux with React components to efficiently manage state in complex apps.",
+  },
+
   {
     icon: TSIcon,
     title: "Typescript",
