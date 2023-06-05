@@ -160,7 +160,7 @@ const Main = () => {
               </div>
               <div className="main__photo">
                 <div className="main__photo_inner">
-                  <img src="photo.jpg" alt="" />
+                  <img src="photo.png" alt="" />
                 </div>
               </div>
             </div>
