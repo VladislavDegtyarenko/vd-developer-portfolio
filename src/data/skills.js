@@ -7,6 +7,7 @@ import ReduxIcon from "./../assets/Icons/Redux.svg";
 import TSIcon from "./../assets/Icons/TS.svg";
 import JestIcon from "./../assets/Icons/Jest.svg";
 import GitIcon from "./../assets/Icons/Git.svg";
+import GSAPIcon from "./../assets/Icons/GSAP.svg";
 import FigmaIcon from "./../assets/Icons/Figma.svg";
 import ViteIcon from "./../assets/Icons/Vitejs-logo.svg";
 
@@ -64,6 +65,12 @@ const skillsData = [
     title: "Git",
     description:
       "Able to effectively manage code changes and collaborate with teams using version control systems.",
+  },
+  {
+    icon: GSAPIcon,
+    title: "GSAP",
+    description:
+      "Experienced with GSAP, leveraging its animation capabilities to deliver visually stunning and engaging websites",
   },
   {
     icon: ViteIcon,
