@@ -1,3 +1,4 @@
+import WeatherAppImg from "./../assets/projects/0-weatherapp.png";
 import TodoImg from "./../assets/projects/1-todo.jpg";
 import SnakeImg from "./../assets/projects/2-snake.jpg";
 import OcularImg from "./../assets/projects/3-ocular.jpg";
@@ -8,6 +9,14 @@ import TenziesImg from "./../assets/projects/7-tenzies.jpg";
 import Game2048Img from "./../assets/projects/8-2048.jpg";
 
 const projectsData = [
+  {
+    img: WeatherAppImg,
+    title: "Weather App",
+    description:
+      "A weather application developed using React, Redux, Material UI, Typescript and ChartJS, featuring a Microsoft-inspired interface.",
+    previewLink: "https://vd-react-weather-app.vercel.app/",
+    codeLink: "https://github.com/VladislavDegtyarenko/react-weather-app",
+  },
   {
     img: TodoImg,
     title: "Todo App",
