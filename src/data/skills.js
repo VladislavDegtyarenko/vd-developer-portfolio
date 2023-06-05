@@ -21,7 +21,7 @@ const skillsData = [
     icon: CSSIcon,
     title: "CSS",
     description:
-      "Highly skilled in CSS, Sass, Bootstrap, and Tailwind for exceptional designs.",
+      "Highly skilled in CSS and tools like Sass, Bootstrap, Tailwind, Material UI and CSS-in-JS",
   },
   {
     icon: JSIcon,
