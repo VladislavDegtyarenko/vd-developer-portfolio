@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/vd-developer-portfolio/:path*",
-      "destination": "/:path*"
-    }
-  ]
-}
