@@ -1,5 +1,3 @@
-"use client";
-
 import StyledComponentsRegistry from "./lib/registry";
 import { Poppins } from "next/font/google";
 import "./index.css";
