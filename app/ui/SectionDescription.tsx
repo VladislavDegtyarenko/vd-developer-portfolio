@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 
 import styled from "styled-components";
 import { P1 } from "./Text";
@@ -26,7 +27,7 @@ const StyledSectionDescription = styled(P1)`
 const SectionDescription = ({ children, animationOptions }: SectionDescriptionProps) => {
   const ref = useRef<SectionDescriptionRef>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     animateFromBottom(ref.current, animationOptions);
   }, []);
 

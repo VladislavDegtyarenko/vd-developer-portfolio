@@ -18,6 +18,7 @@ const animateMain = (ref: MutableRefObject<HTMLElement | null>) => {
       {
         opacity: 0,
         y: 50,
+        autoAlpha: 1,
       },
       { y: 0, opacity: 1, duration: 0.7, stagger: 0.7 }
     );
@@ -32,6 +33,7 @@ const animateMain = (ref: MutableRefObject<HTMLElement | null>) => {
       stagger: 0.3,
       opacity: 0,
       y: 50,
+      autoAlpha: 1,
       text: { value: "", delimiter: " " },
     });
   };

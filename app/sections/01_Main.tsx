@@ -1,6 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import styled from "styled-components";
 import Image from "next/image";
 import Section from "./../ui/Section";
@@ -139,7 +140,7 @@ const Main = () => {
   const homeRef = useRef<HTMLElement | null>(null);
   const { animateMainElements, animateInfoText } = animateMain(homeRef);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     animateMainElements();
     animateInfoText();
   }, []);
@@ -149,7 +150,7 @@ const Main = () => {
       <StyledMain id="home" ref={homeRef}>
         <Container>
           <div className="main">
-            <div className=" main__inner">
+            <div className="main__inner">
               <div className="main__info">
                 <H1>Hello,</H1>
                 <H2>
