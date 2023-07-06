@@ -3,7 +3,8 @@
 import styled from "styled-components";
 import { H4, P1, P2 } from "./Text";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import animateFromBottom from "../animations/animateFromBottom";
 import { ExpCardRef, ExperienceCardProps } from "../types";
 
@@ -75,7 +76,7 @@ const ExperienceCard = ({
 }: ExperienceCardProps) => {
   const ref = useRef<ExpCardRef>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     animateFromBottom(ref.current, animationOptions);
   }, []);
 

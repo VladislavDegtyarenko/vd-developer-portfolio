@@ -1,6 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import styled from "styled-components";
 import textByChars from "../functions/textByChars";
 import { H3 } from "./Text";
@@ -21,7 +22,7 @@ const SectionSubtitle = ({ children }: SectionSubtitleProps) => {
 
   const { animateTitle } = animateSectionTitle(ref);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect (() => {
     animateTitle("*", {}, { delay: 0.15 });
   }, []);
 

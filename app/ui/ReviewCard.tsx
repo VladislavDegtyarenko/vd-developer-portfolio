@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -66,7 +67,7 @@ const StyledReviewCard = styled.div`
 const ReviewCard = () => {
   const ref = useRef<ReviewCardRef>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     animateFromBottom(ref.current);
   }, []);
 

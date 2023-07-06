@@ -1,4 +1,5 @@
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 
 import styled from "styled-components";
 import Section from "./../ui/Section";
@@ -85,7 +86,7 @@ const Contact = () => {
   const iconsRef = useRef<ContactIconRef>(null);
   const downloadBtnRef = useRef<DownloadBtnRef>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!iconsRef.current) return;
 
     animateFromBottom([...new Set(iconsRef.current.children), downloadBtnRef.current], {

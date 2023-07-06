@@ -4,7 +4,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import { H4, P2 } from "./Text";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import animateFromBottom from "../animations/animateFromBottom";
 import { SkillCardProps, SkillCardRef } from "../types";
 
@@ -63,7 +64,7 @@ const SkillCard = ({
 }: SkillCardProps) => {
   const ref = useRef<SkillCardRef>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     animateFromBottom(ref.current, animationOptions);
   }, [animationOptions]);
 

@@ -2,7 +2,8 @@
 
 import styled from "styled-components";
 import { H2 } from "./Text";
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 
 import textByChars from "./../functions/textByChars";
 import animateSectionTitle from "../animations/animateSectionTitle";
@@ -36,7 +37,7 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
 
   const { animateTitle, animateLine } = animateSectionTitle(ref);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     animateTitle("h2 > *");
     animateLine();
   }, []);
