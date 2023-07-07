@@ -9,7 +9,9 @@ import SectionDivider from "./../ui/SectionDivider";
 import Container from "../ui/Container";
 import { H1, H2, P1 } from "./../ui/Text";
 import ScrollDownIcon from "@/assets/Icons/Scroll Down";
+
 import bg from "@/assets/bg.jpg";
+import photo from "@/photo.png";
 
 import animateMain from "../animations/animateMain";
 
@@ -24,19 +26,30 @@ const StyledMain = styled(Section)`
   position: relative;
   background: transparent;
   z-index: 1;
-  &:before {
-    content: "";
+
+  .bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(transparent 70%, ${({ theme }) => theme.bg} 100%),
-      url(${bg.src}) center center/cover no-repeat;
+    top: 0;
+    left: 0;
     opacity: 0.2;
-    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+    img {
+      object-fit: cover;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent 70%, ${({ theme }) => theme.bg} 100%);
+    }
   }
 
   .main {
@@ -148,8 +161,12 @@ const Main = () => {
   return (
     <>
       <StyledMain id="home" ref={homeRef}>
-        <Container>
-          <div className="main">
+        <div className="bg">
+          <Image src={bg} alt="" placeholder="blur" quality="50" fill priority />
+        </div>
+
+        <div className="main">
+          <Container>
             <div className="main__inner">
               <div className="main__info">
                 <H1>Hello,</H1>
@@ -165,8 +182,8 @@ const Main = () => {
               <div className="main__photo">
                 <div className="main__photo_inner">
                   <Image
-                    src="/photo.png"
-                    // sizes="(max-width: 991.98px) 232px, 312px"
+                    src={photo}
+                    sizes="(max-width: 991.98px) 464px, 624px"
                     alt="Photo of Vladyslav Dihtiarneko, frontend developer"
                     fill
                     priority
@@ -182,8 +199,8 @@ const Main = () => {
             >
               <ScrollDownIcon />
             </a>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </StyledMain>
       <Container>
         <SectionDivider />
