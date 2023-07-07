@@ -47,7 +47,7 @@ export interface MenuLinksProps {
 }
 
 export interface StyledLinksProps {
-  $isMobile: IsMobile;
+  isMobile: IsMobile;
 }
 
 export interface DarkModeToggleProps {

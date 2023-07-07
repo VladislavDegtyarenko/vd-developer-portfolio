@@ -142,7 +142,6 @@ const App = () => {
           toggleDarkMode={toggleDarkMode}
           ref={headerRef}
         />
-
         <Main />
         <About />
         <Projects previewProject={previewProject} />
