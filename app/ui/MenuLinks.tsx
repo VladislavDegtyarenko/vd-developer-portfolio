@@ -6,9 +6,9 @@ import { H3, P1 } from "./Text";
 
 const StyledLinks = styled.ul<StyledLinksProps>`
   display: grid;
-  grid-auto-flow: ${({ $isMobile }) => ($isMobile ? "row" : "column")};
-  align-items: ${({ $isMobile }) => ($isMobile ? "center" : "stretch")};
-  gap: ${({ $isMobile }) => ($isMobile ? "5vh" : "3em")};
+  grid-auto-flow: ${({ isMobile }) => (isMobile ? "row" : "column")};
+  align-items: ${({ isMobile }) => (isMobile ? "center" : "stretch")};
+  gap: ${({ isMobile }) => (isMobile ? "5vh" : "3em")};
   justify-content: center;
 
   li {
@@ -52,7 +52,7 @@ const MenuLinks = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   };
 
   return (
-    <StyledLinks $isMobile={isMobile}>
+    <StyledLinks isMobile={isMobile}>
       <li>
         <CustomLink as="a" href="#home" onClick={handleClick}>
           Home
