@@ -90,7 +90,14 @@ const ProjectSlide = ({
   return (
     <StyledSlide>
       <div className="slide__img">
-        <Image src={img.src} sizes="(max-width: 991.98px) 240px, 320px" alt="" fill />
+        <Image
+          src={img}
+          sizes="(max-width: 991.98px) 240px, 320px"
+          quality={80}
+          alt=""
+          placeholder="blur"
+          fill
+        />
       </div>
       <div className="slide__main">
         <H4 as="h3">{title}</H4>
