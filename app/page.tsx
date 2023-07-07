@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import App from "./App";
 
-const NoSSRWrapper = ({ children }) => (
+const NoSSRWrapper = () => (
   <>
     <App />
   </>
