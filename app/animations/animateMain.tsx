@@ -1,9 +1,10 @@
+import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import TextPlugin from "gsap/TextPlugin";
 import { MutableRefObject } from "react";
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(TextPlugin);
+// gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(TextPlugin);
 
 const animateMain = (ref: MutableRefObject<HTMLElement | null>) => {
   if (!ref) return { animateMainElements: () => {}, animateInfoText: () => {} };
@@ -20,7 +21,15 @@ const animateMain = (ref: MutableRefObject<HTMLElement | null>) => {
         y: 50,
         autoAlpha: 1,
       },
-      { y: 0, opacity: 1, duration: 0.7, stagger: 0.7 }
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        stagger: 0.7,
+        onComplete: function () {
+          gsap.set(this.targets(), { clearProps: "all" });
+        },
+      }
     );
   };
 
@@ -35,6 +44,9 @@ const animateMain = (ref: MutableRefObject<HTMLElement | null>) => {
       y: 50,
       autoAlpha: 1,
       text: { value: "", delimiter: " " },
+      onComplete: function () {
+        gsap.set(this.targets(), { clearProps: "all" });
+      },
     });
   };
 

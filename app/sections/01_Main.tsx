@@ -11,6 +11,10 @@ import { H1, H2, P1 } from "./../ui/Text";
 import ScrollDownIcon from "@/assets/Icons/Scroll Down";
 import bg from "@/assets/bg.jpg";
 
+import gsap from "gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import TextPlugin from "gsap/TextPlugin";
+
 import animateMain from "../animations/animateMain";
 
 const StyledMain = styled(Section)`
@@ -141,6 +145,9 @@ const Main = () => {
   const { animateMainElements, animateInfoText } = animateMain(homeRef);
 
   useIsomorphicLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(TextPlugin);
+
     animateMainElements();
     animateInfoText();
   }, []);

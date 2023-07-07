@@ -1,5 +1,4 @@
 import gsap from "gsap";
-import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 const animateFromBottom = (
   selector: gsap.DOMTarget,
@@ -18,6 +17,9 @@ const animateFromBottom = (
         trigger: selector,
       },
       ...animationOptions,
+      onComplete: function () {
+        gsap.set(this.targets(), { clearProps: "all" });
+      },
     }
   );
 };

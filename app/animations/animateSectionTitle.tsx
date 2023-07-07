@@ -3,8 +3,8 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import TextPlugin from "gsap/TextPlugin";
 import { MutableRefObject } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(TextPlugin);
+// gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(TextPlugin);
 
 const animateSectionTitle = (ref: MutableRefObject<HTMLElement | null>) => {
   const q = gsap.utils.selector(ref);
@@ -32,6 +32,9 @@ const animateSectionTitle = (ref: MutableRefObject<HTMLElement | null>) => {
           trigger: ref.current,
         },
         ...animationOptions,
+        onComplete: function () {
+          gsap.set(this.targets(), { clearProps: "all" });
+        },
       }
     );
   };
