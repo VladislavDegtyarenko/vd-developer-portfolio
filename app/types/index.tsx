@@ -36,8 +36,6 @@ export interface HeaderProps {
   menuIsOpen: MenuIsOpen;
   toggleMenu: ToggleMenu;
   scrollbarWidth: GetScrollbarWidth;
-  isDarkMode: IsDarkMode;
-  toggleDarkMode: ToggleDarkMode;
   ref: RefObject<HeaderRef>;
 }
 
@@ -145,7 +143,6 @@ export interface MobileMenuProps {
 
 export interface StyledThemeProviderProps {
   children: ReactNode;
-  isDarkMode: IsDarkMode;
 }
 
 // Functions

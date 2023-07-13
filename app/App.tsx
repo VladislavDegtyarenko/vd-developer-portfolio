@@ -2,7 +2,6 @@
 
 import { createRef, useRef } from "react";
 import styled from "styled-components";
-import ThemeProvider from "./StyledThemeProvider";
 
 import Header from "./sections/Header";
 import Main from "./sections/01_Main";
@@ -23,8 +22,6 @@ import {
   ToggleMenu,
   MenuIsOpen,
   GetScrollbarWidth,
-  IsDarkMode,
-  ToggleDarkMode,
   CloseProjectModal,
   PreviewProject,
   HeaderRef,
@@ -38,29 +35,6 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  // Theme
-  const [isDarkMode, setIsDarkMode] = useState<IsDarkMode>(() => {
-    if (typeof window === "undefined") return true; // for SSR
-
-    const saved = localStorage.getItem("isDarkMode");
-    const initialValue = saved ? JSON.parse(saved) : isSystemDarkMode();
-    return initialValue;
-  });
-
-  function isSystemDarkMode() {
-    return (
-      window &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    );
-  }
-
-  const toggleDarkMode: ToggleDarkMode = () => setIsDarkMode((d) => !d);
-
-  useEffect(() => {
-    localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
-
   // Mobile Menu
   const [menuIsOpen, setMenuIsOpen] = useState<MenuIsOpen>(false);
   // const [scrollbarWidth, setScrollbarWidth] = useState(16);
@@ -132,42 +106,38 @@ const App = () => {
   const headerRef = createRef<HeaderRef>();
 
   return (
-    <ThemeProvider isDarkMode={isDarkMode}>
-      <StyledApp>
-        <Header
-          menuIsOpen={menuIsOpen}
-          toggleMenu={toggleMenu}
-          scrollbarWidth={scrollbarWidth.current}
-          isDarkMode={isDarkMode}
-          toggleDarkMode={toggleDarkMode}
-          ref={headerRef}
-        />
-        <Main />
-        <About />
-        <Projects previewProject={previewProject} />
-        <Reviews />
-        <Contact />
-        <Footer />
+    <StyledApp>
+      <Header
+        menuIsOpen={menuIsOpen}
+        toggleMenu={toggleMenu}
+        scrollbarWidth={scrollbarWidth.current}
+        ref={headerRef}
+      />
+      <Main />
+      <About />
+      <Projects previewProject={previewProject} />
+      <Reviews />
+      <Contact />
+      <Footer />
 
-        <AnimatePresence>
-          {menuIsOpen && (
-            <MobileMenu
-              scrollbarWidth={scrollbarWidth.current}
-              toggleMenu={toggleMenu}
-              headerRef={headerRef}
-            />
-          )}
-        </AnimatePresence>
+      <AnimatePresence>
+        {menuIsOpen && (
+          <MobileMenu
+            scrollbarWidth={scrollbarWidth.current}
+            toggleMenu={toggleMenu}
+            headerRef={headerRef}
+          />
+        )}
+      </AnimatePresence>
 
-        <AnimatePresence>
-          {projectSrc && (
-            <ProjectModal projectSrc={projectSrc} closeProjectModal={closeProjectModal} />
-          )}
-        </AnimatePresence>
+      <AnimatePresence>
+        {projectSrc && (
+          <ProjectModal projectSrc={projectSrc} closeProjectModal={closeProjectModal} />
+        )}
+      </AnimatePresence>
 
-        <BackToTopBtn />
-      </StyledApp>
-    </ThemeProvider>
+      <BackToTopBtn />
+    </StyledApp>
   );
 };
 
