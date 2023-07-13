@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import DarkModeContext from "./contexts/DarkModeContext";
+
 import { ThemeProvider } from "styled-components";
 import { StyledThemeProviderProps } from "./types";
 
@@ -19,7 +22,10 @@ const lightTheme = {
   white: "#F8F8F8",
 };
 
-function StyledThemeProvider({ children, isDarkMode }: StyledThemeProviderProps) {
+function StyledThemeProvider({ children }: StyledThemeProviderProps) {
+  const { isDarkMode } = useContext(DarkModeContext);
+  console.log("isDarkMode: ", isDarkMode);
+
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>
   );

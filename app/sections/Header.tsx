@@ -6,7 +6,9 @@ import Logo from "@/assets/Icons/LOGO";
 import BurgerButton from "../ui/BurgerButton";
 import MenuLinks from "../ui/MenuLinks";
 
-import { useState, useEffect, useRef, forwardRef } from "react";
+import { useState, useEffect, useRef, forwardRef, useContext } from "react";
+import DarkModeContext from "app/contexts/DarkModeContext";
+
 import DarkModeToggle from "../ui/DarkModeToggle";
 import { HeaderProps, HeaderRef, TimeoutRef } from "../types";
 
@@ -82,7 +84,9 @@ const StyledHeader = styled.header`
 `;
 
 const Header = forwardRef<HeaderRef, HeaderProps>(
-  ({ menuIsOpen, toggleMenu, scrollbarWidth, isDarkMode, toggleDarkMode }, ref) => {
+  ({ menuIsOpen, toggleMenu, scrollbarWidth }, ref) => {
+    const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+
     // SCROLL
     const [didScroll, setDidScroll] = useState(false);
     const [lastScrollTop, setLastScrollTop] = useState(0);
