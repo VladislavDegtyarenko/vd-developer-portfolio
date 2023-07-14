@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, memo } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
+import { memo } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Section from "./../ui/Section";
@@ -12,8 +11,6 @@ import ScrollDownIcon from "@/assets/Icons/Scroll Down";
 
 import bg from "@/assets/bg.jpg";
 import photo from "@/photo.png";
-
-import animateMain from "../animations/animateMain";
 
 const StyledMain = styled(Section)`
   /* scroll-margin-top: 200px; */
@@ -150,17 +147,9 @@ const StyledMain = styled(Section)`
 `;
 
 const Main = () => {
-  const homeRef = useRef<HTMLElement | null>(null);
-  const { animateMainElements, animateInfoText } = animateMain(homeRef);
-
-  useIsomorphicLayoutEffect(() => {
-    animateMainElements();
-    animateInfoText();
-  }, []);
-
   return (
     <>
-      <StyledMain id="home" ref={homeRef}>
+      <StyledMain id="home">
         <div className="bg">
           <Image src={bg} alt="" placeholder="blur" quality="50" fill priority />
         </div>
