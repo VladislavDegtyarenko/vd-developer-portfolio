@@ -28,6 +28,7 @@ export type SectionDescriptionRef = HTMLParagraphElement | null;
 export type ProjectModalRef = HTMLIFrameElement | null;
 export type ContactIconRef = HTMLDivElement | null;
 export type DownloadBtnRef = HTMLAnchorElement | null;
+export type FooterRef = HTMLParagraphElement | null;
 export type TimeoutRef = ReturnType<typeof setInterval> | undefined;
 export type IsMobile = boolean;
 export type CloseProjectModal = () => void;
