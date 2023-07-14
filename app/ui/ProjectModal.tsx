@@ -16,7 +16,7 @@ const StyledModal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 3;
   backdrop-filter: blur(4px);
 
   .overlay {
