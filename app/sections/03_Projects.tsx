@@ -1,25 +1,21 @@
 import styled from "styled-components";
+import { useState, useRef, memo } from "react";
+import dynamic from "next/dynamic";
+
+// UI
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
 import SectionSubtitle from "../ui/SectionDescription";
-import ArrowIcon from "@/assets/Icons/Arrow";
-import ProjectSlide from "../ui/ProjectSlide";
+// import ProjectsSlider from "app/components/ProjectsSlider";
 
-import projectsData from "../data/projects";
+import ProjectsSliderSkeleton from "app/ui/skeletons/ProjectsSliderSkeleton";
 
-import { useState, useRef, memo } from "react";
-
-// import Swiper core and required modules
-import { EffectFade, Pagination } from "swiper";
-import { Swiper, SwiperSlide, SwiperRef } from "swiper/react";
-import SwiperType from "swiper/types/swiper-class";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { PreviewProject } from "../types";
+const ProjectsSlider = dynamic(() => import("app/components/ProjectsSlider"), {
+  loading: () => <ProjectsSliderSkeleton />,
+  ssr: false,
+});
 
 const StyledProjects = styled(Section)`
   .projects {
@@ -92,20 +88,7 @@ const StyledProjects = styled(Section)`
   }
 `;
 
-const Projects = ({ previewProject }: { previewProject: PreviewProject }) => {
-  const [isFirstSlide, setIsFirstSlide] = useState(true);
-  const [isLastSlide, setIsLastSlide] = useState(false);
-
-  const swiperRef = useRef<SwiperType | null>(null);
-
-  const handleSlideChange = (swiper: SwiperType) => {
-    setIsFirstSlide(swiper.activeIndex === 0);
-    setIsLastSlide(swiper.activeIndex === swiper.slides.length - 1);
-  };
-
-  const prevSlide = () => swiperRef.current?.slidePrev();
-  const nextSlide = () => swiperRef.current?.slideNext();
-
+const Projects = () => {
   return (
     <>
       <StyledProjects id="projects">
@@ -119,59 +102,7 @@ const Projects = ({ previewProject }: { previewProject: PreviewProject }) => {
               call
             </SectionSubtitle>
 
-            <div className="slider">
-              {/* <SwiperBtnPrev /> */}
-              <button
-                onClick={prevSlide}
-                className={`slider__arrow ${
-                  isFirstSlide ? "slider__arrow-disabled" : ""
-                }`}
-              >
-                <ArrowIcon />
-              </button>
-
-              <Swiper
-                className="slider__main"
-                modules={[Pagination, EffectFade]}
-                // navigation={true}
-                pagination={{
-                  dynamicBullets: true,
-                }}
-                spaceBetween={50}
-                slidesPerView={1}
-                effect="fade"
-                fadeEffect={{ crossFade: true }}
-                onBeforeInit={(swiper) => {
-                  swiperRef.current = swiper;
-                }}
-                onRealIndexChange={(swiper) => handleSlideChange(swiper)}
-              >
-                {projectsData.map(
-                  ({ img, title, description, previewLink, codeLink }) => (
-                    <SwiperSlide key={title}>
-                      <ProjectSlide
-                        img={img}
-                        title={title}
-                        description={description}
-                        previewLink={previewLink}
-                        previewProject={previewProject}
-                        codeLink={codeLink}
-                      />
-                    </SwiperSlide>
-                  )
-                )}
-              </Swiper>
-
-              {/* <SwiperBtnNext /> */}
-              <button
-                onClick={nextSlide}
-                className={`slider__arrow slider__arrow-right ${
-                  isLastSlide ? "slider__arrow-disabled" : ""
-                }`}
-              >
-                <ArrowIcon />
-              </button>
-            </div>
+            <ProjectsSlider />
           </div>
         </Container>
       </StyledProjects>
