@@ -11,6 +11,8 @@ import DarkModeContext from "app/contexts/DarkModeContext";
 
 import DarkModeToggle from "../ui/DarkModeToggle";
 import { HeaderProps, HeaderRef, TimeoutRef } from "../types";
+import MobileMenuContext from "app/contexts/MobileMenuContext";
+import ScrollLockContext from "app/contexts/ScrollLockContext";
 
 const StyledHeader = styled.header`
   padding: 1.5em 0;
@@ -83,88 +85,88 @@ const StyledHeader = styled.header`
   }
 `;
 
-const Header = forwardRef<HeaderRef, HeaderProps>(
-  ({ menuIsOpen, toggleMenu, scrollbarWidth }, ref) => {
-    const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
+const Header = forwardRef<HeaderRef>((props, ref) => {
+  const { scrollbarWidth } = useContext(ScrollLockContext);
+  const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
-    // SCROLL
-    const [didScroll, setDidScroll] = useState(false);
-    const [lastScrollTop, setLastScrollTop] = useState(0);
-    const delta = 5;
+  // SCROLL
+  const [didScroll, setDidScroll] = useState(false);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  const delta = 5;
 
-    const timeoutRef = useRef<TimeoutRef>(undefined);
+  const timeoutRef = useRef<TimeoutRef>(undefined);
 
-    useEffect(() => {
-      document.body.onscroll = () => {
-        setDidScroll(true);
-      };
-    }, []);
+  useEffect(() => {
+    document.body.onscroll = () => {
+      setDidScroll(true);
+    };
+  }, []);
 
-    useEffect(() => {
-      if (!didScroll) return;
+  useEffect(() => {
+    if (!didScroll) return;
 
-      timeoutRef.current = setInterval(() => {
-        hasScrolled();
-        setDidScroll(false);
-      }, 250);
+    timeoutRef.current = setInterval(() => {
+      hasScrolled();
+      setDidScroll(false);
+    }, 250);
 
-      return () => {
-        clearInterval(timeoutRef.current);
-      };
-    }, [ref, didScroll]);
+    return () => {
+      clearInterval(timeoutRef.current);
+    };
+  }, [ref, didScroll]);
 
-    function hasScrolled() {
-      if (!ref || typeof ref === "function" || !ref?.current) return;
+  function hasScrolled() {
+    if (!ref || typeof ref === "function" || !ref?.current) return;
 
-      const scrollTop = Math.round(window.scrollY);
+    const scrollTop = Math.round(window.scrollY);
 
-      const headerHeight = ref.current.clientHeight;
+    const headerHeight = ref.current.clientHeight;
 
-      if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
+    if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
 
-      if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
-        ref.current.classList.add("header-collapse");
-      } else {
-        if (scrollTop < lastScrollTop) {
-          ref.current.classList.remove("header-collapse");
-        }
+    if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+      ref.current.classList.add("header-collapse");
+    } else {
+      if (scrollTop < lastScrollTop) {
+        ref.current.classList.remove("header-collapse");
       }
-
-      setLastScrollTop(scrollTop);
     }
 
-    return (
-      <StyledHeader
-        ref={ref}
-        // scrollbarWidth={scrollbarWidth}
-        style={{
-          // paddingRight: `${menuIsOpen ? scrollbarWidth + "px" : ""}`,
-          width: menuIsOpen ? `calc(100% - ${scrollbarWidth}px)` : "",
-        }}
-      >
-        <Container>
-          <nav>
-            <a
-              className="logo"
-              href="#home"
-              onClick={() => {
-                if (menuIsOpen) {
-                  toggleMenu();
-                }
-              }}
-              aria-label="logo, click to scroll to top"
-            >
-              <Logo />
-            </a>
-            <MenuLinks />
-            <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-            <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
-          </nav>
-        </Container>
-      </StyledHeader>
-    );
+    setLastScrollTop(scrollTop);
   }
-);
+
+  return (
+    <StyledHeader
+      ref={ref}
+      // scrollbarWidth={scrollbarWidth}
+      style={{
+        // paddingRight: `${menuIsOpen ? scrollbarWidth + "px" : ""}`,
+        width: menuIsOpen ? `calc(100% - ${scrollbarWidth}px)` : "",
+      }}
+    >
+      <Container>
+        <nav>
+          <a
+            className="logo"
+            href="#home"
+            onClick={() => {
+              if (menuIsOpen) {
+                toggleMenu();
+              }
+            }}
+            aria-label="logo, click to scroll to top"
+          >
+            <Logo />
+          </a>
+          <MenuLinks />
+          <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+          <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
+        </nav>
+      </Container>
+    </StyledHeader>
+  );
+});
 
 Header.displayName = "Header";
 

@@ -9,12 +9,11 @@ export const DarkModeContextProvider = ({ children }: { children: ReactNode }) =
   // Theme
   const [isDarkMode, setIsDarkMode] = useState<IsDarkMode>(() => {
     if (typeof window === "undefined") return true; // for SSR
-    
+
     const saved = localStorage.getItem("isDarkMode");
     const initialValue = saved ? JSON.parse(saved) : isSystemDarkMode();
     return initialValue;
   });
-  console.log('isDarkMode: ', isDarkMode);
 
   function isSystemDarkMode() {
     return (

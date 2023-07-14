@@ -33,9 +33,6 @@ export type IsMobile = boolean;
 export type CloseProjectModal = () => void;
 
 export interface HeaderProps {
-  menuIsOpen: MenuIsOpen;
-  toggleMenu: ToggleMenu;
-  scrollbarWidth: GetScrollbarWidth;
   ref: RefObject<HeaderRef>;
 }
 
@@ -132,12 +129,10 @@ export interface ProjectSlideProps extends Project {
 }
 
 export interface StyledMenuProps {
-  headerHeight: number;
+  $headerHeight: number;
 }
 
 export interface MobileMenuProps {
-  scrollbarWidth: GetScrollbarWidth;
-  toggleMenu: ToggleMenu;
   headerRef: RefObject<HeaderRef>;
 }
 
@@ -147,3 +142,14 @@ export interface StyledThemeProviderProps {
 
 // Functions
 export type ThrottleCallback = (...args: any[]) => void;
+
+// Context
+export interface ContextParentElement {
+  children: ReactNode;
+}
+
+export interface ProjectContext {
+  projectSrc: string | null;
+  previewProject: PreviewProject;
+  closeProjectModal: CloseProjectModal;
+}

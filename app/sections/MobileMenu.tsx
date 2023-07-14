@@ -1,11 +1,15 @@
 "use client";
 
+import { useContext } from "react";
+import MobileMenuContext from "app/contexts/MobileMenuContext";
+
 import styled from "styled-components";
 import Container from "../ui/Container";
 import MenuLinks from "../ui/MenuLinks";
 
 import { motion } from "framer-motion";
 import { MobileMenuProps, StyledMenuProps } from "../types";
+import ScrollLockContext from "app/contexts/ScrollLockContext";
 
 const StyledMenu = styled.div<StyledMenuProps>`
   display: flex;
@@ -36,11 +40,11 @@ const StyledMenu = styled.div<StyledMenuProps>`
   }
 
   > div {
-    margin-top: ${({ headerHeight }) => `${headerHeight}px`};
+    margin-top: ${({ $headerHeight }) => `${$headerHeight}px`};
   }
 
   .overlay {
-    margin-top: ${({ headerHeight }) => `${headerHeight}px`};
+    margin-top: ${({ $headerHeight }) => `${$headerHeight}px`};
     position: absolute;
     top: 0;
     left: 0;
@@ -58,7 +62,10 @@ const StyledMenu = styled.div<StyledMenuProps>`
 
 const DEFAULT_HEADER_HEIGHT = 78;
 
-const MobileMenu = ({ scrollbarWidth, toggleMenu, headerRef }: MobileMenuProps) => {
+const MobileMenu = ({ headerRef }: MobileMenuProps) => {
+  const { scrollbarWidth } = useContext(ScrollLockContext);
+  const { toggleMenu } = useContext(MobileMenuContext);
+
   const headerHeight = headerRef?.current
     ? Math.round(headerRef.current.clientHeight)
     : DEFAULT_HEADER_HEIGHT;
@@ -68,7 +75,7 @@ const MobileMenu = ({ scrollbarWidth, toggleMenu, headerRef }: MobileMenuProps) 
       style={{
         width: `calc(100% - ${scrollbarWidth}px)`,
       }}
-      headerHeight={headerHeight}
+      $headerHeight={headerHeight}
       as={motion.div}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

@@ -5,6 +5,9 @@ import "./index.css";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 import { DarkModeContextProvider } from "./contexts/DarkModeContext";
+import { ScrollLockContextProvider } from "./contexts/ScrollLockContext";
+import { MobileMenuContextProvider } from "./contexts/MobileMenuContext";
+import { ProjectContextProvider } from "./contexts/ProjectContext";
 import StyledThemeProvider from "./StyledThemeProvider";
 
 export const metadata = {
@@ -18,7 +21,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={poppins.className}>
         <StyledComponentsRegistry>
           <DarkModeContextProvider>
-            <StyledThemeProvider>{children}</StyledThemeProvider>
+            <ScrollLockContextProvider>
+              <MobileMenuContextProvider>
+                <ProjectContextProvider>
+                  <StyledThemeProvider>{children}</StyledThemeProvider>
+                </ProjectContextProvider>
+              </MobileMenuContextProvider>
+            </ScrollLockContextProvider>
           </DarkModeContextProvider>
         </StyledComponentsRegistry>
       </body>
