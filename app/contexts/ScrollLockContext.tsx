@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import { ContextParentElement, GetScrollbarWidth } from "app/types";
 
 const DEFAULT_SCROLLBAR_WIDTH = 16;
@@ -26,15 +26,15 @@ export const ScrollLockContextProvider = ({ children }: ContextParentElement) =>
     // scrollbarWidth.current = getScrollbarWidth();
   }, []);
 
-  const scrollLock = () => {
+  const scrollLock = useCallback(() => {
     document.body.style.overflow = "hidden";
     document.body.style.marginRight = scrollbarWidth + "px";
-  };
+  }, []);
 
-  const scrollUnlock = () => {
+  const scrollUnlock = useCallback(() => {
     document.body.style.overflow = "";
     document.body.style.marginRight = "";
-  };
+  }, []);
 
   return (
     <ScrollLockContext.Provider value={{ scrollbarWidth, scrollLock, scrollUnlock }}>

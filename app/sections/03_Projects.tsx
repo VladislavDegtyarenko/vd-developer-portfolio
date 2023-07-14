@@ -9,7 +9,7 @@ import ProjectSlide from "../ui/ProjectSlide";
 
 import projectsData from "../data/projects";
 
-import { useState, useRef } from "react";
+import { useState, useRef, memo } from "react";
 
 // import Swiper core and required modules
 import { EffectFade, Pagination } from "swiper";
@@ -182,4 +182,4 @@ const Projects = ({ previewProject }: { previewProject: PreviewProject }) => {
   );
 };
 
-export default Projects;
+export default memo(Projects);

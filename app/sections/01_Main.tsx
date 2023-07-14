@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import styled from "styled-components";
 import Image from "next/image";
@@ -209,4 +209,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default memo(Main);

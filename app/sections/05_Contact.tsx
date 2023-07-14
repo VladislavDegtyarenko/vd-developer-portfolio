@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 
 import styled from "styled-components";
@@ -146,4 +146,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default memo(Contact);
