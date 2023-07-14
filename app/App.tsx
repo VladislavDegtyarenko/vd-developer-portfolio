@@ -1,6 +1,7 @@
 "use client";
 
-import { createRef, useContext, useRef } from "react";
+import { createRef, useContext, useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import styled from "styled-components";
 
 import Header from "./sections/Header";
@@ -11,23 +12,23 @@ import Reviews from "./sections/04_Reviews";
 import Contact from "./sections/05_Contact";
 import Footer from "./sections/Footer";
 
-import MobileMenu from "./sections/MobileMenu";
-import { AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import ProjectModal from "./ui/ProjectModal";
+// UI
 import BackToTopBtn from "./ui/BackToTopBtn";
+import MobileMenu from "./sections/MobileMenu";
+const AnimatePresence = dynamic(
+  () => import("framer-motion").then((m) => m.AnimatePresence),
+  {
+    ssr: false,
+  }
+);
+const ProjectModal = dynamic(() => import("./ui/ProjectModal"), { ssr: false });
 
-import {
-  DebounceFunction,
-  ToggleMenu,
-  MenuIsOpen,
-  GetScrollbarWidth,
-  CloseProjectModal,
-  PreviewProject,
-  HeaderRef,
-} from "./types";
+// Contexts
 import MobileMenuContext from "./contexts/MobileMenuContext";
 import ProjectContext from "./contexts/ProjectContext";
+
+// TS
+import { HeaderRef } from "./types";
 
 const StyledApp = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -38,7 +39,7 @@ const StyledApp = styled.div`
 
 const App = () => {
   const { menuIsOpen } = useContext(MobileMenuContext);
-  const { projectSrc, closeProjectModal, previewProject } = useContext(ProjectContext);
+  const { projectSrc, closeProjectModal } = useContext(ProjectContext);
 
   const headerRef = createRef<HeaderRef>();
 
@@ -47,7 +48,7 @@ const App = () => {
       <Header ref={headerRef} />
       <Main />
       <About />
-      <Projects previewProject={previewProject} />
+      <Projects />
       <Reviews />
       <Contact />
       <Footer />
