@@ -53,6 +53,7 @@ const StyledReviewCard = styled.div`
       border-radius: 50%;
       margin-right: 16px;
       overflow: hidden;
+      flex-shrink: 0;
     }
     &__name {
       color: ${({ theme }) => theme.cyan};
