@@ -1,6 +1,6 @@
 "use client";
 
-import { createRef, useRef } from "react";
+import { createRef, useContext, useRef } from "react";
 import styled from "styled-components";
 
 import Header from "./sections/Header";
@@ -26,6 +26,8 @@ import {
   PreviewProject,
   HeaderRef,
 } from "./types";
+import MobileMenuContext from "./contexts/MobileMenuContext";
+import ProjectContext from "./contexts/ProjectContext";
 
 const StyledApp = styled.div`
   background-color: ${({ theme }) => theme.bg};
@@ -35,84 +37,14 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  // Mobile Menu
-  const [menuIsOpen, setMenuIsOpen] = useState<MenuIsOpen>(false);
-  // const [scrollbarWidth, setScrollbarWidth] = useState(16);
-  const scrollbarWidth = useRef(16);
-
-  const toggleMenu: ToggleMenu = () => setMenuIsOpen((o) => !o);
-
-  function getScrollbarWidth(): GetScrollbarWidth {
-    if (!document) return 16;
-
-    let el = document.createElement("div");
-    el.style.cssText = "overflow:scroll; visibility:hidden; position:absolute;";
-    document.body.appendChild(el);
-    let width = el.offsetWidth - el.clientWidth;
-    el.remove();
-    return width;
-  }
-
-  useEffect(() => {
-    // setScrollbarWidth(getScrollbarWidth());
-    scrollbarWidth.current = getScrollbarWidth();
-  }, []);
-
-  // Project Preview Source
-  const [projectSrc, setProjectSrc] = useState<string | null>(null);
-
-  const previewProject: PreviewProject = (url) => {
-    setProjectSrc(url);
-  };
-
-  const closeProjectModal: CloseProjectModal = () => setProjectSrc(null);
-
-  // SCROLL LOCK
-  const scrollLock = () => {
-    document.body.style.overflow = "hidden";
-    document.body.style.marginRight = scrollbarWidth + "px";
-  };
-
-  const scrollUnlock = () => {
-    document.body.style.overflow = "";
-    document.body.style.marginRight = "";
-  };
-
-  useEffect(() => {
-    if (menuIsOpen || projectSrc) {
-      scrollLock();
-    } else {
-      scrollUnlock();
-    }
-  }, [menuIsOpen, projectSrc]);
-
-  useEffect(() => {
-    window.onresize = () => debounceCloseMenu();
-  }, []);
-
-  const debounce: DebounceFunction<(...args: any[]) => any> = (func, timeout = 300) => {
-    let timer: ReturnType<typeof setTimeout>;
-
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(this, args);
-      }, timeout);
-    };
-  };
-
-  const debounceCloseMenu = debounce(() => setMenuIsOpen(false), 100);
+  const { menuIsOpen } = useContext(MobileMenuContext);
+  const { projectSrc, closeProjectModal, previewProject } = useContext(ProjectContext);
 
   const headerRef = createRef<HeaderRef>();
 
   return (
     <StyledApp>
-      <Header
-        menuIsOpen={menuIsOpen}
-        toggleMenu={toggleMenu}
-        scrollbarWidth={scrollbarWidth.current}
-        ref={headerRef}
-      />
+      <Header ref={headerRef} />
       <Main />
       <About />
       <Projects previewProject={previewProject} />
@@ -121,13 +53,7 @@ const App = () => {
       <Footer />
 
       <AnimatePresence>
-        {menuIsOpen && (
-          <MobileMenu
-            scrollbarWidth={scrollbarWidth.current}
-            toggleMenu={toggleMenu}
-            headerRef={headerRef}
-          />
-        )}
+        {menuIsOpen && <MobileMenu headerRef={headerRef} />}
       </AnimatePresence>
 
       <AnimatePresence>

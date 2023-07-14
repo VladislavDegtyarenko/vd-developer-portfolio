@@ -26,7 +26,6 @@ const lightTheme = {
 
 function StyledThemeProvider({ children }: StyledThemeProviderProps) {
   const { isDarkMode } = useContext(DarkModeContext);
-  console.log("isDarkMode: ", isDarkMode);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>
