@@ -6,7 +6,7 @@ import Logo from "@/assets/Icons/LOGO";
 import BurgerButton from "../ui/BurgerButton";
 import MenuLinks from "../ui/MenuLinks";
 
-import { useState, useEffect, useRef, forwardRef, useContext } from "react";
+import { useState, useEffect, useRef, forwardRef, useContext, memo } from "react";
 import DarkModeContext from "app/contexts/DarkModeContext";
 
 import DarkModeToggle from "../ui/DarkModeToggle";
@@ -170,4 +170,4 @@ const Header = forwardRef<HeaderRef>((props, ref) => {
 
 Header.displayName = "Header";
 
-export default Header;
+export default memo(Header);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import MobileMenuContext from "app/contexts/MobileMenuContext";
 
 import styled from "styled-components";
@@ -89,4 +89,4 @@ const MobileMenu = ({ headerRef }: MobileMenuProps) => {
   );
 };
 
-export default MobileMenu;
+export default memo(MobileMenu);

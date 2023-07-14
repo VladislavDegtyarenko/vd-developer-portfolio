@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import styled from "styled-components";
 
 // UI
@@ -96,4 +96,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default memo(About);

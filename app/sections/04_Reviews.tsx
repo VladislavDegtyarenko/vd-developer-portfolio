@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
@@ -36,4 +37,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default memo(Reviews);

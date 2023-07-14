@@ -1,5 +1,5 @@
 // Core
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import styled from "styled-components";
 
 // UI
@@ -38,4 +38,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);
