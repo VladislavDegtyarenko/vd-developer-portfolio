@@ -1,8 +1,17 @@
+// Core
+import { useRef } from "react";
 import styled from "styled-components";
+
+// UI
 import Container from "../ui/Container";
 import { P2 } from "../ui/Text";
 
-import { Fade } from "react-awesome-reveal";
+// Hooks
+import animateFromBottom from "app/animations/animateFromBottom";
+import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
+
+// TS
+import { FooterRef } from "app/types";
 
 const StyledFooter = styled.div`
   text-align: center;
@@ -11,15 +20,19 @@ const StyledFooter = styled.div`
 `;
 
 const Footer = () => {
+  const ref = useRef<FooterRef>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    animateFromBottom(ref.current);
+  }, []);
+
   return (
     <StyledFooter>
       <Container>
-        <Fade triggerOnce>
-          <P2>
-            © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All Rights
-            Reserved
-          </P2>
-        </Fade>
+        <P2 ref={ref}>
+          © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All Rights
+          Reserved
+        </P2>
       </Container>
     </StyledFooter>
   );
