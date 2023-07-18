@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useRef, memo } from "react";
+import { useState, useRef, useContext, memo } from "react";
 import dynamic from "next/dynamic";
 
 // UI
@@ -8,14 +8,9 @@ import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
 import SectionSubtitle from "../ui/SectionDescription";
-// import ProjectsSlider from "app/components/ProjectsSlider";
 
-import ProjectsSliderSkeleton from "app/ui/skeletons/ProjectsSliderSkeleton";
+import ProjectsList from "app/components/ProjectsList";
 
-const ProjectsSlider = dynamic(() => import("app/components/ProjectsSlider"), {
-  loading: () => <ProjectsSliderSkeleton />,
-  ssr: false,
-});
 
 const StyledProjects = styled(Section)`
   .projects {
@@ -102,7 +97,7 @@ const Projects = () => {
               call
             </SectionSubtitle>
 
-            <ProjectsSlider />
+            <ProjectsList />
           </div>
         </Container>
       </StyledProjects>

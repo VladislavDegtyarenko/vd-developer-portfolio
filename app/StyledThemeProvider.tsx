@@ -10,18 +10,22 @@ const darkTheme = {
   bg: "#050505",
   cardBg: "#242424",
   cyan: "#1B9AAA",
+  cyanHover: "#2dacbd",
   grey: "#B1B1B1",
   fg: "#F8F8F8",
   white: "#F8F8F8",
+  overlay: "#242424",
 };
 
 const lightTheme = {
   bg: "#f6f6f6",
   cardBg: "#e4e4e4",
   cyan: "#1B9AAA",
+  cyanHover: "#2dacbd",
   grey: "#5d5c5c",
   fg: "#353535",
   white: "#F8F8F8",
+  overlay: "#242424",
 };
 
 function StyledThemeProvider({ children }: StyledThemeProviderProps) {
