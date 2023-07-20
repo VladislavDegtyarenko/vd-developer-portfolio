@@ -14,8 +14,9 @@ const StyledCard = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1em;
-  width: 140px;
   padding: 0.5em 0;
+  width: 140px;
+
   .icon {
     width: 48px;
     height: 48px;
@@ -45,13 +46,6 @@ const StyledCard = styled.div`
       &__descr {
         display: none;
       }
-    }
-  }
-
-  @media screen and (max-width: 575.98px) {
-    justify-content: center;
-    .text {
-      display: none;
     }
   }
 `;
