@@ -1,10 +1,10 @@
 import { memo } from "react";
 import styled from "styled-components";
-import Section from "./../ui/Section";
-import SectionDivider from "./../ui/SectionDivider";
+import Section from "../ui/Section";
+import SectionDivider from "../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
-import SectionDescription from "./../ui/SectionDescription";
+import SectionDescription from "../ui/SectionDescription";
 
 import ReviewCard from "../ui/ReviewCard";
 

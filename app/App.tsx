@@ -7,9 +7,10 @@ import styled from "styled-components";
 import Header from "./sections/Header";
 import Main from "./sections/01_Main";
 import About from "./sections/02_About";
-import Projects from "./sections/03_Projects";
-import Reviews from "./sections/04_Reviews";
-import Contact from "./sections/05_Contact";
+import Experience from "./sections/03_Experience";
+import Projects from "./sections/04_Projects";
+import Reviews from "./sections/05_Reviews";
+import Contact from "./sections/06_Contact";
 import Footer from "./sections/Footer";
 
 // UI
@@ -48,6 +49,7 @@ const App = () => {
       <Header ref={headerRef} />
       <Main />
       <About />
+      <Experience />
       <Projects />
       <Reviews />
       <Contact />
