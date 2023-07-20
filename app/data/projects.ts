@@ -1,4 +1,4 @@
-import WeatherAppImg from "/public/assets/projects/0-weatherapp.png";
+import WeatherAppImg from "/public/assets/projects/weather app.jpg";
 import PortfolioImg from "/public/assets/projects/portfolio.jpg";
 import TodoImg from "/public/assets/projects/1-todo.jpg";
 import SnakeImg from "/public/assets/projects/2-snake.jpg";
