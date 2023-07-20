@@ -31,6 +31,7 @@ const animateSectionTitle = (ref: MutableRefObject<HTMLElement | null>) => {
         scrollTrigger: {
           trigger: ref.current,
         },
+        preserveSpaces: true,
         ...animationOptions,
       }
     );

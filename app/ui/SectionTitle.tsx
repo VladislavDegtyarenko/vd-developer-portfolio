@@ -20,6 +20,9 @@ const StyledSectionTitle = styled(H2)`
     padding-bottom: 14px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .line {
     background-color: ${({ theme }) => theme.cyan};
