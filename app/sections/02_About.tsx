@@ -6,18 +6,13 @@ import styled from "styled-components";
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
-import SectionSubtitle from "../ui/SectionSubtitle";
 import SectionDescription from "app/ui/SectionDescription";
 import Container from "../ui/Container";
 import SkillCard from "../ui/SkillCard";
-import ExperienceCard from "../ui/ExperienceCard";
 import { H4 } from "app/ui/Text";
 
 // Data
 import skillsData from "../data/skills";
-import experienceData from "../data/experience";
-
-skillsData.map((group) => console.log(group));
 
 // Styled
 const StyledAbout = styled(Section)`

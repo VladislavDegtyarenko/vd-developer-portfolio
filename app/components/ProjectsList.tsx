@@ -53,7 +53,6 @@ const ProjectsList = () => {
     }
 
     if (!showAll) {
-      console.log("scroll");
       listRef.current?.scrollIntoView();
     }
   }, [showAll]);

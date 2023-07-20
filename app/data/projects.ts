@@ -1,4 +1,5 @@
 import WeatherAppImg from "/public/assets/projects/0-weatherapp.png";
+import PortfolioImg from "/public/assets/projects/portfolio.jpg";
 import TodoImg from "/public/assets/projects/1-todo.jpg";
 import SnakeImg from "/public/assets/projects/2-snake.jpg";
 import OcularImg from "/public/assets/projects/3-ocular.jpg";
@@ -20,6 +21,12 @@ const projectsData: Project[] = [
     codeLink: "https://github.com/VladislavDegtyarenko/react-weather-app",
   },
   {
+    img: PortfolioImg,
+    title: "Portfolio Website",
+    // previewLink: "https://vd-developer.vercel.app/",
+    codeLink: "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
+  },
+  {
     img: TodoImg,
     title: "Todo App",
     description:
@@ -27,6 +34,7 @@ const projectsData: Project[] = [
     previewLink: "https://vladislavdegtyarenko.github.io/react-todo-app/",
     codeLink: "https://github.com/VladislavDegtyarenko/react-todo-app",
   },
+
   {
     img: Game2048Img,
     title: "2048 Game",
