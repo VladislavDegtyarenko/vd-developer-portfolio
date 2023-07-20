@@ -15,7 +15,7 @@ const StyledCard = styled.div`
   align-items: center;
   gap: 1em;
   width: 140px;
-
+  padding: 0.5em 0;
   .icon {
     width: 48px;
     height: 48px;
