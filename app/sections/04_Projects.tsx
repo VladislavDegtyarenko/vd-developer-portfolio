@@ -7,7 +7,7 @@ import Section from "../ui/Section";
 import SectionDivider from "../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
-import SectionSubtitle from "../ui/SectionDescription";
+import SectionDescription from "../ui/SectionDescription";
 
 import ProjectsList from "app/components/ProjectsList";
 
@@ -89,12 +89,12 @@ const Projects = () => {
         <Container>
           <div className="projects">
             <SectionTitle>Projects</SectionTitle>
-            <SectionSubtitle className="projects__descr">
+            <SectionDescription className="projects__descr">
               A concise overview of selected frontend development projects, showcasing
               skills and capabilities.
               <br /> <br /> If you want to check my actual frontend skills, let’s get a
               call
-            </SectionSubtitle>
+            </SectionDescription>
 
             <ProjectsList />
           </div>

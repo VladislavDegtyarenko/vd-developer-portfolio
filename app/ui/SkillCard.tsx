@@ -10,11 +10,11 @@ import animateFromBottom from "../animations/animateFromBottom";
 import { SkillCardProps, SkillCardRef } from "../types";
 
 const StyledCard = styled.div`
-  display: grid;
-  align-self: start;
-  justify-content: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1em;
-  padding: 8px 0;
+  width: 140px;
 
   .icon {
     width: 48px;
@@ -23,6 +23,7 @@ const StyledCard = styled.div`
   }
 
   .text {
+    text-align: center;
     &__descr {
       margin-top: 8px;
       color: ${({ theme }) => theme.grey};
@@ -71,12 +72,12 @@ const SkillCard = ({
   return (
     <StyledCard ref={ref}>
       <div className="icon">
-        <Image src={icon.src} alt={alt || ""} title={alt} fill />
+        <Image src={`/assets/Icons/${icon}.svg`} alt={alt || ""} title={alt} fill />
       </div>
 
       <div className="text">
-        <H4 className="text__title">{title}</H4>
-        <P2 className="text__descr">{description}</P2>
+        <P2 className="text__title">{title}</P2>
+        {/* <P2 className="text__descr">{description}</P2> */}
       </div>
     </StyledCard>
   );
