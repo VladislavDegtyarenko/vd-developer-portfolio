@@ -69,7 +69,7 @@ export interface Icon extends NextjsImageAssetProps {
 
 // DATA
 export interface Skill {
-  icon: NextjsImageAssetProps;
+  icon: string;
   title: string;
   description?: string;
 }

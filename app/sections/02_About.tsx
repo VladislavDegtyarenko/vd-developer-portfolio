@@ -7,34 +7,39 @@ import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import SectionSubtitle from "../ui/SectionSubtitle";
+import SectionDescription from "app/ui/SectionDescription";
 import Container from "../ui/Container";
 import SkillCard from "../ui/SkillCard";
 import ExperienceCard from "../ui/ExperienceCard";
+import { H4 } from "app/ui/Text";
 
 // Data
 import skillsData from "../data/skills";
 import experienceData from "../data/experience";
 
+skillsData.map((group) => console.log(group));
+
 // Styled
 const StyledAbout = styled(Section)`
   .about {
     &__subsection {
-      margin-top: 48px;
+      margin-top: 3em;
     }
-    &__skills-wrapper {
-      margin-top: 42px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+  }
 
-      @media screen and (max-width: 991.98px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
+  .wrapper {
+  }
 
-      @media screen and (max-width: 991.98px) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+  .group {
+    display: grid;
+    gap: 2em;
+    margin-top: 3.75em;
+  }
+
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
   }
 `;
 
@@ -44,12 +49,16 @@ const About = () => {
     <>
       <StyledAbout id="about">
         <Container>
-          <SectionTitle>About</SectionTitle>
-          <div className="about__subsection">
-            <SectionSubtitle>Skills</SectionSubtitle>
-
-            <div className="about__skills-wrapper">
-              {skillsData.map(({ icon, title, description }, key) => (
+          <div className="inner">
+            <SectionTitle>Expertise</SectionTitle>
+            <SectionDescription>
+              Discover my arsenal of frontend tools & technologies—JavaScript, React,
+              Redux, Next.js & more. From powerful UI libraries like Material UI &
+              Tailwind to custom animations using GSAP & Framer Motion, I deliver stunning
+              user experiences.
+            </SectionDescription>
+            <div className="wrapper">
+              {/* {skillsData.map(({ icon, title, description }, key) => (
                 <SkillCard
                   icon={icon}
                   alt={title}
@@ -60,6 +69,18 @@ const About = () => {
                     delay: 0.15 * (key % 3),
                   }}
                 />
+              ))} */}
+
+              {skillsData.map(({ groupTitle, groupCards }) => (
+                <div className="group" key={groupTitle}>
+                  <H4 key={groupTitle}>{groupTitle}</H4>
+
+                  <div className="icons">
+                    {groupCards.map(({ icon, title }) => (
+                      <SkillCard key={icon} icon={icon} title={title} />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
