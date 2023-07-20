@@ -2,8 +2,8 @@ import { useRef, memo } from "react";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 
 import styled from "styled-components";
-import Section from "./../ui/Section";
-import SectionDivider from "./../ui/SectionDivider";
+import Section from "../ui/Section";
+import SectionDivider from "../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
 import SectionDescription from "../ui/SectionDescription";

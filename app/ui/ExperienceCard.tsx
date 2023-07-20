@@ -6,17 +6,24 @@ import { H4, P1, P2 } from "./Text";
 import { useRef } from "react";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import animateFromBottom from "../animations/animateFromBottom";
-import { ExpCardRef, ExperienceCardProps } from "../types";
+import { ExpCardRef, ExperienceCardProps, StyledExpCardProps } from "../types";
 
-const StyledExpCard = styled.div`
+const StyledExpCard = styled.div<StyledExpCardProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   gap: 16px;
-  padding: 24px;
+  padding: ${({ $secondary }) => ($secondary ? "0" : "24px")};
   border-radius: var(--borderRadiusNormal);
-  background-color: ${({ theme }) => theme.cardBg};
+  background-color: ${({ $secondary, theme }) =>
+    $secondary ? "transparent" : theme.cardBg};
+
+  &.secondary {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+  }
 
   .info {
     display: grid;
@@ -41,6 +48,11 @@ const StyledExpCard = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+
+    > * {
+      background-color: ${({ $secondary, theme }) =>
+        $secondary ? theme.cardBg : theme.bg};
+    }
   }
 
   .icons {
@@ -73,6 +85,7 @@ const ExperienceCard = ({
   description,
   icons,
   animationOptions,
+  secondary,
 }: ExperienceCardProps) => {
   const ref = useRef<ExpCardRef>(null);
 
@@ -81,7 +94,7 @@ const ExperienceCard = ({
   }, []);
 
   return (
-    <StyledExpCard ref={ref}>
+    <StyledExpCard ref={ref} $secondary={secondary}>
       <div className="info">
         <div className="time-range">
           <P2>{timerange}</P2>

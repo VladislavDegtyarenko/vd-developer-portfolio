@@ -46,6 +46,10 @@ export interface StyledLinksProps {
   $isMobile: IsMobile;
 }
 
+export interface StyledExpCardProps {
+  $secondary?: boolean;
+}
+
 export interface DarkModeToggleProps {
   isDarkMode: IsDarkMode;
   toggleDarkMode: ToggleDarkMode;
@@ -102,6 +106,7 @@ export interface SkillCardProps extends Skill {
 
 export interface ExperienceCardProps extends Experience {
   animationOptions?: gsap.TweenVars;
+  secondary?: boolean;
 }
 
 export interface SectionTitleProps {

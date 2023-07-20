@@ -3,14 +3,13 @@ import { useState, useRef, useContext, memo } from "react";
 import dynamic from "next/dynamic";
 
 // UI
-import Section from "./../ui/Section";
-import SectionDivider from "./../ui/SectionDivider";
+import Section from "../ui/Section";
+import SectionDivider from "../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import Container from "../ui/Container";
 import SectionSubtitle from "../ui/SectionDescription";
 
 import ProjectsList from "app/components/ProjectsList";
-
 
 const StyledProjects = styled(Section)`
   .projects {
