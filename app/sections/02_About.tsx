@@ -34,12 +34,20 @@ const StyledAbout = styled(Section)`
     display: grid;
     gap: 2em;
     margin-top: 3.75em;
+    > h4 {
+      text-align: center;
+    }
   }
 
   .icons {
     display: flex;
     flex-wrap: wrap;
+    /* max-width: 992px; */
+    margin: 0 auto;
     gap: 1em;
+    @media (max-width: 991.98px) {
+      justify-content: center;
+    }
   }
 `;
 
