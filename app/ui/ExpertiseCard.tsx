@@ -7,15 +7,16 @@ import { H4, P2 } from "./Text";
 import { useRef } from "react";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import animateFromBottom from "../animations/animateFromBottom";
-import { SkillCardProps, SkillCardRef } from "../types";
+import { ExpertiseCardProps, ExpertiseCardRef } from "../types";
 
-const StyledCard = styled.div`
+const StyledCard = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1em;
   padding: 0.5em 0;
   width: 140px;
+  list-style-type: none;
 
   .icon {
     width: 48px;
@@ -50,18 +51,12 @@ const StyledCard = styled.div`
   }
 `;
 
-const SkillCard = ({
-  icon,
-  alt,
-  title,
-  description,
-  animationOptions,
-}: SkillCardProps) => {
-  const ref = useRef<SkillCardRef>(null);
+const ExpertiseCard = ({ icon, alt, title, animationOptions }: ExpertiseCardProps) => {
+  const ref = useRef<ExpertiseCardRef>(null);
 
-  useIsomorphicLayoutEffect(() => {
+  /* useIsomorphicLayoutEffect(() => {
     animateFromBottom(ref.current, animationOptions);
-  }, [animationOptions]);
+  }, [animationOptions]); */
 
   return (
     <StyledCard ref={ref}>
@@ -71,10 +66,9 @@ const SkillCard = ({
 
       <div className="text">
         <P2 className="text__title">{title}</P2>
-        {/* <P2 className="text__descr">{description}</P2> */}
       </div>
     </StyledCard>
   );
 };
 
-export default SkillCard;
+export default ExpertiseCard;

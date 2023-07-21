@@ -1,6 +1,6 @@
-import { Skill } from "../types";
+import { Expertise } from "../types";
 
-const skillsData = [
+const expertiseData = [
   {
     groupTitle: "Core Frontend Tools",
     groupCards: [
@@ -50,4 +50,4 @@ const skillsData = [
   },
 ];
 
-export default skillsData;
+export default expertiseData;
