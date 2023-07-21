@@ -13,11 +13,14 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  gap: 16px;
   padding: ${({ $secondary }) => ($secondary ? "0" : "24px")};
   border-radius: var(--borderRadiusNormal);
   background-color: ${({ $secondary, theme }) =>
     $secondary ? "transparent" : theme.cardBg};
+
+  > * + * {
+    margin-top: 1em;
+  }
 
   &.secondary {
     background-color: transparent;
@@ -47,8 +50,10 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
 
+    > * + * {
+      margin-left: 0.5em;
+    }
     > * {
       background-color: ${({ $secondary, theme }) =>
         $secondary ? theme.cardBg : theme.bg};

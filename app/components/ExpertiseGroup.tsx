@@ -18,10 +18,8 @@ const StyledGroup = styled.div`
   }
 
   .icons {
-    display: flex;
-    flex-wrap: wrap;
-    /* max-width: 992px; */
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 140px);
     gap: 1em;
     @media (max-width: 991.98px) {
       justify-content: center;

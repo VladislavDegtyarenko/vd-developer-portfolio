@@ -13,10 +13,13 @@ const StyledCard = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
   padding: 0.5em 0;
   width: 140px;
   list-style-type: none;
+
+  > * + * {
+    margin-top: 1em;
+  }
 
   .icon {
     width: 48px;
@@ -52,14 +55,8 @@ const StyledCard = styled.li`
 `;
 
 const ExpertiseCard = ({ icon, alt, title, animationOptions }: ExpertiseCardProps) => {
-  const ref = useRef<ExpertiseCardRef>(null);
-
-  /* useIsomorphicLayoutEffect(() => {
-    animateFromBottom(ref.current, animationOptions);
-  }, [animationOptions]); */
-
   return (
-    <StyledCard ref={ref}>
+    <StyledCard>
       <div className="icon">
         <Image src={`/assets/Icons/${icon}.svg`} alt={alt || ""} title={alt} fill />
       </div>
