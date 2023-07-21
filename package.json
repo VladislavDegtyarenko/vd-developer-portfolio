@@ -2,6 +2,7 @@
   "name": "frontend-portfolio-website",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [">0.3%", "not dead", "not op_mini all"],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -26,4 +27,6 @@
     "swiper": "^9.4.1",
     "typescript": "5.1.6"
   }
+  
+  
 }
