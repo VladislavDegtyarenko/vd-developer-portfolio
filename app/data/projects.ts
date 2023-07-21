@@ -1,13 +1,13 @@
 import WeatherAppImg from "/public/assets/projects/weather app.jpg";
 import PortfolioImg from "/public/assets/projects/portfolio.jpg";
-import TodoImg from "/public/assets/projects/1-todo.jpg";
-import SnakeImg from "/public/assets/projects/2-snake.jpg";
-import OcularImg from "/public/assets/projects/3-ocular.jpg";
+import TodoImg from "/public/assets/projects/todo-app.jpg";
+import SnakeImg from "/public/assets/projects/Snake Game.jpg";
+import OcularImg from "/public/assets/projects/Ocular.jpg";
 import HisImg from "/public/assets/projects/4-his.jpg";
-import PasGenImg from "/public/assets/projects/5-pasgen.jpg";
-import ClockImg from "/public/assets/projects/6-clock.jpg";
+import PasGenImg from "/public/assets/projects/Pass Gen.jpg";
+import ClockImg from "/public/assets/projects/Clock.jpg";
 import TenziesImg from "/public/assets/projects/7-tenzies.jpg";
-import Game2048Img from "/public/assets/projects/8-2048.jpg";
+import Game2048Img from "/public/assets/projects/2048 Game.jpg";
 
 import { Project } from "../types";
 
@@ -60,22 +60,6 @@ const projectsData: Project[] = [
     codeLink: "https://github.com/VladislavDegtyarenko/preact-password-generator",
   },
   {
-    img: OcularImg,
-    title: "Ocular",
-    description:
-      'Delivered front-end for "Ocular" medical center website, providing a seamless user experience for ophthalmology patients.',
-    previewLink: "https://ocular.com.ua/",
-    codeLink: "https://github.com/VladislavDegtyarenko/Ocular",
-  },
-  {
-    img: HisImg,
-    title: "His.ua",
-    description:
-      'Developed front-end for "His," a Ukrainian brand for exclusive furniture.',
-    previewLink: "https://his.ua/",
-    // codeLink: "#",
-  },
-  {
     img: ClockImg,
     title: "Alarms & Clock Clone",
     description:
@@ -84,12 +68,29 @@ const projectsData: Project[] = [
     codeLink: "https://github.com/VladislavDegtyarenko/react-windows-clock-clone",
   },
   {
+    img: OcularImg,
+    title: "Ocular",
+    description:
+      'Delivered front-end for "Ocular" medical center website, providing a seamless user experience for ophthalmology patients.',
+    previewLink: "https://ocular.com.ua/",
+    codeLink: "https://github.com/VladislavDegtyarenko/Ocular",
+  },
+  /*  {
+    img: HisImg,
+    title: "His.ua",
+    description:
+      'Developed front-end for "His," a Ukrainian brand for exclusive furniture.',
+    previewLink: "https://his.ua/",
+    // codeLink: "#",
+  },
+
+  {
     img: TenziesImg,
     title: "Tenzies Game",
     description: "A simple tenzies game built using React",
     previewLink: "https://vladislavdegtyarenko.github.io/react-tenzies/",
     codeLink: "https://github.com/VladislavDegtyarenko/react-tenzies",
-  },
+  }, */
 ];
 
 export default projectsData;
