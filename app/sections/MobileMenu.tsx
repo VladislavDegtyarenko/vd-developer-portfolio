@@ -18,7 +18,8 @@ const StyledMenu = styled.div<StyledMenuProps>`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: ${({ $scrollbarCompensation }) =>
+    $scrollbarCompensation ? `calc(100% - ${$scrollbarCompensation}px)` : "100%"};
   height: 100%;
   height: 100svh;
   z-index: 2;
@@ -63,7 +64,7 @@ const StyledMenu = styled.div<StyledMenuProps>`
 const DEFAULT_HEADER_HEIGHT = 78;
 
 const MobileMenu = ({ headerRef }: MobileMenuProps) => {
-  const { scrollbarWidth } = useContext(ScrollLockContext);
+  const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { toggleMenu } = useContext(MobileMenuContext);
 
   const headerHeight = headerRef?.current
@@ -72,9 +73,7 @@ const MobileMenu = ({ headerRef }: MobileMenuProps) => {
 
   return (
     <StyledMenu
-      style={{
-        width: `calc(100% - ${scrollbarWidth}px)`,
-      }}
+      $scrollbarCompensation={scrollbarCompensation}
       $headerHeight={headerHeight}
       as={motion.div}
       initial={{ opacity: 0 }}

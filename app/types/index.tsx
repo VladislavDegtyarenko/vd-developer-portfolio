@@ -136,6 +136,7 @@ export interface ProjectSlideProps extends Project {
 }
 
 export interface StyledMenuProps {
+  $scrollbarCompensation: number | null;
   $headerHeight: number;
 }
 
