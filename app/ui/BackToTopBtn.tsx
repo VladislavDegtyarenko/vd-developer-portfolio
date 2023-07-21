@@ -2,10 +2,11 @@
 
 import styled from "styled-components";
 import ArrowIcon from "@/assets/Icons/Arrow";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import throttle from "../functions/throttle";
+import ScrollLockContext from "app/contexts/ScrollLockContext";
 
-const StyledBtn = styled.button`
+const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
   position: fixed;
   font-size: 1.5em;
   width: 2em;
@@ -13,6 +14,7 @@ const StyledBtn = styled.button`
   bottom: 1em;
   right: 1em;
   padding: 0.5em;
+  margin-right: ${({ $scrollbarCompensation }) => $scrollbarCompensation + "px" || 0};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +28,7 @@ const StyledBtn = styled.button`
   opacity: 0;
   transform: scale(0.5);
   cursor: pointer;
-  transition: all var(--duration);
+  transition: transform var(--duration), opacity var(--duration);
 
   &.visible {
     pointer-events: initial;
@@ -53,6 +55,7 @@ const DEFAULT_SCROLL_POSITION = 0;
 
 const BackToTopBtn = () => {
   const [visible, setVisible] = useState(false);
+  const { scrollbarCompensation } = useContext(ScrollLockContext);
 
   const getScrollPosition = () => window?.scrollY || DEFAULT_SCROLL_POSITION;
   const scrollPosition = useRef(DEFAULT_SCROLL_POSITION);
@@ -82,9 +85,13 @@ const BackToTopBtn = () => {
   }, [debounceHandleScroll]);
 
   const scrollToTop = () => window.scrollTo(0, 0);
-
+  
   return (
-    <StyledBtn className={visible ? "visible" : ""} onClick={scrollToTop}>
+    <StyledBtn
+      className={visible ? "visible" : ""}
+      $scrollbarCompensation={scrollbarCompensation}
+      onClick={scrollToTop}
+    >
       <ArrowIcon />
     </StyledBtn>
   );
