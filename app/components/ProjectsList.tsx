@@ -1,10 +1,16 @@
 import styled from "styled-components";
 
 import { useContext, useState, useEffect, useRef, memo } from "react";
+import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
 
 import projectsData from "app/data/projects";
 import ProjectSlide from "app/ui/ProjectSlide";
 import ProjectContext from "app/contexts/ProjectContext";
+
+import animateFromBottom from "app/animations/animateFromBottom";
+
+//tS
+import { ProjectCardsListRef } from "./../types";
 
 const StyledProjectsList = styled.div`
   ul {
@@ -38,29 +44,22 @@ const StyledProjectsList = styled.div`
 `;
 
 const ProjectsList = () => {
-  const [showAll, setShowAll] = useState(false);
   const { previewProject } = useContext(ProjectContext);
 
-  const projData = showAll ? projectsData : projectsData.slice(0, 2);
+  const cardsListRef = useRef<ProjectCardsListRef>(null);
 
-  const listRef = useRef<HTMLUListElement>(null);
-  const firstRender = useRef(false);
+  useIsomorphicLayoutEffect(() => {
+    if (!cardsListRef.current) return;
 
-  useEffect(() => {
-    if (!firstRender.current) {
-      firstRender.current = true;
-      return;
-    }
-
-    if (!showAll) {
-      listRef.current?.scrollIntoView();
-    }
-  }, [showAll]);
+    animateFromBottom([...new Set(cardsListRef.current.children)], {
+      stagger: 0.15,
+    });
+  }, []);
 
   return (
     <StyledProjectsList>
-      <ul ref={listRef}>
-        {projData.map(({ img, title, description, previewLink, codeLink }) => (
+      <ul ref={cardsListRef}>
+        {projectsData.map(({ img, title, description, previewLink, codeLink }) => (
           <ProjectSlide
             key={title}
             img={img}
@@ -72,10 +71,6 @@ const ProjectsList = () => {
           />
         ))}
       </ul>
-
-      <button className="showAll" onClick={() => setShowAll((s) => !s)}>
-        {!showAll ? "Show all projects" : "Show less"}
-      </button>
     </StyledProjectsList>
   );
 };

@@ -1,11 +1,15 @@
 "use client";
 
+import { useRef, MouseEvent } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { ProjectSlideProps } from "../types";
 import { H4, P1 } from "./../ui/Text";
 
 import { BiCodeAlt, BiLinkExternal } from "react-icons/bi";
+
+import gsap from "gsap";
+import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
 
 const StyledSlide = styled.li`
   aspect-ratio: 16/9;
@@ -16,6 +20,7 @@ const StyledSlide = styled.li`
   overflow: hidden;
   min-height: 240px;
   width: 100%;
+  cursor: pointer;
   .slide {
     &__img {
       --slide-size: 100%;
@@ -116,13 +121,40 @@ const StyledSlide = styled.li`
 const ProjectSlide = ({
   img,
   title,
-  description,
   previewLink,
   codeLink,
   previewProject,
 }: ProjectSlideProps) => {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const zoomRef = useRef<gsap.core.Timeline | null>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    zoomRef.current = gsap.timeline({
+      paused: true,
+      defaults: {
+        ease: "none",
+      },
+    });
+
+    zoomRef.current.to(imageRef.current, { scale: 1.05 });
+  }, [zoomRef.current, imageRef.current]);
+
+  const zoomIn = () => {
+    gsap.to(zoomRef.current, { time: 0.5, ease: "power3.out", overwrite: true });
+  };
+  const zoomOut = () => {
+    gsap.to(zoomRef.current, { time: 0, ease: "power3.out", overwrite: true });
+  };
+
   return (
-    <StyledSlide>
+    <StyledSlide
+      onMouseEnter={zoomIn}
+      onMouseLeave={zoomOut}
+      onClick={() => {
+        zoomOut();
+        previewLink && previewProject(previewLink);
+      }}
+    >
       <div className="slide__img">
         <Image
           src={img}
@@ -132,25 +164,21 @@ const ProjectSlide = ({
           alt=""
           placeholder="blur"
           fill
+          ref={imageRef}
         />
       </div>
       <div className="slide__main">
         <H4 as="h3">{title}</H4>
-        {/* <P1 className="slide__descr">{description}</P1> */}
         <div className="slide__buttons">
           {codeLink && codeLink.length > 0 ? (
-            <P1 as="a" href={codeLink} target="_blank" className="slide__btn">
-              <BiCodeAlt />
-            </P1>
-          ) : null}
-
-          {previewLink && previewLink.length > 0 ? (
             <P1
-              as="button"
-              onClick={() => previewProject(previewLink)}
+              as="a"
+              href={codeLink}
+              target="_blank"
               className="slide__btn slide__btn-primary"
+              onClick={(e: MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
             >
-              <BiLinkExternal />
+              <BiCodeAlt />
             </P1>
           ) : null}
         </div>
