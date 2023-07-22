@@ -1,43 +1,48 @@
 "use client";
 
 import { createContext, useState, useEffect, useCallback } from "react";
+import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
 import { ContextParentElement, GetScrollbarWidth } from "app/types";
 
 const DEFAULT_SCROLLBAR_WIDTH = 16;
 
-const ScrollLockContext = createContext({
-  scrollbarWidth: DEFAULT_SCROLLBAR_WIDTH,
+const ScrollLockContext = createContext<{
+  scrollbarCompensation: number | null;
+  scrollLock: () => void;
+  scrollUnlock: () => void;
+}>({
+  scrollbarCompensation: null,
   scrollLock: () => {},
   scrollUnlock: () => {},
 });
 
 export const ScrollLockContextProvider = ({ children }: ContextParentElement) => {
-  const [scrollbarWidth, setScrollbarWidth] = useState(DEFAULT_SCROLLBAR_WIDTH);
-  // const scrollbarWidth = useRef(16);
-
-  function getScrollbarWidth(): GetScrollbarWidth {
-    if (!document || !window) return DEFAULT_SCROLLBAR_WIDTH;
-
-    return window.innerWidth - document.body.offsetWidth;
-  }
-
-  useEffect(() => {
-    setScrollbarWidth(getScrollbarWidth());
-    // scrollbarWidth.current = getScrollbarWidth();
-  }, []);
+  const [scrollbarCompensation, setScrollBarCompensation] = useState<number | null>(null);
 
   const scrollLock = useCallback(() => {
-    document.body.style.overflow = "hidden";
-    document.body.style.marginRight = scrollbarWidth + "px";
+    const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
+
+    setScrollBarCompensation(scrollbarWidth);
   }, []);
 
   const scrollUnlock = useCallback(() => {
-    document.body.style.overflow = "";
-    document.body.style.marginRight = "";
+    setScrollBarCompensation(null);
   }, []);
 
+  useIsomorphicLayoutEffect(() => {
+    if (scrollbarCompensation) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = scrollbarCompensation + "px";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+  }, [scrollbarCompensation]);
+
   return (
-    <ScrollLockContext.Provider value={{ scrollbarWidth, scrollLock, scrollUnlock }}>
+    <ScrollLockContext.Provider
+      value={{ scrollbarCompensation, scrollLock, scrollUnlock }}
+    >
       {children}
     </ScrollLockContext.Provider>
   );

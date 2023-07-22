@@ -14,10 +14,11 @@ import { HeaderProps, HeaderRef, TimeoutRef } from "../types";
 import MobileMenuContext from "app/contexts/MobileMenuContext";
 import ScrollLockContext from "app/contexts/ScrollLockContext";
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.header<{ $scrollbarCompensation: number | null }>`
   padding: 1.5em 0;
   position: fixed;
-  width: 100%;
+  width: ${({ $scrollbarCompensation }) =>
+    $scrollbarCompensation ? `calc(100% - ${$scrollbarCompensation}px)` : "100%"};
   z-index: 3;
   box-shadow: 0 0 8px #35353555;
   /* background-color: #050505bb; */
@@ -86,7 +87,7 @@ const StyledHeader = styled.header`
 `;
 
 const Header = forwardRef<HeaderRef>((props, ref) => {
-  const { scrollbarWidth } = useContext(ScrollLockContext);
+  const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
@@ -139,10 +140,11 @@ const Header = forwardRef<HeaderRef>((props, ref) => {
   return (
     <StyledHeader
       ref={ref}
+      $scrollbarCompensation={scrollbarCompensation}
       // scrollbarWidth={scrollbarWidth}
       style={{
         // paddingRight: `${menuIsOpen ? scrollbarWidth + "px" : ""}`,
-        width: menuIsOpen ? `calc(100% - ${scrollbarWidth}px)` : "",
+        width: menuIsOpen ? `calc(100% - ${scrollbarCompensation}px)` : "",
       }}
     >
       <Container>

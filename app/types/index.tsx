@@ -19,7 +19,7 @@ export type PreviewProject = (url: string) => void;
 export type GetScrollbarWidth = number;
 export type MenuIsOpen = boolean;
 export type HeaderRef = HTMLElement | null;
-export type SkillCardRef = HTMLDivElement | null;
+export type ExpertiseCardRef = HTMLLIElement | null;
 export type ExpCardRef = HTMLDivElement | null;
 export type ReviewCardRef = HTMLDivElement | null;
 export type SectionTitleRef = HTMLHeadingElement | null;
@@ -69,10 +69,15 @@ export interface Icon extends NextjsImageAssetProps {
 }
 
 // DATA
-export interface Skill {
+export interface Expertise {
   icon: string;
   title: string;
   description?: string;
+}
+
+export interface ExpertiseGroup {
+  groupTitle: string;
+  groupCards: Expertise[];
 }
 
 export interface Project {
@@ -100,7 +105,7 @@ export interface ContactBtn {
 
 // UI
 
-export interface SkillCardProps extends Skill {
+export interface ExpertiseCardProps extends Expertise {
   alt?: string;
   animationOptions?: gsap.TweenVars;
 }
@@ -136,6 +141,7 @@ export interface ProjectSlideProps extends Project {
 }
 
 export interface StyledMenuProps {
+  $scrollbarCompensation: number | null;
   $headerHeight: number;
 }
 
