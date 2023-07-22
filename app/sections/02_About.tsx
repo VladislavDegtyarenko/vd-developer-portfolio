@@ -8,40 +8,17 @@ import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import SectionDescription from "app/ui/SectionDescription";
 import Container from "../ui/Container";
-import SkillCard from "../ui/SkillCard";
+import ExpertiseGroup from "app/components/ExpertiseGroup";
 import { H4 } from "app/ui/Text";
 
 // Data
-import skillsData from "../data/skills";
+import expertiseData from "../data/expertise";
 
 // Styled
 const StyledAbout = styled(Section)`
   .about {
     &__subsection {
       margin-top: 3em;
-    }
-  }
-
-  .wrapper {
-  }
-
-  .group {
-    display: grid;
-    gap: 2em;
-    margin-top: 3.75em;
-    > h4 {
-      text-align: center;
-    }
-  }
-
-  .icons {
-    display: flex;
-    flex-wrap: wrap;
-    /* max-width: 992px; */
-    margin: 0 auto;
-    gap: 1em;
-    @media (max-width: 991.98px) {
-      justify-content: center;
     }
   }
 `;
@@ -61,29 +38,8 @@ const About = () => {
               user experiences.
             </SectionDescription>
             <div className="wrapper">
-              {/* {skillsData.map(({ icon, title, description }, key) => (
-                <SkillCard
-                  icon={icon}
-                  alt={title}
-                  title={title}
-                  description={description}
-                  key={title}
-                  animationOptions={{
-                    delay: 0.15 * (key % 3),
-                  }}
-                />
-              ))} */}
-
-              {skillsData.map(({ groupTitle, groupCards }) => (
-                <div className="group" key={groupTitle}>
-                  <H4 key={groupTitle}>{groupTitle}</H4>
-
-                  <div className="icons">
-                    {groupCards.map(({ icon, title }) => (
-                      <SkillCard key={icon} icon={icon} title={title} />
-                    ))}
-                  </div>
-                </div>
+              {expertiseData.map((group) => (
+                <ExpertiseGroup key={group.groupTitle} {...group} />
               ))}
             </div>
           </div>

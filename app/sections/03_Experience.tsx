@@ -8,12 +8,12 @@ import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
 import SectionSubtitle from "../ui/SectionSubtitle";
 import Container from "../ui/Container";
-import SkillCard from "../ui/SkillCard";
+import ExpertiseCard from "../ui/ExpertiseCard";
 import ExperienceCard from "../ui/ExperienceCard";
 import { H4 } from "app/ui/Text";
 
 // Data
-import skillsData from "../data/skills";
+import skillsData from "../data/expertise";
 import experienceData from "../data/experience";
 
 // Styled
@@ -24,6 +24,7 @@ const StyledExperience = styled(Section)`
     }
   }
   .subtitle {
+    margin-top: 3em;
     text-align: center;
   }
   .experience__wrapper {

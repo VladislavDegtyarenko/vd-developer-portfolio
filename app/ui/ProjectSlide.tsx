@@ -14,7 +14,7 @@ import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
 const StyledSlide = styled.li`
   aspect-ratio: 16/9;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   position: relative;
   border-radius: var(--borderRadiusNormal);
   overflow: hidden;
@@ -47,8 +47,6 @@ const StyledSlide = styled.li`
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      flex-wrap: wrap;
-      gap: 1em;
       padding: 24px;
       color: ${({ theme }) => theme.white};
 
@@ -77,6 +75,7 @@ const StyledSlide = styled.li`
     }
     &__buttons {
       display: flex;
+      margin-left: 1em;
       @media screen and (max-width: 991.98px) {
         justify-content: center;
       }
