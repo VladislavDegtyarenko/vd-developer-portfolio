@@ -128,7 +128,7 @@ const Contact = () => {
           </div>
           <div className="contact__download-cv">
             <a
-              href="Vladyslav Dihtiarenko CV Mar23_compressed.pdf"
+              href="Vladyslav Dihtiarenko CV Jul'23.pdf"
               title={"Get my CV in PDF format"}
               target="_blank"
               ref={downloadBtnRef}
