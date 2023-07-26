@@ -32,7 +32,7 @@ export type DownloadBtnRef = HTMLAnchorElement | null;
 export type FooterRef = HTMLParagraphElement | null;
 export type TimeoutRef = ReturnType<typeof setInterval> | undefined;
 export type IsMobile = boolean;
-export type CloseProjectModal = () => void;
+export type CloseModal = () => void;
 
 export interface HeaderProps {
   ref: RefObject<HeaderRef>;
@@ -133,20 +133,20 @@ export interface SectionDescriptionProps {
 
 export interface ProjectModalProps {
   projectSrc: string;
-  closeProjectModal: CloseProjectModal;
+  closeModal: CloseModal;
 }
 
 export interface ProjectSlideProps extends Project {
   previewProject: PreviewProject;
 }
 
-export interface StyledMenuProps {
+export interface StyledModalWrapperProps {
   $scrollbarCompensation: number | null;
-  $headerHeight: number;
 }
 
-export interface MobileMenuProps {
-  headerRef: RefObject<HeaderRef>;
+export interface ModalWrapperProps {
+  closeModal: CloseModal;
+  children: ReactNode;
 }
 
 export interface StyledThemeProviderProps {
@@ -164,5 +164,5 @@ export interface ContextParentElement {
 export interface ProjectContext {
   projectSrc: string | null;
   previewProject: PreviewProject;
-  closeProjectModal: CloseProjectModal;
+  closeModal: CloseModal;
 }

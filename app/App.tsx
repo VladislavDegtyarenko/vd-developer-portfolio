@@ -40,7 +40,7 @@ const StyledApp = styled.div`
 
 const App = () => {
   const { menuIsOpen } = useContext(MobileMenuContext);
-  const { projectSrc, closeProjectModal } = useContext(ProjectContext);
+  const { projectSrc, closeModal } = useContext(ProjectContext);
 
   const headerRef = createRef<HeaderRef>();
 
@@ -55,14 +55,10 @@ const App = () => {
       <Contact />
       <Footer />
 
-      <AnimatePresence>
-        {menuIsOpen && <MobileMenu headerRef={headerRef} />}
-      </AnimatePresence>
+      <AnimatePresence>{menuIsOpen && <MobileMenu />}</AnimatePresence>
 
       <AnimatePresence>
-        {projectSrc && (
-          <ProjectModal projectSrc={projectSrc} closeProjectModal={closeProjectModal} />
-        )}
+        {projectSrc && <ProjectModal projectSrc={projectSrc} closeModal={closeModal} />}
       </AnimatePresence>
 
       <BackToTopBtn />
