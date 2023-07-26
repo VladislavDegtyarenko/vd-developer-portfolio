@@ -2,8 +2,8 @@
 
 import styled from "styled-components";
 import ArrowIcon from "@/assets/Icons/Arrow";
-import { useState, useEffect, useRef, useContext } from "react";
-import throttle from "../functions/throttle";
+import { MouseEvent, useContext } from "react";
+import useScrollDelta from "app/hooks/useScrollDelta";
 import ScrollLockContext from "app/contexts/ScrollLockContext";
 
 const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
@@ -36,11 +36,10 @@ const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
     transform: scale(1);
 
     opacity: 0.75;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.fg};
-    opacity: 0.9;
+    &:hover {
+      background-color: ${({ theme }) => theme.fg};
+      opacity: 0.9;
+    }
   }
 
   > svg {
@@ -54,38 +53,16 @@ const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
 const DEFAULT_SCROLL_POSITION = 0;
 
 const BackToTopBtn = () => {
-  const [visible, setVisible] = useState(false);
   const { scrollbarCompensation } = useContext(ScrollLockContext);
 
-  const getScrollPosition = () => window?.scrollY || DEFAULT_SCROLL_POSITION;
-  const scrollPosition = useRef(DEFAULT_SCROLL_POSITION);
+  const { scrolledUp, scrollPosition } = useScrollDelta();
 
-  const handleScroll = () => {
-    const oldScroll = scrollPosition.current;
-    const newScroll = getScrollPosition();
-
-    const userIsScrolledUp = newScroll < oldScroll;
-    const userIsOnTop = newScroll < 500;
-
-    setVisible(userIsScrolledUp && !userIsOnTop);
-
-    scrollPosition.current = newScroll;
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
 
-  const debounceHandleScroll = throttle(() => handleScroll(), 200);
+  const visible = scrolledUp && scrollPosition > 800;
 
-  useEffect(() => {
-    if (!window) return;
-
-    scrollPosition.current = getScrollPosition();
-
-    window.addEventListener("scroll", debounceHandleScroll);
-
-    return () => window.removeEventListener("scroll", debounceHandleScroll);
-  }, [debounceHandleScroll]);
-
-  const scrollToTop = () => window.scrollTo(0, 0);
-  
   return (
     <StyledBtn
       className={visible ? "visible" : ""}

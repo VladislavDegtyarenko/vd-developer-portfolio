@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useContext, memo, useCallback } from "react";
 import styled from "styled-components";
+import useScrollDelta from "app/hooks/useScrollDelta";
 
 // UI
 import Container from "../ui/Container";
@@ -15,10 +16,10 @@ import DarkModeContext from "app/contexts/DarkModeContext";
 import MobileMenuContext from "app/contexts/MobileMenuContext";
 import ScrollLockContext from "app/contexts/ScrollLockContext";
 
-// TS
-import { HeaderRef, TimeoutRef } from "../types";
-
-const StyledHeader = styled.header<{ $scrollbarCompensation: number | null }>`
+const StyledHeader = styled.header<{
+  $scrollbarCompensation: number | null;
+  $scrolledDown: boolean;
+}>`
   padding: 1.5em 0;
   position: fixed;
   width: ${({ $scrollbarCompensation }) =>
@@ -54,9 +55,7 @@ const StyledHeader = styled.header<{ $scrollbarCompensation: number | null }>`
 
   @media screen and (max-width: 991.98px) {
     padding: 1.25em 0;
-    &.header-collapse {
-      top: -150px;
-    }
+    top: ${({ $scrolledDown }) => ($scrolledDown ? "-150px" : 0)};
   }
 
   nav {
@@ -91,64 +90,18 @@ const StyledHeader = styled.header<{ $scrollbarCompensation: number | null }>`
 `;
 
 const Header = () => {
-  const ref = useRef<HeaderRef>(null);
-
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   // SCROLL
-  const [didScroll, setDidScroll] = useState(false);
-  const [lastScrollTop, setLastScrollTop] = useState(0);
-  const delta = 5;
-
-  const timeoutRef = useRef<TimeoutRef>(undefined);
-
-  const handleScroll = useCallback(() => {
-    if (!ref || typeof ref === "function" || !ref?.current) return;
-
-    const scrollTop = Math.round(window.scrollY);
-
-    const headerHeight = ref.current.clientHeight;
-
-    if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
-
-    if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
-      ref.current.classList.add("header-collapse");
-    } else {
-      if (scrollTop < lastScrollTop) {
-        ref.current.classList.remove("header-collapse");
-      }
-    }
-
-    setLastScrollTop(scrollTop);
-  }, [lastScrollTop]);
-
-  useEffect(() => {
-    const hasScrolled = () => {
-      setDidScroll(true);
-    };
-
-    document.body.addEventListener("scroll", hasScrolled);
-
-    return () => document.body.removeEventListener("scroll", hasScrolled);
-  }, []);
-
-  useEffect(() => {
-    if (!didScroll) return;
-
-    timeoutRef.current = setInterval(() => {
-      handleScroll();
-      setDidScroll(false);
-    }, 250);
-
-    return () => {
-      clearInterval(timeoutRef.current);
-    };
-  }, [didScroll, handleScroll]);
+  const { scrolledUp, scrolledDown } = useScrollDelta();
 
   return (
-    <StyledHeader ref={ref} $scrollbarCompensation={scrollbarCompensation}>
+    <StyledHeader
+      $scrollbarCompensation={scrollbarCompensation}
+      $scrolledDown={scrolledDown}
+    >
       <Container>
         <nav>
           <a
