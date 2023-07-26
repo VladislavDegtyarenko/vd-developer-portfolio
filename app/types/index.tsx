@@ -18,7 +18,6 @@ export type ToggleDarkMode = () => void;
 export type PreviewProject = (url: string) => void;
 export type GetScrollbarWidth = number;
 export type MenuIsOpen = boolean;
-export type HeaderRef = HTMLElement | null;
 export type ExpertiseCardRef = HTMLLIElement | null;
 export type ExpCardRef = HTMLDivElement | null;
 export type ReviewCardRef = HTMLDivElement | null;
