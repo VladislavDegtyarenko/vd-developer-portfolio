@@ -1,18 +1,22 @@
 "use client";
 
+import { useState, useEffect, useRef, useContext, memo, useCallback } from "react";
 import styled from "styled-components";
+
+// UI
 import Container from "../ui/Container";
 import Logo from "@/assets/Icons/LOGO";
 import BurgerButton from "../ui/BurgerButton";
 import MenuLinks from "../ui/MenuLinks";
-
-import { useState, useEffect, useRef, forwardRef, useContext, memo } from "react";
-import DarkModeContext from "app/contexts/DarkModeContext";
-
 import DarkModeToggle from "../ui/DarkModeToggle";
-import { HeaderProps, HeaderRef, TimeoutRef } from "../types";
+
+// Contexts
+import DarkModeContext from "app/contexts/DarkModeContext";
 import MobileMenuContext from "app/contexts/MobileMenuContext";
 import ScrollLockContext from "app/contexts/ScrollLockContext";
+
+// TS
+import { HeaderRef, TimeoutRef } from "../types";
 
 const StyledHeader = styled.header<{ $scrollbarCompensation: number | null }>`
   padding: 1.5em 0;
@@ -86,7 +90,9 @@ const StyledHeader = styled.header<{ $scrollbarCompensation: number | null }>`
   }
 `;
 
-const Header = forwardRef<HeaderRef>((props, ref) => {
+const Header = () => {
+  const ref = useRef<HeaderRef>(null);
+
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
   const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
@@ -98,26 +104,7 @@ const Header = forwardRef<HeaderRef>((props, ref) => {
 
   const timeoutRef = useRef<TimeoutRef>(undefined);
 
-  useEffect(() => {
-    document.body.onscroll = () => {
-      setDidScroll(true);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!didScroll) return;
-
-    timeoutRef.current = setInterval(() => {
-      hasScrolled();
-      setDidScroll(false);
-    }, 250);
-
-    return () => {
-      clearInterval(timeoutRef.current);
-    };
-  }, [ref, didScroll]);
-
-  function hasScrolled() {
+  const handleScroll = useCallback(() => {
     if (!ref || typeof ref === "function" || !ref?.current) return;
 
     const scrollTop = Math.round(window.scrollY);
@@ -135,18 +122,33 @@ const Header = forwardRef<HeaderRef>((props, ref) => {
     }
 
     setLastScrollTop(scrollTop);
-  }
+  }, [lastScrollTop]);
+
+  useEffect(() => {
+    const hasScrolled = () => {
+      setDidScroll(true);
+    };
+
+    document.body.addEventListener("scroll", hasScrolled);
+
+    return () => document.body.removeEventListener("scroll", hasScrolled);
+  }, []);
+
+  useEffect(() => {
+    if (!didScroll) return;
+
+    timeoutRef.current = setInterval(() => {
+      handleScroll();
+      setDidScroll(false);
+    }, 250);
+
+    return () => {
+      clearInterval(timeoutRef.current);
+    };
+  }, [didScroll, handleScroll]);
 
   return (
-    <StyledHeader
-      ref={ref}
-      $scrollbarCompensation={scrollbarCompensation}
-      // scrollbarWidth={scrollbarWidth}
-      style={{
-        // paddingRight: `${menuIsOpen ? scrollbarWidth + "px" : ""}`,
-        width: menuIsOpen ? `calc(100% - ${scrollbarCompensation}px)` : "",
-      }}
-    >
+    <StyledHeader ref={ref} $scrollbarCompensation={scrollbarCompensation}>
       <Container>
         <nav>
           <a
@@ -168,8 +170,6 @@ const Header = forwardRef<HeaderRef>((props, ref) => {
       </Container>
     </StyledHeader>
   );
-});
-
-Header.displayName = "Header";
+};
 
 export default memo(Header);
