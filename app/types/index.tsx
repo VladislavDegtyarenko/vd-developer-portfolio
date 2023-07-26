@@ -34,10 +34,6 @@ export type TimeoutRef = ReturnType<typeof setInterval> | undefined;
 export type IsMobile = boolean;
 export type CloseModal = () => void;
 
-export interface HeaderProps {
-  ref: RefObject<HeaderRef>;
-}
-
 export interface MenuLinksProps {
   isMobile?: IsMobile;
   toggleMenu?: ToggleMenu;

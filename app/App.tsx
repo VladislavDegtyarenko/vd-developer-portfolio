@@ -28,9 +28,6 @@ const ProjectModal = dynamic(() => import("./ui/ProjectModal"), { ssr: false });
 import MobileMenuContext from "./contexts/MobileMenuContext";
 import ProjectContext from "./contexts/ProjectContext";
 
-// TS
-import { HeaderRef } from "./types";
-
 const StyledApp = styled.div`
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.fg};
@@ -42,11 +39,9 @@ const App = () => {
   const { menuIsOpen } = useContext(MobileMenuContext);
   const { projectSrc, closeModal } = useContext(ProjectContext);
 
-  const headerRef = createRef<HeaderRef>();
-
   return (
     <StyledApp>
-      <Header ref={headerRef} />
+      <Header />
       <Main />
       <About />
       <Experience />
