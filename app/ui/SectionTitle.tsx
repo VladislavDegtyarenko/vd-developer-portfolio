@@ -41,7 +41,7 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
   const { animateTitle, animateLine } = animateSectionTitle(ref);
 
   useIsomorphicLayoutEffect(() => {
-    animateTitle("h2 > *");
+    animateTitle("h2 span");
     animateLine();
   }, []);
 
