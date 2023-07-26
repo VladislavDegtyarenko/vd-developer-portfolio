@@ -1,36 +1,14 @@
 "use client";
 
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import Loading from "./Loading";
 import { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+
+import Loading from "./Loading";
 import { ProjectModalProps, ProjectModalRef } from "../types";
+import ModalWrapper from "./ModalWrapper";
 
-const StyledModal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const StyledModal = styled(ModalWrapper)`
   z-index: 3;
-  backdrop-filter: blur(4px);
-
-  .overlay {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    opacity: 0.8;
-    position: absolute;
-    background-color: ${({ theme }) => theme.cardBg};
-  }
 
   .close {
     position: absolute;
@@ -81,41 +59,37 @@ const StyledModal = styled.div`
   }
 `;
 
-const ProjectModal = ({ projectSrc, closeProjectModal }: ProjectModalProps) => {
+const ProjectModal = ({ projectSrc, closeModal }: ProjectModalProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const iframeRef = useRef<ProjectModalRef>(null);
 
   useEffect(() => {
-    if (!iframeRef.current) return;
+    const iframeElement = iframeRef.current;
 
-    iframeRef.current.addEventListener("load", () => {
+    if (!iframeElement) return;
+
+    iframeElement.addEventListener("load", () => {
       setIsLoading(false);
     });
 
     document.body.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeProjectModal();
+      if (e.key === "Escape") closeModal();
     });
 
     return () => {
-      iframeRef.current?.removeEventListener("load", () => {
+      iframeElement?.removeEventListener("load", () => {
         setIsLoading(false);
       });
 
       document.body.removeEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeProjectModal();
+        if (e.key === "Escape") closeModal();
       });
     };
-  }, []);
+  }, [closeModal]);
 
   return (
-    <StyledModal
-      as={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="overlay" onClick={closeProjectModal}></div>
-      <button className="close" onClick={closeProjectModal}>
+    <StyledModal closeModal={closeModal}>
+      <button className="close" onClick={closeModal}>
         <span></span>
         <span></span>
       </button>

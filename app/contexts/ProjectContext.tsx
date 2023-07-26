@@ -1,18 +1,18 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import ScrollLockContext from "./ScrollLockContext";
 import {
   ContextParentElement,
   ProjectContext,
-  CloseProjectModal,
   PreviewProject,
+  CloseModal,
 } from "app/types";
 
 const ProjectContext = createContext<ProjectContext>({
   projectSrc: "",
   previewProject: (url) => {},
-  closeProjectModal: () => {},
+  closeModal: () => {},
 });
 
 export const ProjectContextProvider = ({ children }: ContextParentElement) => {
@@ -20,19 +20,18 @@ export const ProjectContextProvider = ({ children }: ContextParentElement) => {
   const [projectSrc, setProjectSrc] = useState<string | null>(null);
   const { scrollLock, scrollUnlock } = useContext(ScrollLockContext);
 
-
   const previewProject: PreviewProject = (url) => {
     setProjectSrc(url);
   };
 
-  const closeProjectModal: CloseProjectModal = () => setProjectSrc(null);
+  const closeModal: CloseModal = useCallback(() => setProjectSrc(null), []);
 
   useEffect(() => {
     projectSrc ? scrollLock() : scrollUnlock();
   }, [projectSrc, scrollLock, scrollUnlock]);
 
   return (
-    <ProjectContext.Provider value={{ projectSrc, previewProject, closeProjectModal }}>
+    <ProjectContext.Provider value={{ projectSrc, previewProject, closeModal }}>
       {children}
     </ProjectContext.Provider>
   );
