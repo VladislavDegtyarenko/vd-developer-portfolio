@@ -1,19 +1,15 @@
 // Core
-import { useRef, memo } from "react";
 import styled from "styled-components";
 
 // UI
 import Section from "./../ui/Section";
 import SectionDivider from "./../ui/SectionDivider";
 import SectionTitle from "../ui/SectionTitle";
-import SectionSubtitle from "../ui/SectionSubtitle";
 import Container from "../ui/Container";
-import ExpertiseCard from "../ui/ExpertiseCard";
 import ExperienceCard from "../ui/ExperienceCard";
 import { H4 } from "app/ui/Text";
 
 // Data
-import skillsData from "../data/expertise";
 import experienceData from "../data/experience";
 
 // Styled
