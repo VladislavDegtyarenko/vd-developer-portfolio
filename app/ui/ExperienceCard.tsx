@@ -30,7 +30,7 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
 
   .info {
     display: grid;
-    gap: 8px;
+    gap: 0.5em;
   }
 
   .time-range {
@@ -45,6 +45,9 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   }
   .descr {
     color: ${({ theme }) => theme.grey};
+    > * + * {
+      margin-top: 1em;
+    }
   }
 
   .chips {
@@ -113,7 +116,11 @@ const ExperienceCard = ({
             ))}
           </div>
         ) : null}
-        <P2 className="descr">{description}</P2>
+        <P2 className="descr">
+          {description.split(`\n`).map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </P2>
       </div>
       {icons && icons.length > 0 ? (
         <div className="icons">

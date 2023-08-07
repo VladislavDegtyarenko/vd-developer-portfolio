@@ -15,8 +15,12 @@ const experienceData = [
     position: "Frontend Developer",
     company: "Astound Commerce",
     chips: ["Ukraine", "Remote", "Full-time"],
-    description:
-      "At Astound Commerce, I collaborated with experienced managers and developers on a large project, utilizing technologies such as TypeScript, SFCC, React, and Next.js, and got competence in unit testing.",
+    description: `
+      Collaborated with an international team on an ongoing multi-page store project  for a prominent global brand.
+      Utilized cutting-edge technologies including React, Next.js, Tailwind CSS, GraphQL, and TypeScript to enhance and extend the stores functionality, resulting in a seamless and engaging user experience.
+      Expanded expertise in Jest and React Testing Library for unit testing custom hooks.
+      Received positive feedback for delivering fast, clean, and accessible web experiences.
+    `,
     icons: [
       { ...TSIcon, alt: "Typescript" },
       { ...ReactIcon, alt: "React.js" },
@@ -31,8 +35,11 @@ const experienceData = [
     position: "Frontend Developer",
     company: "While Web Production",
     chips: ["Ukraine", "Remote", "Part-time"],
-    description:
-      "Provided top-notch frontend development in a range of projects, from landing pages to multi-page websites, resulting in happy clients.",
+    description: `
+      Developed websites for Ukrainian businesses using HTML, CSS, Bootstrap, JavaScript, jQuery, and Gulp, contributing to the growth of businesses in Ukraine.
+      Successfully completed 5 projects, resulting in happy clients and recognition for delivering fast, clean, pixel-perfect, and accessible web experiences.
+      Demonstrated versatility and skill in handling various projects, from landing pages to multi-page websites.
+      `,
     icons: [
       { ...HTMLIcon, alt: "HTML" },
       { ...CSSIcon, alt: "CSS" },
