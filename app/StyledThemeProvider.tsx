@@ -27,7 +27,7 @@ const lightTheme = {
   cyanHover: "#2dacbd",
   error: "#E1341E",
   grey: "#5d5c5c",
-  fg: "#353535",
+  fg: "#242424",
   white: "#F8F8F8",
   overlay: "#242424",
 };
