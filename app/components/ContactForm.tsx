@@ -22,10 +22,10 @@ const StyledContactForm = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30em;
+    max-width: 30em;
     margin-left: auto;
     margin-right: auto;
-    max-width: 100%;
+    width: 100%;
 
     > label {
       display: flex;
