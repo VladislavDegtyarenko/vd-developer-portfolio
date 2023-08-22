@@ -138,12 +138,12 @@ const ContactForm = () => {
   const [error, setError] = useState("");
 
   const sendEmail: SubmitHandler<FormInputs> = (data) => {
-    const apiEndpoint = "/api/email";
+    const sendgridApiEndpoint = "/api/sendgrid";
 
     setError("");
     setIsSending(true);
 
-    fetch(apiEndpoint, {
+    fetch(sendgridApiEndpoint, {
       method: "POST",
       body: JSON.stringify(data),
     })

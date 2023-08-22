@@ -1,3 +1,4 @@
+import { P2 } from "app/ui/Text";
 import { type NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
@@ -6,7 +7,10 @@ export async function POST(request: NextRequest) {
   const { email, name, message, error } = await request.json();
 
   const transport = nodemailer.createTransport({
-    service: "gmail",
+    service: "sendgrid",
+    host: "smtp.sendgrid.net",
+    port: 587,
+
     /* 
       setting service as 'gmail' is same as providing these setings:
       host: "smtp.gmail.com",
@@ -17,16 +21,17 @@ export async function POST(request: NextRequest) {
       https://github.com/nodemailer/nodemailer/blob/master/lib/well-known/services.json
   */
     auth: {
-      user: process.env.NODEMAILER_EMAIL,
-      pass: process.env.NODEMAILER_PW,
+      user: "apikey",
+      pass: process.env.SENDGRID_KEY,
     },
   });
 
   const mailOptions: Mail.Options = {
-    from: process.env.NODEMAILER_EMAIL,
+    from: "contact@vddeveloper.online",
+    sender: email,
+    replyTo: email,
     to: process.env.NODEMAILER_EMAIL,
-    //cc: email, //(uncomment this line if you want to send a copy to the sender)
-    subject: `Message from ${name} (${email})`,
+    subject: `${name} <${email}> | Portfolio Website Contact Form`,
     text: message,
   };
 
