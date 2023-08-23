@@ -13,9 +13,7 @@ import bg from "@/assets/bg.jpg";
 import photo from "@/photo.png";
 
 const StyledMain = styled(Section)`
-  /* scroll-margin-top: 200px; */
-
-  padding: 160px 0;
+  padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -50,6 +48,9 @@ const StyledMain = styled(Section)`
   }
 
   .main {
+    position: relative;
+    padding: 160px 0;
+
     &__inner {
       display: flex;
       justify-content: space-between;
