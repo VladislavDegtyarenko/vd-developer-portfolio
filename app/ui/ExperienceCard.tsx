@@ -116,11 +116,11 @@ const ExperienceCard = ({
             ))}
           </div>
         ) : null}
-        <P2 className="descr">
+        <div className="descr">
           {description.split(`\n`).map((p) => (
-            <p key={p}>{p}</p>
+            <P2 key={p}>{p}</P2>
           ))}
-        </P2>
+        </div>
       </div>
       {icons && icons.length > 0 ? (
         <div className="icons">
