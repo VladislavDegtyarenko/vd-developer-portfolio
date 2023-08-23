@@ -171,6 +171,7 @@ const ContactForm = () => {
     animateFromBottom([...new Set(formRef.current.children)], { stagger: 0.05 });
   }, [formRef]);
 
+  const isOnlySpaces = (value: string) => !value.trim();
   // console.log(watch("example")); // watch input value by passing the name of it
 
   return (
@@ -217,7 +218,13 @@ const ContactForm = () => {
           </label>
           <label>
             <textarea
-              {...register("message", { required: "This field is required" })}
+              {...register("message", {
+                required: "This field is required",
+                validate: {
+                  noSpacesOnly: (value) =>
+                    !isOnlySpaces(value) || "Message cannot be only spaces",
+                },
+              })}
               placeholder="Message"
               className={errors.message?.message ? "error" : ""}
               spellCheck="false"
