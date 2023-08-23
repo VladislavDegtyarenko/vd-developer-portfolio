@@ -49,7 +49,7 @@ const StyledMain = styled(Section)`
 
   .main {
     position: relative;
-    padding: 160px 0;
+    padding: 6em 0;
 
     &__inner {
       display: flex;
@@ -181,16 +181,17 @@ const Main = () => {
                 </div>
               </div>
             </div>
-            <a
-              href="#about"
-              className="main__scroll-btn"
-              aria-label="scroll down"
-              title="scroll down"
-            >
-              <ScrollDownIcon />
-            </a>
           </Container>
         </div>
+
+        <a
+          href="#about"
+          className="main__scroll-btn"
+          aria-label="scroll down"
+          title="scroll down"
+        >
+          <ScrollDownIcon />
+        </a>
       </StyledMain>
       <Container>
         <SectionDivider />
