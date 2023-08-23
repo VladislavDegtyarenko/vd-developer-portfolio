@@ -1,3 +1,5 @@
+![logo](https://github.com/VladislavDegtyarenko/vd-developer-portfolio/assets/62521930/df32cc0f-1cce-4d14-a763-dc8f49d81f90)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
