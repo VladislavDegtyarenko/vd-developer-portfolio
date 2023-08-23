@@ -15,6 +15,7 @@ import animateFromBottom from "../animations/animateFromBottom";
 // Data
 import contactBtns from "../data/contactBtns";
 import { ContactIconRef, DownloadBtnRef } from "../types";
+import ContactForm from "app/components/ContactForm";
 
 const StyledContact = styled(Section)`
   .contact {
@@ -23,7 +24,7 @@ const StyledContact = styled(Section)`
       color: ${({ theme }) => theme.fg};
     }
     &__wrapper {
-      margin-top: 48px;
+      margin-top: 4em;
       display: grid;
       grid-auto-flow: column;
       align-content: center;
@@ -108,6 +109,9 @@ const Contact = () => {
           >
             Get in touch today and let&apos;s bring your ideas to life.
           </SectionDescription>
+
+          <ContactForm />
+
           <div className="contact__wrapper" ref={iconsRef}>
             {contactBtns.map(({ href, ariaLabel, icon }) => {
               const Icon = icon;

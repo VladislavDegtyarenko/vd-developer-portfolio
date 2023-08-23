@@ -2,7 +2,11 @@
   "name": "frontend-portfolio-website",
   "version": "0.1.0",
   "private": true,
-  "browserslist": [">0.3%", "not dead", "not op_mini all"],
+  "browserslist": [
+    ">0.3%",
+    "not dead",
+    "not op_mini all"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +14,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-email/button": "0.0.10",
+    "@react-email/components": "^0.0.7",
+    "@react-email/html": "0.0.4",
+    "@sendgrid/mail": "^7.7.0",
     "@types/node": "20.3.3",
+    "@types/nodemailer": "^6.4.9",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "eslint": "8.44.0",
@@ -18,9 +27,12 @@
     "framer-motion": "^10.12.18",
     "gsap": "^3.12.2",
     "next": "13.4.7",
+    "nodemailer": "^6.9.4",
     "react": "18.2.0",
     "react-content-loader": "^6.2.1",
     "react-dom": "18.2.0",
+    "react-email": "1.9.4",
+    "react-hook-form": "^7.45.2",
     "react-icons": "^4.10.1",
     "sharp": "^0.32.1",
     "styled-components": "^6.0.1",
