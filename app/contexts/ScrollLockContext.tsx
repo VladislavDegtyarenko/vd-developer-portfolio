@@ -18,6 +18,7 @@ const ScrollLockContext = createContext<{
 
 export const ScrollLockContextProvider = ({ children }: ContextParentElement) => {
   const [scrollbarCompensation, setScrollBarCompensation] = useState<number | null>(null);
+  console.log("scrollbarCompensation: ", scrollbarCompensation);
 
   const scrollLock = useCallback(() => {
     const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
@@ -30,7 +31,7 @@ export const ScrollLockContextProvider = ({ children }: ContextParentElement) =>
   }, []);
 
   useIsomorphicLayoutEffect(() => {
-    if (scrollbarCompensation) {
+    if (scrollbarCompensation !== null) {
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = scrollbarCompensation + "px";
     } else {

@@ -17,7 +17,7 @@ const StyledModalWrapper = styled(motion.div)<StyledModalWrapperProps>`
   padding-right: ${({ $scrollbarCompensation }) =>
     $scrollbarCompensation ? `${$scrollbarCompensation}px` : 0};
   height: 100%;
-  height: 100svh;
+  height: 100dvh;
   z-index: 2;
 
   &:after {
@@ -36,10 +36,7 @@ const StyledModalWrapper = styled(motion.div)<StyledModalWrapperProps>`
   }
 `;
 
-const ModalWrapper = ({
-  closeModal,
-  ...props
-}: ModalWrapperProps) => {
+const ModalWrapper = ({ closeModal, ...props }: ModalWrapperProps) => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
 
   return (
