@@ -1,7 +1,8 @@
-import { P2 } from "app/ui/Text";
 import { type NextRequest, NextResponse } from "next/server";
+import { render } from "@react-email/render";
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
+import ContactEmail from "app/components/ContactEmail";
 
 export async function POST(request: NextRequest) {
   const { email, name, message, error } = await request.json();
@@ -26,6 +27,8 @@ export async function POST(request: NextRequest) {
     },
   });
 
+  const html = render(ContactEmail({ name, email, message }));
+
   const mailOptions: Mail.Options = {
     from: "contact@vddeveloper.online",
     sender: email,
@@ -33,6 +36,7 @@ export async function POST(request: NextRequest) {
     to: process.env.NODEMAILER_EMAIL,
     subject: `${name} <${email}> | Portfolio Website Contact Form`,
     text: message,
+    html,
   };
 
   const sendMailPromise = () =>
