@@ -21,9 +21,7 @@ const StyledGroup = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, 140px);
     gap: 1em;
-    @media (max-width: 991.98px) {
-      justify-content: center;
-    }
+    justify-content: center;
   }
 `;
 
