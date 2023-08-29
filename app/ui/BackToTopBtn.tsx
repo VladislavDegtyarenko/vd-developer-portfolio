@@ -1,12 +1,14 @@
 "use client";
 
 import styled from "styled-components";
+import { useContext } from "react";
+
 import ArrowIcon from "@/assets/Icons/Arrow";
-import { MouseEvent, useContext } from "react";
 import useScrollDelta from "app/hooks/useScrollDelta";
 import ScrollLockContext from "app/contexts/ScrollLockContext";
+import { motion, AnimatePresence } from "framer-motion";
 
-const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
+const StyledBtn = styled(motion.button)<{ $scrollbarCompensation: number | null }>`
   position: fixed;
   font-size: 1.5em;
   width: 2em;
@@ -25,21 +27,16 @@ const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
   z-index: 1;
   pointer-events: none;
   user-select: none;
-  opacity: 0;
-  transform: scale(0.5);
+  opacity: 0.75;
   cursor: pointer;
-  transition: transform var(--duration), opacity var(--duration);
+  transition: opacity var(--duration);
 
-  &.visible {
-    pointer-events: initial;
-    user-select: initial;
-    transform: scale(1);
+  pointer-events: initial;
+  user-select: initial;
 
-    opacity: 0.75;
-    &:hover {
-      background-color: ${({ theme }) => theme.fg};
-      opacity: 0.9;
-    }
+  &:hover {
+    background-color: ${({ theme }) => theme.fg};
+    opacity: 0.9;
   }
 
   > svg {
@@ -49,8 +46,6 @@ const StyledBtn = styled.button<{ $scrollbarCompensation: number | null }>`
     object-fit: contain;
   }
 `;
-
-const DEFAULT_SCROLL_POSITION = 0;
 
 const BackToTopBtn = () => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
@@ -64,13 +59,21 @@ const BackToTopBtn = () => {
   const visible = scrolledUp && scrollPosition > 800;
 
   return (
-    <StyledBtn
-      className={visible ? "visible" : ""}
-      $scrollbarCompensation={scrollbarCompensation}
-      onClick={scrollToTop}
-    >
-      <ArrowIcon />
-    </StyledBtn>
+    <AnimatePresence>
+      {visible && (
+        <StyledBtn
+          key="backToTopBtn"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 0.75, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.15, ease: "easeIn" }}
+          $scrollbarCompensation={scrollbarCompensation}
+          onClick={scrollToTop}
+        >
+          <ArrowIcon />
+        </StyledBtn>
+      )}
+    </AnimatePresence>
   );
 };
 
