@@ -92,8 +92,11 @@ const Projects = () => {
             <SectionDescription className="projects__descr">
               A concise overview of selected frontend development projects, showcasing
               skills and capabilities.
-              <br /> <br /> If you want to check my actual frontend skills, let’s get a
-              call
+            </SectionDescription>
+
+            <SectionDescription>
+              {`If you want to check my actual frontend skills, let's get a
+              call`}
             </SectionDescription>
 
             <ProjectsList />

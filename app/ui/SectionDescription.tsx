@@ -14,6 +14,7 @@ const StyledSectionDescription = styled(P1)`
   padding: 0 80px;
   color: ${({ theme }) => theme.grey};
   margin-top: 40px;
+  text-wrap: balance;
 
   @media screen and (max-width: 991.98px) {
     padding: 0 40px;
