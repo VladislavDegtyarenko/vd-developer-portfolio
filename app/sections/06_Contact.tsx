@@ -47,7 +47,7 @@ const StyledContact = styled(Section)`
       /* align-self: center; */
 
       &:hover {
-        color: #178695;
+        color: ${({ theme }) => theme.cyanHover};
       }
       > * {
         width: 100%;

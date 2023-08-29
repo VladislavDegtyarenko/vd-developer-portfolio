@@ -12,7 +12,6 @@ const StyledToggle = styled.label`
   align-self: center;
   width: 4em;
   height: 2em;
-  /* border: solid 1px #35353533; */
   background-color: ${({ theme }) => theme.cardBg};
   border-radius: 1em;
   --size: 1.25em;
@@ -70,6 +69,12 @@ const StyledToggle = styled.label`
     top: 0.375em;
     color: ${({ theme }) => theme.cyan};
     transition: all var(--duration-long);
+  }
+
+  &:hover {
+    svg {
+      color: ${({ theme }) => theme.cyanHover};
+    }
   }
 
   .sun {

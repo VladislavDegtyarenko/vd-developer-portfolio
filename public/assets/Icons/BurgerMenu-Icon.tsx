@@ -14,7 +14,7 @@ const StyledWrapper = styled.span`
     position: absolute;
     display: inline-block;
     background-color: ${({ theme }) => theme.cyan};
-    transition: all 0.5s;
+    transition: all 0.3s;
 
     &:nth-child(1) {
       top: 0;
@@ -42,6 +42,12 @@ const StyledWrapper = styled.span`
       &:nth-child(3) {
         transform: rotate(-45deg) scaleX(1.5);
       }
+    }
+  }
+
+  &:hover {
+    span {
+      background-color: ${({ theme }) => theme.cyanHover};
     }
   }
 `;
