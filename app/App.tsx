@@ -16,12 +16,9 @@ import Footer from "./sections/Footer";
 // UI
 import BackToTopBtn from "./ui/BackToTopBtn";
 import MobileMenu from "./sections/MobileMenu";
-const AnimatePresence = dynamic(
-  () => import("framer-motion").then((m) => m.AnimatePresence),
-  {
-    ssr: false,
-  }
-);
+const AnimatePresence = dynamic(() => import("./features/framerAnimatePresence"), {
+  ssr: false,
+});
 const ProjectModal = dynamic(() => import("./ui/ProjectModal"), { ssr: false });
 
 // Contexts

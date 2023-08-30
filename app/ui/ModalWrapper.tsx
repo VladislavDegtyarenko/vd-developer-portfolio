@@ -1,11 +1,14 @@
 import { useContext, memo } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { m, LazyMotion, AnimatePresence } from "framer-motion";
+
+const framerFeatures = () =>
+  import("./../features/framerFeatures").then((res) => res.default);
 
 import ScrollLockContext from "app/contexts/ScrollLockContext";
 import { ModalWrapperProps, StyledModalWrapperProps } from "app/types";
 
-const StyledModalWrapper = styled(motion.div)<StyledModalWrapperProps>`
+const StyledModalWrapper = styled(m.div)<StyledModalWrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,16 +43,18 @@ const ModalWrapper = ({ closeModal, ...props }: ModalWrapperProps) => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
 
   return (
-    <StyledModalWrapper
-      $scrollbarCompensation={scrollbarCompensation}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) closeModal();
-      }}
-      {...props}
-    ></StyledModalWrapper>
+    <LazyMotion features={framerFeatures}>
+      <StyledModalWrapper
+        $scrollbarCompensation={scrollbarCompensation}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) closeModal();
+        }}
+        {...props}
+      ></StyledModalWrapper>
+    </LazyMotion>
   );
 };
 

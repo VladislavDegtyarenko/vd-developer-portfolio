@@ -6,9 +6,12 @@ import { useContext } from "react";
 import ArrowIcon from "@/assets/Icons/Arrow";
 import useScrollDelta from "app/hooks/useScrollDelta";
 import ScrollLockContext from "app/contexts/ScrollLockContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, LazyMotion, AnimatePresence } from "framer-motion";
 
-const StyledBtn = styled(motion.button)<{ $scrollbarCompensation: number | null }>`
+const framerFeatures = () =>
+  import("./../features/framerFeatures").then((res) => res.default);
+
+const StyledBtn = styled(m.button)<{ $scrollbarCompensation: number | null }>`
   position: fixed;
   font-size: 1.5em;
   width: 2em;
@@ -59,21 +62,23 @@ const BackToTopBtn = () => {
   const visible = scrolledUp && scrollPosition > 800;
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <StyledBtn
-          key="backToTopBtn"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 0.75, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.15, ease: "easeIn" }}
-          $scrollbarCompensation={scrollbarCompensation}
-          onClick={scrollToTop}
-        >
-          <ArrowIcon />
-        </StyledBtn>
-      )}
-    </AnimatePresence>
+    <LazyMotion features={framerFeatures}>
+      <AnimatePresence>
+        {visible && (
+          <StyledBtn
+            key="backToTopBtn"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 0.75, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            transition={{ duration: 0.15, ease: "easeIn" }}
+            $scrollbarCompensation={scrollbarCompensation}
+            onClick={scrollToTop}
+          >
+            <ArrowIcon />
+          </StyledBtn>
+        )}
+      </AnimatePresence>
+    </LazyMotion>
   );
 };
 
