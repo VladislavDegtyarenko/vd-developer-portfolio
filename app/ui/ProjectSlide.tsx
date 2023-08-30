@@ -176,6 +176,7 @@ const ProjectSlide = ({
               target="_blank"
               className="slide__btn slide__btn-primary"
               onClick={(e: MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
+              aria-label={`View the source code of ${title}`}
             >
               <BiCodeAlt />
             </P1>
