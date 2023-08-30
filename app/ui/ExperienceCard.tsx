@@ -107,7 +107,7 @@ const ExperienceCard = ({
         <div className="time-range">
           <P2>{timerange}</P2>
         </div>
-        <H4 as="H3" className="position">
+        <H4 as="h3" className="position">
           {position}
         </H4>
         <P1>{company}</P1>

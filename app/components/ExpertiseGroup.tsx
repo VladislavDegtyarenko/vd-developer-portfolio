@@ -13,7 +13,7 @@ const StyledGroup = styled.div`
   display: grid;
   gap: 2em;
   margin-top: 3.75em;
-  > h4 {
+  .expGroupTitle {
     text-align: center;
   }
 
@@ -39,7 +39,7 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
 
   return (
     <StyledGroup>
-      <H4 key={groupTitle} as="h3" ref={groupTitleRef}>
+      <H4 key={groupTitle} as="h3" className="expGroupTitle" ref={groupTitleRef}>
         {groupTitle}
       </H4>
 
