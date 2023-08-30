@@ -107,7 +107,9 @@ const ExperienceCard = ({
         <div className="time-range">
           <P2>{timerange}</P2>
         </div>
-        <H4 className="position">{position}</H4>
+        <H4 as="H3" className="position">
+          {position}
+        </H4>
         <P1>{company}</P1>
         {chips && chips.length > 0 ? (
           <div className="chips">

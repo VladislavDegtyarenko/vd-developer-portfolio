@@ -39,7 +39,7 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
 
   return (
     <StyledGroup>
-      <H4 key={groupTitle} ref={groupTitleRef}>
+      <H4 key={groupTitle} as="h3" ref={groupTitleRef}>
         {groupTitle}
       </H4>
 
