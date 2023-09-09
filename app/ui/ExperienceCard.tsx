@@ -44,6 +44,7 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
     color: ${({ theme }) => theme.cyan};
   }
   .descr {
+    margin-top: 1em;
     color: ${({ theme }) => theme.grey};
     > * + * {
       margin-top: 1em;
@@ -73,8 +74,8 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
 
 const Chip = styled(P2)`
   display: inline-block;
-  border-radius: 16px;
-  padding: 4px 8px;
+  border-radius: 2em;
+  padding: 0.5em 1em;
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.grey};
 `;
@@ -119,9 +120,12 @@ const ExperienceCard = ({
           </div>
         ) : null}
         <div className="descr">
-          {description.split(`\n`).map((p) => (
-            <P2 key={p}>{p}</P2>
-          ))}
+          {description
+            .split(`\n`)
+            .filter(Boolean)
+            .map((p) => (
+              <P2 key={p}>{p}</P2>
+            ))}
         </div>
       </div>
       {icons && icons.length > 0 ? (
