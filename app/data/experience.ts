@@ -8,6 +8,8 @@ import JestIcon from "/public/assets/Icons/Jest.svg";
 import SalesforceIcon from "/public/assets/Icons/Salesforce.svg";
 import TailwindIcon from "/public/assets/Icons/Tailwind.svg";
 import BootstrapIcon from "/public/assets/Icons/Bootstrap.svg";
+import GulpIcon from "/public/assets/Icons/Gulp.svg";
+import WebpackIcon from "/public/assets/Icons/Webpack.svg";
 
 const experienceData = [
   {
@@ -45,39 +47,33 @@ const experienceData = [
       { ...CSSIcon, alt: "CSS" },
       { ...JSIcon, alt: "Javascript" },
       { ...BootstrapIcon, alt: "Bootstrap" },
+      { ...WebpackIcon, alt: "Webpack" },
+      { ...GulpIcon, alt: "Gulp.js" },
     ],
   },
   {
-    timerange: "feb 20 — sep 21",
-    position: "Music Producer",
-    company: "Fiverr",
-    chips: ["Worldwide", "Remote", "Project-based"],
-    description:
-      "Worked as a freelancer providing professional Music Production, Mixing and Mastering Services to independent musicians, video creators, and businesses globally.",
-  },
-  {
     timerange: "Feb 16 — Feb 20",
-    position: "Music Producer",
-    company: "Envato Audio",
+    position: "Music Producer, Audio Engineer",
+    company: "Self-employed | Envato | Fiverr",
     chips: ["Worldwide", "Remote", "Part-time"],
-    description:
-      "Produced high-quality music for video creators and commercials worldwide to enhance the visual storytelling experience.",
+    description: `
+      Crafted exceptional background music for Envato Marketplace's Audiojungle, elevating the narrative impact of videos and commercials.
+      Provided exclusive music production services to independent musicians and artists, video creators, and businesses globally.  
+      Did audio editing, mixing and mastering for a wide range of audio, spanning from voice recordings to full-fledged songs.
+      `,
   },
   {
-    timerange: "jul 17 - jul 18",
-    position: "PR Manager",
+    timerange: "sep 16 — aug 19",
+    position: "Vice-President for Public Relations",
     company: "BEST Zaporizhzhya",
-    chips: ["Zaporizhia, Ukraine", "Volounteering", "Part-time"],
-    description:
-      "PR work plan, strategy dev., monthly PR meetings, task delegation, FB & IG page management, recruitment campaigns, print & social media design",
-  },
-  {
-    timerange: "aug 18 — dec 18",
-    position: "PR Manager",
-    company: "BEST LikeIT 2018 (IT Hackathon)",
     chips: ["Zaporizhia, Ukraine", "Volounteering", "Project-based"],
-    description:
-      "Finding event participants. PR strategy, goal setting & monitoring work. Designing posts & materials. Facebook & Instagram posts, promo videos & targeted advertising.",
+    description: `
+      Led efforts to boost awareness of BEST Zaporizhzhya, its projects, and activities.
+      Managed and guided a dedicated team to achieve PR objectives.
+      Crafted and executed a strategic PR plan, setting and monitoring goals.
+      Designed engaging content, including social media posts, promo videos, and print marketing materials.
+      Enhanced the organization's online presence and impact through effective PR initiatives.
+    `,
   },
 ];
 
