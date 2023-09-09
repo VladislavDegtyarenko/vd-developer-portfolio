@@ -13,6 +13,9 @@ const StyledGroup = styled.div`
   display: grid;
   gap: 2em;
   margin-top: 3.75em;
+  max-width: 60em;
+  margin-left: auto;
+  margin-right: auto;
   .expGroupTitle {
     text-align: center;
   }
