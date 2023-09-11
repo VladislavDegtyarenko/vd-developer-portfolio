@@ -10,7 +10,7 @@ import { H1, H2, P1 } from "./../ui/Text";
 import ScrollDownIcon from "@/assets/Icons/Scroll Down";
 
 import bg from "@/assets/bg.jpg";
-import photo from "@/photo.png";
+import photo from "@/photo2.jpg";
 
 const StyledMain = styled(Section)`
   padding: 0;
@@ -70,7 +70,7 @@ const StyledMain = styled(Section)`
       position: relative;
       margin-right: calc(20px + var(--strokeWidth) * 2);
       margin-top: 10px;
-      --photo-size: 320px;
+      --photo-size: 280px;
       @media screen and (max-width: 991.98px) {
         --photo-size: 240px;
         margin-bottom: 32px;
