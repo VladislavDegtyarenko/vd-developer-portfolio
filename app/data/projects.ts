@@ -1,3 +1,4 @@
+import ReduxBlogImg from "/public/assets/projects/Redux Blog.jpg";
 import WeatherAppImg from "/public/assets/projects/weather app.jpg";
 import PortfolioImg from "/public/assets/projects/portfolio.jpg";
 import TodoImg from "/public/assets/projects/todo-app.jpg";
@@ -12,6 +13,10 @@ import Game2048Img from "/public/assets/projects/2048 Game.jpg";
 import { Project } from "../types";
 
 const projectsData: Project[] = [
+  {
+    img: ReduxBlogImg,
+    title: "CRUD Redux Blog",
+  },
   {
     img: WeatherAppImg,
     title: "Weather App",
