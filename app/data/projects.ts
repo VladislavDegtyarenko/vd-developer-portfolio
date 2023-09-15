@@ -16,6 +16,7 @@ const projectsData: Project[] = [
   {
     img: ReduxBlogImg,
     title: "CRUD Redux Blog",
+    soon: true,
   },
   {
     img: WeatherAppImg,

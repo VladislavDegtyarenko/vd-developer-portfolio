@@ -81,6 +81,7 @@ export interface Project {
   description?: string;
   previewLink?: string;
   codeLink?: string;
+  soon?: boolean;
 }
 
 export interface Experience {

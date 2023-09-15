@@ -11,7 +11,7 @@ import { BiCodeAlt, BiLinkExternal } from "react-icons/bi";
 import gsap from "gsap";
 import useIsomorphicLayoutEffect from "app/hooks/useIsomorphicLayoutEffect";
 
-const StyledSlide = styled.li`
+const StyledSlide = styled.li<{ $soon?: boolean }>`
   aspect-ratio: 16/9;
   display: flex;
   align-items: flex-end;
@@ -20,7 +20,7 @@ const StyledSlide = styled.li`
   overflow: hidden;
   min-height: 240px;
   width: 100%;
-  cursor: pointer;
+  cursor: ${({ $soon }) => ($soon ? "initial" : "pointer")};
   .slide {
     &__img {
       --slide-size: 100%;
@@ -115,6 +115,19 @@ const StyledSlide = styled.li`
       }
     }
   }
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #05050599;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
 `;
 
 const ProjectSlide = ({
@@ -123,6 +136,7 @@ const ProjectSlide = ({
   previewLink,
   codeLink,
   previewProject,
+  soon,
 }: ProjectSlideProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const zoomRef = useRef<gsap.core.Timeline | null>(null);
@@ -145,6 +159,33 @@ const ProjectSlide = ({
     gsap.to(zoomRef.current, { time: 0, ease: "power3.out", overwrite: true });
   };
 
+  const projectImg = (
+    <div className="slide__img">
+      <Image
+        src={img}
+        sizes="(max-width: 991.98px) 511px, (max-width: 991.98px) 720px, 645px"
+        quality={80}
+        loading="eager"
+        alt=""
+        placeholder="blur"
+        fill
+        ref={imageRef}
+      />
+    </div>
+  );
+
+  if (soon) {
+    return (
+      <StyledSlide $soon={soon}>
+        {projectImg}
+
+        <div className="overlay">
+          <H4 as="h3">Soon!</H4>
+        </div>
+      </StyledSlide>
+    );
+  }
+
   return (
     <StyledSlide
       onMouseEnter={zoomIn}
@@ -154,18 +195,8 @@ const ProjectSlide = ({
         previewLink && previewProject(previewLink);
       }}
     >
-      <div className="slide__img">
-        <Image
-          src={img}
-          sizes="(max-width: 991.98px) 511px, (max-width: 991.98px) 720px, 645px"
-          quality={80}
-          loading="eager"
-          alt=""
-          placeholder="blur"
-          fill
-          ref={imageRef}
-        />
-      </div>
+      {projectImg}
+
       <div className="slide__main">
         <H4 as="h3">{title}</H4>
         <div className="slide__buttons">

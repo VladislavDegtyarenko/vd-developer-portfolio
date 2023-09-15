@@ -59,7 +59,7 @@ const ProjectsList = () => {
   return (
     <StyledProjectsList>
       <ul ref={cardsListRef}>
-        {projectsData.map(({ img, title, description, previewLink, codeLink }) => (
+        {projectsData.map(({ img, title, description, previewLink, codeLink, soon }) => (
           <ProjectSlide
             key={title}
             img={img}
@@ -68,6 +68,7 @@ const ProjectsList = () => {
             previewLink={previewLink}
             previewProject={previewProject}
             codeLink={codeLink}
+            soon={soon}
           />
         ))}
       </ul>
