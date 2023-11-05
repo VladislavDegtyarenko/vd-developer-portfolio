@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react";
+
 import StyledComponentsRegistry from "./lib/registry";
 import { Poppins } from "next/font/google";
 import "./index.css";
@@ -24,7 +26,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ScrollLockContextProvider>
               <MobileMenuContextProvider>
                 <ProjectContextProvider>
-                  <StyledThemeProvider>{children}</StyledThemeProvider>
+                  <StyledThemeProvider>
+                    {children}
+                    <Analytics />
+                  </StyledThemeProvider>
                 </ProjectContextProvider>
               </MobileMenuContextProvider>
             </ScrollLockContextProvider>
