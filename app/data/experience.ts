@@ -6,12 +6,26 @@ import NextIcon from "/public/assets/Icons/Next.svg";
 import TSIcon from "/public/assets/Icons/TS.svg";
 import JestIcon from "/public/assets/Icons/Jest.svg";
 import SalesforceIcon from "/public/assets/Icons/Salesforce.svg";
+import ReduxIcon from "/public/assets/Icons/Redux.svg";
 import TailwindIcon from "/public/assets/Icons/Tailwind.svg";
 import BootstrapIcon from "/public/assets/Icons/Bootstrap.svg";
 import GulpIcon from "/public/assets/Icons/Gulp.svg";
 import WebpackIcon from "/public/assets/Icons/Webpack.svg";
 
 const experienceData = [
+  {
+    timerange: "Mar 23 — Now",
+    position: "Freelance Frontend Developer",
+    company: "Freelance",
+    chips: ["Remote", "Self-employed", "Worldwide"],
+    icons: [
+      { ...ReactIcon, alt: "React.js" },
+      { ...NextIcon, alt: "Next.js" },
+      { ...ReduxIcon, alt: "Redux" },
+      { ...TSIcon, alt: "Typescript" },
+      { ...JestIcon, alt: "Jest" },
+    ],
+  },
   {
     timerange: "Oct 21 — Feb 23",
     position: "Frontend Developer",
