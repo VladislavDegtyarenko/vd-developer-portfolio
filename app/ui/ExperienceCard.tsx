@@ -119,14 +119,16 @@ const ExperienceCard = ({
             ))}
           </div>
         ) : null}
-        <div className="descr">
-          {description
-            .split(`\n`)
-            .filter(Boolean)
-            .map((p) => (
-              <P2 key={p}>{p}</P2>
-            ))}
-        </div>
+        {description && (
+          <div className="descr">
+            {description
+              .split(`\n`)
+              .filter(Boolean)
+              .map((p) => (
+                <P2 key={p}>{p}</P2>
+              ))}
+          </div>
+        )}
       </div>
       {icons && icons.length > 0 ? (
         <div className="icons">

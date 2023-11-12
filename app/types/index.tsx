@@ -89,7 +89,7 @@ export interface Experience {
   position: string;
   company: string;
   chips: string[];
-  description: string;
+  description?: string;
   icons?: Icon[];
 }
 
