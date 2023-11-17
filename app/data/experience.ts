@@ -12,7 +12,7 @@ import BootstrapIcon from "/public/assets/Icons/Bootstrap.svg";
 import GulpIcon from "/public/assets/Icons/Gulp.svg";
 import WebpackIcon from "/public/assets/Icons/Webpack.svg";
 
-const experienceData = [
+export const mainExperienceData = [
   {
     timerange: "Mar 23 — Now",
     position: "Freelance Frontend Developer",
@@ -65,6 +65,9 @@ const experienceData = [
       { ...GulpIcon, alt: "Gulp.js" },
     ],
   },
+];
+
+export const nonRelatedExperienceData = [
   {
     timerange: "Feb 16 — Feb 20",
     position: "Music Producer, Audio Engineer",
@@ -90,5 +93,3 @@ const experienceData = [
     `,
   },
 ];
-
-export default experienceData;

@@ -10,7 +10,7 @@ import ExperienceCard from "../ui/ExperienceCard";
 import { H4 } from "app/ui/Text";
 
 // Data
-import experienceData from "../data/experience";
+import { mainExperienceData, nonRelatedExperienceData } from "../data/experience";
 
 // Styled
 const StyledExperience = styled(Section)`
@@ -47,7 +47,7 @@ const Experience = () => {
             <SectionTitle>Working Experience</SectionTitle>
 
             <div className="experience__wrapper">
-              {experienceData.slice(0, 2).map((experience) => (
+              {mainExperienceData.map((experience) => (
                 <ExperienceCard
                   // prettier-ignore
                   key={experience.company}
@@ -61,7 +61,7 @@ const Experience = () => {
             </div>
 
             <div className="experience__wrapper">
-              {experienceData.slice(2).map((experience) => (
+              {nonRelatedExperienceData.map((experience) => (
                 <ExperienceCard
                   // prettier-ignore
                   key={experience.company}
