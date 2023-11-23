@@ -9,14 +9,27 @@ import PasGenImg from "/public/assets/projects/Pass Gen.jpg";
 import ClockImg from "/public/assets/projects/Clock.jpg";
 import TenziesImg from "/public/assets/projects/7-tenzies.jpg";
 import Game2048Img from "/public/assets/projects/2048 Game.jpg";
+import AirlogixImg from "/public/assets/projects/Airlogix.png";
 
 import { Project } from "../types";
 
 const projectsData: Project[] = [
   {
-    img: ReduxBlogImg,
-    title: "CRUD Redux Blog",
-    soon: true,
+    img: AirlogixImg,
+    title: "Airlogix.io",
+    previewLink: "https://www.airlogix.io/",
+  },
+  // {
+  //   img: ReduxBlogImg,
+  //   title: "CRUD Redux Blog",
+  //   soon: true,
+  // },
+
+  {
+    img: PortfolioImg,
+    title: "Portfolio Website",
+    // previewLink: "https://vd-developer.vercel.app/",
+    codeLink: "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
   },
   {
     img: WeatherAppImg,
@@ -25,12 +38,6 @@ const projectsData: Project[] = [
       "A weather application developed using React, Redux, Material UI, Typescript and ChartJS, featuring a Microsoft-inspired interface.",
     previewLink: "https://vd-react-weather-app.vercel.app/",
     codeLink: "https://github.com/VladislavDegtyarenko/react-weather-app",
-  },
-  {
-    img: PortfolioImg,
-    title: "Portfolio Website",
-    // previewLink: "https://vd-developer.vercel.app/",
-    codeLink: "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
   },
   {
     img: TodoImg,
