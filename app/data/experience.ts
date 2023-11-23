@@ -11,19 +11,33 @@ import TailwindIcon from "/public/assets/Icons/Tailwind.svg";
 import BootstrapIcon from "/public/assets/Icons/Bootstrap.svg";
 import GulpIcon from "/public/assets/Icons/Gulp.svg";
 import WebpackIcon from "/public/assets/Icons/Webpack.svg";
+import FramerIcon from "/public/assets/Icons/Framer-Motion.svg";
+import GSAPIcon from "/public/assets/Icons/GSAP.svg";
 
 export const mainExperienceData = [
   {
     timerange: "Mar 23 — Now",
     position: "Freelance Frontend Developer",
-    company: "Freelance",
+    company: "Freelance | Open to new work opportunities",
     chips: ["Remote", "Self-employed", "Worldwide"],
+    description: `
+    Continually advancing my skills and expertise in frontend technologies. Specializing in crafting engaging and responsive websites, I have successfully completed multiple freelance projects for diverse clients, delivering solutions that meet their needs.
+
+    Key Achievements:
+    - Leveraged cutting-edge technologies such as React.js, Next.js, Redux and TypeScript to build high-performance and scalable web applications.
+    - Collaborated closely with clients to understand their goals, brand identity, translating requirements into visually stunning and functional interfaces.
+    - Orchestrated captivating and seamless animations using Framer Motion, enhancing user engagement and creating immersive user experiences.
+    - Embraced a remote and self-employed work model, providing flexibility and accessibility to clients worldwide.
+
+    Open to new opportunities, I am enthusiastic about contributing my skills to innovative projects and driving digital experiences to new heights.
+  `,
     icons: [
       { ...ReactIcon, alt: "React.js" },
       { ...NextIcon, alt: "Next.js" },
       { ...ReduxIcon, alt: "Redux" },
       { ...TSIcon, alt: "Typescript" },
-      { ...JestIcon, alt: "Jest" },
+      { ...FramerIcon, alt: "Framer Motion" },
+      { ...GSAPIcon, alt: "GSAP" },
     ],
   },
   {

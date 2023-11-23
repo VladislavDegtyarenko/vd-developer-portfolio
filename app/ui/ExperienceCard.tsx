@@ -54,10 +54,8 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   .chips {
     display: flex;
     flex-wrap: wrap;
+    gap: 0.5em;
 
-    > * + * {
-      margin-left: 0.5em;
-    }
     > * {
       background-color: ${({ $secondary, theme }) =>
         $secondary ? theme.cardBg : theme.bg};
