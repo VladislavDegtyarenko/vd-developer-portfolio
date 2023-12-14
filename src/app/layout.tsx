@@ -11,10 +11,14 @@ import { ScrollLockContextProvider } from "@/contexts/ScrollLockContext";
 import { MobileMenuContextProvider } from "@/contexts/MobileMenuContext";
 import { ProjectContextProvider } from "@/contexts/ProjectContext";
 import StyledThemeProvider from "./StyledThemeProvider";
+import { Metadata } from "next";
 
 export const metadata = {
   title: "Vladyslav Dihtiarenko",
   description: "Frontend developer from Ukraine",
+  other: {
+    freelancehunt: "38e96f77035b108",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
