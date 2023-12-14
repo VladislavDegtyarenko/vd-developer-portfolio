@@ -18,7 +18,7 @@ const ScrollLockContext = createContext<{
 
 export const ScrollLockContextProvider = ({ children }: ContextParentElement) => {
   const [scrollbarCompensation, setScrollBarCompensation] = useState<number | null>(null);
-  console.log("scrollbarCompensation: ", scrollbarCompensation);
+  // console.log("scrollbarCompensation: ", scrollbarCompensation);
 
   const scrollLock = useCallback(() => {
     const scrollbarWidth = window.innerWidth - document.body.offsetWidth;
