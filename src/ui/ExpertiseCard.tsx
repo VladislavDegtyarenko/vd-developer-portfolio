@@ -2,12 +2,9 @@
 
 import styled from "styled-components";
 import Image from "next/image";
-import { H4, P2 } from "./Text";
+import { P2 } from "./Text";
 
-import { useRef } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import animateFromBottom from "@/animations/animateFromBottom";
-import { ExpertiseCardProps, ExpertiseCardRef } from "../types";
+import { ExpertiseCardProps } from "../types";
 
 const StyledCard = styled.li`
   display: flex;
@@ -54,7 +51,7 @@ const StyledCard = styled.li`
   }
 `;
 
-const ExpertiseCard = ({ icon, alt, title, animationOptions }: ExpertiseCardProps) => {
+const ExpertiseCard = ({ icon, alt, title }: ExpertiseCardProps) => {
   return (
     <StyledCard>
       <div className="icon">

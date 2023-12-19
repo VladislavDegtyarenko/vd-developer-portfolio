@@ -25,6 +25,7 @@ const expertiseData = [
       { icon: "Gulp", title: "Gulp" },
       { icon: "ESLint", title: "ESLint" },
       { icon: "Prettier", title: "Prettier" },
+      { icon: "bem", title: "BEM" },
       { icon: "chrome", title: "Chrome Developer Tools" },
       { icon: "React", title: "React Profiler" },
       { icon: "Jest", title: "Jest" },
