@@ -5,6 +5,7 @@ const expertiseData = [
       { icon: "TS", title: "Typescript" },
       { icon: "React", title: "React" },
       { icon: "Redux", title: "Redux" },
+      { icon: "MobX", title: "MobX" },
       { icon: "Next", title: "Next.js" },
       { icon: "Axios", title: "Axios" },
       { icon: "SWR", title: "SWR" },
