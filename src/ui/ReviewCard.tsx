@@ -6,15 +6,20 @@ import styled from "styled-components";
 import Image from "next/image";
 
 import animateFromBottom from "@/animations/animateFromBottom";
-import { ReviewCardRef } from "../types";
+import { Review, ReviewCardRef } from "../types";
 import { P1, P2 } from "@/ui/Text";
 import OVasinAvatar from "public/assets/reviews/o-vasin.jpg";
+
+interface ReviewCardProps extends Review {}
 
 const StyledReviewCard = styled.div`
   margin-top: 48px;
   padding: 32px;
   background: ${({ theme }) => theme.cardBg};
   border-radius: var(--borderRadiusNormal);
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
 
   @media screen and (max-width: 991.98px) {
     padding: 24px;
@@ -46,7 +51,7 @@ const StyledReviewCard = styled.div`
       align-items: center;
       margin-top: 16px;
     }
-    &__avatar {
+    &__photo {
       position: relative;
       width: 72px;
       height: 72px;
@@ -65,7 +70,7 @@ const StyledReviewCard = styled.div`
   }
 `;
 
-const ReviewCard = () => {
+const ReviewCard = ({ reviewText, name, position, company, photo }: ReviewCardProps) => {
   const ref = useRef<ReviewCardRef>(null);
 
   useIsomorphicLayoutEffect(() => {
@@ -74,35 +79,21 @@ const ReviewCard = () => {
 
   return (
     <StyledReviewCard className="card" ref={ref}>
-      <div className="card__text">
-        <P1>
-          I had the pleasure of working with <span className="bold-white">Vladislav</span>{" "}
-          on a headless project that utilized <span className="bold-cyan">React</span> and{" "}
-          <span className="bold-cyan">Salesforce Commerce Cloud</span>. His exceptional
-          skills as a frontend developer were evident from the start, as he quickly
-          learned and adapted to new technologies, workflow, and platforms. He
-          consistently produced high-quality work, and his attention to detail was
-          unparalleled.
-        </P1>
-        <P1>
-          Not only was <span className="bold-white">Vladislav</span> a talented developer,
-          but he was also an incredibly responsible and reliable team player. His
-          dedication to the project was unwavering, and he always went above and beyond to
-          ensure the success of the project.
-        </P1>
-        <P1>
-          I am confident that <span className="bold-white">Vladislav</span> will make a
-          valuable contribution to any frontend development role he takes on, and{" "}
-          <span className="bold-cyan">recommend him</span> without hesitation.
-        </P1>
-      </div>
+      <div className="card__text">{reviewText}</div>
       <div className="card__sign">
-        <div className="card__avatar">
-          <Image src={OVasinAvatar.src} alt="reviewer's photo" fill />
+        <div className="card__photo">
+          <Image
+            src={`/assets/reviews/${photo}`}
+            alt={`Photo of ${name}`}
+            fill
+            sizes="72px"
+          />
         </div>
         <div>
-          <P1 className="card__name">Oleksiy Vasin</P1>
-          <P2 className="card__position">Frontend Development Lead, Astound Commerce</P2>
+          <P1 className="card__name">{name}</P1>
+          <P2 className="card__position">
+            {[position, company].filter(Boolean).join(", ")}
+          </P2>
         </div>
       </div>
     </StyledReviewCard>

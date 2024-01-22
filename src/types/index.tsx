@@ -168,3 +168,11 @@ export type FormInputs = {
   email: string;
   message: string;
 };
+
+export type Review = {
+  reviewText: JSX.Element;
+  name: string;
+  position?: string;
+  company?: string;
+  photo: string;
+};

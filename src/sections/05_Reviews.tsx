@@ -8,6 +8,8 @@ import SectionDescription from "@/ui/SectionDescription";
 
 import ReviewCard from "@/ui/ReviewCard";
 
+import { reviews } from "@/data/reviews";
+
 const StyledReviews = styled(Section)`
   .reviews {
     &__descr {
@@ -27,7 +29,9 @@ const Reviews = () => {
             frontend development skills.
           </SectionDescription>
 
-          <ReviewCard />
+          {reviews.map((review) => (
+            <ReviewCard key={review.name} {...review} />
+          ))}
         </Container>
       </StyledReviews>
       <Container>
