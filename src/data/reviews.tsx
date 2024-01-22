@@ -29,6 +29,7 @@ export const reviews: Review[] = [
       </>
     ),
     name: "Ivan Bayev",
+    position: "Business Development Specialist",
     company: "Airlogix",
     photo: "i-bayev.jpg",
   },
