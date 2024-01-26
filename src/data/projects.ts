@@ -10,6 +10,7 @@ import ClockImg from "/public/assets/projects/Clock.jpg";
 import TenziesImg from "/public/assets/projects/7-tenzies.jpg";
 import Game2048Img from "/public/assets/projects/2048 Game.jpg";
 import AirlogixImg from "/public/assets/projects/Airlogix.png";
+import ReactGPT from "/public/assets/projects/ReactGPT.png";
 
 import { Project } from "../types";
 
@@ -18,6 +19,11 @@ const projectsData: Project[] = [
     img: AirlogixImg,
     title: "Airlogix.io",
     previewLink: "https://www.airlogix.io/",
+  },
+  {
+    img: ReactGPT,
+    title: "ReactGPT",
+    previewLink: "https://vladislavdegtyarenko.github.io/react-gpt/",
   },
   // {
   //   img: ReduxBlogImg,
