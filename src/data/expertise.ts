@@ -15,6 +15,7 @@ const expertiseData = [
       { icon: "React-Hook-Form", title: "React Hook Form" },
       { icon: "React-Query", title: "React Query" },
       { icon: "React-Router", title: "React Router" },
+      { icon: "Firebase", title: "Firebase" },
     ],
   },
   {
