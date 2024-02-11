@@ -42,7 +42,9 @@ const ProjectsSlider = () => {
       {/* <SwiperBtnPrev /> */}
       <button
         onClick={prevSlide}
-        className={`slider__arrow ${isFirstSlide ? "slider__arrow-disabled" : ""}`}
+        className={`slider__arrow ${
+          isFirstSlide ? "slider__arrow-disabled" : ""
+        }`}
       >
         <ArrowIcon />
       </button>
@@ -63,18 +65,20 @@ const ProjectsSlider = () => {
         }}
         onRealIndexChange={(swiper) => handleSlideChange(swiper)}
       >
-        {projectsData.map(({ img, title, description, previewLink, codeLink }) => (
-          <SwiperSlide key={title}>
-            <ProjectSlide
-              img={img}
-              title={title}
-              description={description}
-              previewLink={previewLink}
-              previewProject={previewProject}
-              codeLink={codeLink}
-            />
-          </SwiperSlide>
-        ))}
+        {projectsData.map(
+          ({ img, title, description, previewLink, codeLink }) => (
+            <SwiperSlide key={title}>
+              <ProjectSlide
+                img={img}
+                title={title}
+                description={description}
+                previewLink={previewLink}
+                previewProject={previewProject}
+                codeLink={codeLink}
+              />
+            </SwiperSlide>
+          )
+        )}
       </Swiper>
 
       {/* <SwiperBtnNext /> */}

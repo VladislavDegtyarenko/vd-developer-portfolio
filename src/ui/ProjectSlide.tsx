@@ -4,7 +4,7 @@ import { useRef, MouseEvent } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { ProjectSlideProps } from "../types";
-import { H4, P1 } from "@/ui/Text";
+import { H4, P1, P2 } from "@/ui/Text";
 
 import { BiCodeAlt, BiLinkExternal } from "react-icons/bi";
 
@@ -41,6 +41,11 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
         object-position: top center;
       }
     }
+    &__heading {
+      p {
+        color: ${({ theme }) => theme.grey};
+      }
+    }
     &__main {
       position: relative;
       display: flex;
@@ -59,11 +64,7 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
         height: calc(100% + 4em);
         pointer-events: none;
         user-select: none;
-        background: linear-gradient(
-          to bottom,
-          transparent 0%,
-          ${({ theme }) => theme.overlay} 100%
-        );
+        background: linear-gradient(to bottom, transparent -00%, #090909 100%);
       }
       > * {
         position: relative;
@@ -133,6 +134,7 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
 const ProjectSlide = ({
   img,
   title,
+  description,
   previewLink,
   codeLink,
   previewProject,
@@ -153,7 +155,11 @@ const ProjectSlide = ({
   }, [zoomRef.current, imageRef.current]);
 
   const zoomIn = () => {
-    gsap.to(zoomRef.current, { time: 0.5, ease: "power3.out", overwrite: true });
+    gsap.to(zoomRef.current, {
+      time: 0.5,
+      ease: "power3.out",
+      overwrite: true,
+    });
   };
   const zoomOut = () => {
     gsap.to(zoomRef.current, { time: 0, ease: "power3.out", overwrite: true });
@@ -198,7 +204,10 @@ const ProjectSlide = ({
       {projectImg}
 
       <div className="slide__main">
-        <H4 as="h3">{title}</H4>
+        <div className="slide__heading">
+          <H4 as="h3">{title}</H4>
+          {description && <P2>{description}</P2>}
+        </div>
         <div className="slide__buttons">
           {codeLink && codeLink.length > 0 ? (
             <P1
@@ -206,7 +215,9 @@ const ProjectSlide = ({
               href={codeLink}
               target="_blank"
               className="slide__btn slide__btn-primary"
-              onClick={(e: MouseEvent<HTMLAnchorElement>) => e.stopPropagation()}
+              onClick={(e: MouseEvent<HTMLAnchorElement>) =>
+                e.stopPropagation()
+              }
               aria-label={`View the source code of ${title}`}
             >
               <BiCodeAlt />

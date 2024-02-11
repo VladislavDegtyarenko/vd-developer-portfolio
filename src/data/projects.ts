@@ -11,6 +11,7 @@ import TenziesImg from "/public/assets/projects/7-tenzies.jpg";
 import Game2048Img from "/public/assets/projects/2048 Game.jpg";
 import AirlogixImg from "/public/assets/projects/Airlogix.png";
 import ReactGPT from "/public/assets/projects/ReactGPT.png";
+import ExpenseTracker from "/public/assets/projects/Expense Tracker.png";
 
 import { Project } from "../types";
 
@@ -18,11 +19,23 @@ const projectsData: Project[] = [
   {
     img: AirlogixImg,
     title: "Airlogix.io",
+    description:
+      "Next.js • next-intl • Typescript • styled-components • Sendgrid API • Vercel",
+
     previewLink: "https://www.airlogix.io/",
+  },
+  {
+    img: ExpenseTracker,
+    title: "Expense Tracker",
+    description: "React • MUI • Typescript • Firebase • Parcel",
+    previewLink: "https://expense-tracker-d93df.web.app/",
+    codeLink:
+      "https://github.com/VladislavDegtyarenko/expense-tracker-firebase-react",
   },
   {
     img: ReactGPT,
     title: "ReactGPT",
+    description: "React • OpenAI API • Typescript • snadcn/ui • Vite",
     previewLink: "https://vladislavdegtyarenko.github.io/react-gpt/",
   },
   // {
@@ -34,6 +47,7 @@ const projectsData: Project[] = [
   {
     img: PortfolioImg,
     title: "Portfolio Website",
+    description: "Next.js • Typescript • Framer Motion • Sendgrid API",
     // previewLink: "https://vd-developer.vercel.app/",
     codeLink: "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
   },
@@ -75,16 +89,20 @@ const projectsData: Project[] = [
     title: "Password Generator",
     description:
       "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
-    previewLink: "https://vladislavdegtyarenko.github.io/preact-password-generator/",
-    codeLink: "https://github.com/VladislavDegtyarenko/preact-password-generator",
+    previewLink:
+      "https://vladislavdegtyarenko.github.io/preact-password-generator/",
+    codeLink:
+      "https://github.com/VladislavDegtyarenko/preact-password-generator",
   },
   {
     img: ClockImg,
     title: "Alarms & Clock Clone",
     description:
       'Windows 10 "Alarms & Clock" app clone created with ReactJS, Framer Motion, and FluentUI library',
-    previewLink: "https://vladislavdegtyarenko.github.io/react-windows-clock-clone/",
-    codeLink: "https://github.com/VladislavDegtyarenko/react-windows-clock-clone",
+    previewLink:
+      "https://vladislavdegtyarenko.github.io/react-windows-clock-clone/",
+    codeLink:
+      "https://github.com/VladislavDegtyarenko/react-windows-clock-clone",
   },
   {
     img: OcularImg,
