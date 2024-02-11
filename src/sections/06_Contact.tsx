@@ -2,11 +2,11 @@ import { useRef, memo } from "react";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 
 import styled from "styled-components";
-import Section from "@/ui/Section";
-import SectionDivider from "@/ui/SectionDivider";
-import SectionTitle from "@/ui/SectionTitle";
-import Container from "@/ui/Container";
-import SectionDescription from "@/ui/SectionDescription";
+import Section from "@/components/Section";
+import SectionDivider from "@/components/SectionDivider";
+import SectionTitle from "@/components/SectionTitle";
+import Container from "@/components/Container";
+import SectionDescription from "@/components/SectionDescription";
 
 import DownloadIcon from "public/assets/Icons/Download";
 
@@ -90,9 +90,12 @@ const Contact = () => {
   useIsomorphicLayoutEffect(() => {
     if (!iconsRef.current) return;
 
-    animateFromBottom([...new Set(iconsRef.current.children), downloadBtnRef.current], {
-      stagger: 0.1,
-    });
+    animateFromBottom(
+      [...new Set(iconsRef.current.children), downloadBtnRef.current],
+      {
+        stagger: 0.1,
+      }
+    );
   }, []);
   return (
     <>
@@ -100,8 +103,8 @@ const Contact = () => {
         <Container>
           <SectionTitle>Get in Touch</SectionTitle>
           <SectionDescription className="contact__descr">
-            Interested in working with me or hiring me for your next project? Drop me a
-            line and let&apos;s make it happen.
+            Interested in working with me or hiring me for your next project?
+            Drop me a line and let&apos;s make it happen.
           </SectionDescription>
           <SectionDescription
             className="contact__descr"

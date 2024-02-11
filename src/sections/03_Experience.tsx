@@ -2,15 +2,18 @@
 import styled from "styled-components";
 
 // UI
-import Section from "@/ui/Section";
-import SectionDivider from "@/ui/SectionDivider";
-import SectionTitle from "@/ui/SectionTitle";
-import Container from "@/ui/Container";
-import ExperienceCard from "@/ui/ExperienceCard";
-import { H4 } from "@/ui/Text";
+import Section from "@/components/Section";
+import SectionDivider from "@/components/SectionDivider";
+import SectionTitle from "@/components/SectionTitle";
+import Container from "@/components/Container";
+import ExperienceCard from "@/components/ExperienceCard";
+import { H4 } from "@/components/Text";
 
 // Data
-import { mainExperienceData, nonRelatedExperienceData } from "@/data/experience";
+import {
+  mainExperienceData,
+  nonRelatedExperienceData,
+} from "@/data/experience";
 
 // Styled
 const StyledExperience = styled(Section)`

@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import BurgerMenuIcon from "public/assets/Icons/BurgerMenu-Icon";
 
-import { BurgerButtonProps } from "../types";
+import { BurgerButtonProps } from "@/types";
 
 const Button = styled.button`
   color: ${({ theme }) => theme.cyan};

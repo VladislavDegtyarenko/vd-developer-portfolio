@@ -3,11 +3,11 @@ import { useRef, memo } from "react";
 import styled from "styled-components";
 
 // UI
-import Section from "@/ui/Section";
-import SectionDivider from "@/ui/SectionDivider";
-import SectionTitle from "@/ui/SectionTitle";
-import SectionDescription from "@/ui/SectionDescription";
-import Container from "@/ui/Container";
+import Section from "@/components/Section";
+import SectionDivider from "@/components/SectionDivider";
+import SectionTitle from "@/components/SectionTitle";
+import SectionDescription from "@/components/SectionDescription";
+import Container from "@/components/Container";
 import ExpertiseGroup from "@/components/ExpertiseGroup";
 
 // Data
@@ -31,10 +31,10 @@ const About = () => {
           <div className="inner">
             <SectionTitle>Expertise</SectionTitle>
             <SectionDescription>
-              Discover my arsenal of frontend tools & technologies—JavaScript, React,
-              Redux, Next.js & more. From powerful UI libraries like Material UI &
-              Tailwind to custom animations using GSAP & Framer Motion, I deliver stunning
-              user experiences.
+              Discover my arsenal of frontend tools & technologies—JavaScript,
+              React, Redux, Next.js & more. From powerful UI libraries like
+              Material UI & Tailwind to custom animations using GSAP & Framer
+              Motion, I deliver stunning user experiences.
             </SectionDescription>
             <div className="wrapper">
               {expertiseData.map((group) => (

@@ -7,7 +7,7 @@ import Image from "next/image";
 
 import animateFromBottom from "@/animations/animateFromBottom";
 import { Review, ReviewCardRef } from "../types";
-import { P1, P2 } from "@/ui/Text";
+import { P1, P2 } from "@/components/Text";
 import OVasinAvatar from "public/assets/reviews/o-vasin.jpg";
 
 interface ReviewCardProps extends Review {}
@@ -70,7 +70,13 @@ const StyledReviewCard = styled.div`
   }
 `;
 
-const ReviewCard = ({ reviewText, name, position, company, photo }: ReviewCardProps) => {
+const ReviewCard = ({
+  reviewText,
+  name,
+  position,
+  company,
+  photo,
+}: ReviewCardProps) => {
   const ref = useRef<ReviewCardRef>(null);
 
   useIsomorphicLayoutEffect(() => {

@@ -9,7 +9,7 @@ import ScrollLockContext from "@/contexts/ScrollLockContext";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
 
 const framerFeatures = () =>
-  import("./../features/framerFeatures").then((res) => res.default);
+  import("../features/framerFeatures").then((res) => res.default);
 
 const StyledBtn = styled(m.button)<{ $scrollbarCompensation: number | null }>`
   position: fixed;
@@ -19,7 +19,8 @@ const StyledBtn = styled(m.button)<{ $scrollbarCompensation: number | null }>`
   bottom: 1em;
   right: 1em;
   padding: 0.5em;
-  margin-right: ${({ $scrollbarCompensation }) => $scrollbarCompensation + "px" || 0};
+  margin-right: ${({ $scrollbarCompensation }) =>
+    $scrollbarCompensation + "px" || 0};
   display: flex;
   align-items: center;
   justify-content: center;

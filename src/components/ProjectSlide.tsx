@@ -4,7 +4,7 @@ import { useRef, MouseEvent } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { ProjectSlideProps } from "../types";
-import { H4, P1, P2 } from "@/ui/Text";
+import { H4, P1, P2 } from "@/components/Text";
 
 import { BiCodeAlt, BiLinkExternal } from "react-icons/bi";
 

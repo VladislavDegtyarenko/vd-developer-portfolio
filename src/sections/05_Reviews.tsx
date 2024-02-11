@@ -1,12 +1,12 @@
 import { memo } from "react";
 import styled from "styled-components";
-import Section from "@/ui/Section";
-import SectionDivider from "@/ui/SectionDivider";
-import SectionTitle from "@/ui/SectionTitle";
-import Container from "@/ui/Container";
-import SectionDescription from "@/ui/SectionDescription";
+import Section from "@/components/Section";
+import SectionDivider from "@/components/SectionDivider";
+import SectionTitle from "@/components/SectionTitle";
+import Container from "@/components/Container";
+import SectionDescription from "@/components/SectionDescription";
 
-import ReviewCard from "@/ui/ReviewCard";
+import ReviewCard from "@/components/ReviewCard";
 
 import { reviews } from "@/data/reviews";
 
@@ -25,8 +25,8 @@ const Reviews = () => {
         <Container>
           <SectionTitle>Reviews</SectionTitle>
           <SectionDescription className="reviews__descr">
-            See what my past colleagues, managers and clients have to say about my
-            frontend development skills.
+            See what my past colleagues, managers and clients have to say about
+            my frontend development skills.
           </SectionDescription>
 
           {reviews.map((review) => (

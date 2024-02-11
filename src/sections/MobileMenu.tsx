@@ -3,11 +3,11 @@
 import { useContext, memo } from "react";
 import styled from "styled-components";
 
-import Container from "@/ui/Container";
-import MenuLinks from "@/ui/MenuLinks";
+import Container from "@/components/Container";
+import MenuLinks from "@/components/MenuLinks";
 
 import MobileMenuContext from "@/contexts/MobileMenuContext";
-import ModalWrapper from "@/ui/ModalWrapper";
+import ModalWrapper from "@/components/ModalWrapper";
 
 const StyledWrapper = styled(ModalWrapper)`
   ul {

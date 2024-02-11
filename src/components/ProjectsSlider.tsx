@@ -13,7 +13,7 @@ import "swiper/css/effect-fade";
 
 // UI
 import ArrowIcon from "public/assets/Icons/Arrow";
-import ProjectSlide from "@/ui/ProjectSlide";
+import ProjectSlide from "@/components/ProjectSlide";
 
 // Data
 import projectsData from "@/data/projects";

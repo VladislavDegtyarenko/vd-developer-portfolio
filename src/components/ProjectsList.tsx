@@ -4,7 +4,7 @@ import { useContext, useState, useEffect, useRef, memo } from "react";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 
 import projectsData from "@/data/projects";
-import ProjectSlide from "@/ui/ProjectSlide";
+import ProjectSlide from "@/components/ProjectSlide";
 import ProjectContext from "@/contexts/ProjectContext";
 
 import animateFromBottom from "@/animations/animateFromBottom";
@@ -59,18 +59,20 @@ const ProjectsList = () => {
   return (
     <StyledProjectsList>
       <ul ref={cardsListRef}>
-        {projectsData.map(({ img, title, description, previewLink, codeLink, soon }) => (
-          <ProjectSlide
-            key={title}
-            img={img}
-            title={title}
-            description={description}
-            previewLink={previewLink}
-            previewProject={previewProject}
-            codeLink={codeLink}
-            soon={soon}
-          />
-        ))}
+        {projectsData.map(
+          ({ img, title, description, previewLink, codeLink, soon }) => (
+            <ProjectSlide
+              key={title}
+              img={img}
+              title={title}
+              description={description}
+              previewLink={previewLink}
+              previewProject={previewProject}
+              codeLink={codeLink}
+              soon={soon}
+            />
+          )
+        )}
       </ul>
     </StyledProjectsList>
   );

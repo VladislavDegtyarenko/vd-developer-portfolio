@@ -3,11 +3,11 @@ import { useState, useRef, useContext, memo } from "react";
 import dynamic from "next/dynamic";
 
 // UI
-import Section from "@/ui/Section";
-import SectionDivider from "@/ui/SectionDivider";
-import SectionTitle from "@/ui/SectionTitle";
-import Container from "@/ui/Container";
-import SectionDescription from "@/ui/SectionDescription";
+import Section from "@/components/Section";
+import SectionDivider from "@/components/SectionDivider";
+import SectionTitle from "@/components/SectionTitle";
+import Container from "@/components/Container";
+import SectionDescription from "@/components/SectionDescription";
 
 import ProjectsList from "@/components/ProjectsList";
 
@@ -90,8 +90,8 @@ const Projects = () => {
           <div className="projects">
             <SectionTitle>Projects</SectionTitle>
             <SectionDescription className="projects__descr">
-              A concise overview of selected frontend development projects, showcasing
-              skills and capabilities.
+              A concise overview of selected frontend development projects,
+              showcasing skills and capabilities.
             </SectionDescription>
 
             <SectionDescription>

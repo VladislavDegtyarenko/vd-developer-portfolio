@@ -3,8 +3,8 @@ import { useRef, memo } from "react";
 import styled from "styled-components";
 
 // UI
-import Container from "@/ui/Container";
-import { P2 } from "@/ui/Text";
+import Container from "@/components/Container";
+import { P2 } from "@/components/Text";
 
 // Hooks
 import animateFromBottom from "@/animations/animateFromBottom";
@@ -30,8 +30,8 @@ const Footer = () => {
     <StyledFooter>
       <Container>
         <P2 ref={ref}>
-          © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All Rights
-          Reserved
+          © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All
+          Rights Reserved
         </P2>
       </Container>
     </StyledFooter>

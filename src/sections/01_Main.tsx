@@ -3,10 +3,10 @@
 import { memo } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import Section from "@/ui/Section";
-import SectionDivider from "@/ui/SectionDivider";
-import Container from "@/ui/Container";
-import { H1, H2, P1 } from "@/ui/Text";
+import Section from "@/components/Section";
+import SectionDivider from "@/components/SectionDivider";
+import Container from "@/components/Container";
+import { H1, H2, P1 } from "@/components/Text";
 import ScrollDownIcon from "public/assets/Icons/Scroll Down";
 
 import bg from "public/assets/bg.jpg";
@@ -43,7 +43,10 @@ const StyledMain = styled(Section)`
       bottom: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(transparent 70%, ${({ theme }) => theme.bg} 100%);
+      background: linear-gradient(
+        transparent 70%,
+        ${({ theme }) => theme.bg} 100%
+      );
     }
   }
 
@@ -152,7 +155,14 @@ const Main = () => {
     <>
       <StyledMain id="home">
         <div className="bg">
-          <Image src={bg} alt="" placeholder="blur" quality="50" fill priority />
+          <Image
+            src={bg}
+            alt=""
+            placeholder="blur"
+            quality="50"
+            fill
+            priority
+          />
         </div>
 
         <div className="main">
@@ -165,8 +175,8 @@ const Main = () => {
                   Frontend Developer
                 </H2>
                 <P1 className="description">
-                  Based in <span>Kyiv, Ukraine</span>, I&apos;m passionate about creating
-                  engaging, digital experiences on the web.
+                  Based in <span>Kyiv, Ukraine</span>, I&apos;m passionate about
+                  creating engaging, digital experiences on the web.
                 </P1>
               </div>
               <div className="main__photo">

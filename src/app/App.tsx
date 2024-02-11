@@ -14,12 +14,17 @@ import Contact from "@/sections//06_Contact";
 import Footer from "@/sections//Footer";
 
 // UI
-import BackToTopBtn from "@/ui/BackToTopBtn";
+import BackToTopBtn from "@/components/BackToTopBtn";
 import MobileMenu from "@/sections/MobileMenu";
-const AnimatePresence = dynamic(() => import("@/features/framerAnimatePresence"), {
+const AnimatePresence = dynamic(
+  () => import("@/features/framerAnimatePresence"),
+  {
+    ssr: false,
+  }
+);
+const ProjectModal = dynamic(() => import("@/components/ProjectModal"), {
   ssr: false,
 });
-const ProjectModal = dynamic(() => import("@/ui/ProjectModal"), { ssr: false });
 
 // Contexts
 import MobileMenuContext from "@/contexts/MobileMenuContext";
@@ -50,7 +55,9 @@ const App = () => {
       <AnimatePresence>{menuIsOpen && <MobileMenu />}</AnimatePresence>
 
       <AnimatePresence>
-        {projectSrc && <ProjectModal projectSrc={projectSrc} closeModal={closeModal} />}
+        {projectSrc && (
+          <ProjectModal projectSrc={projectSrc} closeModal={closeModal} />
+        )}
       </AnimatePresence>
 
       <BackToTopBtn />

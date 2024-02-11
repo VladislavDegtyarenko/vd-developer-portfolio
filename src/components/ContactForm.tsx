@@ -6,12 +6,12 @@ import styled from "styled-components";
 import animateFromBottom from "@/animations/animateFromBottom";
 
 // UI
-import Loading from "@/ui/Loading";
-import { P2 } from "@/ui/Text";
+import Loading from "@/components/Loading";
+import { P2 } from "@/components/Text";
 
 import { FormInputs } from "@/types";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import FormSuccessMessage from "@/ui/formSuccessMessage";
+import FormSuccessMessage from "./FormSuccessMessage";
 
 const StyledContactForm = styled.div`
   margin-top: 2.5em;
@@ -170,7 +170,9 @@ const ContactForm = () => {
   useIsomorphicLayoutEffect(() => {
     if (!formRef.current) return;
 
-    animateFromBottom([...new Set(formRef.current.children)], { stagger: 0.05 });
+    animateFromBottom([...new Set(formRef.current.children)], {
+      stagger: 0.05,
+    });
   }, [formRef]);
 
   const isOnlySpaces = (value: string) => !value.trim();
@@ -199,7 +201,9 @@ const ContactForm = () => {
               className={errors.name?.message ? "error" : ""}
             />
             {errors.name ? (
-              <span className="helperText errorMessage">{errors.name.message}</span>
+              <span className="helperText errorMessage">
+                {errors.name.message}
+              </span>
             ) : null}
           </label>
           <label>
@@ -215,7 +219,9 @@ const ContactForm = () => {
               className={errors.email?.message ? "error" : ""}
             />
             {errors.email ? (
-              <span className="helperText errorMessage">{errors.email.message}</span>
+              <span className="helperText errorMessage">
+                {errors.email.message}
+              </span>
             ) : null}
           </label>
           <label>
@@ -232,13 +238,18 @@ const ContactForm = () => {
               spellCheck="false"
             ></textarea>
             {errors.message ? (
-              <span className="helperText errorMessage">{errors.message.message}</span>
+              <span className="helperText errorMessage">
+                {errors.message.message}
+              </span>
             ) : null}
           </label>
 
           {error ? <P2 className="error sendError">{error}</P2> : null}
 
-          <button type="submit" className={`submit ${isSending ? "sending" : ""}`}>
+          <button
+            type="submit"
+            className={`submit ${isSending ? "sending" : ""}`}
+          >
             {isSending ? <Loading /> : "Send"}
           </button>
         </form>

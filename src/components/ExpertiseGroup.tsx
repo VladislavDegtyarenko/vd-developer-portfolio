@@ -5,8 +5,8 @@ import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import animateFromBottom from "@/animations/animateFromBottom";
 
 // UI
-import { H4 } from "@/ui/Text";
-import ExpertiseCard from "@/ui/ExpertiseCard";
+import { H4 } from "@/components/Text";
+import ExpertiseCard from "@/components/ExpertiseCard";
 import { ExpertiseGroup } from "@/types";
 
 const StyledGroup = styled.div`
@@ -37,12 +37,19 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
 
     animateFromBottom(groupTitleRef.current);
 
-    animateFromBottom([...new Set(groupIconsRef.current.children)], { stagger: 0.05 });
+    animateFromBottom([...new Set(groupIconsRef.current.children)], {
+      stagger: 0.05,
+    });
   }, []);
 
   return (
     <StyledGroup>
-      <H4 key={groupTitle} as="h3" className="expGroupTitle" ref={groupTitleRef}>
+      <H4
+        key={groupTitle}
+        as="h3"
+        className="expGroupTitle"
+        ref={groupTitleRef}
+      >
         {groupTitle}
       </H4>
 

@@ -1,15 +1,22 @@
 "use client";
 
-import { useState, useEffect, useRef, useContext, memo, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  memo,
+  useCallback,
+} from "react";
 import styled from "styled-components";
 import useScrollDelta from "@/hooks/useScrollDelta";
 
 // UI
-import Container from "@/ui/Container";
+import Container from "@/components/Container";
 import Logo from "public/assets/Icons/LOGO";
-import BurgerButton from "@/ui/BurgerButton";
-import MenuLinks from "@/ui/MenuLinks";
-import DarkModeToggle from "@/ui/DarkModeToggle";
+import BurgerButton from "@/components/BurgerButton";
+import MenuLinks from "@/components/MenuLinks";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 // Contexts
 import DarkModeContext from "@/contexts/DarkModeContext";
@@ -23,7 +30,9 @@ const StyledHeader = styled.header<{
   padding: 1.5em 0;
   position: fixed;
   width: ${({ $scrollbarCompensation }) =>
-    $scrollbarCompensation ? `calc(100% - ${$scrollbarCompensation}px)` : "100%"};
+    $scrollbarCompensation
+      ? `calc(100% - ${$scrollbarCompensation}px)`
+      : "100%"};
   z-index: 3;
   box-shadow: 0 0 8px #35353555;
   /* background-color: #050505bb; */
@@ -117,7 +126,10 @@ const Header = () => {
             <Logo />
           </a>
           <MenuLinks />
-          <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+          <DarkModeToggle
+            isDarkMode={isDarkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
           <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
         </nav>
       </Container>
