@@ -1,18 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import { Variants, motion } from "framer-motion";
+import { useContactForm } from "@/hooks/useContactForm";
 
 // UI
 import Loading from "@/components/Loading";
 import { P2 } from "@/components/Text";
-
 import FormSuccessMessage from "./FormSuccessMessage";
-
-// TS
-import { FormInputs } from "@/types";
 
 const formElementVariants: Variants = {
   hidden: {
@@ -140,53 +135,21 @@ const StyledContactForm = styled.div`
 const ContactForm = () => {
   const {
     register,
-    handleSubmit,
-    // watch,
-    formState: { errors },
-  } = useForm<FormInputs>({
-    mode: "onTouched",
-  });
-
-  const [isSending, setIsSending] = useState(false);
-  const [formSent, setFormSent] = useState(false);
-  const [error, setError] = useState("");
-
-  const sendEmail: SubmitHandler<FormInputs> = (data) => {
-    const sendgridApiEndpoint = "/api/sendgrid";
-
-    setError("");
-    setIsSending(true);
-
-    fetch(sendgridApiEndpoint, {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        setIsSending(false);
-
-        if (response.message) {
-          setFormSent(true);
-        } else if (response.error) {
-          setError(response.error);
-        }
-      })
-      .catch((err) => {
-        console.error("err: ", err);
-        setIsSending(false);
-      });
-  };
-
-  const isOnlySpaces = (value: string) => !value.trim();
-  // console.log(watch("example")); // watch input value by passing the name of it
+    isSending,
+    isSent,
+    isOnlySpaces,
+    errorMessage,
+    errors,
+    onSubmit,
+  } = useContactForm();
 
   return (
     <StyledContactForm>
-      {formSent ? (
+      {isSent ? (
         <FormSuccessMessage />
       ) : (
         <motion.form
-          onSubmit={handleSubmit(sendEmail)}
+          onSubmit={onSubmit}
           initial="hidden"
           whileInView="visible"
           transition={{ staggerChildren: 0.1 }}
@@ -204,7 +167,7 @@ const ContactForm = () => {
                   message: "Name must contain at least 2 characters",
                 },
                 pattern: {
-                  value: /^[A-Za-zА-Яа-я\s-]+$/,
+                  value: /^[A-Za-zА-Яа-яЇїІіЄє\s-]+$/,
                   message: "Invalid name format",
                 },
               })}
@@ -261,7 +224,9 @@ const ContactForm = () => {
             ) : null}
           </motion.label>
 
-          {error ? <P2 className="error sendError">{error}</P2> : null}
+          {errorMessage ? (
+            <P2 className="error sendError">{errorMessage}</P2>
+          ) : null}
 
           <motion.button
             type="submit"
