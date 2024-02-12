@@ -1,12 +1,14 @@
 "use client";
 
+// Core
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
+// Components
 import { H4, P1, P2 } from "./Text";
 
-import { useRef } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import animateFromBottom from "@/animations/animateFromBottom";
-import { ExpCardRef, ExperienceCardProps, StyledExpCardProps } from "../types";
+// TS
+import { ExperienceCardProps, StyledExpCardProps } from "../types";
 
 const StyledExpCard = styled.div<StyledExpCardProps>`
   display: flex;
@@ -70,6 +72,8 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   }
 `;
 
+const MotionStyledExperienceCard = motion(StyledExpCard);
+
 const Chip = styled(P2)`
   display: inline-block;
   border-radius: 2em;
@@ -91,17 +95,16 @@ const ExperienceCard = ({
   chips,
   description,
   icons,
-  animationOptions,
   secondary,
 }: ExperienceCardProps) => {
-  const ref = useRef<ExpCardRef>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    animateFromBottom(ref.current, animationOptions);
-  }, []);
-
   return (
-    <StyledExpCard ref={ref} $secondary={secondary}>
+    <MotionStyledExperienceCard
+      $secondary={secondary}
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
+    >
       <div className="info">
         <div className="time-range">
           <P2>{timerange}</P2>
@@ -135,7 +138,7 @@ const ExperienceCard = ({
           ))}
         </div>
       ) : null}
-    </StyledExpCard>
+    </MotionStyledExperienceCard>
   );
 };
 

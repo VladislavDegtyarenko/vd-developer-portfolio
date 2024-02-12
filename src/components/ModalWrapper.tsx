@@ -1,4 +1,4 @@
-import { useContext, memo } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { m, LazyMotion, AnimatePresence } from "framer-motion";
 

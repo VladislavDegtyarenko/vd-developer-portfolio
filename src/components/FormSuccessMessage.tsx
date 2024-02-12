@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useRef } from "react";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import animateFromBottom from "@/animations/animateFromBottom";
+import { useIsomorphicLayoutEffect } from "framer-motion";
 
 // UI
 import SuccessIcon from "public/assets/SucessIcon";
 import { H4, P1 } from "./Text";
+import { animate, stagger } from "framer-motion";
 
 const StyledFormSuccessMessage = styled.div`
   display: grid;
@@ -26,9 +26,16 @@ const FormSuccessMessage = () => {
   useIsomorphicLayoutEffect(() => {
     if (!formSuccessRef.current) return;
 
-    animateFromBottom([...new Set(formSuccessRef.current.children)], {
-      stagger: 0.075,
-    });
+    const childElements = Array.from(formSuccessRef.current.children);
+
+    animate(
+      childElements,
+      {
+        opacity: [0, 1],
+        y: [50, 0],
+      },
+      { duration: 0.7, delay: stagger(0.075) }
+    );
   }, [formSuccessRef.current]);
 
   return (

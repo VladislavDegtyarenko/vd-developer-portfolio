@@ -1,14 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
+import { useIsomorphicLayoutEffect, animate, useInView } from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
 
-import animateFromBottom from "@/animations/animateFromBottom";
 import { Review, ReviewCardRef } from "../types";
 import { P1, P2 } from "@/components/Text";
-import OVasinAvatar from "public/assets/reviews/o-vasin.jpg";
 
 interface ReviewCardProps extends Review {}
 
@@ -78,10 +76,19 @@ const ReviewCard = ({
   photo,
 }: ReviewCardProps) => {
   const ref = useRef<ReviewCardRef>(null);
+  const inView = useInView(ref, { once: true });
 
   useIsomorphicLayoutEffect(() => {
-    animateFromBottom(ref.current);
-  }, []);
+    const cardElement = ref.current;
+
+    if (!cardElement) return;
+
+    animate(cardElement, { y: 50, opacity: 0 }, { duration: 0 });
+
+    if (!inView) return;
+
+    animate(cardElement, { y: 0, opacity: 1 }, { duration: 0.7 });
+  }, [ref, inView]);
 
   return (
     <StyledReviewCard className="card" ref={ref}>

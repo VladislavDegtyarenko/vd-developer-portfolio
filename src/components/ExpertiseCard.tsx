@@ -3,8 +3,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { P2 } from "./Text";
-
-import { ExpertiseCardProps } from "../types";
+import { ExpertiseCardProps } from "@/types";
 
 const StyledCard = styled.li`
   display: flex;
@@ -51,11 +50,11 @@ const StyledCard = styled.li`
   }
 `;
 
-const ExpertiseCard = ({ icon, alt, title }: ExpertiseCardProps) => {
+const ExpertiseCard = ({ icon, title }: ExpertiseCardProps) => {
   return (
     <StyledCard>
       <div className="icon">
-        <Image src={`/assets/Icons/${icon}.svg`} alt={alt || ""} title={alt} fill />
+        <Image src={`/assets/Icons/${icon}.svg`} alt="" title={title} fill />
       </div>
 
       <div className="text">

@@ -1,5 +1,5 @@
-import { useRef, memo } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
+import { memo } from "react";
+import { motion } from "framer-motion";
 
 import styled from "styled-components";
 import Section from "@/components/Section";
@@ -10,11 +10,8 @@ import SectionDescription from "@/components/SectionDescription";
 
 import DownloadIcon from "public/assets/Icons/Download";
 
-import animateFromBottom from "@/animations/animateFromBottom";
-
 // Data
 import contactBtns from "@/data/contactBtns";
-import { ContactIconRef, DownloadBtnRef } from "../types";
 import ContactForm from "@/components/ContactForm";
 
 const StyledContact = styled(Section)`
@@ -84,19 +81,6 @@ const StyledContact = styled(Section)`
 `;
 
 const Contact = () => {
-  const iconsRef = useRef<ContactIconRef>(null);
-  const downloadBtnRef = useRef<DownloadBtnRef>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    if (!iconsRef.current) return;
-
-    animateFromBottom(
-      [...new Set(iconsRef.current.children), downloadBtnRef.current],
-      {
-        stagger: 0.1,
-      }
-    );
-  }, []);
   return (
     <>
       <StyledContact id="contact">
@@ -106,43 +90,45 @@ const Contact = () => {
             Interested in working with me or hiring me for your next project?
             Drop me a line and let&apos;s make it happen.
           </SectionDescription>
-          <SectionDescription
-            className="contact__descr"
-            animationOptions={{ delay: 0.15 }}
-          >
+          <SectionDescription className="contact__descr">
             Get in touch today and let&apos;s bring your ideas to life.
           </SectionDescription>
 
           <ContactForm />
 
-          <div className="contact__wrapper" ref={iconsRef}>
-            {contactBtns.map(({ href, ariaLabel, icon }) => {
+          <div className="contact__wrapper">
+            {contactBtns.map(({ href, ariaLabel, icon }, index) => {
               const Icon = icon;
 
               return (
-                <a
+                <motion.a
                   href={href}
                   className="contact__link"
                   target="_blank"
                   aria-label={ariaLabel}
                   title={ariaLabel}
                   key={href}
+                  initial={{ y: 32, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.05 * index }}
                 >
                   <Icon />
-                </a>
+                </motion.a>
               );
             })}
           </div>
           <div className="contact__download-cv">
-            <a
+            <motion.a
               href="Vladyslav Dihtiarenko CV (Dec'23, One-Page)-compressed (1).pdf"
               title={"Get my CV in PDF format"}
               target="_blank"
-              ref={downloadBtnRef}
+              initial={{ y: 32, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
               <DownloadIcon />
               Download CV
-            </a>
+            </motion.a>
           </div>
         </Container>
       </StyledContact>

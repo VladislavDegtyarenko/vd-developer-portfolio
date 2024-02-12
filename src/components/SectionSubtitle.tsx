@@ -1,13 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import styled from "styled-components";
 import textByChars from "../functions/textByChars";
+import { motion } from "framer-motion";
 import { H3 } from "./Text";
 
-import animateSectionTitle from "@/animations/animateSectionTitle";
-import { SectionSubtitleProps, SectionSubtitleRef } from "../types";
+import { SectionSubtitleProps } from "../types";
+import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
 
 const StyledSectionSubtitle = styled(H3)`
   overflow: hidden;
@@ -17,16 +17,19 @@ const StyledSectionSubtitle = styled(H3)`
 `;
 
 const SectionSubtitle = ({ children }: SectionSubtitleProps) => {
-  const ref = useRef<SectionSubtitleRef>(null);
-  const titleByChars = textByChars(children);
-
-  const { animateTitle } = animateSectionTitle(ref);
-
-  useIsomorphicLayoutEffect(() => {
-    animateTitle("*", {}, { delay: 0.15 });
-  }, []);
-
-  return <StyledSectionSubtitle ref={ref}>{titleByChars}</StyledSectionSubtitle>;
+  return (
+    <StyledSectionSubtitle>
+      {splitStringUsingRegex(children).map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </StyledSectionSubtitle>
+  );
 };
 
 export default SectionSubtitle;

@@ -1,8 +1,12 @@
 // Core
-import { useRef, memo } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-import animateFromBottom from "@/animations/animateFromBottom";
+import {
+  animate,
+  stagger,
+  useInView,
+  useIsomorphicLayoutEffect,
+} from "framer-motion";
 
 // UI
 import { H4 } from "@/components/Text";
@@ -32,15 +36,39 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
   const groupTitleRef = useRef<HTMLHeadingElement>(null);
   const groupIconsRef = useRef<HTMLUListElement>(null);
 
+  const inView = useInView(groupIconsRef, { once: true });
+
   useIsomorphicLayoutEffect(() => {
-    if (!groupTitleRef.current || !groupIconsRef.current) return;
+    const groupTitleElement = groupTitleRef.current;
+    const groupIconsElement = groupIconsRef.current;
 
-    animateFromBottom(groupTitleRef.current);
+    if (!groupTitleElement || !groupIconsElement) return;
 
-    animateFromBottom([...new Set(groupIconsRef.current.children)], {
-      stagger: 0.05,
-    });
-  }, []);
+    const elementsToAnimate = Array.from([
+      groupTitleElement,
+      ...groupIconsElement.children,
+    ]);
+
+    animate(
+      elementsToAnimate,
+      {
+        y: 50,
+        opacity: 0,
+      },
+      { duration: 0 }
+    );
+
+    if (!inView) return;
+
+    animate(
+      elementsToAnimate,
+      {
+        y: [50, 0],
+        opacity: [0, 1],
+      },
+      { duration: 0.7, delay: stagger(0.05) }
+    );
+  }, [groupTitleRef, groupIconsRef, inView]);
 
   return (
     <StyledGroup>
@@ -55,15 +83,7 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
 
       <ul className="icons" ref={groupIconsRef}>
         {groupCards.map(({ icon, title }, key) => (
-          <ExpertiseCard
-            key={icon}
-            icon={icon}
-            title={title}
-            alt={title}
-            animationOptions={{
-              delay: 0.15 * (key % 3),
-            }}
-          />
+          <ExpertiseCard key={icon} icon={icon} title={title} />
         ))}
       </ul>
     </StyledGroup>

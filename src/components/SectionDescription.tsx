@@ -1,13 +1,11 @@
 "use client";
 
-import { useRef } from "react";
-import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
+import { motion } from "framer-motion";
 
 import styled from "styled-components";
 import { P1 } from "./Text";
 
-import animateFromBottom from "@/animations/animateFromBottom";
-import { SectionDescriptionProps, SectionDescriptionRef } from "../types";
+import { SectionDescriptionProps } from "../types";
 
 const StyledSectionDescription = styled(P1)`
   text-align: center;
@@ -25,14 +23,19 @@ const StyledSectionDescription = styled(P1)`
   }
 `;
 
-const SectionDescription = ({ children, animationOptions }: SectionDescriptionProps) => {
-  const ref = useRef<SectionDescriptionRef>(null);
+const MotionDescription = motion(StyledSectionDescription);
 
-  useIsomorphicLayoutEffect(() => {
-    animateFromBottom(ref.current, animationOptions);
-  }, []);
-
-  return <StyledSectionDescription ref={ref}>{children}</StyledSectionDescription>;
+const SectionDescription = ({ children }: SectionDescriptionProps) => {
+  return (
+    <MotionDescription
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+    >
+      {children}
+    </MotionDescription>
+  );
 };
 
 export default SectionDescription;

@@ -1,4 +1,3 @@
-import gsap from "gsap";
 import { ReactNode, ForwardedRef, Ref, RefObject } from "react";
 import { StaticImageData } from "next/image";
 
@@ -18,17 +17,8 @@ export type ToggleDarkMode = () => void;
 export type PreviewProject = (url: string) => void;
 export type GetScrollbarWidth = number;
 export type MenuIsOpen = boolean;
-export type ExpertiseCardRef = HTMLLIElement | null;
-export type ExpCardRef = HTMLDivElement | null;
 export type ReviewCardRef = HTMLDivElement | null;
-export type SectionTitleRef = HTMLHeadingElement | null;
-export type SectionSubtitleRef = HTMLHeadingElement | null;
-export type SectionDescriptionRef = HTMLParagraphElement | null;
 export type ProjectModalRef = HTMLIFrameElement | null;
-export type ContactIconRef = HTMLDivElement | null;
-export type ProjectCardsListRef = HTMLUListElement | null;
-export type DownloadBtnRef = HTMLAnchorElement | null;
-export type FooterRef = HTMLParagraphElement | null;
 export type TimeoutRef = ReturnType<typeof setInterval> | undefined;
 export type IsMobile = boolean;
 export type CloseModal = () => void;
@@ -70,6 +60,8 @@ export interface Expertise {
   description?: string;
 }
 
+export type ExpertiseCardProps = Expertise & {};
+
 export interface ExpertiseGroup {
   groupTitle: string;
   groupCards: Expertise[];
@@ -100,14 +92,7 @@ export interface ContactBtn {
 }
 
 // UI
-
-export interface ExpertiseCardProps extends Expertise {
-  alt?: string;
-  animationOptions?: gsap.TweenVars;
-}
-
 export interface ExperienceCardProps extends Experience {
-  animationOptions?: gsap.TweenVars;
   secondary?: boolean;
 }
 
@@ -124,7 +109,6 @@ export interface SectionSubtitleProps {
 export interface SectionDescriptionProps {
   className?: string;
   children: string | ReactNode;
-  animationOptions?: gsap.TweenVars;
 }
 
 export interface ProjectModalProps {

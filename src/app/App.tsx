@@ -1,9 +1,16 @@
 "use client";
 
-import { createRef, useContext, useState, useEffect } from "react";
+// Core
+import { useContext } from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
+import { AnimatePresence } from "framer-motion";
 
+// Contexts
+import MobileMenuContext from "@/contexts/MobileMenuContext";
+import ProjectContext from "@/contexts/ProjectContext";
+
+// Sections
 import Header from "@/sections//Header";
 import Main from "@/sections//01_Main";
 import About from "@/sections//02_About";
@@ -13,22 +20,13 @@ import Reviews from "@/sections//05_Reviews";
 import Contact from "@/sections//06_Contact";
 import Footer from "@/sections//Footer";
 
-// UI
+// UI (Components)
 import BackToTopBtn from "@/components/BackToTopBtn";
 import MobileMenu from "@/sections/MobileMenu";
-const AnimatePresence = dynamic(
-  () => import("@/features/framerAnimatePresence"),
-  {
-    ssr: false,
-  }
-);
+
 const ProjectModal = dynamic(() => import("@/components/ProjectModal"), {
   ssr: false,
 });
-
-// Contexts
-import MobileMenuContext from "@/contexts/MobileMenuContext";
-import ProjectContext from "@/contexts/ProjectContext";
 
 const StyledApp = styled.div`
   background-color: ${({ theme }) => theme.bg};

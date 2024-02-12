@@ -1,17 +1,12 @@
 // Core
-import { useRef, memo } from "react";
+import { memo } from "react";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 // UI
 import Container from "@/components/Container";
 import { P2 } from "@/components/Text";
-
-// Hooks
-import animateFromBottom from "@/animations/animateFromBottom";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
-
-// TS
-import { FooterRef } from "@/types";
+const MotionP2 = motion(P2);
 
 const StyledFooter = styled.div`
   text-align: center;
@@ -20,19 +15,20 @@ const StyledFooter = styled.div`
 `;
 
 const Footer = () => {
-  const ref = useRef<FooterRef>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    animateFromBottom(ref.current);
-  }, []);
-
   return (
     <StyledFooter>
       <Container>
-        <P2 ref={ref}>
+        <MotionP2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{ duration: 0.7 }}
+        >
           © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All
           Rights Reserved
-        </P2>
+        </MotionP2>
       </Container>
     </StyledFooter>
   );

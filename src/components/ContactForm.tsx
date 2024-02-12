@@ -1,17 +1,29 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
-import animateFromBottom from "@/animations/animateFromBottom";
+import { Variants, motion } from "framer-motion";
 
 // UI
 import Loading from "@/components/Loading";
 import { P2 } from "@/components/Text";
 
-import { FormInputs } from "@/types";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
 import FormSuccessMessage from "./FormSuccessMessage";
+
+// TS
+import { FormInputs } from "@/types";
+
+const formElementVariants: Variants = {
+  hidden: {
+    y: 50,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const StyledContactForm = styled.div`
   margin-top: 2.5em;
@@ -165,16 +177,6 @@ const ContactForm = () => {
       });
   };
 
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    if (!formRef.current) return;
-
-    animateFromBottom([...new Set(formRef.current.children)], {
-      stagger: 0.05,
-    });
-  }, [formRef]);
-
   const isOnlySpaces = (value: string) => !value.trim();
   // console.log(watch("example")); // watch input value by passing the name of it
 
@@ -183,8 +185,17 @@ const ContactForm = () => {
       {formSent ? (
         <FormSuccessMessage />
       ) : (
-        <form onSubmit={handleSubmit(sendEmail)} ref={formRef}>
-          <label>
+        <motion.form
+          onSubmit={handleSubmit(sendEmail)}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ staggerChildren: 0.1 }}
+          viewport={{ once: true }}
+        >
+          <motion.label
+            variants={formElementVariants}
+            transition={{ duration: 0.7 }}
+          >
             <input
               {...register("name", {
                 required: "This field is required",
@@ -205,8 +216,11 @@ const ContactForm = () => {
                 {errors.name.message}
               </span>
             ) : null}
-          </label>
-          <label>
+          </motion.label>
+          <motion.label
+            variants={formElementVariants}
+            transition={{ duration: 0.7 }}
+          >
             <input
               {...register("email", {
                 required: "This field is required",
@@ -223,8 +237,11 @@ const ContactForm = () => {
                 {errors.email.message}
               </span>
             ) : null}
-          </label>
-          <label>
+          </motion.label>
+          <motion.label
+            variants={formElementVariants}
+            transition={{ duration: 0.7 }}
+          >
             <textarea
               {...register("message", {
                 required: "This field is required",
@@ -242,17 +259,19 @@ const ContactForm = () => {
                 {errors.message.message}
               </span>
             ) : null}
-          </label>
+          </motion.label>
 
           {error ? <P2 className="error sendError">{error}</P2> : null}
 
-          <button
+          <motion.button
             type="submit"
             className={`submit ${isSending ? "sending" : ""}`}
+            variants={formElementVariants}
+            transition={{ duration: 0.7 }}
           >
             {isSending ? <Loading /> : "Send"}
-          </button>
-        </form>
+          </motion.button>
+        </motion.form>
       )}
     </StyledContactForm>
   );

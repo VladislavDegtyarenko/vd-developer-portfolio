@@ -8,8 +8,13 @@ import { H4, P1, P2 } from "@/components/Text";
 
 import { BiCodeAlt, BiLinkExternal } from "react-icons/bi";
 
-import gsap from "gsap";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import {
+  animate,
+  motion,
+  useInView,
+  useIsomorphicLayoutEffect,
+} from "framer-motion";
+import { useMouseEnter } from "@/hooks/useMouseEnter";
 
 const StyledSlide = styled.li<{ $soon?: boolean }>`
   aspect-ratio: 16/9;
@@ -140,30 +145,35 @@ const ProjectSlide = ({
   previewProject,
   soon,
 }: ProjectSlideProps) => {
+  const slideRef = useRef<HTMLLIElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-  const zoomRef = useRef<gsap.core.Timeline | null>(null);
+
+  const inView = useInView(slideRef, { once: true });
+  const { isMouseEntered } = useMouseEnter(slideRef);
 
   useIsomorphicLayoutEffect(() => {
-    zoomRef.current = gsap.timeline({
-      paused: true,
-      defaults: {
-        ease: "none",
-      },
-    });
+    const slideElement = slideRef.current;
 
-    zoomRef.current.to(imageRef.current, { scale: 1.05 });
-  }, [zoomRef.current, imageRef.current]);
+    if (!slideElement) return;
 
-  const zoomIn = () => {
-    gsap.to(zoomRef.current, {
-      time: 0.5,
-      ease: "power3.out",
-      overwrite: true,
-    });
-  };
-  const zoomOut = () => {
-    gsap.to(zoomRef.current, { time: 0, ease: "power3.out", overwrite: true });
-  };
+    if (!inView) return;
+
+    animate(slideElement, { y: [32, 0], opacity: [0, 1] }, { duration: 0.5 });
+  }, [slideRef, imageRef, inView]);
+
+  // Hover
+  useIsomorphicLayoutEffect(() => {
+    const slideElement = slideRef.current;
+    const imageElement = imageRef.current;
+
+    if (!slideElement || !imageElement) return;
+
+    if (isMouseEntered) {
+      animate(imageElement, { scale: [1, 1.05] }, { duration: 0.15 });
+    } else {
+      animate(imageElement, { scale: [1.05, 1] }, { duration: 0.3 });
+    }
+  }, [slideRef, imageRef, isMouseEntered]);
 
   const projectImg = (
     <div className="slide__img">
@@ -194,12 +204,12 @@ const ProjectSlide = ({
 
   return (
     <StyledSlide
-      onMouseEnter={zoomIn}
-      onMouseLeave={zoomOut}
       onClick={() => {
-        zoomOut();
+        // zoomOut();
         previewLink && previewProject(previewLink);
       }}
+      ref={slideRef}
+      style={{ opacity: 0 }}
     >
       {projectImg}
 

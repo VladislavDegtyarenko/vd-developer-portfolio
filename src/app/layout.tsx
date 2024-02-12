@@ -1,27 +1,36 @@
+// Analytics
 import { Analytics } from "@vercel/analytics/react";
 
-import StyledComponentsRegistry from "@/lib/registry";
+// Fonts
 import { Poppins } from "next/font/google";
-import "./index.css";
-
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
+// Contexts
 import { DarkModeContextProvider } from "@/contexts/DarkModeContext";
 import { ScrollLockContextProvider } from "@/contexts/ScrollLockContext";
 import { MobileMenuContextProvider } from "@/contexts/MobileMenuContext";
 import { ProjectContextProvider } from "@/contexts/ProjectContext";
-import StyledThemeProvider from "./StyledThemeProvider";
-import { Metadata } from "next";
 
+// Styled-components config
+import StyledComponentsRegistry from "@/lib/registry";
+import StyledThemeProvider from "./StyledThemeProvider";
+import GlobalStyle from "./GlobalStyle";
+
+// Metadata
 export const metadata = {
   title: "Vladyslav Dihtiarenko",
-  description: "Frontend developer from Ukraine",
+  description:
+    "Frontend Developer from Ukraine. Passionate about creating digital experiences on the web.",
   other: {
     freelancehunt: "38e96f77035b108",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className={poppins.className}>
@@ -31,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <MobileMenuContextProvider>
                 <ProjectContextProvider>
                   <StyledThemeProvider>
+                    <GlobalStyle />
                     {children}
                     <Analytics />
                   </StyledThemeProvider>
