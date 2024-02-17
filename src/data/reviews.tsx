@@ -38,6 +38,39 @@ export const reviews: Review[] = [
     reviewText: (
       <>
         <P1>
+          <span className="bold-white">Vladyslav</span> did an outstanding job!
+          As a frontend developer, he used{" "}
+          <span className="bold-cyan">
+            Next.js, Typescript, and Framer Motion
+          </span>{" "}
+          to create a website with complex and smooth animations.
+        </P1>
+        <P1>
+          His communication was clear, and he paid{" "}
+          <span className="bold-white">great attention to detail</span>,
+          delivering exactly what I outlined in the technical task. The
+          website's{" "}
+          <span className="bold-cyan">
+            Lighthouse metrics scored an impressive 90+
+          </span>
+          , showcasing his commitment to performance.
+        </P1>
+        <P1>
+          <span className="bold-white">Vladyslav's work</span> demonstrates his
+          proficiency, reliability, and dedication to delivering high-quality
+          results. I <span className="bold-cyan">highly recommend him</span> for
+          any frontend development needs.
+        </P1>
+      </>
+    ),
+    name: "Aleksei Bilous",
+    position: "Client",
+    company: "Fiverr",
+  },
+  {
+    reviewText: (
+      <>
+        <P1>
           I had the pleasure of working with{" "}
           <span className="bold-white">Vladislav</span> on a headless project
           that utilized <span className="bold-cyan">React</span> and{" "}

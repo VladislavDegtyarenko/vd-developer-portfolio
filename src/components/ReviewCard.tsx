@@ -7,6 +7,7 @@ import Image from "next/image";
 
 import { Review, ReviewCardRef } from "../types";
 import { P1, P2 } from "@/components/Text";
+import UserIcon from "@/components/UserIcon";
 
 interface ReviewCardProps extends Review {}
 
@@ -57,6 +58,9 @@ const StyledReviewCard = styled.div`
       margin-right: 16px;
       overflow: hidden;
       flex-shrink: 0;
+      svg {
+        color: ${({ theme }) => theme.grey};
+      }
     }
     &__name {
       color: ${({ theme }) => theme.cyan};
@@ -95,12 +99,16 @@ const ReviewCard = ({
       <div className="card__text">{reviewText}</div>
       <div className="card__sign">
         <div className="card__photo">
-          <Image
-            src={`/assets/reviews/${photo}`}
-            alt={`Photo of ${name}`}
-            fill
-            sizes="72px"
-          />
+          {photo ? (
+            <Image
+              src={`/assets/reviews/${photo}`}
+              alt={`Photo of ${name}`}
+              fill
+              sizes="72px"
+            />
+          ) : (
+            <UserIcon />
+          )}
         </div>
         <div>
           <P1 className="card__name">{name}</P1>

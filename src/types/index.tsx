@@ -158,5 +158,5 @@ export type Review = {
   name: string;
   position?: string;
   company?: string;
-  photo: string;
+  photo?: string;
 };
