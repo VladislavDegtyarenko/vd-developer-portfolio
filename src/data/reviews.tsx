@@ -49,17 +49,18 @@ export const reviews: Review[] = [
           His communication was clear, and he paid{" "}
           <span className="bold-white">great attention to detail</span>,
           delivering exactly what I outlined in the technical task. The
-          website's{" "}
+          website&apos;s{" "}
           <span className="bold-cyan">
             Lighthouse metrics scored an impressive 90+
           </span>
           , showcasing his commitment to performance.
         </P1>
         <P1>
-          <span className="bold-white">Vladyslav's work</span> demonstrates his
-          proficiency, reliability, and dedication to delivering high-quality
-          results. I <span className="bold-cyan">highly recommend him</span> for
-          any frontend development needs.
+          <span className="bold-white">Vladyslav&apos;s work</span> demonstrates
+          his proficiency, reliability, and dedication to delivering
+          high-quality results. I{" "}
+          <span className="bold-cyan">highly recommend him</span> for any
+          frontend development needs.
         </P1>
       </>
     ),

@@ -10,7 +10,9 @@ const MobileMenuContext = createContext({
   toggleMenu: () => {},
 });
 
-export const MobileMenuContextProvider = ({ children }: ContextParentElement) => {
+export const MobileMenuContextProvider = ({
+  children,
+}: ContextParentElement) => {
   const { scrollLock, scrollUnlock } = useContext(ScrollLockContext);
   const [menuIsOpen, setMenuIsOpen] = useState<MenuIsOpen>(false);
 
@@ -20,6 +22,8 @@ export const MobileMenuContextProvider = ({ children }: ContextParentElement) =>
 
   useEffect(() => {
     window.onresize = () => debounceCloseMenu();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
