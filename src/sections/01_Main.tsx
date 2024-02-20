@@ -10,7 +10,6 @@ import { H1, H2, P1 } from "@/components/Text";
 import ScrollDownIcon from "public/assets/Icons/Scroll Down";
 
 import bg from "public/assets/bg.jpg";
-import photo from "public/photo2.jpg";
 
 const StyledMain = styled(Section)`
   padding: 0;
@@ -73,9 +72,9 @@ const StyledMain = styled(Section)`
       position: relative;
       margin-right: calc(20px + var(--strokeWidth) * 2);
       margin-top: 10px;
-      --photo-size: 280px;
+      --photo-size: 240px;
       @media screen and (max-width: 991.98px) {
-        --photo-size: 240px;
+        --photo-size: 210px;
         margin-bottom: 32px;
       }
 
@@ -88,7 +87,6 @@ const StyledMain = styled(Section)`
         position: relative;
         background-color: ${({ theme }) => theme.bg};
         overflow: hidden;
-        filter: saturate(0.8);
         img {
           width: 100%;
           height: 100%;
@@ -182,7 +180,7 @@ const Main = () => {
               <div className="main__photo">
                 <div className="main__photo_inner">
                   <Image
-                    src={photo}
+                    src="/IMG_8105 (2).JPG"
                     sizes="(max-width: 991.98px) 464px, 624px"
                     alt="Photo of Vladyslav Dihtiarneko, frontend developer"
                     fill
