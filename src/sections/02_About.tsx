@@ -72,7 +72,7 @@ const About = () => {
             </SectionDescription>
             <div className="core-tools-wrapper">
               {coreTools.map((card) => (
-                <ExpertiseCard {...card} />
+                <ExpertiseCard key={card.title} {...card} />
               ))}
             </div>
 
