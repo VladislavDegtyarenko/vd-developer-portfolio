@@ -1,3 +1,56 @@
+export const coreTools = [
+  { icon: "React", title: "React" },
+  { icon: "Next", title: "Next.js" },
+  { icon: "Redux", title: "Redux" },
+  { icon: "TS", title: "Typescript" },
+  { icon: "HTML", title: "HTML" },
+  { icon: "CSS", title: "CSS" },
+  // { icon: "Jest", title: "Jest" },
+];
+
+export const expertiseTable = {
+  "Core Frontend Tools": [
+    "React",
+    "Next.js",
+    "Typescript",
+    "Javascript",
+    "HTML",
+    "CSS",
+    "Firebase",
+  ],
+  "State Managers": ["Redux", "MobX", "Zustand", "Context API"],
+  "React Ecosystem Libraries": [
+    "Axios",
+    "SWR",
+    "React Hook Form",
+    "React Router",
+    "Tanstack Router",
+    "Tanstack Query",
+  ],
+  CSS: ["Tailwind", "SASS", "Emotion/Styled Components", "CSS Modules"],
+  UI: [
+    "Material UI",
+    "shadcn/ui",
+    "Bootstrap",
+    "FluentUI",
+    "Pixel Perfect",
+    "Adaptive & Responsive",
+  ],
+  Animations: ["Framer Motion", "GSAP"],
+  "Bundling Tools": ["Webpack", "Vite", "Rollup", "Parcel", "Gulp"],
+  "Code Quality": [
+    "ESLint",
+    "Prettier",
+    "BEM",
+    "Chrome Developer Tools",
+    "React Profiler",
+    "Git",
+    "Core Web Vitals",
+  ],
+
+  "Unit Testing": ["Jest", "React Testing Library"],
+};
+
 const expertiseData = [
   {
     groupTitle: "Core Frontend Tools",

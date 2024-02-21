@@ -59,7 +59,7 @@ const Experience = () => {
               ))}
             </div>
 
-            <div className="subtitle">
+            {/* <div className="subtitle">
               <H4>Non-related experience</H4>
             </div>
 
@@ -72,7 +72,7 @@ const Experience = () => {
                   {...experience}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         </Container>
       </StyledExperience>
