@@ -46,8 +46,8 @@ export const mainExperienceData = [
     company: "Astound Commerce",
     chips: ["Ukraine", "Remote", "Full-time"],
     description: `
-      Collaborated with an international team on an ongoing multi-page store project  for a prominent global brand.
-      Utilized cutting-edge technologies including React, Next.js, Tailwind CSS, GraphQL, and TypeScript to enhance and extend the stores functionality, resulting in a seamless and engaging user experience.
+      Collaborated with an international team on a multi-page store project.
+      Utilized React, Next.js, Tailwind CSS, GraphQL, and TypeScript to enhance and extend the stores functionality, resulting in a seamless and engaging user experience.
       Expanded expertise in Jest and React Testing Library for unit testing custom hooks.
       Received positive feedback for delivering fast, clean, and accessible web experiences.
     `,
