@@ -79,30 +79,32 @@ const About = () => {
             <H4>Full list of tools and technologies I use</H4>
 
             <table className="expertise-table">
-              {Object.keys(expertiseTable).map((rowKey) => {
-                const rowValue =
-                  expertiseTable[rowKey as keyof typeof expertiseTable];
+              <tbody>
+                {Object.keys(expertiseTable).map((rowKey) => {
+                  const rowValue =
+                    expertiseTable[rowKey as keyof typeof expertiseTable];
 
-                return (
-                  <tr key={rowKey}>
-                    <th>
-                      <P2>
-                        <strong>{rowKey}</strong>
-                      </P2>
-                    </th>
-                    {/* <td>{rowValue.join(", ")}</td> */}
-                    <td>
-                      <ul>
-                        {rowValue.map((v) => (
-                          <li key={v}>
-                            <P2>{v}</P2>
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={rowKey}>
+                      <th>
+                        <P2>
+                          <strong>{rowKey}</strong>
+                        </P2>
+                      </th>
+                      {/* <td>{rowValue.join(", ")}</td> */}
+                      <td>
+                        <ul>
+                          {rowValue.map((v) => (
+                            <li key={v}>
+                              <P2>{v}</P2>
+                            </li>
+                          ))}
+                        </ul>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           </div>
         </Container>
