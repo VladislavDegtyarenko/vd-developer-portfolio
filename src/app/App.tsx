@@ -18,7 +18,6 @@ import Reviews from "@/sections//05_Reviews";
 import Contact from "@/sections//06_Contact";
 
 // UI (Components)
-import BackToTopBtn from "@/components/BackToTopBtn";
 import MobileMenu from "@/sections/MobileMenu";
 
 const ProjectModal = dynamic(() => import("@/components/ProjectModal"), {
@@ -45,8 +44,6 @@ const App = () => {
           <ProjectModal projectSrc={projectSrc} closeModal={closeModal} />
         )}
       </AnimatePresence>
-
-      <BackToTopBtn />
     </>
   );
 };

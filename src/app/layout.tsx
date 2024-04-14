@@ -22,6 +22,7 @@ import GlobalStyle from "./GlobalStyle";
 import PageWrapper from "@/components/PageWrapper";
 import Header from "@/sections/Header";
 import Footer from "@/sections/Footer";
+import BackToTopBtn from "@/components/BackToTopBtn";
 
 // Metadata
 export const metadata = {
@@ -54,6 +55,8 @@ export default function RootLayout({
                       {children}
 
                       <Footer />
+
+                      <BackToTopBtn />
                     </PageWrapper>
                     <Analytics />
                   </StyledThemeProvider>
