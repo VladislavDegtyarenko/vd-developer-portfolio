@@ -11,6 +11,9 @@ const Styled = styled.div`
   padding-top: 6rem;
   /* background-color: ${({ theme }) => theme.cardBg}; */
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .inner {
     display: flex;
