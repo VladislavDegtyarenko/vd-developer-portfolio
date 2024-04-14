@@ -7,6 +7,7 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlock } from "@9gustin/react-notion-render";
 import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
+import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
 const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
@@ -42,24 +43,37 @@ export const getPosts = async () => {
 
   const results = res.results as BlogPostResponse[];
 
-  const posts: BlogPost[] = results.map((post) => {
-    const id = post.id;
-    const title = post.properties.Title.title[0].plain_text;
-    const description = post.properties.Description.rich_text[0]?.plain_text;
-    const slug = post.properties.Slug?.rich_text[0].plain_text;
-    const date = post.properties.Date.date?.start;
-    const tags = post.properties.Tags.multi_select.map(({ name }) => name);
+  const posts = await Promise.all(
+    results.map(async (post) => {
+      const id = post.id;
+      const title = post.properties.Title.title[0].plain_text;
+      const description = post.properties.Description.rich_text[0]?.plain_text;
+      const slug = post.properties.Slug?.rich_text[0].plain_text;
+      const date = post.properties.Date.date?.start;
+      const tags = post.properties.Tags.multi_select.map(({ name }) => name);
 
-    // Handles both external and file images
-    const coverUrl =
-      post.cover?.type === "file"
-        ? post.cover.file.url
-        : post.cover?.type === "external"
-        ? post.cover.external.url
-        : null;
+      // Handles both external and file images
+      const coverUrl =
+        post.cover?.type === "file"
+          ? post.cover.file.url
+          : post.cover?.type === "external"
+          ? post.cover.external.url
+          : null;
 
-    return { id, title, description, slug, date, tags, coverUrl };
-  });
+      const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+
+      return {
+        id,
+        title,
+        description,
+        slug,
+        date,
+        tags,
+        coverUrl,
+        blurDataUrl,
+      };
+    })
+  );
 
   return posts;
 };
@@ -67,7 +81,7 @@ export const getPosts = async () => {
 export const getPostSlugs = async () => {
   const posts = await getPosts();
 
-  const slugs = posts.map(({ slug }) => slug);
+  const slugs = posts.map(async ({ slug }) => slug);
 
   return slugs;
 };
@@ -85,8 +99,12 @@ export const getPostBySlug = async (slug: string) => {
 
   const blocks = res.results as NotionBlock[];
 
+  const { coverUrl } = postBySlug;
+  const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+
   const post = {
     ...postBySlug,
+    blurDataUrl,
     readingTime: calcBlocksReadingTime(res.results as BlockObjectResponse[]),
     blocks,
   } as BlogPostWithBlocks;

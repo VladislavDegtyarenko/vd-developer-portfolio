@@ -128,6 +128,7 @@ export type BlogPost = {
   date?: string;
   // published: boolean;
   coverUrl: string | null;
+  blurDataUrl: string | null;
   readingTime?: number;
 };
 

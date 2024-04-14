@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import { H2, P1 } from "@/components/Text";
 import Image from "next/image";
+import HeroBg from "/public/assets/blog/FullSizeRender2.jpg";
 
 const Styled = styled.div`
   padding-top: 6rem;
@@ -46,12 +47,7 @@ const BlogHero = () => {
     <Styled>
       <Container>
         <div className="inner">
-          <Image
-            className="bg"
-            src="/assets/blog/FullSizeRender2.jpg"
-            alt=""
-            fill
-          />
+          <Image className="bg" src={HeroBg} placeholder="blur" alt="" fill />
           <div className="heading">
             <H2>Blog</H2>
             <P1>

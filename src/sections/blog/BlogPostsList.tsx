@@ -37,7 +37,16 @@ const BlogPostsList = ({ posts }: { posts: BlogPost[] }) => {
           {posts && posts.length > 0 ? (
             posts.map(
               (
-                { id, title, description, slug, tags, date, coverUrl },
+                {
+                  id,
+                  title,
+                  description,
+                  slug,
+                  tags,
+                  date,
+                  coverUrl,
+                  blurDataUrl,
+                },
                 index
               ) => {
                 return (
@@ -50,6 +59,7 @@ const BlogPostsList = ({ posts }: { posts: BlogPost[] }) => {
                         date={date}
                         slug={slug}
                         coverUrl={coverUrl}
+                        blurDataUrl={blurDataUrl}
                         tags={tags}
                       />
                     </li>

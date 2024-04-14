@@ -1,12 +1,17 @@
 "use client";
 
+// Core
 import { styled } from "styled-components";
-import { H4, P1, P2 } from "../Text";
-import Link, { LinkProps } from "next/link";
-import { formatDate } from "@/utils/formatDate";
 import Image from "next/image";
-import Logo from "public/assets/Icons/LOGO";
+import Link from "next/link";
+
+// Utils
+import { formatDate } from "@/utils/formatDate";
+
+// UI
 import { BlogPost } from "@/types/notion";
+import { H4, P1, P2 } from "../Text";
+import Logo from "public/assets/Icons/LOGO";
 
 const Styled = styled(Link)`
   display: grid;
@@ -58,14 +63,22 @@ const BlogPostCard = ({
   date,
   description,
   slug,
-  coverUrl,
   tags,
+  coverUrl,
+  blurDataUrl,
 }: BlogPostCardProps) => {
   return (
     <Styled href={`/blog/${slug}`}>
       <div className="cover">
         {coverUrl ? (
-          <Image src={coverUrl} alt="" sizes="512px" fill />
+          <Image
+            src={coverUrl}
+            blurDataURL={blurDataUrl || ""}
+            placeholder={blurDataUrl ? "blur" : "empty"}
+            alt=""
+            sizes="512px"
+            fill
+          />
         ) : (
           <Logo />
         )}
