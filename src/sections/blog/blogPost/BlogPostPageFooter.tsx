@@ -19,7 +19,7 @@ const Styled = styled.div`
   .back-to-blog-btn {
     margin-top: 2rem;
     padding: 0.5rem 1rem;
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.fg};
     text-decoration: none;
     border-radius: 0.5rem;
     display: inline-flex;
