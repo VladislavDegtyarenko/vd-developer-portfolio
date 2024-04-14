@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 import { AnimatePresence } from "framer-motion";
 
 // Contexts
-import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ProjectContext from "@/contexts/ProjectContext";
 
 // Sections
@@ -17,15 +16,11 @@ import Projects from "@/sections//04_Projects";
 import Reviews from "@/sections//05_Reviews";
 import Contact from "@/sections//06_Contact";
 
-// UI (Components)
-import MobileMenu from "@/sections/MobileMenu";
-
 const ProjectModal = dynamic(() => import("@/components/ProjectModal"), {
   ssr: false,
 });
 
 const App = () => {
-  const { menuIsOpen } = useContext(MobileMenuContext);
   const { projectSrc, closeModal } = useContext(ProjectContext);
 
   return (
@@ -36,8 +31,6 @@ const App = () => {
       <Projects />
       <Reviews />
       <Contact />
-
-      <AnimatePresence>{menuIsOpen && <MobileMenu />}</AnimatePresence>
 
       <AnimatePresence>
         {projectSrc && (
