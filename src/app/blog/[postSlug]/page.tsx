@@ -1,3 +1,4 @@
+import { redirect, notFound } from "next/navigation";
 import { getPostBySlug, getPostSlugs } from "@/lib/notion";
 
 import BlogPostPageWrapper from "@/sections/blog/blogPost/BlogPostPageWrapper";
@@ -17,7 +18,13 @@ export async function generateStaticParams() {
 const BlogPostPage = async ({ params }: { params: { postSlug: string } }) => {
   const { postSlug } = params;
 
-  const { blocks, ...postInfo } = await getPostBySlug(postSlug);
+  const post = await getPostBySlug(postSlug);
+
+  if (post === null) {
+    notFound();
+  }
+
+  const { blocks, ...postInfo } = post;
 
   return (
     <BlogPostPageWrapper>

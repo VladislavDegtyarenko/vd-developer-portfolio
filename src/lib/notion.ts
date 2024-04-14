@@ -89,7 +89,11 @@ export const getPostSlugs = async () => {
 export const getPostBySlug = async (slug: string) => {
   const posts = await getPosts();
 
-  const postBySlug = posts.filter((post) => post.slug === slug)[0];
+  const postBySlug = posts.find((post) => post.slug === slug);
+
+  if (!postBySlug) {
+    return null;
+  }
 
   const postId = postBySlug.id;
 
