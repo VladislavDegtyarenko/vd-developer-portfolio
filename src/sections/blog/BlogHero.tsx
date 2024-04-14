@@ -50,7 +50,15 @@ const BlogHero = () => {
     <Styled>
       <Container>
         <div className="inner">
-          <Image className="bg" src={HeroBg} placeholder="blur" alt="" fill />
+          <Image
+            className="bg"
+            src={HeroBg}
+            placeholder="blur"
+            quality={85}
+            sizes="(min-width: 1920px) 1920px, (min-width: 1200px) 1200px, (min-width: 992px) 992px, (min-width: 575px) 575px, 360px"
+            alt=""
+            fill
+          />
           <div className="heading">
             <H2>Blog</H2>
             <P1>

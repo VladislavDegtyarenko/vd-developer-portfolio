@@ -48,6 +48,7 @@ const BlogPostPageHeading = ({
             src={coverUrl}
             placeholder={blurDataUrl ? "blur" : "empty"}
             blurDataURL={blurDataUrl || ""}
+            sizes="640px"
             alt=""
             fill
           />

@@ -76,7 +76,8 @@ const BlogPostCard = ({
             blurDataURL={blurDataUrl || ""}
             placeholder={blurDataUrl ? "blur" : "empty"}
             alt=""
-            sizes="512px"
+            sizes="256px"
+            quality={90}
             fill
           />
         ) : (
