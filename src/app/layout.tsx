@@ -3,7 +3,11 @@ import { Analytics } from "@vercel/analytics/react";
 
 // Fonts
 import { Poppins } from "next/font/google";
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+});
 
 // Contexts
 import { DarkModeContextProvider } from "@/contexts/DarkModeContext";
@@ -15,6 +19,9 @@ import { ProjectContextProvider } from "@/contexts/ProjectContext";
 import StyledComponentsRegistry from "@/lib/registry";
 import StyledThemeProvider from "./StyledThemeProvider";
 import GlobalStyle from "./GlobalStyle";
+import PageWrapper from "@/components/PageWrapper";
+import Header from "@/sections/Header";
+import Footer from "@/sections/Footer";
 
 // Metadata
 export const metadata = {
@@ -41,7 +48,13 @@ export default function RootLayout({
                 <ProjectContextProvider>
                   <StyledThemeProvider>
                     <GlobalStyle />
-                    {children}
+                    <PageWrapper>
+                      <Header />
+
+                      {children}
+
+                      <Footer />
+                    </PageWrapper>
                     <Analytics />
                   </StyledThemeProvider>
                 </ProjectContextProvider>

@@ -1,10 +1,11 @@
 "use client";
 
 import styled from "styled-components";
+import Link from "next/link";
 import { MenuLinksProps, StyledLinksProps } from "../types";
 import { H3, P1 } from "./Text";
 
-const StyledLinks = styled.ul<StyledLinksProps>`
+const StyledNav = styled.ul<StyledLinksProps>`
   display: grid;
   grid-auto-flow: ${({ $isMobile }) => ($isMobile ? "row" : "column")};
   align-items: ${({ $isMobile }) => ($isMobile ? "center" : "stretch")};
@@ -44,42 +45,51 @@ const StyledLinks = styled.ul<StyledLinksProps>`
   }
 `;
 
-const MenuLinks = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
-  const CustomLink = isMobile ? H3 : P1;
+const navLinks = [
+  {
+    href: "/#home",
+    text: "Home",
+  },
+  // {
+  //   href: "/#about",
+  //   text: "About",
+  // },
+  // {
+  //   href: "/#projects",
+  //   text: "Projects",
+  // },
+  // {
+  //   href: "/#reviews",
+  //   text: "Reviews",
+  // },
+  {
+    href: "/#contact",
+    text: "Contact",
+  },
+  {
+    href: "/blog",
+    text: "Blog",
+  },
+];
+
+const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
+  const LinkText = isMobile ? H3 : P1;
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
   };
 
   return (
-    <StyledLinks $isMobile={isMobile}>
-      <li>
-        <CustomLink as="a" href="#home" onClick={handleClick}>
-          Home
-        </CustomLink>
-      </li>
-      <li>
-        <CustomLink as="a" href="#about" onClick={handleClick}>
-          About
-        </CustomLink>
-      </li>
-      <li>
-        <CustomLink as="a" href="#projects" onClick={handleClick}>
-          Projects
-        </CustomLink>
-      </li>
-      <li>
-        <CustomLink as="a" href="#reviews" onClick={handleClick}>
-          Reviews
-        </CustomLink>
-      </li>
-      <li>
-        <CustomLink as="a" href="#contact" onClick={handleClick}>
-          Contact
-        </CustomLink>
-      </li>
-    </StyledLinks>
+    <StyledNav $isMobile={isMobile}>
+      {navLinks.map(({ href, text }) => (
+        <li key={text}>
+          <Link href={href} onClick={handleClick}>
+            <LinkText as="span">{text}</LinkText>
+          </Link>
+        </li>
+      ))}
+    </StyledNav>
   );
 };
 
-export default MenuLinks;
+export default Nav;

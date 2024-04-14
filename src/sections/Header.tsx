@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  memo,
-  useCallback,
-} from "react";
+import { useContext, memo } from "react";
 import styled from "styled-components";
 import useScrollDelta from "@/hooks/useScrollDelta";
 
@@ -15,7 +8,7 @@ import useScrollDelta from "@/hooks/useScrollDelta";
 import Container from "@/components/Container";
 import Logo from "public/assets/Icons/LOGO";
 import BurgerButton from "@/components/BurgerButton";
-import MenuLinks from "@/components/MenuLinks";
+import Nav from "@/components/Nav";
 import DarkModeToggle from "@/components/DarkModeToggle";
 
 // Contexts
@@ -115,7 +108,7 @@ const Header = () => {
         <nav>
           <a
             className="logo"
-            href="#home"
+            href="/#home"
             onClick={() => {
               if (menuIsOpen) {
                 toggleMenu();
@@ -125,7 +118,7 @@ const Header = () => {
           >
             <Logo />
           </a>
-          <MenuLinks />
+          <Nav />
           <DarkModeToggle
             isDarkMode={isDarkMode}
             toggleDarkMode={toggleDarkMode}

@@ -1,0 +1,95 @@
+// Notion
+import { Client } from "@notionhq/client";
+
+// TS
+import { BlogPost, BlogPostResponse, BlogPostWithBlocks } from "@/types/notion";
+import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { NotionBlock } from "@9gustin/react-notion-render";
+import calcReadingTime from "@/utils/calcReadingTime";
+import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
+
+const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
+const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
+
+const notion = new Client({ auth: NOTION_TOKEN });
+
+export const getPosts = async () => {
+  if (!NOTION_DATABASE_ID) {
+    throw new Error("NOTION_DATABASE_ID is not set in .env file");
+  }
+
+  const res = await notion.databases.query({
+    database_id: NOTION_DATABASE_ID,
+    filter: {
+      and: [
+        {
+          property: "Published",
+          checkbox: { equals: true },
+        },
+        {
+          property: "Slug",
+          rich_text: { is_not_empty: true },
+        },
+      ],
+    },
+    sorts: [
+      {
+        property: "Date",
+        direction: "descending",
+      },
+    ],
+  });
+
+  const results = res.results as BlogPostResponse[];
+
+  const posts: BlogPost[] = results.map((post) => {
+    const id = post.id;
+    const title = post.properties.Title.title[0].plain_text;
+    const description = post.properties.Description.rich_text[0]?.plain_text;
+    const slug = post.properties.Slug?.rich_text[0].plain_text;
+    const date = post.properties.Date.date?.start;
+    const tags = post.properties.Tags.multi_select.map(({ name }) => name);
+
+    // Handles both external and file images
+    const coverUrl =
+      post.cover?.type === "file"
+        ? post.cover.file.url
+        : post.cover?.type === "external"
+        ? post.cover.external.url
+        : null;
+
+    return { id, title, description, slug, date, tags, coverUrl };
+  });
+
+  return posts;
+};
+
+export const getPostSlugs = async () => {
+  const posts = await getPosts();
+
+  const slugs = posts.map(({ slug }) => slug);
+
+  return slugs;
+};
+
+export const getPostBySlug = async (slug: string) => {
+  const posts = await getPosts();
+
+  const postBySlug = posts.filter((post) => post.slug === slug)[0];
+
+  const postId = postBySlug.id;
+
+  const res = await notion.blocks.children.list({
+    block_id: postId,
+  });
+
+  const blocks = res.results as NotionBlock[];
+
+  const post = {
+    ...postBySlug,
+    readingTime: calcBlocksReadingTime(res.results as BlockObjectResponse[]),
+    blocks,
+  } as BlogPostWithBlocks;
+
+  return post;
+};

@@ -4,7 +4,7 @@ import { useContext, memo } from "react";
 import styled from "styled-components";
 
 import Container from "@/components/Container";
-import MenuLinks from "@/components/MenuLinks";
+import Nav from "@/components/Nav";
 
 import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ModalWrapper from "@/components/ModalWrapper";
@@ -21,7 +21,7 @@ const MobileMenu = () => {
   return (
     <StyledWrapper closeModal={toggleMenu}>
       <Container>
-        <MenuLinks isMobile={true} toggleMenu={toggleMenu} />
+        <Nav isMobile={true} toggleMenu={toggleMenu} />
       </Container>
     </StyledWrapper>
   );
