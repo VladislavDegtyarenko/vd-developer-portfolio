@@ -26,6 +26,18 @@ export const H4 = styled.h4`
   line-height: 40px;
 `;
 
+export const H5 = styled.h5`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+`;
+
+export const H6 = styled.h6`
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+`;
+
 export const P1 = styled.p`
   font-weight: 400;
   font-size: 24px;

@@ -1,13 +1,10 @@
 "use client";
 
 import styled from "styled-components";
+import Divider from "./Divider";
 
-const StyledDivider = styled.hr`
+const SectionDivider = styled(Divider)`
   width: calc(100% - 160px);
-  margin: 0 auto;
-  border: none;
-  height: 2px;
-  background-color: ${({ theme }) => theme.cardBg};
 `;
 
-export default StyledDivider;
+export default SectionDivider;

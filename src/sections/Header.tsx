@@ -1,22 +1,17 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  memo,
-  useCallback,
-} from "react";
+import { useContext, memo } from "react";
 import styled from "styled-components";
+import { AnimatePresence } from "framer-motion";
 import useScrollDelta from "@/hooks/useScrollDelta";
 
 // UI
 import Container from "@/components/Container";
 import Logo from "public/assets/Icons/LOGO";
 import BurgerButton from "@/components/BurgerButton";
-import MenuLinks from "@/components/MenuLinks";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import Nav from "@/components/Nav";
+import MobileMenu from "./MobileMenu";
 
 // Contexts
 import DarkModeContext from "@/contexts/DarkModeContext";
@@ -107,33 +102,37 @@ const Header = () => {
   const { scrolledUp, scrolledDown } = useScrollDelta();
 
   return (
-    <StyledHeader
-      $scrollbarCompensation={scrollbarCompensation}
-      $scrolledDown={scrolledDown}
-    >
-      <Container>
-        <nav>
-          <a
-            className="logo"
-            href="#home"
-            onClick={() => {
-              if (menuIsOpen) {
-                toggleMenu();
-              }
-            }}
-            aria-label="logo, click to scroll to top"
-          >
-            <Logo />
-          </a>
-          <MenuLinks />
-          <DarkModeToggle
-            isDarkMode={isDarkMode}
-            toggleDarkMode={toggleDarkMode}
-          />
-          <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
-        </nav>
-      </Container>
-    </StyledHeader>
+    <>
+      <StyledHeader
+        $scrollbarCompensation={scrollbarCompensation}
+        $scrolledDown={scrolledDown}
+      >
+        <Container>
+          <nav>
+            <a
+              className="logo"
+              href="/#home"
+              onClick={() => {
+                if (menuIsOpen) {
+                  toggleMenu();
+                }
+              }}
+              aria-label="logo, click to scroll to top"
+            >
+              <Logo />
+            </a>
+            <Nav />
+            <DarkModeToggle
+              isDarkMode={isDarkMode}
+              toggleDarkMode={toggleDarkMode}
+            />
+            <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
+          </nav>
+        </Container>
+      </StyledHeader>
+
+      <AnimatePresence>{menuIsOpen && <MobileMenu />}</AnimatePresence>
+    </>
   );
 };
 
