@@ -54,8 +54,8 @@ const BlogHero = () => {
             className="bg"
             src={HeroBg}
             placeholder="blur"
-            quality={85}
-            sizes="(min-width: 1920px) 1920px, (min-width: 1200px) 1200px, (min-width: 992px) 992px, (min-width: 575px) 575px, 360px"
+            quality={60}
+            sizes="(min-width: 1200px) 1200px, (min-width: 768px) 768px, 480px"
             alt=""
             fill
           />
