@@ -1,10 +1,11 @@
 "use client";
 
 import styled from "styled-components";
+import { useTheme } from "next-themes";
 
 import SunIcon from "public/assets/Icons/Sun";
 import MoonIcon from "public/assets/Icons/Moon";
-import { DarkModeToggleProps } from "../types";
+import useMounted from "@/hooks/useMounted";
 
 const StyledToggle = styled.label`
   position: relative;
@@ -87,10 +88,26 @@ const StyledToggle = styled.label`
   }
 `;
 
-function DarkModeToggle({ isDarkMode, toggleDarkMode }: DarkModeToggleProps) {
+function DarkModeToggle() {
+  const isMounted = useMounted();
+  const { resolvedTheme, setTheme } = useTheme();
+
+  // If not mounted, render a skeleton
+  if (!isMounted) return <StyledToggle></StyledToggle>;
+
   return (
-    <StyledToggle aria-label={`switch to ${isDarkMode ? "light" : "dark"} theme`}>
-      <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
+    <StyledToggle
+      aria-label={`switch to ${
+        resolvedTheme === "light" ? "dark" : "light"
+      } theme`}
+    >
+      <input
+        type="checkbox"
+        checked={resolvedTheme === "dark"}
+        onChange={() => {
+          setTheme(resolvedTheme === "light" ? "dark" : "light");
+        }}
+      />
       <span className="slider"></span>
       <MoonIcon />
       <SunIcon />

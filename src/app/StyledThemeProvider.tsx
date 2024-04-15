@@ -1,10 +1,9 @@
 "use client";
 
-import { useContext } from "react";
-import DarkModeContext from "@/contexts/DarkModeContext";
-
+import { useTheme } from "next-themes";
 import { ThemeProvider } from "styled-components";
 import { StyledThemeProviderProps } from "@/types";
+import useMounted from "@/hooks/useMounted";
 
 const darkTheme = {
   bg: "#050505",
@@ -33,10 +32,17 @@ const lightTheme = {
 };
 
 function StyledThemeProvider({ children }: StyledThemeProviderProps) {
-  const { isDarkMode } = useContext(DarkModeContext);
+  const isMounted = useMounted();
+  const { resolvedTheme } = useTheme();
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>
+    <ThemeProvider theme={resolvedTheme === "dark" ? darkTheme : lightTheme}>
+      {children}
+    </ThemeProvider>
   );
 }
 
