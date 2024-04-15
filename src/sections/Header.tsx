@@ -14,7 +14,6 @@ import Nav from "@/components/Nav";
 import MobileMenu from "./MobileMenu";
 
 // Contexts
-import DarkModeContext from "@/contexts/DarkModeContext";
 import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
 
@@ -96,7 +95,6 @@ const StyledHeader = styled.header<{
 const Header = () => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
-  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   // SCROLL
   const { scrolledUp, scrolledDown } = useScrollDelta();
@@ -122,10 +120,7 @@ const Header = () => {
               <Logo />
             </a>
             <Nav />
-            <DarkModeToggle
-              isDarkMode={isDarkMode}
-              toggleDarkMode={toggleDarkMode}
-            />
+            <DarkModeToggle />
             <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
           </nav>
         </Container>

@@ -9,20 +9,12 @@ const poppins = Poppins({
   style: ["normal", "italic"],
 });
 
-// Contexts
-import { DarkModeContextProvider } from "@/contexts/DarkModeContext";
-import { ScrollLockContextProvider } from "@/contexts/ScrollLockContext";
-import { MobileMenuContextProvider } from "@/contexts/MobileMenuContext";
-import { ProjectContextProvider } from "@/contexts/ProjectContext";
-
-// Styled-components config
-import StyledComponentsRegistry from "@/lib/registry";
-import StyledThemeProvider from "./StyledThemeProvider";
 import GlobalStyle from "./GlobalStyle";
 import PageWrapper from "@/components/PageWrapper";
 import Header from "@/sections/Header";
 import Footer from "@/sections/Footer";
 import BackToTopBtn from "@/components/BackToTopBtn";
+import Providers from "./Providers";
 
 // Metadata
 export const metadata = {
@@ -40,31 +32,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={poppins.className}>
-        <StyledComponentsRegistry>
-          <DarkModeContextProvider>
-            <ScrollLockContextProvider>
-              <MobileMenuContextProvider>
-                <ProjectContextProvider>
-                  <StyledThemeProvider>
-                    <GlobalStyle />
-                    <PageWrapper>
-                      <Header />
+        <Providers>
+          <GlobalStyle />
+          <PageWrapper>
+            <Header />
 
-                      {children}
+            {children}
 
-                      <Footer />
+            <Footer />
 
-                      <BackToTopBtn />
-                    </PageWrapper>
-                    <Analytics />
-                  </StyledThemeProvider>
-                </ProjectContextProvider>
-              </MobileMenuContextProvider>
-            </ScrollLockContextProvider>
-          </DarkModeContextProvider>
-        </StyledComponentsRegistry>
+            <BackToTopBtn />
+          </PageWrapper>
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );

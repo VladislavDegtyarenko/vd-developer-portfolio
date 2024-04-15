@@ -36,11 +36,6 @@ export interface StyledExpCardProps {
   $secondary?: boolean;
 }
 
-export interface DarkModeToggleProps {
-  isDarkMode: IsDarkMode;
-  toggleDarkMode: ToggleDarkMode;
-}
-
 export interface NextjsImageAssetProps {
   src: string;
   height: number;
