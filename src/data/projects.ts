@@ -12,6 +12,7 @@ import Game2048Img from "/public/assets/projects/2048 Game.jpg";
 import AirlogixImg from "/public/assets/projects/Airlogix.png";
 import ReactGPT from "/public/assets/projects/ReactGPT.png";
 import ExpenseTracker from "/public/assets/projects/Expense Tracker.png";
+import ReactShadcnTodoImg from "/public/assets/projects/react-shadcn-todo-app.jpg";
 
 import { Project } from "../types";
 
@@ -20,14 +21,22 @@ const projectsData: Project[] = [
     img: AirlogixImg,
     title: "Airlogix.io",
     description:
-      "Next.js • next-intl • Typescript • styled-components • Sendgrid API • Vercel",
+      "Multi-page website for Ukrainian drone manufacturer - Airlogix. Techs: Next.js, next-intl, Typescript, styled-components, Sendgrid API, Vercel",
 
     previewLink: "https://www.airlogix.io/",
   },
   {
+    img: ReactShadcnTodoImg,
+    title: "Todo App",
+    description: "React.js • Redux • Typescript • shadcn/ui • Tailwind • Vite",
+    previewLink: "https://vladislavdegtyarenko.github.io/todo-app/",
+    codeLink: "https://github.com/VladislavDegtyarenko/todo-app",
+  },
+  {
     img: ExpenseTracker,
     title: "Expense Tracker",
-    description: "React • MUI • Typescript • Firebase • Parcel",
+    description:
+      "Track your incomes/expenses from any device using this React/Firebase expense tracker! Featuring Typescript, MUI and Parcel",
     previewLink: "https://expense-tracker-d93df.web.app/",
     codeLink:
       "https://github.com/VladislavDegtyarenko/expense-tracker-firebase-react",
@@ -35,7 +44,8 @@ const projectsData: Project[] = [
   {
     img: ReactGPT,
     title: "ReactGPT",
-    description: "React • OpenAI API • Typescript • snadcn/ui • Vite",
+    description:
+      "I built my own ChatGPT with React/Typescript, featuring slick design (thanks to the shadcn/ui library), light/dark theme and ability to chose GPT version (3.5 or 4). Bundled with Vite",
     previewLink: "https://vladislavdegtyarenko.github.io/react-gpt/",
   },
   // {
@@ -47,7 +57,8 @@ const projectsData: Project[] = [
   {
     img: PortfolioImg,
     title: "Portfolio Website",
-    description: "Next.js • Typescript • Framer Motion • Sendgrid API",
+    description:
+      "Vladyslav's portfolio website designed by himself and developed using Next.js, Typescript and Framer Motion. Featuring a brand new Notion API-driven blog and contact form that handles requests with Sendgrid API",
     // previewLink: "https://vd-developer.vercel.app/",
     codeLink: "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
   },
