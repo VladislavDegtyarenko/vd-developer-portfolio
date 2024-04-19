@@ -3,7 +3,10 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { MenuLinksProps, StyledLinksProps } from "../types";
+
+// UI
 import { H3, P1 } from "./Text";
+import ExternalIcon from "./icons/ExternalIcon";
 
 const StyledNav = styled.ul<StyledLinksProps>`
   display: grid;
@@ -41,6 +44,12 @@ const StyledNav = styled.ul<StyledLinksProps>`
     }
     &:hover:after {
       width: 100%;
+    }
+
+    svg,
+    img {
+      margin-left: 0.25rem;
+      color: currentColor;
     }
   }
 `;
@@ -95,6 +104,7 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
             onClick={handleClick}
           >
             <LinkText as="span">{text}</LinkText>
+            {isExternal && <ExternalIcon />}
           </Link>
         </li>
       ))}
