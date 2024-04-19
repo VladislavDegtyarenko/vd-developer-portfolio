@@ -3,8 +3,7 @@ import BlogHero from "@/sections/blog/BlogHero";
 import BlogPostsList from "@/sections/blog/BlogPostsList";
 
 // export const revalidate = 259200; // 3 days
-// export const revalidate = 3600; // 1 hour
-export const revalidate = 30; // 30 sec
+export const revalidate = 3600; // 1 hour
 
 async function Posts() {
   const posts = await getPosts();
