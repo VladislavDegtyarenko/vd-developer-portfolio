@@ -49,6 +49,10 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
     &__heading {
       p {
         color: ${({ theme }) => theme.grey};
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
     &__main {
@@ -74,10 +78,6 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
       > * {
         position: relative;
       }
-    }
-    &__descr {
-      margin-top: 16px;
-      color: ${({ theme }) => theme.grey};
     }
     &__buttons {
       display: flex;
