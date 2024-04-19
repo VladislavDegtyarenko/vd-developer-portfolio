@@ -16,6 +16,7 @@ import MobileMenu from "./MobileMenu";
 // Contexts
 import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
+import Link from "next/link";
 
 const StyledHeader = styled.header<{
   $scrollbarCompensation: number | null;
@@ -107,9 +108,10 @@ const Header = () => {
       >
         <Container>
           <nav>
-            <a
+            <Link
+              prefetch={false}
               className="logo"
-              href="/#home"
+              href="/"
               onClick={() => {
                 if (menuIsOpen) {
                   toggleMenu();
@@ -118,7 +120,7 @@ const Header = () => {
               aria-label="logo, click to scroll to top"
             >
               <Logo />
-            </a>
+            </Link>
             <Nav />
             <DarkModeToggle />
             <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />

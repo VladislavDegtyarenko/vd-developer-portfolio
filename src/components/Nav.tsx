@@ -47,7 +47,7 @@ const StyledNav = styled.ul<StyledLinksProps>`
 
 const navLinks = [
   {
-    href: "/#home",
+    href: "/",
     text: "Home",
   },
   // {
@@ -70,6 +70,11 @@ const navLinks = [
     href: "/blog",
     text: "Blog",
   },
+  {
+    href: "https://www.youtube.com/channel/UCr1JTjRb_IrJ0OkTFwT3xug",
+    text: "YouTube",
+    isExternal: true,
+  },
 ];
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
@@ -81,9 +86,14 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
 
   return (
     <StyledNav $isMobile={isMobile}>
-      {navLinks.map(({ href, text }) => (
+      {navLinks.map(({ href, text, isExternal }) => (
         <li key={text}>
-          <Link href={href} onClick={handleClick}>
+          <Link
+            href={href}
+            prefetch={false}
+            target={isExternal ? "_blank" : "_self"}
+            onClick={handleClick}
+          >
             <LinkText as="span">{text}</LinkText>
           </Link>
         </li>
