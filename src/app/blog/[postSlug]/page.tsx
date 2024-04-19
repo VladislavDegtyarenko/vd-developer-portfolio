@@ -7,7 +7,8 @@ import NotionBlocksRenderer from "@/components/Blog/BlogPost/NotionBlocksRendere
 import BlogPostPageFooter from "@/sections/blog/blogPost/BlogPostPageFooter";
 
 // export const revalidate = 259200; // 3 days
-export const revalidate = 3600; // 1 hour
+// export const revalidate = 3600; // 1 hour
+export const revalidate = 30; // 30 sec
 
 export async function generateStaticParams() {
   const slugs = getPostSlugs();
