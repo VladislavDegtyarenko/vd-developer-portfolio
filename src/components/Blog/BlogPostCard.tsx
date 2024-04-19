@@ -79,6 +79,7 @@ const BlogPostCard = ({
             sizes="256px"
             quality={90}
             fill
+            unoptimized
           />
         ) : (
           <Logo />
