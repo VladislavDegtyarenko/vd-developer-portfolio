@@ -37,21 +37,13 @@ const BlogPostPageHeading = ({
   date,
   tags,
   coverUrl,
-  blurDataUrl,
   readingTime,
 }: BlogPost) => {
   return (
     <Styled>
       {coverUrl && (
         <div className="cover">
-          <Image
-            src={coverUrl}
-            placeholder={blurDataUrl ? "blur" : "empty"}
-            blurDataURL={blurDataUrl || ""}
-            sizes="640px"
-            alt=""
-            fill
-          />
+          <Image src={coverUrl} sizes="640px" alt="" fill />
         </div>
       )}
       <H2 className="title">{title}</H2>

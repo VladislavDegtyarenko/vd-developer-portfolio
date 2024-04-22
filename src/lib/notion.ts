@@ -60,7 +60,7 @@ export const getPosts = async () => {
           ? post.cover.external.url
           : null;
 
-      const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+      // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
 
       return {
         id,
@@ -70,7 +70,7 @@ export const getPosts = async () => {
         date,
         tags,
         coverUrl,
-        blurDataUrl,
+        // blurDataUrl,
       };
     })
   );
@@ -103,12 +103,12 @@ export const getPostBySlug = async (slug: string) => {
 
   const blocks = res.results as NotionBlock[];
 
-  const { coverUrl } = postBySlug;
-  const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+  // const { coverUrl } = postBySlug;
+  // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
 
   const post = {
     ...postBySlug,
-    blurDataUrl,
+    // blurDataUrl,
     readingTime: calcBlocksReadingTime(res.results as BlockObjectResponse[]),
     blocks,
   } as BlogPostWithBlocks;
