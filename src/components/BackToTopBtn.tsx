@@ -1,21 +1,23 @@
 "use client";
 
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import ArrowIcon from "public/assets/Icons/Arrow";
 import useScrollDelta from "@/hooks/useScrollDelta";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
-import { m, LazyMotion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-const framerFeatures = () =>
-  import("../features/framerFeatures").then((res) => res.default);
+type StyledBtnProps = {
+  $scrollbarCompensation: number | null;
+};
 
-const StyledBtn = styled(m.button)<{ $scrollbarCompensation: number | null }>`
+const StyledBtn = styled(motion.button)<StyledBtnProps>`
   position: fixed;
   font-size: 1.5em;
   width: 2em;
   height: 2em;
+  /* bottom: calc(100lvh - 3em); */
   bottom: 1em;
   right: 1em;
   padding: 0.5em;
@@ -60,26 +62,24 @@ const BackToTopBtn = () => {
     window.scrollTo(0, 0);
   };
 
-  const visible = scrolledUp && scrollPosition > 800;
+  const visible = scrolledUp && scrollPosition > 400;
 
   return (
-    <LazyMotion features={framerFeatures}>
-      <AnimatePresence>
-        {visible && (
-          <StyledBtn
-            key="backToTopBtn"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 0.75, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.15, ease: "easeIn" }}
-            $scrollbarCompensation={scrollbarCompensation}
-            onClick={scrollToTop}
-          >
-            <ArrowIcon />
-          </StyledBtn>
-        )}
-      </AnimatePresence>
-    </LazyMotion>
+    <AnimatePresence>
+      {visible && (
+        <StyledBtn
+          key="backToTopBtn"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 0.75, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.15, ease: "easeIn" }}
+          $scrollbarCompensation={scrollbarCompensation}
+          onClick={scrollToTop}
+        >
+          <ArrowIcon />
+        </StyledBtn>
+      )}
+    </AnimatePresence>
   );
 };
 
