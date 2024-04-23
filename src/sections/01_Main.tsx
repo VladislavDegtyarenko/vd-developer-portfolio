@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Section from "@/components/Section";
@@ -10,6 +10,8 @@ import { H1, H2, P1 } from "@/components/Text";
 import ScrollDownIcon from "public/assets/Icons/Scroll Down";
 
 import bg from "public/assets/bg.jpg";
+import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
+import { animate, stagger, useIsomorphicLayoutEffect } from "framer-motion";
 
 const StyledMain = styled(Section)`
   padding: 0;
@@ -20,6 +22,7 @@ const StyledMain = styled(Section)`
   position: relative;
   background: transparent;
   z-index: 1;
+  white-space: pre-wrap;
 
   .bg {
     position: absolute;
@@ -53,7 +56,7 @@ const StyledMain = styled(Section)`
     position: relative;
     padding: 6em 0;
 
-    &__inner {
+    &__content {
       display: flex;
       justify-content: space-between;
 
@@ -72,9 +75,9 @@ const StyledMain = styled(Section)`
       position: relative;
       margin-right: calc(20px + var(--strokeWidth) * 2);
       margin-top: 10px;
-      --photo-size: 240px;
+      --photo-size: 210px;
       @media screen and (max-width: 991.98px) {
-        --photo-size: 210px;
+        --photo-size: 180px;
         margin-bottom: 32px;
       }
 
@@ -149,6 +152,55 @@ const StyledMain = styled(Section)`
 `;
 
 const Main = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    const contentWrapper = contentRef.current;
+
+    if (!contentWrapper) return;
+
+    const titleSpans = contentWrapper.querySelectorAll(".title span");
+    const subtitleSpans = contentWrapper.querySelectorAll(".subtitle span");
+    const description = contentWrapper.querySelector(".description")!;
+    const photoWrapper = contentWrapper.querySelector(".main__photo")!;
+
+    const elementsToAnimate = [
+      ...Array.from(titleSpans),
+      ...Array.from(subtitleSpans),
+    ];
+
+    animate(
+      elementsToAnimate,
+      {
+        opacity: [0, 1],
+      },
+      {
+        duration: 0.5,
+        delay: stagger(0.25, { ease: "easeIn" }),
+      }
+    );
+
+    animate(
+      description,
+      {
+        opacity: [0, 1],
+      },
+      {
+        duration: 0.7,
+        delay: 1.7,
+      }
+    );
+
+    animate(
+      photoWrapper,
+      {
+        opacity: [0, 1],
+      },
+
+      { duration: 1, delay: 2 }
+    );
+  }, [contentRef]);
+
   return (
     <>
       <StyledMain id="home">
@@ -165,12 +217,18 @@ const Main = () => {
 
         <div className="main">
           <Container>
-            <div className="main__inner">
+            <div className="main__content" ref={contentRef}>
               <div className="main__info">
-                <H1>Hello,</H1>
-                <H2>
-                  I am <span className="accent">Vladyslav</span>, <br />
-                  Frontend Developer
+                <H1 className="title">
+                  <span>Hello,</span>
+                </H1>
+                <H2 className="subtitle">
+                  <span>I </span>
+                  <span>am </span>
+                  <span className="accent">Vladyslav</span>
+                  <span>{`, \n`}</span>
+                  <span>Frontend </span>
+                  <span>Developer</span>
                 </H2>
                 <P1 className="description">
                   Based in <span>Kyiv, Ukraine</span>, I&apos;m passionate about
