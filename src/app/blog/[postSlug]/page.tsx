@@ -7,13 +7,13 @@ import NotionBlocksRenderer from "@/components/Blog/BlogPost/NotionBlocksRendere
 import BlogPostPageFooter from "@/sections/blog/blogPost/BlogPostPageFooter";
 
 // export const revalidate = 259200; // 3 days
-export const revalidate = 3600; // 1 hour
+// export const revalidate = 3600; // 1 hour
 
-export async function generateStaticParams() {
-  const slugs = getPostSlugs();
+// export async function generateStaticParams() {
+//   const slugs = getPostSlugs();
 
-  return slugs;
-}
+//   return slugs;
+// }
 
 const BlogPostPage = async ({ params }: { params: { postSlug: string } }) => {
   const { postSlug } = params;

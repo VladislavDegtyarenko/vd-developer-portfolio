@@ -70,14 +70,7 @@ const BlogPostCard = ({
     <Styled href={`/blog/${slug}`}>
       <div className="cover">
         {coverUrl ? (
-          <Image
-            src={coverUrl}
-            alt=""
-            sizes="256px"
-            quality={90}
-            fill
-            unoptimized
-          />
+          <Image src={coverUrl} alt="" sizes="256px" quality={90} fill />
         ) : (
           <Logo />
         )}

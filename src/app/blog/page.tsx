@@ -4,7 +4,8 @@ import BlogPostsList from "@/sections/blog/BlogPostsList";
 import Image from "next/image";
 
 // export const revalidate = 259200; // 3 days
-export const revalidate = 3600; // 1 hour
+// export const revalidate = 3600; // 1 hour
+export const dynamic = "force-dynamic";
 
 async function Posts() {
   const posts = await getPosts();
