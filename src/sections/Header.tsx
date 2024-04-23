@@ -1,6 +1,7 @@
 "use client";
 
 import { useContext, memo } from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import useScrollDelta from "@/hooks/useScrollDelta";
@@ -16,12 +17,14 @@ import MobileMenu from "./MobileMenu";
 // Contexts
 import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
-import Link from "next/link";
 
-const StyledHeader = styled.header<{
+// Types
+type StyledHeaderProps = {
   $scrollbarCompensation: number | null;
-  $scrolledDown: boolean;
-}>`
+  $isHidden: boolean;
+};
+
+const StyledHeader = styled.header<StyledHeaderProps>`
   padding: 1.5em 0;
   position: fixed;
   width: ${({ $scrollbarCompensation }) =>
@@ -33,7 +36,7 @@ const StyledHeader = styled.header<{
   /* background-color: #050505bb; */
   backdrop-filter: blur(8px);
   top: 0;
-  transition: top 0.3s;
+  transition: transform 0.5s;
 
   &:after {
     content: "";
@@ -59,7 +62,9 @@ const StyledHeader = styled.header<{
 
   @media screen and (max-width: 991.98px) {
     padding: 1.25em 0;
-    top: ${({ $scrolledDown }) => ($scrolledDown ? "-150px" : 0)};
+    ${({ $isHidden }) => ({
+      transform: `translateY(${$isHidden ? "-100%" : "0%"})`,
+    })}
   }
 
   nav {
@@ -72,7 +77,6 @@ const StyledHeader = styled.header<{
   .logo {
     width: 80px;
     height: auto;
-    /* margin-right: 3em; */
     transition: width var(--duration);
     color: ${({ theme }) => theme.fg};
   }
@@ -82,6 +86,7 @@ const StyledHeader = styled.header<{
     height: auto;
   }
 
+  /* Hide desktop nav */
   ul {
     @media screen and (max-width: 991.98px) {
       display: none;
@@ -98,13 +103,15 @@ const Header = () => {
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
 
   // SCROLL
-  const { scrolledUp, scrolledDown } = useScrollDelta();
+  const { scrollPosition, scrolledUp, scrolledDown } = useScrollDelta();
+
+  const isHidden = scrollPosition > 250 && scrolledDown;
 
   return (
     <>
       <StyledHeader
         $scrollbarCompensation={scrollbarCompensation}
-        $scrolledDown={scrolledDown}
+        $isHidden={isHidden}
       >
         <Container>
           <nav>
@@ -117,7 +124,7 @@ const Header = () => {
                   toggleMenu();
                 }
               }}
-              aria-label="logo, click to scroll to top"
+              aria-label="logo icon button, click to scroll to top."
             >
               <Logo />
             </Link>
