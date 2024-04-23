@@ -61,6 +61,14 @@ const navLinks = [
   },
 ];
 
+function isLinkActive(href: string, pathname: string) {
+  if (href === "/") {
+    return pathname === href;
+  }
+
+  return pathname.includes(href);
+}
+
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();
 
@@ -76,7 +84,7 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
           text={text}
           href={href}
           isMobile={isMobile}
-          isActive={pathname === href}
+          isActive={isLinkActive(href, pathname)}
           isExternal={isExternal}
           onClick={handleClick}
           {...props}
