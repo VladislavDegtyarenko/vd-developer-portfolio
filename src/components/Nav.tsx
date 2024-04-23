@@ -1,57 +1,32 @@
 "use client";
 
 import styled from "styled-components";
-import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+// Types
 import { MenuLinksProps, StyledLinksProps } from "../types";
 
 // UI
-import { H3, P1 } from "./Text";
-import ExternalIcon from "./icons/ExternalIcon";
+import NavLinkItem from "./NavLinkItem";
 
 const StyledNav = styled.ul<StyledLinksProps>`
   display: grid;
-  grid-auto-flow: ${({ $isMobile }) => ($isMobile ? "row" : "column")};
-  align-items: ${({ $isMobile }) => ($isMobile ? "center" : "stretch")};
-  gap: ${({ $isMobile }) => ($isMobile ? "5vh" : "3em")};
   justify-content: center;
 
-  li {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-  }
-
-  a {
-    color: ${({ theme }) => theme.fg};
-    text-decoration: none;
-    position: relative;
-    display: flex;
-    align-items: center;
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0%;
-      height: 0.1em;
-      background-color: ${({ theme }) => theme.cyan};
-      pointer-events: none;
-      user-select: none;
-      transition: width var(--duration);
-    }
-    &:hover:after {
-      width: 100%;
-    }
-
-    svg,
-    img {
-      margin-left: 0.25rem;
-      color: currentColor;
-    }
-  }
+  ${({ $isMobile }) =>
+    $isMobile
+      ? {
+          // Mobile Nav
+          gap: "5vh",
+          alignItems: "center",
+          gridAutoFlow: "row",
+        }
+      : {
+          // Desktop Nav
+          gap: "3em",
+          alignItems: "stretch",
+          gridAutoFlow: "column",
+        }}
 `;
 
 const navLinks = [
@@ -87,7 +62,7 @@ const navLinks = [
 ];
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
-  const LinkText = isMobile ? H3 : P1;
+  const pathname = usePathname();
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
@@ -95,18 +70,17 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
 
   return (
     <StyledNav $isMobile={isMobile}>
-      {navLinks.map(({ href, text, isExternal }) => (
-        <li key={text}>
-          <Link
-            href={href}
-            prefetch={false}
-            target={isExternal ? "_blank" : "_self"}
-            onClick={handleClick}
-          >
-            <LinkText as="span">{text}</LinkText>
-            {isExternal && <ExternalIcon />}
-          </Link>
-        </li>
+      {navLinks.map(({ text, href, isExternal, ...props }) => (
+        <NavLinkItem
+          key={text}
+          text={text}
+          href={href}
+          isMobile={isMobile}
+          isActive={pathname === href}
+          isExternal={isExternal}
+          onClick={handleClick}
+          {...props}
+        />
       ))}
     </StyledNav>
   );
