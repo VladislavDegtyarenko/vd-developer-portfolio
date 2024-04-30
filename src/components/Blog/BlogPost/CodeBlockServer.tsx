@@ -7,6 +7,7 @@ import "prismjs/components/prism-tsx";
 import "prismjs/components/prism-css";
 import DOMPurify from "isomorphic-dompurify";
 import { DropedProps } from "@9gustin/react-notion-render/dist/hoc/withContentValidation";
+import CopyCode from "./CopyCode";
 
 const highlight = (code: string, lng = "javascript") => {
   let language;
@@ -35,18 +36,22 @@ const CodeBlockServer = ({
   ...props
 }: DropedProps) => {
   const formattedCode = plainText && highlight(plainText, language);
+  const sanitizedHtml = formattedCode
+    ? DOMPurify.sanitize(formattedCode)
+    : null;
 
   return (
     <pre className={`${className} language-${language}`}>
-      {formattedCode ? (
+      {sanitizedHtml ? (
         <code
           dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(formattedCode),
+            __html: sanitizedHtml,
           }}
         ></code>
       ) : (
         <code>{plainText}</code>
       )}
+      <CopyCode code={plainText} />
     </pre>
   );
 };

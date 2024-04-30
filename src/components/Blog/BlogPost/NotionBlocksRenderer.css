@@ -59,6 +59,10 @@
   overflow-x: hidden !important;
 }
 
+.rnr-container pre[class*="language-"] {
+  position: relative;
+}
+
 .rnr-code code {
   white-space: pre-wrap;
   max-width: 100%;
