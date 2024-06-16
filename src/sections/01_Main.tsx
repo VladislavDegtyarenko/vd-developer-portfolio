@@ -238,7 +238,7 @@ const Main = () => {
               <div className="main__photo">
                 <div className="main__photo_inner">
                   <Image
-                    src="/IMG_8105 (2).JPG"
+                    src="/IMG_9693.JPG"
                     sizes="(max-width: 991.98px) 464px, 624px"
                     alt="Photo of Vladyslav Dihtiarneko, frontend developer"
                     fill
