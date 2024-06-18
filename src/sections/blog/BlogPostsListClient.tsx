@@ -29,7 +29,7 @@ const Styled = styled(Section)`
   }
 `;
 
-const BlogPostsList = ({ posts }: { posts: BlogPost[] }) => {
+const BlogPostsListClient = ({ posts }: { posts: BlogPost[] }) => {
   return (
     <Styled>
       <Container>
@@ -67,4 +67,4 @@ const BlogPostsList = ({ posts }: { posts: BlogPost[] }) => {
   );
 };
 
-export default BlogPostsList;
+export default BlogPostsListClient;

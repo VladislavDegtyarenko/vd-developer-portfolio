@@ -13,7 +13,7 @@ import { BlogPost } from "@/types/notion";
 import { H4, P1, P2 } from "../Text";
 import Logo from "public/assets/Icons/LOGO";
 
-const Styled = styled(Link)`
+export const StyledBlogPostCard = styled(Link)`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1rem;
@@ -33,7 +33,7 @@ const Styled = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: ${({ theme }) => theme.cardBg}; */
+    background-color: ${({ theme }) => theme.cardBg};
     img {
       object-fit: cover;
     }
@@ -67,7 +67,7 @@ const BlogPostCard = ({
   coverUrl,
 }: BlogPostCardProps) => {
   return (
-    <Styled href={`/blog/${slug}`}>
+    <StyledBlogPostCard href={`/blog/${slug}`}>
       <div className="cover">
         {coverUrl ? (
           <Image src={coverUrl} alt="" sizes="256px" quality={90} fill />
@@ -90,7 +90,7 @@ const BlogPostCard = ({
           )}
         </div>
       </div>
-    </Styled>
+    </StyledBlogPostCard>
   );
 };
 
