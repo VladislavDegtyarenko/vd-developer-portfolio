@@ -125,7 +125,6 @@ const NavLinkItem = ({
       <MotionLink
         variants={linkVariants}
         href={href}
-        prefetch={false}
         target={isExternal ? "_blank" : "_self"}
         className={`${isActive ? "active" : ""}`}
         onClick={onClick}
