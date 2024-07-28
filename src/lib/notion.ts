@@ -1,6 +1,3 @@
-// React
-import { cache } from "react";
-
 // Notion
 import { Client } from "@notionhq/client";
 
@@ -17,7 +14,7 @@ const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
 
 const notion = new Client({ auth: NOTION_TOKEN });
 
-export const getPosts = cache(async () => {
+export const getPosts = async () => {
   if (!NOTION_DATABASE_ID) {
     throw new Error("NOTION_DATABASE_ID is not set in .env file");
   }
@@ -79,17 +76,17 @@ export const getPosts = cache(async () => {
   );
 
   return posts;
-});
+};
 
-export const getPostSlugs = cache(async () => {
+export const getPostSlugs = async () => {
   const posts = await getPosts();
 
   const slugs = posts.map(async ({ slug }) => slug);
 
   return slugs;
-});
+};
 
-export const getPostBySlug = cache(async (slug: string) => {
+export const getPostBySlug = async (slug: string) => {
   const posts = await getPosts();
 
   const postBySlug = posts.find((post) => post.slug === slug);
@@ -117,4 +114,4 @@ export const getPostBySlug = cache(async (slug: string) => {
   } as BlogPostWithBlocks;
 
   return post;
-});
+};
