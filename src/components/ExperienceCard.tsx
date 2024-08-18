@@ -136,7 +136,7 @@ const ExperienceCard = ({
           {icons.map(({ src, alt }) => (
             <Icon
               key={`${company} ${alt}`}
-              src={`/assets/icons/${src}`}
+              src={`/assets/tech-icons/${src}`}
               alt={alt}
               title={alt}
             />

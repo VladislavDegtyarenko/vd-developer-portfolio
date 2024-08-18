@@ -54,7 +54,7 @@ const ExpertiseCard = ({ icon, title }: ExpertiseCardProps) => {
   return (
     <StyledCard>
       <div className="icon">
-        <Image src={`/assets/icons/${icon}`} alt="" title={title} fill />
+        <Image src={`/assets/tech-icons/${icon}`} alt="" title={title} fill />
       </div>
 
       <div className="text">
