@@ -10,7 +10,7 @@ import SectionTitle from "@/components/SectionTitle";
 import Container from "@/components/layout/Container";
 import SectionDescription from "@/components/SectionDescription";
 
-import DownloadIcon from "public/assets/icons/Download";
+import DownloadIcon from "@/components/icons/Download";
 
 // Data
 import CONTACT from "@/data/contact.json";

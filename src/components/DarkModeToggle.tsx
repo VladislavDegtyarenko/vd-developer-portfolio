@@ -3,8 +3,8 @@
 import styled from "styled-components";
 import { useTheme } from "next-themes";
 
-import SunIcon from "public/assets/icons/Sun";
-import MoonIcon from "public/assets/icons/Moon";
+import SunIcon from "@/components/icons/Sun";
+import MoonIcon from "@/components/icons/Moon";
 import useMounted from "@/hooks/useMounted";
 
 const StyledToggle = styled.label`

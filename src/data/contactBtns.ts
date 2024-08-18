@@ -1,10 +1,10 @@
-import YouTubeIcon from "public/assets/social/YouTubeIcon";
-import FacebookIcon from "public/assets/social/FacebookIcon";
-import InstagramIcon from "public/assets/social/InstagramIcon";
-import LinkedInIcon from "public/assets/social/LinkedInIcon";
-import GitHubIcon from "public/assets/social/GitHubIcon";
-import TelegramIcon from "public/assets/social/TelegramIcon";
-import EmailIcon from "public/assets/social/EmailIcon";
+import YouTubeIcon from "@/components/icons/social/YouTubeIcon";
+import FacebookIcon from "@/components/icons/social/FacebookIcon";
+import InstagramIcon from "@/components/icons/social/InstagramIcon";
+import LinkedInIcon from "@/components/icons/social/LinkedInIcon";
+import GitHubIcon from "@/components/icons/social/GitHubIcon";
+import TelegramIcon from "@/components/icons/social/TelegramIcon";
+import EmailIcon from "@/components/icons/social/EmailIcon";
 
 const contactBtns = [
   {

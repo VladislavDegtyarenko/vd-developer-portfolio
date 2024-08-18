@@ -3,7 +3,7 @@
 import styled from "styled-components";
 
 import Link from "next/link";
-import ArrowIcon from "public/assets/icons/Arrow";
+import ArrowIcon from "@/components/icons/Arrow";
 
 const StyledBtn = styled(Link)`
   padding: 0.5rem 1rem;

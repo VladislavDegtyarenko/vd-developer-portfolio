@@ -7,7 +7,7 @@ import Section from "@/components/Section";
 import SectionDivider from "@/components/SectionDivider";
 import Container from "@/components/layout/Container";
 import { H1, H2, P1 } from "@/components/Text";
-import ScrollDownIcon from "public/assets/icons/Scroll Down";
+import ScrollDownIcon from "@/components/icons/ScrollDown";
 
 import bg from "public/assets/bg.jpg";
 import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";

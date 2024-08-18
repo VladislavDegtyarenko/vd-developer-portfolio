@@ -8,7 +8,7 @@ import useScrollDelta from "@/hooks/useScrollDelta";
 
 // UI
 import Container from "@/components/layout/Container";
-import Logo from "public/assets/icons/LOGO";
+import Logo from "@/components/icons/LOGO";
 import BurgerButton from "@/components/BurgerButton";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import Nav from "@/components/Nav";

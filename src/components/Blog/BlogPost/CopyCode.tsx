@@ -2,7 +2,7 @@
 
 import CheckIcon from "@/components/icons/CheckIcon";
 import CopyIcon from "@/components/icons/CopyIcon";
-import SuccessIcon from "public/assets/SucessIcon";
+import SuccessIcon from "@/components/icons/SucessIcon";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 

@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useIsomorphicLayoutEffect } from "framer-motion";
 
 // UI
-import SuccessIcon from "public/assets/SucessIcon";
+import SuccessIcon from "@/components/icons/SucessIcon";
 import { H4, P1 } from "./Text";
 import { animate, stagger } from "framer-motion";
 
