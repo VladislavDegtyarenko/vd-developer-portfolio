@@ -17,7 +17,7 @@ export default function Page() {
       <Projects />
       <Reviews />
       <Contact />
-      <ProjectPreview />;
+      <ProjectPreview />
     </>
   );
 }
