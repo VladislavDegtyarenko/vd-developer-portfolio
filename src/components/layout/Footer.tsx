@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 // UI
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import { P2 } from "@/components/Text";
 const MotionP2 = motion(P2);
 

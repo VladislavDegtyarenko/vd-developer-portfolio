@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import { ReactNode } from "react";
 
 const Styled = styled.div`

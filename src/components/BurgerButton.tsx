@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import BurgerMenuIcon from "public/assets/Icons/BurgerMenu-Icon";
+import BurgerMenuIcon from "public/assets/icons/BurgerMenu-Icon";
 
 import { BurgerButtonProps } from "@/types";
 

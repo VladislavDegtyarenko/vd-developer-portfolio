@@ -1,3 +1,5 @@
+"use client";
+
 import { memo } from "react";
 import { motion } from "framer-motion";
 
@@ -5,12 +7,13 @@ import styled from "styled-components";
 import Section from "@/components/Section";
 import SectionDivider from "@/components/SectionDivider";
 import SectionTitle from "@/components/SectionTitle";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import SectionDescription from "@/components/SectionDescription";
 
-import DownloadIcon from "public/assets/Icons/Download";
+import DownloadIcon from "public/assets/icons/Download";
 
 // Data
+import CONTACT from "@/data/contact.json";
 import contactBtns from "@/data/contactBtns";
 import ContactForm from "@/components/ContactForm";
 
@@ -81,17 +84,18 @@ const StyledContact = styled(Section)`
 `;
 
 const Contact = () => {
+  const { title, description, formHeading, downloadCV } = CONTACT;
+
   return (
     <>
       <StyledContact id="contact">
         <Container>
-          <SectionTitle>Get in Touch</SectionTitle>
+          <SectionTitle>{title}</SectionTitle>
           <SectionDescription className="contact__descr">
-            Interested in working with me or hiring me for your next project?
-            Drop me a line and let&apos;s make it happen.
+            {description}
           </SectionDescription>
           <SectionDescription className="contact__descr">
-            Get in touch today and let&apos;s bring your ideas to life.
+            {formHeading}
           </SectionDescription>
 
           <ContactForm />
@@ -117,7 +121,7 @@ const Contact = () => {
               );
             })}
           </div>
-          <div className="contact__download-cv">
+          {/* <div className="contact__download-cv">
             <motion.a
               href="Vladyslav Dihtiarenko CV (Dec'23, One-Page)-compressed (1).pdf"
               title={"Get my CV in PDF format"}
@@ -127,9 +131,9 @@ const Contact = () => {
               transition={{ duration: 0.5 }}
             >
               <DownloadIcon />
-              Download CV
+              {downloadCV}
             </motion.a>
-          </div>
+          </div> */}
         </Container>
       </StyledContact>
       <Container>

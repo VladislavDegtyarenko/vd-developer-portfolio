@@ -9,12 +9,12 @@ const poppins = Poppins({
   style: ["normal", "italic"],
 });
 
-import GlobalStyle from "./GlobalStyle";
+import GlobalStyle from "../../GlobalStyle";
 import PageWrapper from "@/components/PageWrapper";
-import Header from "@/sections/Header";
-import Footer from "@/sections/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import BackToTopBtn from "@/components/BackToTopBtn";
-import Providers from "./Providers";
+import Providers from "../../Providers";
 
 // Metadata
 export const metadata = {

@@ -1,3 +1,4 @@
+import YouTubeIcon from "public/assets/social/YouTubeIcon";
 import FacebookIcon from "public/assets/social/FacebookIcon";
 import InstagramIcon from "public/assets/social/InstagramIcon";
 import LinkedInIcon from "public/assets/social/LinkedInIcon";
@@ -7,9 +8,9 @@ import EmailIcon from "public/assets/social/EmailIcon";
 
 const contactBtns = [
   {
-    href: "https://www.facebook.com/vladislav.degtyarenko.1996",
-    ariaLabel: "Contact me via Facebook",
-    icon: FacebookIcon,
+    href: "https://www.youtube.com/@VladyslavDihtiarenko",
+    ariaLabel: "Visit my YouTube channel",
+    icon: YouTubeIcon,
   },
   {
     href: "https://www.instagram.com/vladislavdegtyarenko/",

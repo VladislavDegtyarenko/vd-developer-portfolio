@@ -11,7 +11,7 @@ import { formatDate } from "@/utils/formatDate";
 // UI
 import { BlogPost } from "@/types/notion";
 import { H4, P1, P2 } from "../Text";
-import Logo from "public/assets/Icons/LOGO";
+import Logo from "public/assets/icons/LOGO";
 
 export const StyledBlogPostCard = styled(Link)`
   display: grid;

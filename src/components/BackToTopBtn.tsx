@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { useContext, useMemo } from "react";
 
-import ArrowIcon from "public/assets/Icons/Arrow";
+import ArrowIcon from "public/assets/icons/Arrow";
 import useScrollDelta from "@/hooks/useScrollDelta";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
 import { motion, AnimatePresence } from "framer-motion";

@@ -1,0 +1,120 @@
+{
+  "title": "Projects",
+  "description": "A concise overview of selected frontend development projects, showcasing skills and capabilities.\n\nIf you want to check my actual frontend skills, let's get a call",
+  "projects": [
+    {
+      "img": "Airlogix.png",
+      "title": "Airlogix.io",
+      "description": "Multi-page website for Ukrainian drone manufacturer - Airlogix. Techs: Next.js, next-intl, Typescript, styled-components, Sendgrid API, Vercel",
+      "previewLink": "https://www.airlogix.io/",
+      "isVisible": true
+    },
+    {
+      "img": "react-shadcn-todo-app.jpg",
+      "title": "Tasks Manager",
+      "description": "React.js • Redux • Typescript • shadcn/ui • Tailwind • Vite",
+      "previewLink": "https://vladislavdegtyarenko.github.io/todo-app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/todo-app",
+      "isVisible": true
+    },
+    {
+      "img": "Expense Tracker.png",
+      "title": "Expense Tracker",
+      "description": "Track your incomes/expenses from any device using this React/Firebase expense tracker! Featuring Typescript, MUI and Parcel",
+      "previewLink": "https://expense-tracker-d93df.web.app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/expense-tracker-firebase-react",
+      "isVisible": true
+    },
+    {
+      "img": "ReactGPT.png",
+      "title": "ReactGPT",
+      "description": "I built my own ChatGPT with React/Typescript, featuring slick design (thanks to the shadcn/ui library), light/dark theme and ability to chose GPT version (3.5 or 4). Bundled with Vite",
+      "previewLink": "https://vladislavdegtyarenko.github.io/react-gpt/",
+      "isVisible": true
+    },
+    {
+      "img": "Redux Blog.jpg",
+      "title": "CRUD Redux Blog",
+      "soon": true
+    },
+
+    {
+      "img": "portfolio.jpg",
+      "title": "Portfolio Website",
+      "description": "Vladyslav's portfolio website designed by himself and developed using Next.js, Typescript and Framer Motion. Featuring a brand new Notion API-driven blog and contact form that handles requests with Sendgrid API",
+      "codeLink": "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
+      "isVisible": true
+    },
+    {
+      "img": "weather app.jpg",
+      "title": "Weather App",
+      "description": "A weather application developed using React, Redux, Material UI, Typescript and ChartJS, featuring a Microsoft-inspired interface.",
+      "previewLink": "https://vd-react-weather-app.vercel.app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/react-weather-app",
+      "isVisible": true
+    },
+    {
+      "img": "todo-app.jpg",
+      "title": "Todo App",
+      "description": "Todo List app built with ReactJS. Features: easy-to-use interface, fast and responsive, sleek UI, saved in localStorage.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/react-todo-app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/react-todo-app",
+      "isVisible": true
+    },
+
+    {
+      "img": "2048 Game.jpg",
+      "title": "2048 Game",
+      "description": "A popular 2048 game built using React.js, featuring smooth animations, touch/swipe/keyboard controls and elegant dark theme you never saw before",
+      "previewLink": "https://preact-2048-game.vercel.app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/preact-2048-game",
+      "isVisible": true
+    },
+    {
+      "img": "Snake Game.jpg",
+      "title": "Snake Game",
+      "description": "A classic Snake Game clone, built using pure (Vanilla) JavaScript, with a nostalgic and classic gameplay experience.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/snake-game-js/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/snake-game-js",
+      "isVisible": true
+    },
+    {
+      "img": "Pass Gen.jpg",
+      "title": "Password Generator",
+      "description": "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/preact-password-generator/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/preact-password-generator",
+      "isVisible": true
+    },
+    {
+      "img": "Clock.jpg",
+      "title": "Alarms & Clock Clone",
+      "description": "Windows 10 \"Alarms & Clock\" app clone created with ReactJS, Framer Motion, and FluentUI library",
+      "previewLink": "https://vladislavdegtyarenko.github.io/react-windows-clock-clone/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/react-windows-clock-clone",
+      "isVisible": true
+    },
+    {
+      "img": "Ocular.jpg",
+      "title": "Ocular",
+      "description": "Delivered front-end for \"Ocular\" medical center website, providing a seamless user experience for ophthalmology patients.",
+      "previewLink": "https://ocular.com.ua/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/Ocular",
+      "isVisible": true
+    },
+    {
+      "img": "4-his.jpg",
+      "title": "His.ua",
+      "description": "Developed front-end for \"His,\" a Ukrainian brand for exclusive furniture.",
+      "previewLink": "https://his.ua/"
+    },
+
+    {
+      "img": "7-tenzies.jpg",
+      "title": "Tenzies Game",
+      "description": "A simple tenzies game built using React",
+      "previewLink": "https://vladislavdegtyarenko.github.io/react-tenzies/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/react-tenzies"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "title": "Working Experience",
+  "mainExperience": [
+    {
+      "timerange": "Mar 23 — Now",
+      "position": "Freelance Frontend Developer",
+      "company": "Freelance | Open to new work opportunities",
+      "chips": ["Remote", "Self-employed", "Worldwide"],
+      "description": "Continually advancing my skills and expertise in frontend technologies. Specializing in crafting engaging and responsive websites, I have successfully completed multiple freelance projects for diverse clients, delivering solutions that meet their needs.\n\nKey Achievements:\n- Leveraged cutting-edge technologies such as React.js, Next.js, Redux and TypeScript to build high-performance and scalable web applications.\n- Collaborated closely with clients to understand their goals, brand identity, translating requirements into visually stunning and functional interfaces.\n- Orchestrated captivating and seamless animations using Framer Motion, enhancing user engagement and creating immersive user experiences.\n- Embraced a remote and self-employed work model, providing flexibility and accessibility to clients worldwide.\n\nOpen to new opportunities, I am enthusiastic about contributing my skills to innovative projects and driving digital experiences to new heights.",
+      "icons": [
+        { "src": "React.svg", "alt": "React.js" },
+        { "src": "Next.svg", "alt": "Next.js" },
+        { "src": "Redux.svg", "alt": "Redux" },
+        { "src": "TS.svg", "alt": "Typescript" },
+        { "src": "Framer-Motion.svg", "alt": "Framer Motion" },
+        { "src": "GSAP.svg", "alt": "GSAP" }
+      ]
+    },
+    {
+      "timerange": "Oct 21 — Feb 23",
+      "position": "Frontend Developer",
+      "company": "Astound Commerce",
+      "chips": ["Ukraine", "Remote", "Full-time"],
+      "description": "Collaborated with an international team on a multi-page store project.\nUtilized React, Next.js, Tailwind CSS, GraphQL, and TypeScript to enhance and extend the stores functionality, resulting in a seamless and engaging user experience.\nExpanded expertise in Jest and React Testing Library for unit testing custom hooks.\nReceived positive feedback for delivering fast, clean, and accessible web experiences.",
+      "icons": [
+        { "src": "TS.svg", "alt": "Typescript" },
+        { "src": "React.svg", "alt": "React.js" },
+        { "src": "Next.svg", "alt": "Next.js" },
+        { "src": "Salesforce.svg", "alt": "Salesforce" },
+        { "src": "Tailwind.svg", "alt": "Tailwind CSS" },
+        { "src": "Jest.svg", "alt": "Jest" }
+      ]
+    },
+    {
+      "timerange": "nov 20 — sep 21",
+      "position": "Frontend Developer",
+      "company": "While Web Production",
+      "chips": ["Ukraine", "Remote", "Part-time"],
+      "description": "Developed websites for Ukrainian businesses using HTML, CSS, Bootstrap, JavaScript, jQuery, and Gulp, contributing to the growth of businesses in Ukraine.\nSuccessfully completed 5 projects, resulting in happy clients and recognition for delivering fast, clean, pixel-perfect, and accessible web experiences.\nDemonstrated versatility and skill in handling various projects, from landing pages to multi-page websites.",
+      "icons": [
+        { "src": "HTML.svg", "alt": "HTML" },
+        { "src": "CSS.svg", "alt": "CSS" },
+        { "src": "JS.svg", "alt": "Javascript" },
+        { "src": "Bootstrap.svg", "alt": "Bootstrap" },
+        { "src": "Webpack.svg", "alt": "Webpack" },
+        { "src": "Gulp.svg", "alt": "Gulp.js" }
+      ]
+    }
+  ],
+  "nonRelatedExperience": [
+    {
+      "timerange": "Feb 16 — Feb 20",
+      "position": "Music Producer, Audio Engineer",
+      "company": "Self-employed | Envato | Fiverr",
+      "chips": ["Worldwide", "Remote", "Part-time"],
+      "description": "Crafted exceptional background music for Envato Marketplace's Audiojungle, elevating the narrative impact of videos and commercials.\nProvided exclusive music production services to independent musicians and artists, video creators, and businesses globally.\nDid audio editing, mixing and mastering for a wide range of audio, spanning from voice recordings to full-fledged songs."
+    },
+    {
+      "timerange": "sep 16 — aug 19",
+      "position": "Vice-President for Public Relations",
+      "company": "BEST Zaporizhzhya",
+      "chips": ["Zaporizhia, Ukraine", "Volounteering", "Project-based"],
+      "description": "Led efforts to boost awareness of BEST Zaporizhzhya, its projects, and activities.\nManaged and guided a dedicated team to achieve PR objectives.\nCrafted and executed a strategic PR plan, setting and monitoring goals.\nDesigned engaging content, including social media posts, promo videos, and print marketing materials.\nEnhanced the organization's online presence and impact through effective PR initiatives."
+    }
+  ],
+  "expertiseData": [
+    {
+      "groupTitle": "Core Frontend Tools",
+      "groupCards": [
+        { "icon": "TS", "title": "Typescript" },
+        { "icon": "React", "title": "React" },
+        { "icon": "Redux", "title": "Redux" },
+        { "icon": "MobX", "title": "MobX" },
+        { "icon": "Next", "title": "Next.js" },
+        { "icon": "Axios", "title": "Axios" },
+        { "icon": "SWR", "title": "SWR" },
+        { "icon": "JS", "title": "Javascript" },
+        { "icon": "HTML", "title": "HTML" },
+        { "icon": "CSS", "title": "CSS" },
+        { "icon": "React-Hook-Form", "title": "React Hook Form" },
+        { "icon": "React-Query", "title": "React Query" },
+        { "icon": "React-Router", "title": "React Router" },
+        { "icon": "Firebase", "title": "Firebase" }
+      ]
+    },
+    {
+      "groupTitle": "Bundling Tools & Code Quality",
+      "groupCards": [
+        { "icon": "Webpack", "title": "Webpack" },
+        { "icon": "Vitejs-logo", "title": "Vite" },
+        { "icon": "Rollup", "title": "Rollup" },
+        { "icon": "Gulp", "title": "Gulp" },
+        { "icon": "ESLint", "title": "ESLint" },
+        { "icon": "Prettier", "title": "Prettier" },
+        { "icon": "bem", "title": "BEM" },
+        { "icon": "chrome", "title": "Chrome Developer Tools" },
+        { "icon": "React", "title": "React Profiler" },
+        { "icon": "Jest", "title": "Jest" },
+        { "icon": "Testing-Library", "title": "Testing Library" },
+        { "icon": "Git", "title": "Git" },
+        { "icon": "Web-Core-Vitals-Pagespeed", "title": "Core Web Vitals" }
+      ]
+    },
+    {
+      "groupTitle": "UI, Layout & Animations",
+      "groupCards": [
+        { "icon": "Material UI (MUI)", "title": "Material UI" },
+        { "icon": "Tailwind", "title": "Tailwind CSS" },
+        { "icon": "shadcn-ui", "title": "shadcn/ui" },
+        { "icon": "Bootstrap", "title": "Bootstrap" },
+        { "icon": "SASS", "title": "SASS" },
+        { "icon": "styled-components", "title": "Styled Components" },
+        { "icon": "Framer-Motion", "title": "Framer Motion" },
+        { "icon": "GSAP", "title": "GSAP" },
+        { "icon": "css-modules", "title": "CSS Modules" },
+        { "icon": "Pixel-Perfect", "title": "Pixel Perfect" },
+        { "icon": "adaptive-responsive", "title": "Adaptive & Responsive" }
+      ]
+    }
+  ]
+}

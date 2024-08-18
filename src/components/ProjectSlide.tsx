@@ -178,12 +178,11 @@ const ProjectSlide = ({
   const projectImg = (
     <div className="slide__img">
       <Image
-        src={img}
+        src={`/assets/projects/${img}`}
         sizes="(max-width: 991.98px) 511px, (max-width: 991.98px) 720px, 645px"
         quality={80}
-        loading="eager"
+        loading="lazy"
         alt=""
-        placeholder="blur"
         fill
         ref={imageRef}
       />

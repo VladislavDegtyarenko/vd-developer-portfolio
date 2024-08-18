@@ -5,7 +5,7 @@ import { Fragment } from "react";
 
 // UI
 import Section from "@/components/Section";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import BlogPostCard from "@/components/Blog/BlogPostCard";
 import Divider from "@/components/Divider";
 import { BlogPost } from "@/types/notion";

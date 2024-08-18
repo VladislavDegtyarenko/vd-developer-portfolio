@@ -7,12 +7,12 @@ import { AnimatePresence } from "framer-motion";
 import useScrollDelta from "@/hooks/useScrollDelta";
 
 // UI
-import Container from "@/components/Container";
-import Logo from "public/assets/Icons/LOGO";
+import Container from "@/components/layout/Container";
+import Logo from "public/assets/icons/LOGO";
 import BurgerButton from "@/components/BurgerButton";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import Nav from "@/components/Nav";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "../MobileMenu";
 
 // Contexts
 import MobileMenuContext from "@/contexts/MobileMenuContext";

@@ -2,9 +2,13 @@ import styled from "styled-components";
 
 import { useContext } from "react";
 
-import projectsData from "@/data/projects";
 import ProjectSlide from "@/components/ProjectSlide";
 import ProjectContext from "@/contexts/ProjectContext";
+import { Project } from "@/types";
+
+type ProjectsListProps = {
+  projects: Project[];
+};
 
 const StyledProjectsList = styled.div`
   ul {
@@ -37,13 +41,19 @@ const StyledProjectsList = styled.div`
   }
 `;
 
-const ProjectsList = () => {
+const ProjectsList = ({ projects }: ProjectsListProps) => {
   const { previewProject } = useContext(ProjectContext);
+
+  if (!Array.isArray(projects)) {
+    return null;
+  }
+
+  const visibleProjects = projects.filter((project) => project?.isVisible);
 
   return (
     <StyledProjectsList>
       <ul>
-        {projectsData.map(
+        {visibleProjects.map(
           ({ img, title, description, previewLink, codeLink, soon }) => (
             <ProjectSlide
               key={title}

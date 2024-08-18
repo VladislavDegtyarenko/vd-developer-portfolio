@@ -44,7 +44,8 @@ export interface NextjsImageAssetProps {
   blurHeight: number;
 }
 
-export interface Icon extends NextjsImageAssetProps {
+export interface Icon {
+  src: string;
   alt: string;
 }
 
@@ -63,12 +64,13 @@ export interface ExpertiseGroup {
 }
 
 export interface Project {
-  img: StaticImageData;
+  img: string;
   title: string;
   description?: string;
   previewLink?: string;
   codeLink?: string;
   soon?: boolean;
+  isVisible?: boolean;
 }
 
 export interface Experience {

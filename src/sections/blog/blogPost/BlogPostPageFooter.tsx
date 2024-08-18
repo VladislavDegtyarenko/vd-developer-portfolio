@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import Link from "next/link";
-import ArrowIcon from "public/assets/Icons/Arrow";
+import ArrowIcon from "public/assets/icons/Arrow";
 import { P2 } from "@/components/Text";
 // import SharePost from "../../../components/Blog/BlogPost/SharePost";
 import dynamic from "next/dynamic";

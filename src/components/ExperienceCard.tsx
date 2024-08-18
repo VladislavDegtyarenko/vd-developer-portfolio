@@ -134,7 +134,12 @@ const ExperienceCard = ({
       {icons && icons.length > 0 ? (
         <div className="icons">
           {icons.map(({ src, alt }) => (
-            <Icon key={`${company} ${alt}`} src={src} alt={alt} title={alt} />
+            <Icon
+              key={`${company} ${alt}`}
+              src={`/assets/icons/${src}`}
+              alt={alt}
+              title={alt}
+            />
           ))}
         </div>
       ) : null}

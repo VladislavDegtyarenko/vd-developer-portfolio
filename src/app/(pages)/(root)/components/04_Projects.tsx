@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "styled-components";
 import { useState, useRef, useContext, memo } from "react";
 import dynamic from "next/dynamic";
@@ -6,10 +8,12 @@ import dynamic from "next/dynamic";
 import Section from "@/components/Section";
 import SectionDivider from "@/components/SectionDivider";
 import SectionTitle from "@/components/SectionTitle";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import SectionDescription from "@/components/SectionDescription";
-
 import ProjectsList from "@/components/ProjectsList";
+
+// Data
+import PROJECTS from "@/data/projects.json";
 
 const StyledProjects = styled(Section)`
   .projects {
@@ -83,23 +87,19 @@ const StyledProjects = styled(Section)`
 `;
 
 const Projects = () => {
+  const { title, description, projects } = PROJECTS;
+
   return (
     <>
       <StyledProjects id="projects">
         <Container>
           <div className="projects">
-            <SectionTitle>Projects</SectionTitle>
+            <SectionTitle>{title}</SectionTitle>
             <SectionDescription className="projects__descr">
-              A concise overview of selected frontend development projects,
-              showcasing skills and capabilities.
+              {description}
             </SectionDescription>
 
-            <SectionDescription>
-              {`If you want to check my actual frontend skills, let's get a
-              call`}
-            </SectionDescription>
-
-            <ProjectsList />
+            <ProjectsList projects={projects} />
           </div>
         </Container>
       </StyledProjects>

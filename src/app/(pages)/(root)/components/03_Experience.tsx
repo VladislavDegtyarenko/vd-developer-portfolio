@@ -1,3 +1,5 @@
+"use client";
+
 // Core
 import styled from "styled-components";
 
@@ -5,15 +7,11 @@ import styled from "styled-components";
 import Section from "@/components/Section";
 import SectionDivider from "@/components/SectionDivider";
 import SectionTitle from "@/components/SectionTitle";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import ExperienceCard from "@/components/ExperienceCard";
-import { H4 } from "@/components/Text";
 
 // Data
-import {
-  mainExperienceData,
-  nonRelatedExperienceData,
-} from "@/data/experience";
+import EXPERIENCE from "@/data/experience.json";
 
 // Styled
 const StyledExperience = styled(Section)`
@@ -42,22 +40,22 @@ const StyledExperience = styled(Section)`
 `;
 
 const Experience = () => {
+  const { title, mainExperience, nonRelatedExperience } = EXPERIENCE;
+
   return (
     <>
       <StyledExperience>
         <Container>
           <div className="experience__inner">
-            <SectionTitle>Working Experience</SectionTitle>
+            <SectionTitle>{title}</SectionTitle>
 
-            <div className="experience__wrapper">
-              {mainExperienceData.map((experience) => (
-                <ExperienceCard
-                  // prettier-ignore
-                  key={experience.company}
-                  {...experience}
-                />
-              ))}
-            </div>
+            {Array.isArray(mainExperience) && (
+              <div className="experience__wrapper">
+                {mainExperience.map((experience) => (
+                  <ExperienceCard key={experience.company} {...experience} />
+                ))}
+              </div>
+            )}
 
             {/* <div className="subtitle">
               <H4>Non-related experience</H4>

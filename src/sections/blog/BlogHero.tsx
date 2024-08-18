@@ -1,7 +1,7 @@
 "use client";
 
 import { styled } from "styled-components";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import Section from "@/components/Section";
 import { H2, P1 } from "@/components/Text";
 import Image from "next/image";

@@ -5,9 +5,9 @@ import styled from "styled-components";
 import Image from "next/image";
 import Section from "@/components/Section";
 import SectionDivider from "@/components/SectionDivider";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import { H1, H2, P1 } from "@/components/Text";
-import ScrollDownIcon from "public/assets/Icons/Scroll Down";
+import ScrollDownIcon from "public/assets/icons/Scroll Down";
 
 import bg from "public/assets/bg.jpg";
 import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";

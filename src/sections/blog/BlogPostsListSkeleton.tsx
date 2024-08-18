@@ -2,7 +2,7 @@
 
 import { styled } from "styled-components";
 import Section from "@/components/Section";
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import BlogPostCardSkeleton from "@/components/Blog/BlogPostCardSkeleton";
 
 const Styled = styled(Section)`

@@ -3,7 +3,7 @@
 import { useContext, memo } from "react";
 import styled from "styled-components";
 
-import Container from "@/components/Container";
+import Container from "@/components/layout/Container";
 import Nav from "@/components/Nav";
 
 import MobileMenuContext from "@/contexts/MobileMenuContext";
