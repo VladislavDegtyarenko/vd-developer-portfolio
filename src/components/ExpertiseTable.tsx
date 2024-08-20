@@ -12,10 +12,12 @@ const StyledTable = styled.table`
   max-width: 60rem;
   margin-left: auto;
   margin-right: auto;
-  transition: height 0.5s;
+  transition-duration: 0.5s;
+  transition-property: height, max-height;
   display: block;
   position: relative;
-  height: 10lh;
+  /* height: 10lh; */
+  max-height: 10lh;
   overflow: hidden;
 
   th,
@@ -41,7 +43,8 @@ const StyledTable = styled.table`
   }
 
   &.expanded {
-    height: calc-size(auto);
+    max-height: 28lh;
+    /* height: calc-size(auto); */
 
     &:after {
       opacity: 0;
