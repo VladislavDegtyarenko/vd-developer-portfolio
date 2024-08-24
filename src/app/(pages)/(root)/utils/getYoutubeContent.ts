@@ -65,7 +65,7 @@ type getYoutubeContentProps = {
   maxResults: number;
 };
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getYoutubeContent = async (
   props: getYoutubeContentProps
@@ -83,33 +83,36 @@ export const getYoutubeContent = async (
   const url = `https://www.googleapis.com/youtube/v3/search?${searchParams.toString()}`;
 
   try {
-    // const response = await fetch(url);
-    // const data = await response.json();
-    // console.log("data: ", data);
+    const response = await fetch(url, {
+      next: { revalidate: 3600 * 12 },
+    });
+    const data = await response.json();
 
-    // if (!response.ok) {
-    //   throw new Error(data?.error?.message);
+    if (!response.ok) {
+      throw new Error(data?.error?.message);
+    }
+
+    const items: YoutubeSearchResult[] = data.items;
+
+    const videos = items.map((item: any) => ({
+      id: item.id.videoId,
+      title: item.snippet.title,
+      thumbnail: item.snippet.thumbnails.high,
+    }));
+
+    // await delay(5000);
+
+    return videos;
+
+    // if (order === "date") {
+    //   return MOCK_LATEST_VIDEOS;
     // }
 
-    // const items: YoutubeSearchResult[] = data.items;
+    // if (order === "viewCount") {
+    //   return MOCK_POPULAR_VIDEOS;
+    // }
 
-    // const videos = items.map((item: any) => ({
-    //   id: item.id.videoId,
-    //   title: item.snippet.title,
-    //   thumbnail: item.snippet.thumbnails.high,
-    // }));
-
-    await sleep(10000);
-
-    if (order === "date") {
-      return MOCK_LATEST_VIDEOS;
-    }
-
-    if (order === "viewCount") {
-      return MOCK_POPULAR_VIDEOS;
-    }
-
-    return null;
+    // return null;
   } catch (error) {
     console.error(
       `Error fetching content from Youtube API, ${getYoutubeContent.name}, ${error}`

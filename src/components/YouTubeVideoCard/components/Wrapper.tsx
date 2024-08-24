@@ -27,21 +27,21 @@ type Props = {
 };
 
 const MotionHeading = motion(H4);
+const MotionStyledWrapper = motion(StyledWrapper);
 
 const Wrapper = (props: Props) => {
   const { heading, children } = props;
 
   return (
-    <StyledWrapper>
-      <MotionHeading
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        {heading}
-      </MotionHeading>
+    <MotionStyledWrapper
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+    >
+      <MotionHeading>{heading}</MotionHeading>
       <div>{children}</div>
-    </StyledWrapper>
+    </MotionStyledWrapper>
   );
 };
 
