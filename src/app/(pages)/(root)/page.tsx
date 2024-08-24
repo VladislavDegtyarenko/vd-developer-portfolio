@@ -12,13 +12,13 @@ import YouTubeSection from "./components/YouTubeSection";
 export default function Page() {
   return (
     <>
-      {/* <Main />
+      <Main />
       <About />
       <Experience />
-      <Projects /> */}
+      <Projects />
       <YouTubeSection />
-      {/* <Reviews />
-      <Contact /> */}
+      <Reviews />
+      <Contact />
       <ProjectPreview />
     </>
   );
