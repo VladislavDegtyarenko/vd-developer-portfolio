@@ -9,6 +9,7 @@ const StyledWrapper = styled.li`
   text-align: center;
 
   width: 100%;
+  position: relative;
 
   > div {
     margin-top: 0.5rem;
@@ -18,6 +19,26 @@ const StyledWrapper = styled.li`
     > * + * {
       margin-top: 0.5rem;
     }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: ${({ theme }) => theme.cyan};
+    filter: blur(48px);
+    opacity: 0.15;
+    transform: scale(0.8);
+    transition-property: transform, opacity;
+    transition-duration: 0.5s;
+  }
+
+  &:hover:before {
+    transform: scale(1);
+    opacity: 0.3;
   }
 `;
 
@@ -37,7 +58,11 @@ const Wrapper = (props: Props) => {
       initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
+      transition={{
+        opacity: {
+          duration: 0.7,
+        },
+      }}
     >
       <MotionHeading>{heading}</MotionHeading>
       <div>{children}</div>
