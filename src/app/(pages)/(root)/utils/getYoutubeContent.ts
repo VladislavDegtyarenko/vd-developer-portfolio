@@ -86,17 +86,9 @@ export const getYoutubeContent = cache(
     try {
       const response = await fetch(url, {
         next: {
-          revalidate: 30, // 3 hrs
+          revalidate: 10800, // 3 hrs
         },
       });
-
-      // Log all headers to see if any cache-related headers exist
-      response.headers.forEach((value, name) => {
-        console.log(`${name}: ${value}`);
-      });
-
-      // Log the cache status
-      console.log("Cache Status:", response.headers.get("x-nextjs-cache")); // HIT, STALE, MISS, etc.
 
       const data = await response.json();
 
@@ -111,7 +103,7 @@ export const getYoutubeContent = cache(
         title: item.snippet.title,
         thumbnail: item.snippet.thumbnails.high,
       }));
-      console.log("videos[0].title: ", videos[0].title);
+      console.log("YouTube video requested: ", videos[0].title);
 
       // await delay(5000);
 
