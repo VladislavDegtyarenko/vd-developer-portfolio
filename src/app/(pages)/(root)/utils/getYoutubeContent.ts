@@ -85,8 +85,11 @@ export const getYoutubeContent = cache(
 
     try {
       const response = await fetch(url, {
-        next: { revalidate: 60 },
+        next: {
+          revalidate: 30, // 3 hrs
+        },
       });
+      console.log("cache-control: ", response.headers.get("cache-control"));
       const data = await response.json();
 
       if (!response.ok) {
@@ -100,6 +103,7 @@ export const getYoutubeContent = cache(
         title: item.snippet.title,
         thumbnail: item.snippet.thumbnails.high,
       }));
+      console.log("videos[0].title: ", videos[0].title);
 
       // await delay(5000);
 

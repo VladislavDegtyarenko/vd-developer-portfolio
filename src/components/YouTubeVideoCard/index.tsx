@@ -8,8 +8,6 @@ export type YouTubeVideoCardProps = {
   type: "popular" | "latest";
 };
 
-export const dynamic = "force-dynamic";
-
 const YouTubeVideoCard = (props: YouTubeVideoCardProps) => {
   const { type } = props;
   console.log("type: ", type);
