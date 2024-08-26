@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 
 const YouTubeVideoCard = (props: YouTubeVideoCardProps) => {
   const { type } = props;
+  console.log("type: ", type);
 
   const { popularVideoHeading, latestVideoHeading } = YOUTUBE;
 

@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const API_KEY = process.env.YOUTUBE_API_KEY || "";
 const CHANNEL_ID = "UCr1JTjRb_IrJ0OkTFwT3xug";
 
@@ -67,57 +69,57 @@ type getYoutubeContentProps = {
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getYoutubeContent = async (
-  props: getYoutubeContentProps
-): Promise<Video[] | null> => {
-  const { order, maxResults } = props;
+export const getYoutubeContent = cache(
+  async (props: getYoutubeContentProps): Promise<Video[] | null> => {
+    const { order, maxResults } = props;
 
-  const queryParams = {
-    key: API_KEY,
-    channelId: CHANNEL_ID,
-    part: "snippet,id",
-    order,
-    maxResults: String(maxResults),
-  };
-  const searchParams = new URLSearchParams(queryParams);
-  const url = `https://www.googleapis.com/youtube/v3/search?${searchParams.toString()}`;
+    const queryParams = {
+      key: API_KEY,
+      channelId: CHANNEL_ID,
+      part: "snippet,id",
+      order,
+      maxResults: String(maxResults),
+    };
+    const searchParams = new URLSearchParams(queryParams);
+    const url = `https://www.googleapis.com/youtube/v3/search?${searchParams.toString()}`;
 
-  try {
-    const response = await fetch(url, {
-      next: { revalidate: 3600 * 12 },
-    });
-    const data = await response.json();
+    try {
+      const response = await fetch(url, {
+        next: { revalidate: 60 },
+      });
+      const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data?.error?.message);
+      if (!response.ok) {
+        throw new Error(data?.error?.message);
+      }
+
+      const items: YoutubeSearchResult[] = data.items;
+
+      const videos = items.map((item: any) => ({
+        id: item.id.videoId,
+        title: item.snippet.title,
+        thumbnail: item.snippet.thumbnails.high,
+      }));
+
+      // await delay(5000);
+
+      return videos;
+
+      // if (order === "date") {
+      //   return MOCK_LATEST_VIDEOS;
+      // }
+
+      // if (order === "viewCount") {
+      //   return MOCK_POPULAR_VIDEOS;
+      // }
+
+      // return null;
+    } catch (error) {
+      console.error(
+        `Error fetching content from Youtube API, ${getYoutubeContent.name}, ${error}`
+      );
+
+      return null;
     }
-
-    const items: YoutubeSearchResult[] = data.items;
-
-    const videos = items.map((item: any) => ({
-      id: item.id.videoId,
-      title: item.snippet.title,
-      thumbnail: item.snippet.thumbnails.high,
-    }));
-
-    // await delay(5000);
-
-    return videos;
-
-    // if (order === "date") {
-    //   return MOCK_LATEST_VIDEOS;
-    // }
-
-    // if (order === "viewCount") {
-    //   return MOCK_POPULAR_VIDEOS;
-    // }
-
-    // return null;
-  } catch (error) {
-    console.error(
-      `Error fetching content from Youtube API, ${getYoutubeContent.name}, ${error}`
-    );
-
-    return null;
   }
-};
+);

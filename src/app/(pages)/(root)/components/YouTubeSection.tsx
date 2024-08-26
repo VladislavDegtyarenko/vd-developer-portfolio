@@ -7,8 +7,8 @@ const YouTubeSection = () => {
 
   return (
     <YouTubeSectionContainer title={title} description={description}>
-      <YouTubeVideoCard type="popular" />
       <YouTubeVideoCard type="latest" />
+      <YouTubeVideoCard type="popular" />
     </YouTubeSectionContainer>
   );
 };
