@@ -89,7 +89,15 @@ export const getYoutubeContent = cache(
           revalidate: 30, // 3 hrs
         },
       });
-      console.log("cache-control: ", response.headers.get("cache-control"));
+
+      // Log all headers to see if any cache-related headers exist
+      response.headers.forEach((value, name) => {
+        console.log(`${name}: ${value}`);
+      });
+
+      // Log the cache status
+      console.log("Cache Status:", response.headers.get("x-nextjs-cache")); // HIT, STALE, MISS, etc.
+
       const data = await response.json();
 
       if (!response.ok) {

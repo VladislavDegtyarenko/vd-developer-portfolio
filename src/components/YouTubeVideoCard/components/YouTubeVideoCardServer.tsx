@@ -11,7 +11,6 @@ const YouTubeVideoCardServer = async (props: Props) => {
     order: type === "popular" ? "viewCount" : "date",
     maxResults: 1,
   });
-  console.log("content: ", content);
 
   if (!content || content.length === 0) {
     return null;
