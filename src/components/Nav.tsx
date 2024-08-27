@@ -55,7 +55,7 @@ const navLinks = [
     text: "Blog",
   },
   {
-    href: "https://www.youtube.com/channel/UCr1JTjRb_IrJ0OkTFwT3xug",
+    href: "https://www.youtube.com/@VladyslavDihtiarenko?sub_confirmation=1",
     text: "YouTube",
     isExternal: true,
   },
