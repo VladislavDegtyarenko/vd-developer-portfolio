@@ -59,9 +59,17 @@
       "description": "Todo List app built with ReactJS. Features: easy-to-use interface, fast and responsive, sleek UI, saved in localStorage.",
       "previewLink": "https://vladislavdegtyarenko.github.io/react-todo-app/",
       "codeLink": "https://github.com/VladislavDegtyarenko/react-todo-app",
-      "isVisible": true
+      "isVisible": false
     },
 
+    {
+      "img": "minesweeper-game.jpg",
+      "title": "Minesweeper",
+      "description": "Play classic minesweeper game with fun! Choose between easy, medium and expert levels. Built using React.js.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/react-minesweeper/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/react-minesweeper",
+      "isVisible": true
+    },
     {
       "img": "2048 Game.jpg",
       "title": "2048 Game",
