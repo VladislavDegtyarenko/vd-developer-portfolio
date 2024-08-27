@@ -43,7 +43,7 @@ const StyledTable = styled.table`
   }
 
   &.expanded {
-    max-height: 28lh;
+    max-height: 46lh;
     /* height: calc-size(auto); */
 
     &:after {

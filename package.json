@@ -11,6 +11,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "preview": "next start",
+    "build-preview": "next build && next start",
+    "build-start": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -41,6 +44,7 @@
     "react-email": "1.9.4",
     "react-hook-form": "^7.45.2",
     "react-icons": "^4.10.1",
+    "react-lite-youtube-embed": "^2.4.0",
     "react-share": "^5.1.0",
     "sharp": "^0.32.6",
     "styled-components": "^6.0.1",

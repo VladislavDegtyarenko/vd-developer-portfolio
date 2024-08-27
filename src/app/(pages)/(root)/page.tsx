@@ -7,6 +7,7 @@ import Reviews from "./components/05_Reviews";
 import Contact from "./components/06_Contact";
 
 import ProjectPreview from "./components/ProjectPreview";
+import YouTubeSection from "./components/YouTubeSection";
 
 export default function Page() {
   return (
@@ -15,6 +16,7 @@ export default function Page() {
       <About />
       <Experience />
       <Projects />
+      <YouTubeSection />
       <Reviews />
       <Contact />
       <ProjectPreview />
