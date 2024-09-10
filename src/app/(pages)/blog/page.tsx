@@ -5,7 +5,8 @@ import { Suspense } from "react";
 
 // export const revalidate = 259200; // 3 days
 // export const revalidate = 3600; // 1 hour
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 const BlogPage = async () => {
   return (

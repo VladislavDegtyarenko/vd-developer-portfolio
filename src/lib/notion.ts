@@ -8,6 +8,7 @@ import { NotionBlock } from "@9gustin/react-notion-render";
 import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
 import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
+import { downloadImage } from "@/utils/imageHandler";
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
 const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
@@ -53,12 +54,16 @@ export const getPosts = async () => {
       const tags = post.properties.Tags.multi_select.map(({ name }) => name);
 
       // Handles both external and file images
-      const coverUrl =
+      const notionCover = post.cover;
+      // console.log("notionCover: ", notionCover);
+      const notionCoverUrl =
         post.cover?.type === "file"
           ? post.cover.file.url
           : post.cover?.type === "external"
           ? post.cover.external.url
           : null;
+
+      // downloadImage(notionCoverUrl, )
 
       // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
 
@@ -69,7 +74,7 @@ export const getPosts = async () => {
         slug,
         date,
         tags,
-        coverUrl,
+        coverUrl: notionCoverUrl,
         // blurDataUrl,
       };
     })
@@ -113,5 +118,9 @@ export const getPostBySlug = async (slug: string) => {
     blocks,
   } as BlogPostWithBlocks;
 
+  // console.log(
+  //   "image blocks: ",
+  //   post.blocks.filter(({ type }) => type === "image")[0]
+  // );
   return post;
 };

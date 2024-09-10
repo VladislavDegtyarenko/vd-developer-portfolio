@@ -43,7 +43,14 @@ const BlogPostPageHeading = ({
     <Styled>
       {coverUrl && (
         <div className="cover">
-          <Image src={coverUrl} priority sizes="640px" alt="" fill />
+          <Image
+            src={coverUrl}
+            priority
+            sizes="640px"
+            alt=""
+            fill
+            unoptimized
+          />
         </div>
       )}
       <H2 className="title">{title}</H2>

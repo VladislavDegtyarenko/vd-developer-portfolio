@@ -8,6 +8,7 @@ import BlogPostPageFooter from "@/sections/blog/blogPost/BlogPostPageFooter";
 
 // export const revalidate = 259200; // 3 days
 // export const revalidate = 3600; // 1 hour
+export const dynamic = "force-static";
 
 // export async function generateStaticParams() {
 //   const slugs = getPostSlugs();
