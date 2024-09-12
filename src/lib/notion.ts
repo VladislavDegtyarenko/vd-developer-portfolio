@@ -1,6 +1,8 @@
 // Notion
 import { Client } from "@notionhq/client";
 
+import { cache } from "react";
+
 // TS
 import { BlogPost, BlogPostResponse, BlogPostWithBlocks } from "@/types/notion";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
@@ -8,14 +10,14 @@ import { NotionBlock } from "@9gustin/react-notion-render";
 import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
 import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
-import { downloadImage } from "@/utils/imageHandler";
+import { downloadImage, notionImageResolver } from "@/utils/imageHandler";
 
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
 const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
 
 const notion = new Client({ auth: NOTION_TOKEN });
 
-export const getPosts = async () => {
+export const getPosts = cache(async () => {
   if (!NOTION_DATABASE_ID) {
     throw new Error("NOTION_DATABASE_ID is not set in .env file");
   }
@@ -54,8 +56,6 @@ export const getPosts = async () => {
       const tags = post.properties.Tags.multi_select.map(({ name }) => name);
 
       // Handles both external and file images
-      const notionCover = post.cover;
-      // console.log("notionCover: ", notionCover);
       const notionCoverUrl =
         post.cover?.type === "file"
           ? post.cover.file.url
@@ -63,7 +63,7 @@ export const getPosts = async () => {
           ? post.cover.external.url
           : null;
 
-      // downloadImage(notionCoverUrl, )
+      const resolvedCoverUrl = await notionImageResolver(post.cover);
 
       // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
 
@@ -74,14 +74,14 @@ export const getPosts = async () => {
         slug,
         date,
         tags,
-        coverUrl: notionCoverUrl,
+        coverUrl: resolvedCoverUrl,
         // blurDataUrl,
       };
     })
   );
 
   return posts;
-};
+});
 
 export const getPostSlugs = async () => {
   const posts = await getPosts();
