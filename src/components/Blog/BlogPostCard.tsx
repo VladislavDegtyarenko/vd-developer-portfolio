@@ -67,7 +67,7 @@ const BlogPostCard = ({
   coverUrl,
 }: BlogPostCardProps) => {
   return (
-    <StyledBlogPostCard href={`/blog/${slug}`}>
+    <StyledBlogPostCard href={`/blog/${slug}`} prefetch={false}>
       <div className="cover">
         {coverUrl ? (
           <Image

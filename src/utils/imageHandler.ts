@@ -1,26 +1,32 @@
-import fs from "fs";
-import path from "path";
 import fetch from "node-fetch";
-import { GetStaticProps } from "next";
 import { Cover } from "@/types/notion";
+import { put } from "@vercel/blob";
+import { list } from "@vercel/blob";
+import { cache } from "react";
 
-const PUBLIC = "public";
-const NOTION_IMAGES = "notion-images";
-
-// Function to download an image and save it in the public folder
-export const downloadImage = async (url: string, filename: string) => {
-  const imagesDir = path.join(process.cwd(), PUBLIC, NOTION_IMAGES);
-
-  // Ensure that the images directory exists, create if not
-  if (!fs.existsSync(imagesDir)) {
-    fs.mkdirSync(imagesDir, { recursive: true }); // Creates the directory if it doesn't exist
-  }
-
+const uploadImageToBlob = async (url: string, filename: string) => {
+  console.log("uploadImageToBlob: ");
   const res = await fetch(url);
   const imageBuffer = await res.buffer();
-  const filePath = path.join(imagesDir, filename);
-  fs.writeFileSync(filePath, imageBuffer);
+  const contentType = res.headers.get("content-type");
+  const imageBlob = new Blob([imageBuffer], {
+    type: contentType || "image/jpeg",
+  });
+  console.log("\u001b[1;32m", "imageBlob: ", imageBlob, "\u001b[0m");
+
+  const blob = await put(filename, imageBlob, {
+    access: "public",
+  });
+
+  console.log("blob: ", blob);
+  return blob;
 };
+
+const listBlobStore = cache(async () => {
+  console.log("listBlobStore function");
+  const { blobs } = await list();
+  return blobs;
+});
 
 // Function to check if image URL has expired
 const isUrlExpired = (expiryTime: string) => {
@@ -29,22 +35,31 @@ const isUrlExpired = (expiryTime: string) => {
   return currentDate > expiryDate;
 };
 
-export const notionImageResolver = async (cover: Cover) => {
+export const resolveCoverUrl = async (postId: string, cover: Cover) => {
   if (cover === null) return null;
 
   if (cover.type === "external") return cover.external.url;
 
   const { url, expiry_time } = cover.file;
-  const imageUrl = new URL(url);
-  const imageName = imageUrl.pathname.split("/").pop()!;
-  const filePath = path.join(process.cwd(), PUBLIC, NOTION_IMAGES, imageName);
+
+  const blobStore = await listBlobStore();
+  const isUploadedToVercelBlob = blobStore.some(
+    (blob) => blob.pathname === postId
+  );
+  const isNotionAWSBucketExpired = isUrlExpired(expiry_time);
 
   // Check if the file exists and if the URL has expired
-  if (!fs.existsSync(filePath) || isUrlExpired(expiry_time)) {
+  if (!isUploadedToVercelBlob || isNotionAWSBucketExpired) {
     // If the URL is expired or the file doesn't exist, download the image again
-    await downloadImage(url, imageName);
+    const newBlob = await uploadImageToBlob(url, postId);
+    return newBlob.url;
   }
 
-  // Return the local path to be used in your rendering
-  return `/notion-images/${imageName}`;
+  const image = blobStore.find(({ pathname }) => pathname === postId);
+
+  if (image) {
+    return image.url;
+  }
+
+  return null;
 };

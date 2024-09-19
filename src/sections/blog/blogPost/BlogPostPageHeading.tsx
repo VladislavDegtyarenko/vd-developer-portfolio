@@ -11,8 +11,7 @@ const Styled = styled.div`
     width: 100%;
     aspect-ratio: 16 / 9;
     position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
+    clip-path: inset(0 round 1rem);
     /* border: solid 2px ${({ theme }) => theme.cyan}; */
     img {
       object-fit: cover;

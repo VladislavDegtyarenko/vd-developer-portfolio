@@ -1,11 +1,12 @@
 "use client";
 
 import styled from "styled-components";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import ArrowIcon from "@/components/icons/Arrow";
 
-const StyledBtn = styled(Link)`
+const StyledBtn = styled.button`
   padding: 0.5rem 1rem;
   color: ${({ theme }) => theme.fg};
   text-decoration: none;
@@ -33,8 +34,14 @@ const StyledBtn = styled(Link)`
 `;
 
 const BackToBlogBtn = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    window?.history?.length > 2 ? router.back() : router.push("/blog");
+  };
+
   return (
-    <StyledBtn href="/blog">
+    <StyledBtn onClick={handleClick}>
       <ArrowIcon />
       Back to blog
     </StyledBtn>

@@ -1,3 +1,5 @@
+"server-only";
+
 // Notion
 import { Client } from "@notionhq/client";
 
@@ -7,23 +9,26 @@ import { cache } from "react";
 import { BlogPost, BlogPostResponse, BlogPostWithBlocks } from "@/types/notion";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlock } from "@9gustin/react-notion-render";
-import calcReadingTime from "@/utils/calcReadingTime";
+// import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
-import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
-import { downloadImage, notionImageResolver } from "@/utils/imageHandler";
+// import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
+import { resolveCoverUrl } from "@/utils/imageHandler";
 
-const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
-const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
+export const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
+export const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
 
-const notion = new Client({ auth: NOTION_TOKEN });
+export const notion = new Client({ auth: NOTION_TOKEN });
 
 export const getPosts = cache(async () => {
-  if (!NOTION_DATABASE_ID) {
-    throw new Error("NOTION_DATABASE_ID is not set in .env file");
-  }
+  console.log("getPosts");
 
-  const res = await notion.databases.query({
-    database_id: NOTION_DATABASE_ID,
+  const headers = new Headers({
+    Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+    "Notion-Version": "2022-06-28",
+    "Content-Type": "application/json",
+  });
+
+  const body = JSON.stringify({
     filter: {
       and: [
         {
@@ -44,55 +49,94 @@ export const getPosts = cache(async () => {
     ],
   });
 
-  const results = res.results as BlogPostResponse[];
+  const url = `${process.env.NOTION_API_ENDPOINT}/v1/databases/${process.env.NOTION_DATABASE_ID}/query`;
+  const options = {
+    method: "POST",
+    headers,
+    body,
+  };
 
-  const posts = await Promise.all(
-    results.map(async (post) => {
-      const id = post.id;
-      const title = post.properties.Title.title[0].plain_text;
-      const description = post.properties.Description.rich_text[0]?.plain_text;
-      const slug = post.properties.Slug?.rich_text[0].plain_text;
-      const date = post.properties.Date.date?.start;
-      const tags = post.properties.Tags.multi_select.map(({ name }) => name);
+  try {
+    const res = await fetch(url, options);
 
-      // Handles both external and file images
-      const notionCoverUrl =
-        post.cover?.type === "file"
-          ? post.cover.file.url
-          : post.cover?.type === "external"
-          ? post.cover.external.url
-          : null;
+    if (!res.ok) {
+      const errorObjectFromNotion = await res.json();
 
-      const resolvedCoverUrl = await notionImageResolver(post.cover);
+      if (errorObjectFromNotion?.object === "error") {
+        console.error(
+          `Error status: ${errorObjectFromNotion?.status}.\nCode: ${errorObjectFromNotion?.code}.\.Message: ${errorObjectFromNotion?.message} `
+        );
+      }
 
-      // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+      return null;
+    }
 
-      return {
-        id,
-        title,
-        description,
-        slug,
-        date,
-        tags,
-        coverUrl: resolvedCoverUrl,
-        // blurDataUrl,
-      };
-    })
-  );
+    const data = await res.json();
 
-  return posts;
+    const results = data.results as BlogPostResponse[];
+
+    const posts = await Promise.all(
+      results.map(async (post) => {
+        const id = post.id;
+        const title = post.properties.Title.title[0].plain_text;
+        const description =
+          post.properties.Description.rich_text[0]?.plain_text;
+        const slug = post.properties.Slug?.rich_text[0].plain_text;
+        const date = post.properties.Date.date?.start;
+        const tags = post.properties.Tags.multi_select.map(({ name }) => name);
+
+        // Handles both external and file images
+        // const notionCoverUrl =
+        //   post.cover?.type === "file"
+        //     ? post.cover.file.url
+        //     : post.cover?.type === "external"
+        //     ? post.cover.external.url
+        //     : null;
+
+        const resolvedCoverUrl = await resolveCoverUrl(post.id, post.cover);
+
+        // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+
+        return {
+          id,
+          title,
+          description,
+          slug,
+          date,
+          tags,
+          coverUrl: resolvedCoverUrl,
+          // blurDataUrl,
+        };
+      })
+    );
+
+    return posts;
+  } catch (error) {
+    new Error(
+      `Error while querying Notion database in getPosts function ${getPosts.name}: ${error}`
+    );
+
+    return null;
+  }
 });
 
-export const getPostSlugs = async () => {
+export const getPostSlugs = cache(async () => {
   const posts = await getPosts();
 
-  const slugs = posts.map(async ({ slug }) => slug);
+  if (posts === null) return [];
+
+  const slugs = posts.map(({ slug }) => ({
+    postSlug: slug,
+  }));
+  console.log("Slugs: ", slugs);
 
   return slugs;
-};
+});
 
-export const getPostBySlug = async (slug: string) => {
+export const getPostBySlug = cache(async (slug: string) => {
   const posts = await getPosts();
+
+  if (posts === null) return null;
 
   const postBySlug = posts.find((post) => post.slug === slug);
 
@@ -100,27 +144,46 @@ export const getPostBySlug = async (slug: string) => {
     return null;
   }
 
-  const postId = postBySlug.id;
+  const blockId = postBySlug.id;
 
-  const res = await notion.blocks.children.list({
-    block_id: postId,
-  });
+  try {
+    const url = `${process.env.NOTION_API_ENDPOINT}/v1/blocks/${blockId}/children?page_size=100`;
+    const options = {
+      method: "GET",
+      headers: new Headers({
+        Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+        "Notion-Version": "2022-06-28",
+      }),
+    };
 
-  const blocks = res.results as NotionBlock[];
+    const res = await fetch(url, options);
 
-  // const { coverUrl } = postBySlug;
-  // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+    if (!res.ok) {
+      const errorObjectFromNotion = await res.json();
+      console.error(errorObjectFromNotion);
 
-  const post = {
-    ...postBySlug,
-    // blurDataUrl,
-    readingTime: calcBlocksReadingTime(res.results as BlockObjectResponse[]),
-    blocks,
-  } as BlogPostWithBlocks;
+      return null;
+    }
 
-  // console.log(
-  //   "image blocks: ",
-  //   post.blocks.filter(({ type }) => type === "image")[0]
-  // );
-  return post;
-};
+    const data = await res.json();
+    const blocks = data.results as NotionBlock[];
+
+    // const { coverUrl } = postBySlug;
+    // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+
+    const post = {
+      ...postBySlug,
+      // blurDataUrl,
+      readingTime: calcBlocksReadingTime(blocks as BlockObjectResponse[]),
+      blocks,
+    } as BlogPostWithBlocks;
+
+    return post;
+  } catch (error) {
+    console.error(
+      `Error while fetching data from Notion, ${getPostBySlug.name}: ${error}`
+    );
+
+    return null;
+  }
+});
