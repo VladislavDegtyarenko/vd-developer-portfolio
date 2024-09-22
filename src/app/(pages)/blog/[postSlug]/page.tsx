@@ -20,11 +20,11 @@ const BlogPostPage = async ({ params }: { params: { postSlug: string } }) => {
   const { postSlug } = params;
 
   return (
-    <BlogPostPageWrapper>
-      <Suspense fallback={<PostSkeleton />}>
-        <BlogPostServer postSlug={postSlug} />
-      </Suspense>
-    </BlogPostPageWrapper>
+    // <BlogPostPageWrapper>
+    <Suspense fallback={<PostSkeleton />}>
+      <BlogPostServer postSlug={postSlug} />
+    </Suspense>
+    // </BlogPostPageWrapper>
   );
 };
 
