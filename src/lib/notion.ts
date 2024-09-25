@@ -11,7 +11,7 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlock } from "@9gustin/react-notion-render";
 // import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
-// import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
+import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
 import { resolveCoverUrl } from "@/utils/imageHandler";
 
 export const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
@@ -20,7 +20,7 @@ export const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
 export const notion = new Client({ auth: NOTION_TOKEN });
 
 export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
-  console.log("getPosts");
+  console.log("\u001b[1;44m getPosts \u001b[0m");
 
   const headers = new Headers({
     Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
@@ -95,7 +95,9 @@ export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
 
         const resolvedCoverUrl = await resolveCoverUrl(post.id, post.cover);
 
-        // const blurDataUrl = coverUrl ? await generateBlurDataUrl(coverUrl) : null;
+        const blurDataUrl = resolvedCoverUrl
+          ? await generateBlurDataUrl(resolvedCoverUrl)
+          : null;
 
         return {
           id,
@@ -105,7 +107,7 @@ export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
           date,
           tags,
           coverUrl: resolvedCoverUrl,
-          // blurDataUrl,
+          blurDataUrl,
         };
       })
     );

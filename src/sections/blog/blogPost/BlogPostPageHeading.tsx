@@ -36,6 +36,7 @@ const BlogPostPageHeading = ({
   date,
   tags,
   coverUrl,
+  blurDataUrl,
   readingTime,
 }: BlogPost) => {
   return (
@@ -49,6 +50,7 @@ const BlogPostPageHeading = ({
             alt=""
             fill
             quality={80}
+            {...(blurDataUrl && { blurDataURL: blurDataUrl })}
           />
         </div>
       )}
