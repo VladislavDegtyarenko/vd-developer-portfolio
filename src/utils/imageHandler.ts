@@ -1,35 +1,29 @@
-import fetch from "node-fetch";
 import { Cover } from "@/types/notion";
-import { put } from "@vercel/blob";
-import { list } from "@vercel/blob";
-import { cache } from "react";
+import { listBlobStore, uploadImageToBlob } from "./vercelBlob";
 
-const uploadImageToBlob = async (url: string, filename: string) => {
-  console.log("uploadImageToBlob: ");
-  const res = await fetch(url);
-  const imageBuffer = await res.buffer();
-  const contentType = res.headers.get("content-type");
-  const imageBlob = new Blob([imageBuffer], {
-    type: contentType || "image/jpeg",
-  });
-  console.log("\u001b[1;32m", "imageBlob: ", imageBlob, "\u001b[0m");
+function isValidISO8601(timestamp: string) {
+  const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/;
+  return regex.test(timestamp);
+}
 
-  const blob = await put(filename, imageBlob, {
-    access: "public",
-  });
-
-  console.log("blob: ", blob);
-  return blob;
-};
-
-const listBlobStore = cache(async () => {
-  console.log("listBlobStore function");
-  const { blobs } = await list();
-  return blobs;
-});
-
-// Function to check if image URL has expired
+// Function to check if Notion image URL from AWS Bucket has expired
 const isUrlExpired = (expiryTime: string) => {
+  if (typeof expiryTime !== "string") {
+    console.warn(
+      `The expiryTime type is not a string. Current type: ${typeof expiryTime}`
+    );
+
+    return true;
+  }
+
+  if (!isValidISO8601(expiryTime)) {
+    console.error(
+      `The expiryTime timestamp which is ${expiryTime} is not an ISO 8601 string`
+    );
+
+    return true;
+  }
+
   const expiryDate = new Date(expiryTime);
   const currentDate = new Date();
   return currentDate > expiryDate;
@@ -52,7 +46,7 @@ export const resolveCoverUrl = async (postId: string, cover: Cover) => {
   if (!isUploadedToVercelBlob || isNotionAWSBucketExpired) {
     // If the URL is expired or the file doesn't exist, download the image again
     const newBlob = await uploadImageToBlob(url, postId);
-    return newBlob.url;
+    return newBlob?.url ?? null;
   }
 
   const image = blobStore.find(({ pathname }) => pathname === postId);
