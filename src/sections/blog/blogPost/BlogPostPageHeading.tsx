@@ -45,10 +45,10 @@ const BlogPostPageHeading = ({
           <Image
             src={coverUrl}
             priority
-            sizes="640px"
+            sizes="(max-width: 479px) 432px, (max-width: 767px) 540px, 640px"
             alt=""
             fill
-            unoptimized
+            quality={80}
           />
         </div>
       )}

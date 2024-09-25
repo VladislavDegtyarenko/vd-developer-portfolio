@@ -19,7 +19,7 @@ export const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
 
 export const notion = new Client({ auth: NOTION_TOKEN });
 
-export const getPosts = cache(async () => {
+export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
   console.log("getPosts");
 
   const headers = new Headers({
