@@ -1,8 +1,4 @@
-"server-only";
-
-// Notion
-import { Client } from "@notionhq/client";
-
+// Core
 import { cache } from "react";
 
 // TS
@@ -12,12 +8,10 @@ import { NotionBlock } from "@9gustin/react-notion-render";
 // import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
 import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
-import { resolveCoverUrl } from "@/utils/imageHandler";
+import { resolveNotionImage } from "@/utils/resolveNotionImage";
 
 export const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID || "";
 export const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
-
-export const notion = new Client({ auth: NOTION_TOKEN });
 
 export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
   console.log("\u001b[1;44m getPosts \u001b[0m");
@@ -93,7 +87,7 @@ export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
         //     ? post.cover.external.url
         //     : null;
 
-        const resolvedCoverUrl = await resolveCoverUrl(post.id, post.cover);
+        const resolvedCoverUrl = await resolveNotionImage(post.id, post.cover);
 
         const blurDataUrl = resolvedCoverUrl
           ? await generateBlurDataUrl(resolvedCoverUrl)

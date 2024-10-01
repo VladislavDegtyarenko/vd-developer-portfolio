@@ -50,6 +50,7 @@ const BlogPostPageHeading = ({
             alt=""
             fill
             quality={80}
+            unoptimized
             {...(blurDataUrl && { blurDataURL: blurDataUrl })}
           />
         </div>

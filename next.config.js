@@ -34,13 +34,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    logging: {
-      fetches: {
-        fullUrl: true,
-      },
-    },
-  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

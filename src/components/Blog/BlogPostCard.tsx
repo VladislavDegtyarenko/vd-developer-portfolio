@@ -77,6 +77,7 @@ const BlogPostCard = ({
             sizes="256px"
             quality={80}
             fill
+            unoptimized
             {...(blurDataUrl && { blurDataURL: blurDataUrl })}
           />
         ) : (
