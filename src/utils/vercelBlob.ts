@@ -5,7 +5,6 @@ import sharp from "sharp";
 
 export const listBlobStore = cache(async () => {
   const { blobs } = await list();
-  console.log("listBlobStore blobs[0]: ", blobs[0]);
   return blobs;
 });
 
@@ -32,7 +31,6 @@ export const uploadImageToBlob = async (url: string, filename: string) => {
       cacheControlMaxAge: 0,
     });
 
-    console.log("blob: ", blob);
     return blob;
   } catch (error) {
     console.error(`Error while uploading image to Vercel Blob: ${error}`);
