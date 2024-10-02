@@ -16,7 +16,7 @@ export default function Page() {
       <About />
       <Experience />
       <Projects />
-      {/* <YouTubeSection /> */}
+      <YouTubeSection />
       <Reviews />
       <Contact />
       <ProjectPreview />
