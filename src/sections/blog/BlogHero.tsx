@@ -2,14 +2,12 @@
 
 import { styled } from "styled-components";
 import Container from "@/components/layout/Container";
-import Section from "@/components/Section";
 import { H2, P1 } from "@/components/Text";
 import Image from "next/image";
 import HeroBg from "/public/assets/blog/FullSizeRender2.jpg";
 
 const Styled = styled.div`
   padding-top: 6rem;
-  /* background-color: ${({ theme }) => theme.cardBg}; */
   position: relative;
   display: flex;
   justify-content: center;

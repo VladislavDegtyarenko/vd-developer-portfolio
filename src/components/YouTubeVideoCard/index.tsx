@@ -17,9 +17,9 @@ const YouTubeVideoCard = (props: YouTubeVideoCardProps) => {
     <Wrapper
       heading={type === "popular" ? popularVideoHeading : latestVideoHeading}
     >
-      {/* <Suspense fallback={<Loading />}> */}
-      <YouTubeVideoCardServer type={type} />
-      {/* </Suspense> */}
+      <Suspense fallback={<Loading />}>
+        <YouTubeVideoCardServer type={type} />
+      </Suspense>
     </Wrapper>
   );
 };

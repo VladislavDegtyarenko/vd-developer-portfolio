@@ -12,10 +12,11 @@ type CoverFile = {
   type: "file";
   file: {
     url: string;
+    expiry_time: string;
   };
 };
 
-type Cover = CoverFile & CoverExternal;
+export type Cover = CoverFile | CoverExternal | null;
 
 type Date = {
   id: string;
@@ -128,7 +129,7 @@ export type BlogPost = {
   date?: string;
   // published: boolean;
   coverUrl: string | null;
-  // blurDataUrl: string | null;
+  blurDataUrl: string | null;
   readingTime?: number;
 };
 

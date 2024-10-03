@@ -1,32 +1,12 @@
 import { cache } from "react";
+// import path from "path";
+// import fs from "fs";
 
 const API_KEY = process.env.YOUTUBE_API_KEY || "";
 const CHANNEL_ID = "UCr1JTjRb_IrJ0OkTFwT3xug";
 
-const MOCK_LATEST_VIDEOS = [
-  {
-    id: "4imxQHicyN0",
-    title: "How To Create Read More Read Less Button with CSS Only",
-    thumbnail: {
-      url: "https://i.ytimg.com/vi/4imxQHicyN0/hqdefault.jpg",
-      width: 480,
-      height: 360,
-    },
-  },
-];
-
-const MOCK_POPULAR_VIDEOS = [
-  {
-    id: "vAp3xL1AY4I",
-    title:
-      "Elegant Text Reveal Effect using React and Framer Motion | Letter-By-Letter Text Animation",
-    thumbnail: {
-      url: "https://i.ytimg.com/vi/vAp3xL1AY4I/hqdefault.jpg",
-      width: 480,
-      height: 360,
-    },
-  },
-];
+import mockLatest from "src/data/youtubeContentMocks/latest.json";
+import mockPopular from "src/data/youtubeContentMocks/popular.json";
 
 export type Video = {
   id: string;
@@ -67,8 +47,6 @@ type getYoutubeContentProps = {
   maxResults: number;
 };
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const getYoutubeContent = cache(
   async (props: getYoutubeContentProps): Promise<Video[] | null> => {
     const { order, maxResults } = props;
@@ -84,17 +62,51 @@ export const getYoutubeContent = cache(
     const url = `https://www.googleapis.com/youtube/v3/search?${searchParams.toString()}`;
 
     try {
-      const response = await fetch(url, {
-        next: {
-          revalidate: 10800, // 3 hrs
-        },
-      });
+      let data;
 
-      const data = await response.json();
+      // Fetch only in production mode
+      console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
+      if (process.env.NODE_ENV === "production") {
+        const response = await fetch(url, {
+          next: {
+            revalidate: 10800, // 3 hrs
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error(data?.error?.message);
+        data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data?.error?.message);
+        }
       }
+
+      // Use mocks on dev mode to save API call bandwidth
+      if (process.env.NODE_ENV === "development") {
+        if (order === "viewCount") {
+          data = mockPopular;
+        } else {
+          data = mockLatest;
+        }
+      }
+
+      // Solution to write mocks in jsons
+      // if (order === "viewCount") {
+      //   const filePath = path.join(
+      //     process.cwd(),
+      //     "src/data/youtubeContentMocks/popular.json"
+      //   );
+      //   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+      //   console.log(`Data written to popular.json`);
+      // }
+
+      // if (order === "date") {
+      //   const filePath = path.join(
+      //     process.cwd(),
+      //     "src/data/youtubeContentMocks/latest.json"
+      //   );
+      //   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+      //   console.log(`Data written to latest.json`);
+      // }
 
       const items: YoutubeSearchResult[] = data.items;
 
@@ -103,21 +115,10 @@ export const getYoutubeContent = cache(
         title: item.snippet.title,
         thumbnail: item.snippet.thumbnails.high,
       }));
-      console.log("YouTube video requested: ", videos[0].title);
 
       // await delay(5000);
 
       return videos;
-
-      // if (order === "date") {
-      //   return MOCK_LATEST_VIDEOS;
-      // }
-
-      // if (order === "viewCount") {
-      //   return MOCK_POPULAR_VIDEOS;
-      // }
-
-      // return null;
     } catch (error) {
       console.error(
         `Error fetching content from Youtube API, ${getYoutubeContent.name}, ${error}`

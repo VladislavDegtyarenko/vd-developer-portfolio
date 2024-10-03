@@ -8,6 +8,7 @@ import useMounted from "@/hooks/useMounted";
 const darkTheme = {
   bg: "#050505",
   cardBg: "#242424",
+  shine: "#363636",
   cyan: "#1B9AAA",
   // cyan: "#1ECBE1",
   cyanHover: "#2dacbd",
@@ -21,6 +22,7 @@ const darkTheme = {
 const lightTheme = {
   bg: "#f6f6f6",
   cardBg: "#e4e4e4",
+  shine: "#f2f2f2",
   cyan: "#1B9AAA",
   // cyan: "#1ECBE1",
   cyanHover: "#2dacbd",

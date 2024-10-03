@@ -11,8 +11,7 @@ const Styled = styled.div`
     width: 100%;
     aspect-ratio: 16 / 9;
     position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
+    clip-path: inset(0 round 1rem);
     /* border: solid 2px ${({ theme }) => theme.cyan}; */
     img {
       object-fit: cover;
@@ -37,13 +36,23 @@ const BlogPostPageHeading = ({
   date,
   tags,
   coverUrl,
+  blurDataUrl,
   readingTime,
 }: BlogPost) => {
   return (
     <Styled>
       {coverUrl && (
         <div className="cover">
-          <Image src={coverUrl} priority sizes="640px" alt="" fill />
+          <Image
+            src={coverUrl}
+            priority
+            sizes="(max-width: 479px) 432px, (max-width: 767px) 540px, 640px"
+            alt=""
+            fill
+            quality={80}
+            unoptimized
+            {...(blurDataUrl && { blurDataURL: blurDataUrl })}
+          />
         </div>
       )}
       <H2 className="title">{title}</H2>

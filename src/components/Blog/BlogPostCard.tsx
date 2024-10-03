@@ -65,12 +65,21 @@ const BlogPostCard = ({
   slug,
   tags,
   coverUrl,
+  blurDataUrl,
 }: BlogPostCardProps) => {
   return (
     <StyledBlogPostCard href={`/blog/${slug}`}>
       <div className="cover">
         {coverUrl ? (
-          <Image src={coverUrl} alt="" sizes="256px" quality={90} fill />
+          <Image
+            src={coverUrl}
+            alt=""
+            sizes="256px"
+            quality={80}
+            fill
+            unoptimized
+            {...(blurDataUrl && { blurDataURL: blurDataUrl })}
+          />
         ) : (
           <Logo />
         )}
