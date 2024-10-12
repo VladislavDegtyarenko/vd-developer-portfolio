@@ -1,14 +1,14 @@
 import { NotionBlock } from "@9gustin/react-notion-render";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
-type CoverExternal = {
+type NotionExternalImage = {
   type: "external";
   external: {
     url: string;
   };
 };
 
-type CoverFile = {
+export type NotionImage = {
   type: "file";
   file: {
     url: string;
@@ -16,7 +16,7 @@ type CoverFile = {
   };
 };
 
-export type Cover = CoverFile | CoverExternal | null;
+export type NotionCoverImage = NotionImage | NotionExternalImage | null;
 
 type Date = {
   id: string;
