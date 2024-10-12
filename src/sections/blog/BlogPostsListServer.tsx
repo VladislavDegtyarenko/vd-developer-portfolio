@@ -1,15 +1,8 @@
 import { getPosts } from "@/lib/notion";
 import BlogPostsListClient from "./BlogPostsListClient";
-import { cache } from "react";
-
-const Posts = async () => {
-  const posts = await getPosts();
-
-  return posts;
-};
 
 const BlogPostsListServer = async () => {
-  const posts = await Posts();
+  const posts = await getPosts();
 
   if (!posts) {
     return null;

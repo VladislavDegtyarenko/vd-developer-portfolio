@@ -35,39 +35,16 @@ const BlogPostsListClient = ({ posts }: { posts: BlogPost[] }) => {
       <Container>
         <ul className="posts-list">
           {posts && posts.length > 0 ? (
-            posts.map(
-              (
-                {
-                  id,
-                  title,
-                  description,
-                  slug,
-                  tags,
-                  date,
-                  coverUrl,
-                  blurDataUrl,
-                },
-                index
-              ) => {
-                return (
-                  <Fragment key={id}>
-                    <li>
-                      <BlogPostCard
-                        id={id}
-                        title={title}
-                        description={description}
-                        date={date}
-                        slug={slug}
-                        coverUrl={coverUrl}
-                        blurDataUrl={blurDataUrl}
-                        tags={tags}
-                      />
-                    </li>
-                    {index < posts.length - 1 && <Divider />}
-                  </Fragment>
-                );
-              }
-            )
+            posts.map((post, index) => {
+              return (
+                <Fragment key={post.id}>
+                  <li>
+                    <BlogPostCard {...post} />
+                  </li>
+                  {index < posts.length - 1 && <Divider />}
+                </Fragment>
+              );
+            })
           ) : (
             <P1>No posts yet.</P1>
           )}

@@ -51,7 +51,10 @@ const BlogPostPageHeading = ({
             fill
             quality={80}
             unoptimized
-            {...(blurDataUrl && { blurDataURL: blurDataUrl })}
+            {...(blurDataUrl && {
+              placeholder: "blur",
+              blurDataURL: blurDataUrl,
+            })}
           />
         </div>
       )}

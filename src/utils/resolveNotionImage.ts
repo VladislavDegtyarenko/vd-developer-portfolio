@@ -1,5 +1,5 @@
-import { Cover } from "@/types/notion";
-import { listBlobStore, uploadImageToBlob } from "./vercelBlob";
+import { NotionCoverImage } from "@/types/notion";
+import { getImageFromBlob, uploadImageToBlob } from "./vercelBlob";
 import { isNotionUrlExpired } from "./isNotionUrlExpired";
 
 /**
@@ -12,48 +12,52 @@ import { isNotionUrlExpired } from "./isNotionUrlExpired";
  * existing image URL or null if couldn't resolve an image.
  *
  * @param {string} postId - The ID of the post associated with the image.
- * @param {Cover} cover - The cover object containing image details, including type and URL.
+ * @param {NotionCoverImage} image - The cover object containing image details, including type and URL.
  * @returns {Promise<string | null>} A promise that resolves to the image URL if found or null.
  */
 
 export const resolveNotionImage = async (
-  postId: string,
-  cover: Cover
+  image: NotionCoverImage
 ): Promise<string | null> => {
-  if (cover === null) return null;
+  if (image === null) return null;
 
   // External images are not stored in AWS Cloud
-  if (cover.type === "external") return cover.external.url;
+  if (image.type === "external") return image.external.url;
 
-  const { url, expiry_time } = cover.file;
+  // Extra check if the notion image is a file
+  if (image.type !== "file") {
+    return null;
+  }
 
-  const blobStore = await listBlobStore();
-  const isUploadedToVercelBlob = blobStore.some(
-    (blob) => blob.pathname === postId
-  );
+  const { url, expiry_time } = image.file;
+
+  const imageUrl = new URL(url);
+  const pathname = imageUrl.pathname.slice(1); //remove leading slash
+
+  const imageInVercelBlob = await getImageFromBlob(pathname);
   const isNotionAWSBucketExpired = isNotionUrlExpired(expiry_time);
 
   // Check if the file is not in Vercel Blob yet
   // OR
   // if the URL has expired
-  if (!isUploadedToVercelBlob || isNotionAWSBucketExpired) {
+  if (!imageInVercelBlob || isNotionAWSBucketExpired) {
     // If the URL is expired or the file doesn't exist,
     // download the image and upload it to Vercel Blob
-    const newBlob = await uploadImageToBlob(url, postId);
+    const newBlob = await uploadImageToBlob(url, pathname);
 
     // If the image is uploaded successfully, return a URL from Vercel Blob
     if (newBlob?.url) {
       console.log(`Returned new image url: ${newBlob.url}`);
-      return newBlob?.url;
+      return newBlob.url;
     }
   }
 
-  // Otherwise, find the image in Vercel Blob
-  const image = blobStore.find(({ pathname }) => pathname === postId);
-
-  if (image) {
-    console.log(`Returned already uploaded image to Vercel Blob: ${image.url}`);
-    return image.url;
+  // Otherwise, use the already uploaded image in Vercel Blob
+  if (imageInVercelBlob) {
+    console.log(
+      `Returned already uploaded image to Vercel Blob: ${imageInVercelBlob.url}`
+    );
+    return imageInVercelBlob.url;
   }
 
   console.log(`Returned null as image for url: ${url}`);
