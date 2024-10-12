@@ -1,6 +1,8 @@
 import { NotionCoverImage } from "@/types/notion";
-import { getImageFromBlob, uploadImageToBlob } from "./vercelBlob";
 import { isNotionUrlExpired } from "./isNotionUrlExpired";
+import { getImageFromVercelBlob } from "./vercelBlob/getImageToVercelBlob";
+import { uploadImageToVercelBlob } from "./vercelBlob/uploadImageToVercelBlob";
+import { ResizeOptions } from "sharp";
 
 /**
  * Resolves the URL for a Notion image by checking its status and uploading it if necessary.
@@ -17,7 +19,8 @@ import { isNotionUrlExpired } from "./isNotionUrlExpired";
  */
 
 export const resolveNotionImage = async (
-  image: NotionCoverImage
+  image: NotionCoverImage,
+  resizeOptions: ResizeOptions = {}
 ): Promise<string | null> => {
   if (image === null) return null;
 
@@ -34,7 +37,7 @@ export const resolveNotionImage = async (
   const imageUrl = new URL(url);
   const pathname = imageUrl.pathname.slice(1); //remove leading slash
 
-  const imageInVercelBlob = await getImageFromBlob(pathname);
+  const imageInVercelBlob = await getImageFromVercelBlob(pathname);
   const isNotionAWSBucketExpired = isNotionUrlExpired(expiry_time);
 
   // Check if the file is not in Vercel Blob yet
@@ -43,7 +46,11 @@ export const resolveNotionImage = async (
   if (!imageInVercelBlob || isNotionAWSBucketExpired) {
     // If the URL is expired or the file doesn't exist,
     // download the image and upload it to Vercel Blob
-    const newBlob = await uploadImageToBlob(url, pathname);
+    const newBlob = await uploadImageToVercelBlob({
+      url,
+      pathname,
+      resizeOptions,
+    });
 
     // If the image is uploaded successfully, return a URL from Vercel Blob
     if (newBlob?.url) {

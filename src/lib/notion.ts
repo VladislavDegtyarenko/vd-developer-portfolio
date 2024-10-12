@@ -2,12 +2,7 @@
 import { cache } from "react";
 
 // TS
-import {
-  BlogPost,
-  BlogPostResponse,
-  BlogPostWithBlocks,
-  NotionImage,
-} from "@/types/notion";
+import { BlogPost, BlogPostResponse, BlogPostWithBlocks } from "@/types/notion";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlock } from "@9gustin/react-notion-render";
 // import calcReadingTime from "@/utils/calcReadingTime";
@@ -97,14 +92,16 @@ export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
         const tags = post.properties.Tags.multi_select.map(({ name }) => name);
 
         // Handles both external and file images
-        const notionCoverUrl =
-          post.cover?.type === "file"
-            ? post.cover.file.url
-            : post.cover?.type === "external"
-            ? post.cover.external.url
-            : null;
+        // const notionCoverUrl =
+        //   post.cover?.type === "file"
+        //     ? post.cover.file.url
+        //     : post.cover?.type === "external"
+        //     ? post.cover.external.url
+        //     : null;
 
-        const resolvedCoverUrl = await resolveNotionImage(post.cover);
+        const resolvedCoverUrl = await resolveNotionImage(post.cover, {
+          width: 640,
+        });
 
         const blurDataUrl = resolvedCoverUrl
           ? await generateBlurDataUrl(resolvedCoverUrl)
@@ -242,7 +239,7 @@ export const getPostBySlug = cache(async (slug: string) => {
     // X-Amz-SignedHeaders=host&
     // x-id=GetObject
 
-    // TODO:
+    // DONE:
     // 1. Rework uploading images in the same structure: /awsPostSlug/awsBlockSlug/filename_transformed.png
     // 2. Handle getting images in this way
     // 3. Handle resolving block image urls
