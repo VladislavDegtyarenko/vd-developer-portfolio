@@ -117,7 +117,7 @@ export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
           slug,
           date,
           tags,
-          coverUrl: notionCoverUrl,
+          coverUrl: resolvedCoverUrl,
           blurDataUrl,
         };
       })
