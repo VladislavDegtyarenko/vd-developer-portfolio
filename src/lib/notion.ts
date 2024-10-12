@@ -5,7 +5,6 @@ import { cache } from "react";
 import { BlogPost, BlogPostResponse, BlogPostWithBlocks } from "@/types/notion";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlock } from "@9gustin/react-notion-render";
-// import calcReadingTime from "@/utils/calcReadingTime";
 import { calcBlocksReadingTime } from "@/utils/calcBlocksReadingTime";
 import { generateBlurDataUrl } from "@/utils/generateBlurDataUrl";
 import { resolveNotionImage } from "@/utils/resolveNotionImage";

@@ -43,7 +43,7 @@
 }
 
 .rnr-container .rnr-quote {
-  border-left-color: #1b9aaa;
+  border-left-color: #0eb7e4;
 }
 
 .rnr-container .rnr-callout {
@@ -66,4 +66,9 @@
 .rnr-code code {
   white-space: pre-wrap;
   max-width: 100%;
+}
+
+.rnr-container :any-link,
+.rnr-container a {
+  color: #0eb7e4;
 }
