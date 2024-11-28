@@ -24,6 +24,7 @@ const Styled = styled.div`
     text-align: center;
     max-width: 36rem;
     position: relative;
+    z-index: 1;
   }
 
   h2 {

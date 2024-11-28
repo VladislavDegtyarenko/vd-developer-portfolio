@@ -77,7 +77,7 @@ const MotionStyledExperienceCard = motion(StyledExpCard);
 const Chip = styled(P2)`
   display: inline-block;
   border-radius: 2em;
-  padding: 0.5em 1em;
+  padding: 0.25em 0.5em;
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.grey};
 `;

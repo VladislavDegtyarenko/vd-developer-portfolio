@@ -2,10 +2,22 @@
   "title": "Working Experience",
   "mainExperience": [
     {
-      "timerange": "Mar 23 — Now",
+      "timerange": "May 24 — Now",
+      "position": "Frontend Developer",
+      "company": "Patrianna Limited",
+      "chips": ["Ukraine, Remote", "Full-time"],
+      "icons": [
+        { "src": "React.svg", "alt": "React.js" },
+        { "src": "Next.svg", "alt": "Next.js" },
+        { "src": "Redux.svg", "alt": "Redux" },
+        { "src": "Jest.svg", "alt": "Jest" }
+      ]
+    },
+    {
+      "timerange": "Mar 23 — Apr 24",
       "position": "Freelance Frontend Developer",
       "company": "Freelance | Open to new work opportunities",
-      "chips": ["Remote", "Self-employed", "Worldwide"],
+      "chips": ["Remote", "Self-employed"],
       "description": "Continually advancing my skills and expertise in frontend technologies. Specializing in crafting engaging and responsive websites, I have successfully completed multiple freelance projects for diverse clients, delivering solutions that meet their needs.\n\nKey Achievements:\n- Leveraged cutting-edge technologies such as React.js, Next.js, Redux and TypeScript to build high-performance and scalable web applications.\n- Collaborated closely with clients to understand their goals, brand identity, translating requirements into visually stunning and functional interfaces.\n- Orchestrated captivating and seamless animations using Framer Motion, enhancing user engagement and creating immersive user experiences.\n- Embraced a remote and self-employed work model, providing flexibility and accessibility to clients worldwide.\n\nOpen to new opportunities, I am enthusiastic about contributing my skills to innovative projects and driving digital experiences to new heights.",
       "icons": [
         { "src": "React.svg", "alt": "React.js" },
@@ -20,7 +32,7 @@
       "timerange": "Oct 21 — Feb 23",
       "position": "Frontend Developer",
       "company": "Astound Commerce",
-      "chips": ["Ukraine", "Remote", "Full-time"],
+      "chips": ["Ukraine, Remote", "Full-time"],
       "description": "Collaborated with an international team on a multi-page store project.\nUtilized React, Next.js, Tailwind CSS, GraphQL, and TypeScript to enhance and extend the stores functionality, resulting in a seamless and engaging user experience.\nExpanded expertise in Jest and React Testing Library for unit testing custom hooks.\nReceived positive feedback for delivering fast, clean, and accessible web experiences.",
       "icons": [
         { "src": "TS.svg", "alt": "Typescript" },
@@ -35,7 +47,7 @@
       "timerange": "nov 20 — sep 21",
       "position": "Frontend Developer",
       "company": "While Web Production",
-      "chips": ["Ukraine", "Remote", "Part-time"],
+      "chips": ["Ukraine, Remote", "Part-time"],
       "description": "Developed websites for Ukrainian businesses using HTML, CSS, Bootstrap, JavaScript, jQuery, and Gulp, contributing to the growth of businesses in Ukraine.\nSuccessfully completed 5 projects, resulting in happy clients and recognition for delivering fast, clean, pixel-perfect, and accessible web experiences.\nDemonstrated versatility and skill in handling various projects, from landing pages to multi-page websites.",
       "icons": [
         { "src": "HTML.svg", "alt": "HTML" },
