@@ -7,15 +7,16 @@ import { ResizeOptions } from "sharp";
 /**
  * Resolves the URL for a Notion image by checking its status and uploading it if necessary.
  *
- * This function handles different types of covers (external and file-based) and checks if
- * the image is already uploaded to Vercel Blob or if its URL has expired. If the image is
- * not uploaded or the URL has expired, it downloads the image from the Notion URL and uploads
- * it to Vercel Blob. If successful, it returns the new image URL; otherwise, it returns the
- * existing image URL or null if couldn't resolve an image.
+ * This function processes Notion cover images of type "external" or "file".
+ * - If the image is external, its URL is returned immediately.
+ * - If it is a file-based Notion image, the function checks if it is already uploaded to Vercel Blob.
+ * - If the image is missing in Vercel Blob or its Notion URL has expired, it downloads and re-uploads it.
+ * - If the upload is successful, the new Vercel Blob URL is returned; otherwise, the existing URL is used.
+ * - If no valid image can be resolved, the function returns `null`.
  *
- * @param {string} postId - The ID of the post associated with the image.
- * @param {NotionCoverImage} image - The cover object containing image details, including type and URL.
- * @returns {Promise<string | null>} A promise that resolves to the image URL if found or null.
+ * @param {NotionCoverImage} image - The Notion cover image object, which includes its type and URL.
+ * @param {ResizeOptions} [resizeOptions={}] - Optional resizing options for image processing.
+ * @returns {Promise<string | null>} A promise that resolves to the image URL (from Notion or Vercel Blob) or `null` if no valid image is available.
  */
 
 export const resolveNotionImage = async (
@@ -61,12 +62,12 @@ export const resolveNotionImage = async (
 
   // Otherwise, use the already uploaded image in Vercel Blob
   if (imageInVercelBlob) {
-    console.log(
+    console.warn(
       `Returned already uploaded image to Vercel Blob: ${imageInVercelBlob.url}`
     );
     return imageInVercelBlob.url;
   }
 
-  console.log(`Returned null as image for url: ${url}`);
+  console.warn(`Returned null as image for url: ${url}`);
   return null;
 };
