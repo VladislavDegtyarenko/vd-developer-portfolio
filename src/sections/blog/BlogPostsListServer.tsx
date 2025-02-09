@@ -1,4 +1,4 @@
-import { getPosts } from "@/lib/notion";
+import { getPosts } from "@/utils/notion/getPosts";
 import BlogPostsListClient from "./BlogPostsListClient";
 
 const BlogPostsListServer = async () => {
