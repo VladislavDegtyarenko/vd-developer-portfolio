@@ -74,6 +74,10 @@ const StyledMain = styled(Section)`
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
+
+      @media screen and (max-width: 991.98px) {
+        align-items: center;
+      }
     }
 
     &__photo {
