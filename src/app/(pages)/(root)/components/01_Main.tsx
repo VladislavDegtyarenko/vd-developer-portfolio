@@ -12,6 +12,7 @@ import ScrollDownIcon from "@/components/icons/ScrollDown";
 import bg from "public/assets/bg.jpg";
 import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
 import { animate, stagger, useIsomorphicLayoutEffect } from "framer-motion";
+import useViewportWidth from "@/hooks/useViewportWidth";
 
 const StyledMain = styled(Section)`
   padding: 0;
@@ -69,6 +70,10 @@ const StyledMain = styled(Section)`
 
     &__info {
       margin-right: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
     }
 
     &__photo {
@@ -143,16 +148,48 @@ const StyledMain = styled(Section)`
   }
 
   .description {
-    margin-top: 16px;
     color: ${({ theme }) => theme.grey};
     span {
       font-weight: 700;
+    }
+  }
+
+  .cta {
+    text-decoration: none;
+    font-weight: 700;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--borderRadiusNormal);
+    color: inherit;
+    cursor: pointer;
+    transition: background-color var(--duration), color var(--duration);
+    border: none;
+    &:hover {
+      color: #dddcdc;
+    }
+    &-primary {
+      background-color: ${({ theme }) => theme.cyan};
+      color: inherit;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.cyanHover};
+      }
+    }
+    p {
+      font-weight: 700;
+    }
+
+    &-disabled {
+      color: #686868;
     }
   }
 `;
 
 const Main = () => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const { width } = useViewportWidth();
 
   useIsomorphicLayoutEffect(() => {
     const contentWrapper = contentRef.current;
@@ -163,6 +200,7 @@ const Main = () => {
     const subtitleSpans = contentWrapper.querySelectorAll(".subtitle span");
     const description = contentWrapper.querySelector(".description")!;
     const photoWrapper = contentWrapper.querySelector(".main__photo")!;
+    const ctaBtn = contentWrapper.querySelector(".cta")!;
 
     const elementsToAnimate = [
       ...Array.from(titleSpans),
@@ -176,7 +214,7 @@ const Main = () => {
       },
       {
         duration: 0.5,
-        delay: stagger(0.25, { ease: "easeIn" }),
+        delay: stagger(0.5),
       }
     );
 
@@ -187,7 +225,7 @@ const Main = () => {
       },
       {
         duration: 0.7,
-        delay: 1.7,
+        delay: 1.5,
       }
     );
 
@@ -197,7 +235,18 @@ const Main = () => {
         opacity: [0, 1],
       },
 
-      { duration: 1, delay: 2 }
+      { duration: 1, delay: width <= 991.98 ? 0 : 2 }
+    );
+
+    animate(
+      ctaBtn,
+      {
+        opacity: [0, 1],
+      },
+      {
+        duration: 0.7,
+        delay: 2,
+      }
     );
   }, [contentRef]);
 
@@ -214,26 +263,21 @@ const Main = () => {
             priority
           />
         </div>
-
         <div className="main">
           <Container>
             <div className="main__content" ref={contentRef}>
               <div className="main__info">
-                <H1 className="title">
-                  <span>Hello,</span>
-                </H1>
-                <H2 className="subtitle">
-                  <span>I </span>
-                  <span>am </span>
-                  <span className="accent">Vladyslav</span>
-                  <span>{`, \n`}</span>
-                  <span>Frontend </span>
-                  <span>Developer</span>
+                <H2 as="h1" className="subtitle">
+                  <span className="accent">Frontend Developer</span>{" "}
+                  <span>who cares about</span> <span>UX and performance</span>
                 </H2>
                 <P1 className="description">
-                  Based in <span>Kyiv, Ukraine</span>, I&apos;m passionate about
-                  creating engaging, digital experiences on the web.
+                  I build responsive, fast-loading websites using React, Next.js
+                  and tasteful motion design.
                 </P1>
+                <a className="cta cta-primary" href="#contact">
+                  Get In Touch
+                </a>
               </div>
               <div className="main__photo">
                 <div className="main__photo_inner">
@@ -249,7 +293,6 @@ const Main = () => {
             </div>
           </Container>
         </div>
-
         <a
           href="#about"
           className="main__scroll-btn"

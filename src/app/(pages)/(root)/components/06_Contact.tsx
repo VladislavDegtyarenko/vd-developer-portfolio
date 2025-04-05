@@ -24,7 +24,7 @@ const StyledContact = styled(Section)`
       color: ${({ theme }) => theme.fg};
     }
     &__wrapper {
-      margin-top: 4em;
+      margin-top: 1em;
       display: grid;
       grid-auto-flow: column;
       align-content: center;
@@ -84,7 +84,7 @@ const StyledContact = styled(Section)`
 `;
 
 const Contact = () => {
-  const { title, description, formHeading, downloadCV } = CONTACT;
+  const { title, description, downloadCV } = CONTACT;
 
   return (
     <>
@@ -94,11 +94,12 @@ const Contact = () => {
           <SectionDescription className="contact__descr">
             {description}
           </SectionDescription>
-          <SectionDescription className="contact__descr">
-            {formHeading}
-          </SectionDescription>
 
           <ContactForm />
+
+          <SectionDescription className="contact__descr">
+            Prefer email or socials? Find me here 👇
+          </SectionDescription>
 
           <div className="contact__wrapper">
             {contactBtns.map(({ href, ariaLabel, icon }, index) => {

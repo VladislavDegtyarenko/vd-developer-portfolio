@@ -1,8 +1,6 @@
-import { Suspense, cache } from "react";
+import { cache } from "react";
 import { getPostSlugs } from "@/lib/notion";
 
-import BlogPostPageWrapper from "@/sections/blog/blogPost/BlogPostPageWrapper";
-import PostSkeleton from "./components/PostSkeleton";
 import BlogPostServer from "./components/BlogPostServer";
 
 export const dynamic = "force-static";
