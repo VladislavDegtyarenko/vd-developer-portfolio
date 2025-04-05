@@ -7,9 +7,9 @@ import { isObject } from "@/utils/isObject";
 import { H4, P2 } from "./Text";
 
 const StyledTable = styled.table`
-  margin-top: 2.5rem;
+  margin-top: 0.5rem;
   border-spacing: 1rem;
-  max-width: 60rem;
+  max-width: 40rem;
   margin-left: auto;
   margin-right: auto;
   transition-duration: 0.5s;
@@ -65,21 +65,27 @@ const ShowMoreButton = styled.button`
 `;
 
 type ExpertiseTableProps = {
-  expertiseTable: Record<string, string[]>;
+  title: string;
+  table: Record<string, string[]>;
+  isShowMoreDisabled?: boolean;
 };
 
 const ExpertiseTable = (props: ExpertiseTableProps) => {
-  const { expertiseTable } = props;
+  const { title, table, isShowMoreDisabled } = props;
 
-  const [isShowMore, setIsShowMore] = useState(false);
+  const [isShowMore, setIsShowMore] = useState(
+    isShowMoreDisabled ? true : false
+  );
 
-  return isObject(expertiseTable) ? (
+  return isObject(table) ? (
     <>
-      <H4>Full list of tools and technologies I use</H4>
+      <H4>{title}</H4>
 
-      <StyledTable className={isShowMore ? "expanded" : ""}>
+      <StyledTable
+        className={isShowMore || isShowMoreDisabled ? "expanded" : ""}
+      >
         <tbody>
-          {Object.entries(expertiseTable).map(([title, technologiesList]) => {
+          {Object.entries(table).map(([title, technologiesList]) => {
             return (
               <tr key={title}>
                 <th>
@@ -94,9 +100,11 @@ const ExpertiseTable = (props: ExpertiseTableProps) => {
         </tbody>
       </StyledTable>
 
-      <ShowMoreButton onClick={() => setIsShowMore((p) => !p)}>
-        Show {isShowMore ? "Less" : "More"}
-      </ShowMoreButton>
+      {!isShowMoreDisabled && (
+        <ShowMoreButton onClick={() => setIsShowMore((p) => !p)}>
+          Show {isShowMore ? "Less" : "More"}
+        </ShowMoreButton>
+      )}
     </>
   ) : null;
 };

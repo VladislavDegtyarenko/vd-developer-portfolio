@@ -1,6 +1,7 @@
 {
   "title": "Expertise",
-  "subtitle": "Discover my arsenal of frontend tools & technologies — TypeScript, React, Redux, Next.js & more. From UI libraries like Material UI & shadcn/ui to custom animations using GSAP & Framer Motion, I deliver stunning user experiences.",
+  "subtitle": "I work with modern tools like React, Next.js, TypeScript, and motion libraries to deliver responsive, accessible, and polished user experiences.",
+  "secondSubtitle": "Whether it’s integrating a headless CMS, managing state, or building reusable UI components — I focus on writing clean, maintainable code that scales.",
   "coreTools": [
     { "icon": "React.svg", "title": "React" },
     { "icon": "Next.svg", "title": "Next.js" },
@@ -11,7 +12,7 @@
     { "icon": "Jest.svg", "title": "Jest" }
   ],
   "expertiseTable": {
-    "Core Frontend Tools": [
+    "Frontend": [
       "React",
       "Next.js",
       "Typescript",
@@ -20,37 +21,12 @@
       "CSS",
       "Firebase"
     ],
-    "State Managers": ["Redux", "MobX", "Zustand", "Context API"],
-    "React Ecosystem Libraries": [
-      "Axios",
-      "SWR",
-      "React Hook Form",
-      "React Router",
-      "Tanstack Router",
-      "Tanstack Query"
-    ],
-    "Content Management Systems (CMS)": ["Prismic.io", "Builder.io", "Strapi"],
-    "CSS": ["Tailwind", "SASS", "Emotion/Styled Components", "CSS Modules"],
-    "UI": [
-      "Material UI",
-      "shadcn/ui",
-      "Bootstrap",
-      "FluentUI",
-      "Pixel Perfect",
-      "Adaptive & Responsive"
-    ],
+    "State": ["Redux", "MobX", "Zustand"],
+    "Styling": ["Tailwind", "SASS", "Styled Components"],
+    "CMS": ["Prismic.io", "Builder.io", "Strapi"],
     "Animations": ["Framer Motion", "GSAP"],
-    "Bundling Tools": ["Webpack", "Vite", "Rollup", "Parcel", "Gulp"],
-    "Code Quality": [
-      "ESLint",
-      "Prettier",
-      "BEM",
-      "Chrome Developer Tools",
-      "React Profiler",
-      "Git",
-      "Core Web Vitals"
-    ],
-
-    "Unit Testing": ["Jest", "React Testing Library"]
-  }
+    "Quality": ["Jest", "ESLint", "Prettier"]
+  },
+  "expertiseTableTitle": "Tech stack",
+  "postScriptum": "💡 Tools are just tools — what matters is how you use them to solve real problems."
 }
