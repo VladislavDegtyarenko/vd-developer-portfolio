@@ -55,16 +55,16 @@ export const resolveNotionImage = async (
 
     // If the image is uploaded successfully, return a URL from Vercel Blob
     if (newBlob?.url) {
-      console.log(`Returned new image url: ${newBlob.url}`);
+      // console.log(`Returned new image url: ${newBlob.url}`);
       return newBlob.url;
     }
   }
 
   // Otherwise, use the already uploaded image in Vercel Blob
   if (imageInVercelBlob) {
-    console.warn(
-      `Returned already uploaded image to Vercel Blob: ${imageInVercelBlob.url}`
-    );
+    // console.warn(
+    //   `Returned already uploaded image to Vercel Blob: ${imageInVercelBlob.url}`
+    // );
     return imageInVercelBlob.url;
   }
 

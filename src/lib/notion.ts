@@ -14,8 +14,6 @@ export const NOTION_TOKEN = process.env.NOTION_TOKEN || "";
 
 export const getPosts = cache(async (): Promise<BlogPost[] | null> => {
   try {
-    console.log("\u001b[1;44m getPosts \u001b[0m");
-
     if (!process.env.NOTION_TOKEN) {
       throw new Error("Add NOTION_TOKEN to env");
     }
