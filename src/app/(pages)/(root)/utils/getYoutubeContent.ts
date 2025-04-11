@@ -65,7 +65,6 @@ export const getYoutubeContent = cache(
       let data;
 
       // Fetch only in production mode
-      console.log("process.env.NODE_ENV: ", process.env.NODE_ENV);
       if (process.env.NODE_ENV === "production") {
         const response = await fetch(url, {
           next: {

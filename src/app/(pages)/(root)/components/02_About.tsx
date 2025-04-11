@@ -41,11 +41,26 @@ const StyledAbout = styled(Section)`
     margin-top: 4rem;
     text-align: center;
   }
+
+  .postScriptum {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: ${({ theme }) => theme.grey};
+    font-style: italic;
+  }
 `;
 
 // Component
 const About = () => {
-  const { title, subtitle, coreTools, expertiseTable } = data;
+  const {
+    title,
+    subtitle,
+    secondSubtitle,
+    coreTools,
+    expertiseTable,
+    expertiseTableTitle,
+    postScriptum,
+  } = data;
 
   return (
     <>
@@ -54,6 +69,7 @@ const About = () => {
           <div className="inner">
             <SectionTitle>{title}</SectionTitle>
             <SectionDescription>{subtitle}</SectionDescription>
+            <SectionDescription>{secondSubtitle}</SectionDescription>
 
             {coreTools && Array.isArray(coreTools) && coreTools.length > 0 ? (
               <div className="core-tools-wrapper">
@@ -63,7 +79,13 @@ const About = () => {
               </div>
             ) : null}
 
-            <ExpertiseTable expertiseTable={expertiseTable} />
+            <ExpertiseTable
+              title={expertiseTableTitle}
+              table={expertiseTable}
+              isShowMoreDisabled
+            />
+
+            <P2 className="postScriptum">{postScriptum}</P2>
           </div>
         </Container>
       </StyledAbout>

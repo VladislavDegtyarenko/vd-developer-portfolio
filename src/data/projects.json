@@ -10,6 +10,20 @@
       "isVisible": true
     },
     {
+      "img": "Ocular.jpg",
+      "title": "Ocular",
+      "description": "Delivered front-end for \"Ocular\" medical center website, providing a seamless user experience for ophthalmology patients.",
+      "previewLink": "https://ocular.com.ua/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/Ocular",
+      "isVisible": true
+    },
+    {
+      "img": "4-his.jpg",
+      "title": "His.ua",
+      "description": "Developed front-end for \"His,\" a Ukrainian brand for exclusive furniture.",
+      "previewLink": "https://his.ua/"
+    },
+    {
       "img": "react-shadcn-todo-app.jpg",
       "title": "Tasks Manager",
       "description": "React.js • Redux • Typescript • shadcn/ui • Tailwind • Vite",
@@ -33,12 +47,6 @@
       "isVisible": true
     },
     {
-      "img": "Redux Blog.jpg",
-      "title": "CRUD Redux Blog",
-      "soon": true
-    },
-
-    {
       "img": "portfolio.jpg",
       "title": "Portfolio Website",
       "description": "Vladyslav's portfolio website designed by himself and developed using Next.js, Typescript and Framer Motion. Featuring a brand new Notion API-driven blog and contact form that handles requests with Sendgrid API",
@@ -60,6 +68,14 @@
       "previewLink": "https://vladislavdegtyarenko.github.io/react-todo-app/",
       "codeLink": "https://github.com/VladislavDegtyarenko/react-todo-app",
       "isVisible": false
+    },
+    {
+      "img": "Pass Gen.jpg",
+      "title": "Password Generator",
+      "description": "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/preact-password-generator/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/preact-password-generator",
+      "isVisible": true
     },
 
     {
@@ -86,14 +102,7 @@
       "codeLink": "https://github.com/VladislavDegtyarenko/snake-game-js",
       "isVisible": true
     },
-    {
-      "img": "Pass Gen.jpg",
-      "title": "Password Generator",
-      "description": "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
-      "previewLink": "https://vladislavdegtyarenko.github.io/preact-password-generator/",
-      "codeLink": "https://github.com/VladislavDegtyarenko/preact-password-generator",
-      "isVisible": true
-    },
+
     {
       "img": "Clock.jpg",
       "title": "Alarms & Clock Clone",
@@ -103,20 +112,10 @@
       "isVisible": true
     },
     {
-      "img": "Ocular.jpg",
-      "title": "Ocular",
-      "description": "Delivered front-end for \"Ocular\" medical center website, providing a seamless user experience for ophthalmology patients.",
-      "previewLink": "https://ocular.com.ua/",
-      "codeLink": "https://github.com/VladislavDegtyarenko/Ocular",
-      "isVisible": true
+      "img": "Redux Blog.jpg",
+      "title": "CRUD Redux Blog",
+      "soon": true
     },
-    {
-      "img": "4-his.jpg",
-      "title": "His.ua",
-      "description": "Developed front-end for \"His,\" a Ukrainian brand for exclusive furniture.",
-      "previewLink": "https://his.ua/"
-    },
-
     {
       "img": "7-tenzies.jpg",
       "title": "Tenzies Game",
