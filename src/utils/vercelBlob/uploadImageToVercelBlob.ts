@@ -34,8 +34,9 @@ export const uploadImageToVercelBlob = async ({
     const blob = await put(pathname, optimizedImage, {
       access: "public",
       contentType,
-      cacheControlMaxAge: 0,
+      cacheControlMaxAge: 30 * 24 * 60 * 60, // 1 Month
       addRandomSuffix: false,
+      allowOverwrite: true,
     });
 
     return blob;
