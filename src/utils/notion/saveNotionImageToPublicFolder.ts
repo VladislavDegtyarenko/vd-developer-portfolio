@@ -1,18 +1,19 @@
-import { put } from "@vercel/blob";
 import fetch from "node-fetch";
 import sharp, { ResizeOptions } from "sharp";
+import fs from "fs";
+import path from "path";
 
-export type UploadImageToBlobArgs = {
+type Args = {
   url: string;
   pathname: string;
   resizeOptions?: ResizeOptions;
 };
 
-export const uploadImageToVercelBlob = async ({
+export const saveNotionImageToPublicFolder = async ({
   url,
   pathname,
   resizeOptions,
-}: UploadImageToBlobArgs) => {
+}: Args) => {
   try {
     const res = await fetch(url);
     const imageBuffer = await res.buffer();
@@ -30,17 +31,19 @@ export const uploadImageToVercelBlob = async ({
       .webp({ quality: 80 })
       .toBuffer();
 
-    // Put it to Vercel Blob
-    const blob = await put(pathname, optimizedImage, {
-      access: "public",
-      contentType,
-      cacheControlMaxAge: 0,
-      addRandomSuffix: false,
-    });
+    // Save to PATH_TO_IMAGES
+    const parsedPath = path.parse(pathname);
+    const dir = parsedPath.dir;
+    const filename = parsedPath.base;
 
-    return blob;
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, filename), optimizedImage);
+
+    return {
+      url: pathname,
+    };
   } catch (error) {
-    console.error(`Error while uploading image to Vercel Blob: ${error}`);
+    console.error(`Error saving Notion image to /public: ${error}`);
 
     return null;
   }

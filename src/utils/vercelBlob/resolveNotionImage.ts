@@ -1,7 +1,7 @@
 import { NotionCoverImage } from "@/types/notion";
-import { isNotionUrlExpired } from "./isNotionUrlExpired";
-import { getImageFromVercelBlob } from "./vercelBlob/getImageToVercelBlob";
-import { uploadImageToVercelBlob } from "./vercelBlob/uploadImageToVercelBlob";
+import { isNotionUrlExpired } from "../isNotionUrlExpired";
+import { getImageFromVercelBlob } from "./getImageFromVercelBlob";
+import { uploadImageToVercelBlob } from "./uploadImageToVercelBlob";
 import { ResizeOptions } from "sharp";
 
 /**
