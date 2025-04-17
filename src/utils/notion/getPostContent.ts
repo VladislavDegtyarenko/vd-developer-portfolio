@@ -2,11 +2,12 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { calcBlocksReadingTime } from "../calcBlocksReadingTime";
 import { BlogPostWithBlocks } from "@/types/notion";
 import { NotionBlock } from "@9gustin/react-notion-render";
-import { resolveNotionImage } from "../resolveNotionImage";
+// import { resolveNotionImage } from "../vercelBlob/resolveNotionImage";
 import { fetchNotion } from "./fetchNotion";
 import { getPosts } from "./getPosts";
 import { cache } from "react";
 import { headers } from "./constants";
+import { resolveNotionImageLocally } from "./resolveNotionImageLocally";
 
 export const getPostContent = cache(async (slug: string) => {
   const posts = await getPosts(slug);
@@ -32,7 +33,8 @@ export const getPostContent = cache(async (slug: string) => {
       data.results.map(async (block: any) => {
         if (block.type === "image" && block.image) {
           const notionImage = block.image as any;
-          const imageUrl = await resolveNotionImage(notionImage);
+          // const imageUrl = await resolveNotionImage(notionImage);
+          const imageUrl = await resolveNotionImageLocally(notionImage);
 
           if (imageUrl) {
             return {
@@ -48,9 +50,9 @@ export const getPostContent = cache(async (slug: string) => {
           }
         }
 
-        if (block.type === "video" && block.video) {
-          console.log("block.video: ", block.video);
-        }
+        // if (block.type === "video" && block.video) {
+        //   console.log("block.video: ", block.video);
+        // }
 
         return block;
       })

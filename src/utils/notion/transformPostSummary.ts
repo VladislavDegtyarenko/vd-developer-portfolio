@@ -1,6 +1,7 @@
 import { BlogPostResponse } from "@/types/notion";
-import { generateBlurDataUrl } from "../generateBlurDataUrl";
-import { resolveNotionImage } from "../resolveNotionImage";
+// import { generateBlurDataUrl } from "../generateBlurDataUrl";
+// import { resolveNotionImage } from "../vercelBlob/resolveNotionImage";
+import { resolveNotionImageLocally } from "./resolveNotionImageLocally";
 
 export const transformPostSummary = async (post: BlogPostResponse) => {
   const id = post.id;
@@ -10,10 +11,13 @@ export const transformPostSummary = async (post: BlogPostResponse) => {
   const date = post.properties.Date.date?.start;
   const tags = post.properties.Tags.multi_select.map(({ name }) => name);
 
-  const resolvedCoverUrl = await resolveNotionImage(post.cover, { width: 640 });
-  const blurDataUrl = resolvedCoverUrl
-    ? await generateBlurDataUrl(resolvedCoverUrl)
-    : null;
+  // const resolvedCoverUrl = await resolveNotionImage(post.cover, { width: 640 });
+  const resolvedCoverUrl = await resolveNotionImageLocally(post.cover, {
+    width: 640,
+  });
+  // const blurDataUrl = resolvedCoverUrl
+  //   ? await generateBlurDataUrl(resolvedCoverUrl)
+  //   : null;
 
   return {
     id,
@@ -23,6 +27,6 @@ export const transformPostSummary = async (post: BlogPostResponse) => {
     date,
     tags,
     coverUrl: resolvedCoverUrl,
-    blurDataUrl,
+    blurDataUrl: null,
   };
 };
