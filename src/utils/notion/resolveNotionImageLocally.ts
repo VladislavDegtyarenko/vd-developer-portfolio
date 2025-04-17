@@ -3,7 +3,8 @@ import { ResizeOptions } from "sharp";
 import { saveNotionImageToPublicFolder } from "./saveNotionImageToPublicFolder";
 import fs from "fs";
 import path from "path";
-import { toPosixPath } from "../toPosixPath";
+import process from "process";
+import { toSrcPath } from "../toSrcPath";
 
 /**
  * Resolves the local path to a Notion image by checking if it exists in the `/public` folder,
@@ -23,13 +24,18 @@ import { toPosixPath } from "../toPosixPath";
  * @returns {Promise<string | null>} The local POSIX-style path to the image in `/public`, or the external URL, or `null`.
  */
 
-const BLOG_POSTS_ASSETS_FOLDER = path.join("assets", "blog", "posts");
+const BLOG_POSTS_ASSETS_FOLDER = path.join(
+  process.cwd(),
+  "public",
+  "assets",
+  "blog",
+  "posts"
+);
 
 export const resolveNotionImageLocally = async (
   image: NotionCoverImage,
   resizeOptions: ResizeOptions = {}
 ): Promise<string | null> => {
-  console.log("image: ", image);
   if (image === null) return null;
 
   // External images are not stored in AWS Cloud
@@ -44,11 +50,7 @@ export const resolveNotionImageLocally = async (
 
   const imageUrl = new URL(url);
   const pathname = decodeURIComponent(imageUrl.pathname.slice(1)); //remove leading slash
-  const fullPath = path.join(
-    "public",
-    BLOG_POSTS_ASSETS_FOLDER,
-    ...pathname.split("/")
-  );
+  const fullPath = path.join(BLOG_POSTS_ASSETS_FOLDER, ...pathname.split("/"));
 
   const isFileExists = fs.existsSync(fullPath);
 
@@ -59,11 +61,12 @@ export const resolveNotionImageLocally = async (
       pathname: fullPath,
       resizeOptions,
     });
-
     // If the image is uploaded successfully, return a URL from Vercel Blob
     if (newFile?.url) {
       // console.log(`Returned new image url: ${newBlob.url}`);
-      return toPosixPath(newFile.url);
+      const src = toSrcPath(newFile?.url);
+
+      return src;
     }
   }
 
@@ -72,7 +75,9 @@ export const resolveNotionImageLocally = async (
     // console.warn(
     //   `Returned already uploaded image to Vercel Blob: ${imageInVercelBlob.url}`
     // );
-    return toPosixPath(fullPath);
+    const src = toSrcPath(fullPath);
+
+    return src;
   }
 
   // console.warn(`Returned null as image for url: ${url}`);

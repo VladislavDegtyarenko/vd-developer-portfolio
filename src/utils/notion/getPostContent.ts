@@ -50,9 +50,9 @@ export const getPostContent = cache(async (slug: string) => {
           }
         }
 
-        if (block.type === "video" && block.video) {
-          console.log("block.video: ", block.video);
-        }
+        // if (block.type === "video" && block.video) {
+        //   console.log("block.video: ", block.video);
+        // }
 
         return block;
       })
