@@ -29,6 +29,7 @@ export const resolveNotionImageLocally = async (
   image: NotionCoverImage,
   resizeOptions: ResizeOptions = {}
 ): Promise<string | null> => {
+  console.log("image: ", image);
   if (image === null) return null;
 
   // External images are not stored in AWS Cloud
