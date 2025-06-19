@@ -7,6 +7,7 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "700"],
   style: ["normal", "italic"],
+  preload: true,
 });
 
 import GlobalStyle from "./GlobalStyle";
