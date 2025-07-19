@@ -9,6 +9,15 @@ import Contact from "./components/06_Contact";
 import ProjectPreview from "./components/ProjectPreview";
 import YouTubeSection from "./components/YouTubeSection";
 
+import { generateMetadata } from "@/utils/generateMetadata";
+
+export const metadata = generateMetadata({
+  title: "Frontend Developer - Vladyslav Dihtiarenko",
+  description:
+    "Frontend Developer from Ukraine, crafting fast, accessible, and visually polished web apps. Passionate about React, Next.js, TypeScript, and creating intuitive user experiences.",
+  path: "/",
+});
+
 export default function Page() {
   return (
     <>
