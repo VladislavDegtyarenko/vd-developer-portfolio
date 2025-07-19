@@ -1,9 +1,1 @@
-import { PRODUCTION_DOMAIN } from "@/constants";
-import { getSiteUrl } from "./getSiteUrl";
-
-export const isProd = () => {
-  return (
-    process.env.NODE_ENV === "production" &&
-    getSiteUrl().includes(PRODUCTION_DOMAIN)
-  );
-};
+export const isProd = () => process.env.VERCEL_ENV === "production";

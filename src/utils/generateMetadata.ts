@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getSiteUrl } from "@/utils/getSiteUrl";
 import { isProd } from "./isProd";
+import { isPreview } from "./isPreview";
 
 type GenerateMetadataProps = {
   title?: string;
@@ -52,7 +53,7 @@ export function generateMetadata({
     publisher: "Vladyslav Dihtiarenko",
     metadataBase: new URL(getSiteUrl()),
     alternates: is404 ? undefined : { canonical: path },
-    robots: !isProd || is404 ? "noindex" : undefined,
+    robots: (isPreview() && !isProd()) || is404 ? "noindex" : undefined,
     openGraph: {
       title: fullTitle,
       description,
