@@ -4,3 +4,5 @@ export const BREAKPOINTS = {
   MD: 767.98, // Medium devices (tablets)
   LG: 991.98, // Large devices (laptops)
 };
+
+export const PRODUCTION_DOMAIN = "vd-developer.online";

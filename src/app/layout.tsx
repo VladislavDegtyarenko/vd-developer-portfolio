@@ -17,16 +17,6 @@ import Footer from "@/components/layout/Footer";
 import BackToTopBtn from "@/components/BackToTopBtn";
 import Providers from "./Providers";
 
-// Metadata
-export const metadata = {
-  title: "Vladyslav Dihtiarenko",
-  description:
-    "Frontend Developer from Ukraine. Passionate about creating digital experiences on the web.",
-  other: {
-    freelancehunt: "38e96f77035b108",
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
