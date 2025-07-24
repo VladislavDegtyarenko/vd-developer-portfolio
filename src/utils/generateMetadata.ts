@@ -44,6 +44,9 @@ export function generateMetadata({
     ? title
     : `${title} | Vladyslav Dihtiarenko`;
 
+  const robots =
+    isPreview() || is404 || !isProd() ? "noindex" : "index, follow";
+
   return {
     title: fullTitle,
     description,
@@ -52,8 +55,8 @@ export function generateMetadata({
     creator: "Vladyslav Dihtiarenko",
     publisher: "Vladyslav Dihtiarenko",
     metadataBase: new URL(getSiteUrl()),
-    alternates: is404 ? undefined : { canonical: path },
-    robots: isPreview() || is404 ? "noindex" : undefined,
+    alternates: is404 ? undefined : { canonical: `${siteUrl}${path}` },
+    robots,
     openGraph: {
       title: fullTitle,
       description,
