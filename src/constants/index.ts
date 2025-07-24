@@ -5,4 +5,4 @@ export const BREAKPOINTS = {
   LG: 991.98, // Large devices (laptops)
 };
 
-export const PRODUCTION_DOMAIN = "vd-developer.online";
+export const PRODUCTION_DOMAIN = "https://vd-developer.online";

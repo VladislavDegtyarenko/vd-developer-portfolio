@@ -1,27 +1,30 @@
 import { PRODUCTION_DOMAIN } from "@/constants";
 
+const normalizeUrl = (url: string) =>
+  url.startsWith("http") ? url : `https://${url}`;
+
 export const getSiteUrl = () => {
-  console.table({
-    "process.env.VERCEL_ENV": process.env.VERCEL_ENV,
-    "process.env.NODE_ENV": process.env.NODE_ENV,
-    "process.env.VERCEL_URL": process.env.VERCEL_URL,
-  });
+  const env = process.env.VERCEL_ENV;
+  const nodeEnv = process.env.NODE_ENV;
+  const vercelUrl = process.env.VERCEL_URL;
 
-  if (process.env.NODE_ENV === "production") {
-    return PRODUCTION_DOMAIN;
+  console.table({ env, nodeEnv, vercelUrl });
+
+  if (vercelUrl) {
+    const fullUrl = normalizeUrl(vercelUrl);
+    const isProduction =
+      env === "production" || fullUrl.includes(PRODUCTION_DOMAIN);
+
+    if (isProduction) {
+      return PRODUCTION_DOMAIN;
+    }
+
+    return fullUrl;
   }
 
-  // Prefer Vercel-provided environment variable
-
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-
-  // Default to localhost in development
-  if (process.env.NODE_ENV === "development") {
+  if (nodeEnv === "development") {
     return "http://localhost:3000";
   }
 
-  // Fallback for production build
   return PRODUCTION_DOMAIN;
 };
