@@ -53,7 +53,7 @@ export function generateMetadata({
     publisher: "Vladyslav Dihtiarenko",
     metadataBase: new URL(getSiteUrl()),
     alternates: is404 ? undefined : { canonical: path },
-    robots: (isPreview() && !isProd()) || is404 ? "noindex" : undefined,
+    robots: isPreview() || is404 ? "noindex" : undefined,
     openGraph: {
       title: fullTitle,
       description,
