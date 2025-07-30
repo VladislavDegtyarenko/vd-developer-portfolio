@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { useIsomorphicLayoutEffect, animate, useInView } from "framer-motion";
+import {
+  useIsomorphicLayoutEffect,
+  animate,
+  useInView,
+  useReducedMotion,
+} from "framer-motion";
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -81,8 +86,11 @@ const ReviewCard = ({
 }: ReviewCardProps) => {
   const ref = useRef<ReviewCardRef>(null);
   const inView = useInView(ref, { once: true });
+  const isReducedMotion = useReducedMotion();
 
   useIsomorphicLayoutEffect(() => {
+    if (isReducedMotion) return;
+
     const cardElement = ref.current;
 
     if (!cardElement) return;
@@ -92,7 +100,7 @@ const ReviewCard = ({
     if (!inView) return;
 
     animate(cardElement, { y: 0, opacity: 1 }, { duration: 0.7 });
-  }, [ref, inView]);
+  }, [ref, inView, isReducedMotion]);
 
   return (
     <StyledReviewCard className="card" ref={ref}>

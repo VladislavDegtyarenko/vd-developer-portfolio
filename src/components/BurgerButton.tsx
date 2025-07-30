@@ -16,6 +16,10 @@ const Button = styled.button`
   height: 2em;
   align-self: center;
 
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
   @media screen and (max-width: 991.98px) {
     display: flex;
     justify-content: center;

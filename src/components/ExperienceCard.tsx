@@ -2,13 +2,14 @@
 
 // Core
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 // Components
 import { H4, P1, P2 } from "./Text";
 
 // TS
 import { ExperienceCardProps, StyledExpCardProps } from "../types";
+import { PropsWithChildren } from "react";
 
 const StyledExpCard = styled.div<StyledExpCardProps>`
   display: flex;
@@ -88,6 +89,29 @@ const Icon = styled.img`
   object-fit: contain;
 `;
 
+const Wrapper = ({
+  children,
+  secondary,
+}: PropsWithChildren<{ secondary?: boolean }>) => {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <StyledExpCard $secondary={secondary}>{children}</StyledExpCard>;
+  }
+
+  return (
+    <MotionStyledExperienceCard
+      $secondary={secondary}
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7 }}
+      viewport={{ once: true }}
+    >
+      {children}
+    </MotionStyledExperienceCard>
+  );
+};
+
 const ExperienceCard = ({
   timerange,
   position,
@@ -98,13 +122,7 @@ const ExperienceCard = ({
   secondary,
 }: ExperienceCardProps) => {
   return (
-    <MotionStyledExperienceCard
-      $secondary={secondary}
-      initial={{ y: 50, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: true }}
-    >
+    <Wrapper secondary={secondary}>
       <div className="info">
         <div className="time-range">
           <P2>{timerange}</P2>
@@ -143,7 +161,7 @@ const ExperienceCard = ({
           ))}
         </div>
       ) : null}
-    </MotionStyledExperienceCard>
+    </Wrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import styled from "styled-components";
 import { P1 } from "./Text";
@@ -26,6 +26,12 @@ const StyledSectionDescription = styled(P1)`
 const MotionDescription = motion(StyledSectionDescription);
 
 const SectionDescription = ({ children }: SectionDescriptionProps) => {
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return <StyledSectionDescription>{children}</StyledSectionDescription>;
+  }
+
   return (
     <MotionDescription
       initial={{ y: 50, opacity: 0 }}

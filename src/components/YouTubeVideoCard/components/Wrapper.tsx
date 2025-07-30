@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { H4 } from "../../Text";
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const StyledWrapper = styled.li`
   text-align: center;
@@ -52,6 +52,16 @@ const MotionStyledWrapper = motion(StyledWrapper);
 
 const Wrapper = (props: Props) => {
   const { heading, children } = props;
+  const isReducedMotion = useReducedMotion();
+
+  if (isReducedMotion) {
+    return (
+      <StyledWrapper>
+        <H4>{heading}</H4>
+        <div>{children}</div>
+      </StyledWrapper>
+    );
+  }
 
   return (
     <MotionStyledWrapper

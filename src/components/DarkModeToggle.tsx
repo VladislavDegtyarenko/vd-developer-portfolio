@@ -18,8 +18,13 @@ const StyledToggle = styled.label`
   --size: 1.25em;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow var(--duration);
   box-sizing: content-box;
+  transition: box-shadow var(--duration);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
   input {
     opacity: 0;
     width: 0;
@@ -44,8 +49,12 @@ const StyledToggle = styled.label`
     position: relative;
     border-radius: 50%;
     display: inline-block;
-    transition: all var(--duration-long);
     z-index: 1;
+    transition: all var(--duration-long);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   input:checked ~ .slider {
@@ -70,6 +79,10 @@ const StyledToggle = styled.label`
     top: 0.375em;
     color: ${({ theme }) => theme.cyan};
     transition: all var(--duration-long);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   &:hover {

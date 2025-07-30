@@ -38,6 +38,10 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   top: 0;
   transition: transform 0.5s;
 
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
   &:after {
     content: "";
     display: block;
@@ -49,8 +53,12 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     height: 100%;
     position: absolute;
     background-color: ${({ theme }) => theme.bg};
-    transition: background-color var(--duration);
     backdrop-filter: blur(8px);
+    transition: background-color var(--duration);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     opacity: 0.8;
     z-index: -1;

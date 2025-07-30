@@ -7,6 +7,7 @@ import {
   stagger,
   useInView,
   useIsomorphicLayoutEffect,
+  useReducedMotion,
 } from "framer-motion";
 import { H2 } from "./Text";
 
@@ -48,8 +49,11 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const inView = useInView(titleRef, { once: true });
+  const isReducedMotion = useReducedMotion();
 
   useIsomorphicLayoutEffect(() => {
+    if (isReducedMotion) return;
+
     const title = titleRef.current;
     const line = lineRef.current;
 
@@ -73,14 +77,14 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
       },
       { duration: 0.8, delay: 0.15 }
     );
-  }, [titleRef, lineRef, inView]);
+  }, [titleRef, lineRef, inView, isReducedMotion]);
 
   return (
     <StyledSectionTitle id={id} as="div">
       <div>
         <h2 ref={titleRef}>
           {splitStringUsingRegex(children).map((char, index) => (
-            <span key={index} style={{ opacity: 0 }}>
+            <span key={index} style={{ opacity: isReducedMotion ? 1 : 0 }}>
               {char}
             </span>
           ))}
@@ -88,7 +92,9 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
         <div
           ref={lineRef}
           className="line"
-          style={{ clipPath: "inset(0 100% 0 0)" }}
+          style={{
+            clipPath: isReducedMotion ? "inset(0 0% 0 0)" : "inset(0 100% 0 0)",
+          }}
         ></div>
       </div>
     </StyledSectionTitle>
