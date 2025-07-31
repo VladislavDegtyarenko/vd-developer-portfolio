@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRef } from "react";
-import { useIsomorphicLayoutEffect } from "framer-motion";
+import { useIsomorphicLayoutEffect, useReducedMotion } from "framer-motion";
 
 // UI
 import SuccessIcon from "@/components/icons/SucessIcon";
@@ -22,8 +22,10 @@ const StyledFormSuccessMessage = styled.div`
 
 const FormSuccessMessage = () => {
   const formSuccessRef = useRef<HTMLDivElement>(null);
+  const isReducedMotion = useReducedMotion();
 
   useIsomorphicLayoutEffect(() => {
+    if (isReducedMotion) return;
     if (!formSuccessRef.current) return;
 
     const childElements = Array.from(formSuccessRef.current.children);
@@ -36,7 +38,7 @@ const FormSuccessMessage = () => {
       },
       { duration: 0.7, delay: stagger(0.075) }
     );
-  }, [formSuccessRef.current]);
+  }, [formSuccessRef.current, isReducedMotion]);
 
   return (
     <StyledFormSuccessMessage className="success" ref={formSuccessRef}>

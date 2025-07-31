@@ -16,6 +16,10 @@ const StyledWrapper = styled.span`
     background-color: ${({ theme }) => theme.cyan};
     transition: all 0.3s;
 
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     &:nth-child(1) {
       top: 0;
       transform-origin: 1.75px 0;

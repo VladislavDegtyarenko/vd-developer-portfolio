@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { Variants, motion } from "framer-motion";
+import { Variants, motion, useReducedMotion } from "framer-motion";
 import { useContactForm } from "@/hooks/useContactForm";
 
 // UI
@@ -143,6 +143,8 @@ const ContactForm = () => {
     onSubmit,
   } = useContactForm();
 
+  const isReducedMotion = useReducedMotion();
+
   return (
     <StyledContactForm>
       {isSent ? (
@@ -150,14 +152,18 @@ const ContactForm = () => {
       ) : (
         <motion.form
           onSubmit={onSubmit}
-          initial="hidden"
-          whileInView="visible"
-          transition={{ staggerChildren: 0.1 }}
-          viewport={{ once: true }}
+          {...(!isReducedMotion && {
+            initial: "hidden",
+            whileInView: "visible",
+            transition: { staggerChildren: 0.1 },
+            viewport: { once: true },
+          })}
         >
           <motion.label
-            variants={formElementVariants}
-            transition={{ duration: 0.7 }}
+            {...(!isReducedMotion && {
+              variants: formElementVariants,
+              transition: { duration: 0.7 },
+            })}
           >
             <input
               {...register("name", {
@@ -181,8 +187,10 @@ const ContactForm = () => {
             ) : null}
           </motion.label>
           <motion.label
-            variants={formElementVariants}
-            transition={{ duration: 0.7 }}
+            {...(!isReducedMotion && {
+              variants: formElementVariants,
+              transition: { duration: 0.7 },
+            })}
           >
             <input
               {...register("email", {
@@ -202,8 +210,10 @@ const ContactForm = () => {
             ) : null}
           </motion.label>
           <motion.label
-            variants={formElementVariants}
-            transition={{ duration: 0.7 }}
+            {...(!isReducedMotion && {
+              variants: formElementVariants,
+              transition: { duration: 0.7 },
+            })}
           >
             <textarea
               {...register("message", {
@@ -231,8 +241,10 @@ const ContactForm = () => {
           <motion.button
             type="submit"
             className={`submit ${isSending ? "sending" : ""}`}
-            variants={formElementVariants}
-            transition={{ duration: 0.7 }}
+            {...(!isReducedMotion && {
+              variants: formElementVariants,
+              transition: { duration: 0.7 },
+            })}
           >
             {isSending ? <Loading /> : "Send"}
           </motion.button>

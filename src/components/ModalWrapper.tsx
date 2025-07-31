@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { m, LazyMotion, AnimatePresence } from "framer-motion";
+import { m, LazyMotion, useReducedMotion } from "framer-motion";
 
 const framerFeatures = () =>
   import("./../features/framerFeatures").then((res) => res.default);
@@ -41,14 +41,17 @@ const StyledModalWrapper = styled(m.div)<StyledModalWrapperProps>`
 
 const ModalWrapper = ({ closeModal, ...props }: ModalWrapperProps) => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
+  const isReducedMotion = useReducedMotion();
 
   return (
     <LazyMotion features={framerFeatures}>
       <StyledModalWrapper
         $scrollbarCompensation={scrollbarCompensation}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        {...(!isReducedMotion && {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          exit: { opacity: 0 },
+        })}
         onClick={(e) => {
           if (e.target === e.currentTarget) closeModal();
         }}

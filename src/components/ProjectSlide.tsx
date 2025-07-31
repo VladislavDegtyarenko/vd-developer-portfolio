@@ -13,6 +13,7 @@ import {
   motion,
   useInView,
   useIsomorphicLayoutEffect,
+  useReducedMotion,
 } from "framer-motion";
 import { useMouseEnter } from "@/hooks/useMouseEnter";
 
@@ -147,11 +148,14 @@ const ProjectSlide = ({
 }: ProjectSlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const isReducedMotion = useReducedMotion();
 
   const inView = useInView(slideRef, { once: true });
   const { isMouseEntered } = useMouseEnter(slideRef);
 
   useIsomorphicLayoutEffect(() => {
+    if (isReducedMotion) return;
+
     const slideElement = slideRef.current;
 
     if (!slideElement) return;
@@ -159,10 +163,12 @@ const ProjectSlide = ({
     if (!inView) return;
 
     animate(slideElement, { y: [32, 0], opacity: [0, 1] }, { duration: 0.5 });
-  }, [slideRef, imageRef, inView]);
+  }, [slideRef, imageRef, inView, isReducedMotion]);
 
   // Hover
   useIsomorphicLayoutEffect(() => {
+    if (isReducedMotion) return;
+
     const slideElement = slideRef.current;
     const imageElement = imageRef.current;
 
@@ -173,7 +179,7 @@ const ProjectSlide = ({
     } else {
       animate(imageElement, { scale: [1.05, 1] }, { duration: 0.3 });
     }
-  }, [slideRef, imageRef, isMouseEntered]);
+  }, [slideRef, imageRef, isMouseEntered, isReducedMotion]);
 
   const projectImg = (
     <div className="slide__img">
@@ -208,7 +214,7 @@ const ProjectSlide = ({
         previewLink && previewProject(previewLink);
       }}
       ref={slideRef}
-      style={{ opacity: 0 }}
+      style={{ opacity: isReducedMotion ? 1 : 0 }}
     >
       {projectImg}
 

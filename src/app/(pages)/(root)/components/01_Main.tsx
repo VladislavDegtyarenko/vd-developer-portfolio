@@ -11,7 +11,12 @@ import ScrollDownIcon from "@/components/icons/ScrollDown";
 
 import bg from "public/assets/bg.jpg";
 import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
-import { animate, stagger, useIsomorphicLayoutEffect } from "framer-motion";
+import {
+  animate,
+  stagger,
+  useIsomorphicLayoutEffect,
+  useReducedMotion,
+} from "framer-motion";
 import useViewportWidth from "@/hooks/useViewportWidth";
 
 const StyledMain = styled(Section)`
@@ -136,6 +141,11 @@ const StyledMain = styled(Section)`
       border: none;
       cursor: pointer;
       transition: transform var(--duration);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
       img,
       svg {
         width: 100%;
@@ -168,11 +178,17 @@ const StyledMain = styled(Section)`
     border-radius: var(--borderRadiusNormal);
     color: inherit;
     cursor: pointer;
-    transition: background-color var(--duration), color var(--duration);
     border: none;
+    transition: background-color var(--duration), color var(--duration);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     &:hover {
       color: #dddcdc;
     }
+
     &-primary {
       background-color: ${({ theme }) => theme.cyan};
       color: inherit;
@@ -194,8 +210,13 @@ const StyledMain = styled(Section)`
 const Main = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const { width } = useViewportWidth();
+  const isReducedMotion = useReducedMotion();
 
   useIsomorphicLayoutEffect(() => {
+    if (isReducedMotion) {
+      return undefined;
+    }
+
     const contentWrapper = contentRef.current;
 
     if (!contentWrapper) return;
@@ -252,7 +273,7 @@ const Main = () => {
         delay: 2,
       }
     );
-  }, [contentRef]);
+  }, [contentRef, isReducedMotion]);
 
   return (
     <>

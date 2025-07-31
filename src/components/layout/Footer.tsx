@@ -2,7 +2,7 @@
 
 // Core
 import { memo } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import styled from "styled-components";
 
 // UI
@@ -17,16 +17,20 @@ const StyledFooter = styled.div`
 `;
 
 const Footer = () => {
+  const isReducedMotion = useReducedMotion();
+
   return (
     <StyledFooter>
       <Container>
         <MotionP2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{ duration: 0.7 }}
+          {...(!isReducedMotion && {
+            initial: { opacity: 0, y: 50 },
+            whileInView: {
+              opacity: 1,
+              y: 0,
+            },
+            transition: { duration: 0.7 },
+          })}
         >
           © Copyright {new Date().getFullYear()} | Vladyslav Dihtiarenko | All
           Rights Reserved
