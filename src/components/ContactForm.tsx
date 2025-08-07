@@ -189,6 +189,7 @@ const ContactForm = () => {
               {...register("honeypot")} // can be called "company" or "honeypot"
               style={{ display: "none" }}
               tabIndex={-1}
+              aria-hidden="true"
             />
 
             {errors.name ? (
