@@ -16,19 +16,19 @@ export const sendEmail = async ({
   htmlContent,
   textContent,
 }: SendEmailArgs) => {
-  if (!process.env.BREVO_API_ENDPOINT) {
+  if (!BREVO_API_ENDPOINT) {
     throw new Error("BREVO_API_ENDPOINT is not defined in envs");
   }
 
-  if (!process.env.BREVO_API_KEY) {
+  if (!BREVO_API_KEY) {
     throw new Error("BREVO_API_KEY is not defined in envs");
   }
 
-  if (!process.env.SENDER_EMAIL) {
+  if (!SENDER_EMAIL) {
     throw new Error("SENDER_EMAIL is not defined in envs");
   }
 
-  if (!process.env.MY_EMAIL) {
+  if (!MY_EMAIL) {
     throw new Error("MY_EMAIL is not defined in envs");
   }
 
@@ -46,7 +46,7 @@ export const sendEmail = async ({
     to: [
       {
         email: MY_EMAIL,
-        name: "John Doe",
+        name: "Vladislav Degtyarenko",
       },
     ],
     subject,
