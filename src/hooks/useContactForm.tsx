@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 // TS
-import { FormInputs } from "@/types";
+import { type FormInputs } from "@/types";
 
 export const useContactForm = () => {
   const {
@@ -12,6 +12,7 @@ export const useContactForm = () => {
     handleSubmit,
     // watch,
     formState: { errors },
+    reset,
   } = useForm<FormInputs>({
     mode: "onTouched",
   });
@@ -21,22 +22,28 @@ export const useContactForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const sendEmail: SubmitHandler<FormInputs> = async (data) => {
-    const sendgridApiEndpoint = "api/sendgrid";
+    const routeHandlerEndpoint = "api/contact";
 
     setErrorMessage("");
     setIsSending(true);
 
     try {
-      const request = await fetch(sendgridApiEndpoint, {
+      const request = await fetch(routeHandlerEndpoint, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
 
-      if (request.ok) {
-        setIsSent(true);
+      if (!request.ok) {
+        throw new Error(request.statusText);
       }
+
+      setIsSent(true);
+      reset();
     } catch (error) {
-      setErrorMessage("Error while sending a message. Check the console");
+      setErrorMessage("Error while sending a message. Please try again.");
       console.error(`Error while sending a message: ${error}`);
     } finally {
       setIsSending(false);

@@ -8,8 +8,6 @@ export const getSiteUrl = () => {
   const nodeEnv = process.env.NODE_ENV;
   const vercelUrl = process.env.VERCEL_URL || "";
 
-  console.table({ vercelEnv, nodeEnv, vercelUrl });
-
   if (vercelUrl && vercelEnv === "preview") {
     return normalizeUrl(vercelUrl);
   }

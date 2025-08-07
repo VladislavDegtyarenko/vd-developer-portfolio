@@ -172,6 +172,10 @@ const ContactForm = () => {
                   value: 2,
                   message: "Name must contain at least 2 characters",
                 },
+                maxLength: {
+                  value: 100,
+                  message: "Name is too long",
+                },
                 pattern: {
                   value: /^[A-Za-zА-Яа-яЇїІіЄє\s-]+$/,
                   message: "Invalid name format",
@@ -180,6 +184,13 @@ const ContactForm = () => {
               placeholder="Name"
               className={errors.name?.message ? "error" : ""}
             />
+            <input
+              type="text"
+              {...register("honeypot")} // can be called "company" or "honeypot"
+              style={{ display: "none" }}
+              tabIndex={-1}
+            />
+
             {errors.name ? (
               <span className="helperText errorMessage">
                 {errors.name.message}
