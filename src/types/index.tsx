@@ -148,6 +148,7 @@ export type FormInputs = {
   name: string;
   email: string;
   message: string;
+  honeypot?: string; // honeypot field for bot/spam protection
 };
 
 export type Review = {

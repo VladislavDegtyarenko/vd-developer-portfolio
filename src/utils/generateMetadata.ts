@@ -45,7 +45,6 @@ export function generateMetadata({
     : `${title} | Vladyslav Dihtiarenko`;
 
   const robots = isPreview() || is404 ? "noindex" : "index, follow";
-  console.log("isPreview(): ", isPreview());
 
   return {
     title: fullTitle,
