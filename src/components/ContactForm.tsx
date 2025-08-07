@@ -250,6 +250,7 @@ const ContactForm = () => {
           ) : null}
 
           <motion.button
+            disabled={isSending}
             type="submit"
             className={`submit ${isSending ? "sending" : ""}`}
             {...(!isReducedMotion && {
