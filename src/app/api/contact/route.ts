@@ -12,8 +12,10 @@ export async function POST(request: Request): Promise<Response> {
 
   // Block known bots and crawlers
   const userAgent = request.headers.get("user-agent") || "";
+  console.log("userAgent: ", userAgent);
 
   if (/curl|wget|python|bot|scraper/i.test(userAgent)) {
+    console.warn("Blocked");
     return new Response("Blocked", { status: 403 });
   }
 
