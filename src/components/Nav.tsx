@@ -9,6 +9,13 @@ import { MenuLinksProps, StyledLinksProps } from "../types";
 // UI
 import NavLinkItem from "./NavLinkItem";
 
+// Data
+import navLinks from "../data/navLinks.json";
+import { memo } from "react";
+import { useHomepageActiveSection } from "@/contexts/HomepageActiveSectionContext";
+
+const visibleNavLinks = navLinks.filter(({ isHidden }) => !isHidden);
+
 const StyledNav = styled.ul<StyledLinksProps>`
   display: grid;
   justify-content: center;
@@ -29,48 +36,26 @@ const StyledNav = styled.ul<StyledLinksProps>`
         }}
 `;
 
-const navLinks = [
-  {
-    href: "/",
-    text: "Home",
-  },
-  // {
-  //   href: "/#about",
-  //   text: "About",
-  // },
-  // {
-  //   href: "/#projects",
-  //   text: "Projects",
-  // },
-  // {
-  //   href: "/#reviews",
-  //   text: "Reviews",
-  // },
-  {
-    href: "/#contact",
-    text: "Contact",
-  },
-  {
-    href: "/blog",
-    text: "Blog",
-  },
-  {
-    href: "https://www.youtube.com/@VladyslavDihtiarenko?sub_confirmation=1",
-    text: "YouTube",
-    isExternal: true,
-  },
-];
+function isLinkActive(
+  href: string,
+  pathname: string,
+  activeHomepageSection: string | null
+) {
+  if (pathname === "/") {
+    if (activeHomepageSection === "home" && href === "/") return true;
 
-function isLinkActive(href: string, pathname: string) {
-  if (href === "/") {
-    return pathname === href;
+    return (
+      Boolean(activeHomepageSection) && href.includes(activeHomepageSection!)
+    );
   }
 
-  return pathname.includes(href);
+  return href !== "/" && pathname.includes(href);
 }
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();
+  const { activeSection: activeHomepageSection } = useHomepageActiveSection();
+  // console.log("activeHomepageSection: ", activeHomepageSection);
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
@@ -78,13 +63,13 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
 
   return (
     <StyledNav $isMobile={isMobile}>
-      {navLinks.map(({ text, href, isExternal, ...props }) => (
+      {visibleNavLinks.map(({ text, href, isExternal, ...props }) => (
         <NavLinkItem
           key={text}
           text={text}
           href={href}
           isMobile={isMobile}
-          isActive={isLinkActive(href, pathname)}
+          isActive={isLinkActive(href, pathname, activeHomepageSection)}
           isExternal={isExternal}
           onClick={handleClick}
           {...props}
@@ -94,4 +79,4 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   );
 };
 
-export default Nav;
+export default memo(Nav);

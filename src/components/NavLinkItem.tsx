@@ -55,7 +55,6 @@ const StyledMotionLinkItem = styled(motion.li)`
   display: flex;
   justify-content: center;
   align-items: stretch;
-  /* outline: solid red; */
   position: relative;
 
   a {
@@ -65,23 +64,6 @@ const StyledMotionLinkItem = styled(motion.li)`
     display: flex;
     align-items: center;
     opacity: 0.7;
-    /* &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0%;
-      height: 0.1em;
-      background-color: ${({ theme }) => theme.cyan};
-      pointer-events: none;
-      user-select: none;
-      transition: width var(--duration);
-    }
-    &:hover:after {
-      width: 100%;
-    } */
   }
   svg,
   img {
@@ -126,14 +108,18 @@ const NavLinkItem = ({
         variants={linkVariants}
         href={href}
         target={isExternal ? "_blank" : "_self"}
-        className={`${isActive ? "active" : ""}`}
+        // className={`${isActive ? "active" : ""}`}
         onClick={onClick}
       >
         <LinkText as="span">{text}</LinkText>
         {isExternal && <ExternalIcon />}
       </MotionLink>
 
-      <motion.span className="decorator" variants={decoratorVariants} />
+      <motion.span
+        className="decorator"
+        initial={{ clipPath: "inset(0 50% 0 50%)" }}
+        variants={decoratorVariants}
+      />
     </StyledMotionLinkItem>
   );
 };

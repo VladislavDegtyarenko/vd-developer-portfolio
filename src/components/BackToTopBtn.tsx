@@ -35,7 +35,8 @@ const StyledBtn = styled(motion.button)<StyledBtnProps>`
   user-select: none;
   opacity: 0.75;
   cursor: pointer;
-  transition: opacity var(--duration);
+  transition-property: opacity, background-color;
+  transition-duration: var(--duration);
 
   pointer-events: initial;
   user-select: initial;

@@ -7,6 +7,8 @@ interface ScrollDelta {
 }
 
 const useScrollDelta = (delta: number = 5): ScrollDelta => {
+  // TODO: find a better way to get the scroll position
+  // It triggers rerender too often, but we need only boolean if scrollPosition > 250
   const [scrollPosition, setScrollPosition] = useState<number>(0);
   const [scrolledUp, setScrolledUp] = useState<boolean>(false);
   const [scrolledDown, setScrolledDown] = useState<boolean>(false);

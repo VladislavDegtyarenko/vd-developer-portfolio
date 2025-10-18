@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { ScrollLockContextProvider } from "@/contexts/ScrollLockContext";
 import { MobileMenuContextProvider } from "@/contexts/MobileMenuContext";
 import { ProjectContextProvider } from "@/contexts/ProjectContext";
+import { HomepageActiveSectionContextProvider } from "@/contexts/HomepageActiveSectionContext";
 import { ThemeProvider } from "next-themes";
 
 // Styled-components config
@@ -19,7 +20,9 @@ const Providers = ({ children }: { children: ReactNode }) => {
         <ScrollLockContextProvider>
           <MobileMenuContextProvider>
             <ProjectContextProvider>
-              <StyledThemeProvider>{children}</StyledThemeProvider>
+              <HomepageActiveSectionContextProvider>
+                <StyledThemeProvider>{children}</StyledThemeProvider>
+              </HomepageActiveSectionContextProvider>
             </ProjectContextProvider>
           </MobileMenuContextProvider>
         </ScrollLockContextProvider>
