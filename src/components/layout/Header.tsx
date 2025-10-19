@@ -111,7 +111,7 @@ const Header = () => {
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
 
   // SCROLL
-  const { scrollPosition, scrolledUp, scrolledDown } = useScrollDelta();
+  const { scrollPosition, scrolledDown } = useScrollDelta();
 
   const isHidden = scrollPosition > 250 && scrolledDown;
 

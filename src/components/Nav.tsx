@@ -1,18 +1,20 @@
 "use client";
 
+// Core
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { memo } from "react";
+import { useHomepageActiveSection } from "@/contexts/HomepageActiveSectionContext";
+import { motion } from "framer-motion";
 
 // Types
 import { MenuLinksProps, StyledLinksProps } from "../types";
 
 // UI
-import NavLinkItem from "./NavLinkItem";
+import NavItem from "./NavItem";
 
 // Data
 import navLinks from "../data/navLinks.json";
-import { memo } from "react";
-import { useHomepageActiveSection } from "@/contexts/HomepageActiveSectionContext";
 
 const visibleNavLinks = navLinks.filter(({ isHidden }) => !isHidden);
 
@@ -52,20 +54,22 @@ function isLinkActive(
   return href !== "/" && pathname.includes(href);
 }
 
+const MotionStyledNav = motion(StyledNav);
+
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();
   const { activeSection: activeHomepageSection } = useHomepageActiveSection();
-  // console.log("activeHomepageSection: ", activeHomepageSection);
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
   };
 
   return (
-    <StyledNav $isMobile={isMobile}>
-      {visibleNavLinks.map(({ text, href, isExternal, ...props }) => (
-        <NavLinkItem
+    <MotionStyledNav $isMobile={isMobile}>
+      {visibleNavLinks.map(({ text, href, isExternal, ...props }, index) => (
+        <NavItem
           key={text}
+          index={index}
           text={text}
           href={href}
           isMobile={isMobile}
@@ -75,7 +79,7 @@ const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
           {...props}
         />
       ))}
-    </StyledNav>
+    </MotionStyledNav>
   );
 };
 
