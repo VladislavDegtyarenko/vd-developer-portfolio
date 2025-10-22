@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";

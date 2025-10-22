@@ -24,7 +24,7 @@ const StyledModalWrapper = styled(m.div)<StyledModalWrapperProps>`
   z-index: 2;
   backdrop-filter: blur(0.5rem);
 
-  &::after {
+  &::before {
     content: "";
     display: block;
     background-color: ${({ theme }) => theme.bg};

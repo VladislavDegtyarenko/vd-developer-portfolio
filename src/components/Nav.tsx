@@ -3,7 +3,7 @@
 // Core
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { useHomepageActiveSection } from "@/contexts/HomepageActiveSectionContext";
 import { motion } from "framer-motion";
 
