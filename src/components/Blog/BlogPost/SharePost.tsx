@@ -14,6 +14,7 @@ import {
   TwitterIcon,
 } from "react-share";
 import { P1, P2 } from "@/components/Text";
+import { isBrowser } from "@/utils/isBrowser";
 
 const Styled = styled.div`
   display: flex;
@@ -29,10 +30,9 @@ const Styled = styled.div`
 
 const SharePost = () => {
   const btnProps = {
-    url:
-      typeof window !== "undefined"
-        ? window?.location?.href
-        : "https://vddeveloper.online/blog",
+    url: isBrowser()
+      ? window?.location?.href
+      : "https://vddeveloper.online/blog",
   };
 
   const iconProps = {

@@ -176,7 +176,7 @@ const StyledMain = styled(Section)`
     justify-content: center;
     align-items: center;
     border-radius: var(--borderRadiusNormal);
-    color: inherit;
+    color: ;
     cursor: pointer;
     border: none;
     transition: background-color var(--duration), color var(--duration);
@@ -191,9 +191,10 @@ const StyledMain = styled(Section)`
 
     &-primary {
       background-color: ${({ theme }) => theme.cyan};
-      color: inherit;
+      color: ${({ theme }) => theme.white};
 
       &:hover {
+        color: ${({ theme }) => theme.white};
         background-color: ${({ theme }) => theme.cyanHover};
       }
     }

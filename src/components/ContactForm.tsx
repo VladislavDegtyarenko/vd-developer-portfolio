@@ -107,6 +107,7 @@ const StyledContactForm = styled.div`
       border: none;
       background-color: ${({ theme }) => theme.cyan};
       color: ${({ theme }) => theme.white};
+      font-weight: 700;
 
       &:hover {
         background-color: ${({ theme }) => theme.cyanHover};

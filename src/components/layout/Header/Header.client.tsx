@@ -17,6 +17,7 @@ import MobileMenu from "../../MobileMenu";
 import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
 import { useIsMobileHeaderHidden } from "@/hooks/useIsMobileHeaderHidden";
+import { usePathname } from "next/navigation";
 
 // Types
 type StyledHeaderProps = {
@@ -109,6 +110,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
 const HeaderClient = () => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
+  const pathname = usePathname();
 
   const isHiddenOnMobile = useIsMobileHeaderHidden();
 
@@ -124,7 +126,13 @@ const HeaderClient = () => {
               prefetch={false}
               className="logo"
               href="/"
-              onClick={() => {
+              onClick={(e) => {
+                // Make "/" links scroll to top smoothly
+                if ("/" === pathname) {
+                  e.preventDefault();
+                  scrollTo(0, 0);
+                }
+
                 if (menuIsOpen) {
                   toggleMenu();
                 }

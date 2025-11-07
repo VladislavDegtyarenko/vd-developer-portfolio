@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { isBrowser } from "@/utils/isBrowser";
 
 const useViewportWidth = () => {
   const [width, setWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!isBrowser()) return;
 
     setWidth(window.innerWidth);
 

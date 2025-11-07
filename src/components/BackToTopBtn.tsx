@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { useContext, useMemo } from "react";
 
 import ArrowIcon from "@/components/icons/Arrow";
-import useScrollDelta from "@/hooks/useScrollDelta";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { useScroll } from "@/hooks/useScroll";
 
 type StyledBtnProps = {
   $scrollbarCompensation: number | null;
@@ -57,13 +57,15 @@ const StyledBtn = styled(motion.button)<StyledBtnProps>`
 const BackToTopBtn = () => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
 
-  const { scrolledUp, scrollPosition } = useScrollDelta();
+  const { isScrolledUp, scrollPosition } = useScroll({
+    threshold: 5,
+  });
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
 
-  const visible = scrolledUp && scrollPosition > 400;
+  const visible = isScrolledUp && scrollPosition > 400;
 
   return (
     <AnimatePresence>

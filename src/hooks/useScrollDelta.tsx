@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { isBrowser } from "@/utils/isBrowser";
 
 interface ScrollDelta {
   scrolledUp: boolean;
@@ -13,26 +14,38 @@ const useScrollDelta = (delta: number = 5): ScrollDelta => {
   const [scrolledUp, setScrolledUp] = useState<boolean>(false);
   const [scrolledDown, setScrolledDown] = useState<boolean>(false);
 
+  // Use ref to track previous position for comparison without causing re-renders
+  const previousScrollPositionRef = useRef<number>(0);
+
   // flag to track the first fired scroll event
   // we want to disable firing the first scroll event
   // but fire it each time after a timeout
   const isFirstScrollFired = useRef(true);
 
   useEffect(() => {
+    if (!isBrowser()) return;
+
+    // Initialize scroll position on mount
+    previousScrollPositionRef.current = window.scrollY;
+    setScrollPosition(window.scrollY || 0);
+
     // Helper function to handle the scroll event and set the scrolledUp and scrolledDown state
     const handleScroll = () => {
       // return it it's the first fired scroll event
       if (isFirstScrollFired.current) {
         isFirstScrollFired.current = false;
+        previousScrollPositionRef.current = window?.scrollY || 0;
         return;
       }
 
       const currentPosition = window?.scrollY || 0;
+      const previousPosition = previousScrollPositionRef.current;
 
-      if (Math.abs(currentPosition - scrollPosition) >= delta) {
-        setScrolledUp(currentPosition < scrollPosition);
-        setScrolledDown(currentPosition > scrollPosition);
+      if (Math.abs(currentPosition - previousPosition) >= delta) {
+        setScrolledUp(currentPosition < previousPosition);
+        setScrolledDown(currentPosition > previousPosition);
         setScrollPosition(currentPosition);
+        previousScrollPositionRef.current = currentPosition;
       }
     };
 
@@ -40,14 +53,14 @@ const useScrollDelta = (delta: number = 5): ScrollDelta => {
     const throttleScroll = () => {
       let isThrottled = false;
 
-      return (event: Event) => {
+      return () => {
         if (!isThrottled) {
           handleScroll();
           isThrottled = true;
 
           setTimeout(() => {
             isThrottled = false;
-          }, 70); // Adjust the throttle time (in milliseconds) as needed
+          }, 300); // Adjust the throttle time (in milliseconds) as needed
         }
       };
     };
@@ -62,7 +75,7 @@ const useScrollDelta = (delta: number = 5): ScrollDelta => {
       window.removeEventListener("scroll", throttledScrollHandler);
       isFirstScrollFired.current = true;
     };
-  }, [delta, scrollPosition]);
+  }, [delta]);
 
   return {
     scrolledUp,

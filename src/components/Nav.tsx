@@ -4,7 +4,6 @@
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
 import { memo } from "react";
-import { useHomepageActiveSection } from "@/contexts/HomepageActiveSectionContext";
 import { motion } from "framer-motion";
 
 // Types
@@ -15,6 +14,7 @@ import NavItem from "./NavItem";
 
 // Data
 import navLinks from "../data/navLinks.json";
+import { useActiveHomepageSection } from "@/hooks/useActiveHomepageSection";
 
 const visibleNavLinks = navLinks.filter(({ isHidden }) => !isHidden);
 
@@ -58,7 +58,7 @@ const MotionStyledNav = motion(StyledNav);
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();
-  const { activeSection: activeHomepageSection } = useHomepageActiveSection();
+  const { activeHomepageSection } = useActiveHomepageSection();
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
