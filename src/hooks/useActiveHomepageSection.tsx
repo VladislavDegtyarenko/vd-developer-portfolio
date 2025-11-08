@@ -66,9 +66,9 @@ export const useActiveHomepageSection = () => {
     // There's a cringy bug:
     // In dev mode everything works great,
     // But when building the app, the observer is not updated when you click on <Link /> with anchor tag within the same page.
-    // That's why we need to pass activeSection to the dependency array to force a re-initialization of the observer.
+    // That's why we need to pass hash to the dependency array to force a re-initialization of the observer.
     // This is not the most performant solution, but it's the best we can do for now.
-  }, [isFirstRender, isHomepage, activeSection]);
+  }, [isFirstRender, isHomepage]);
 
   return { activeHomepageSection: activeSection };
 };

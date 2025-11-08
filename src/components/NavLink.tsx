@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { Variants, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 // UI
 import { H3, P1 } from "./Text";
@@ -80,6 +80,7 @@ const NavLink = ({
   isExternal,
   onClick,
 }: NavLinkProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   const isReducedMotion = useReducedMotion();
 
@@ -103,6 +104,7 @@ const NavLink = ({
         // Make "/" links scroll to top smoothly
         if (href === pathname) {
           e.preventDefault();
+          router.push(pathname, { scroll: false });
           scrollTo(0, 0);
         }
 

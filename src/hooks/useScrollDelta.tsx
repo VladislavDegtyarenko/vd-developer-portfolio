@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { isBrowser } from "@/utils/isBrowser";
+import { throttle } from "@/utils/throttle";
 
 interface ScrollDelta {
   scrolledUp: boolean;
@@ -50,22 +51,7 @@ const useScrollDelta = (delta: number = 5): ScrollDelta => {
     };
 
     // Throttle the scroll event to avoid firing it too frequently
-    const throttleScroll = () => {
-      let isThrottled = false;
-
-      return () => {
-        if (!isThrottled) {
-          handleScroll();
-          isThrottled = true;
-
-          setTimeout(() => {
-            isThrottled = false;
-          }, 300); // Adjust the throttle time (in milliseconds) as needed
-        }
-      };
-    };
-
-    const throttledScrollHandler = throttleScroll();
+    const throttledScrollHandler = throttle(500, handleScroll);
 
     // Attach the event listener
     window.addEventListener("scroll", throttledScrollHandler);

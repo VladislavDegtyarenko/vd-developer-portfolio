@@ -14,7 +14,7 @@ import NavItem from "./NavItem";
 
 // Data
 import navLinks from "../data/navLinks.json";
-import { useActiveHomepageSection } from "@/hooks/useActiveHomepageSection";
+import { useActiveHomepageSectionFallback } from "@/hooks/useActiveHomepageSectionFallback";
 
 const visibleNavLinks = navLinks.filter(({ isHidden }) => !isHidden);
 
@@ -58,7 +58,7 @@ const MotionStyledNav = motion(StyledNav);
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();
-  const { activeHomepageSection } = useActiveHomepageSection();
+  const { activeHomepageSection } = useActiveHomepageSectionFallback();
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
