@@ -2,14 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { render } from "@react-email/render";
 import ContactEmail from "@/components/ContactEmail";
 import { sendEmail } from "@/utils/sendEmail";
-import {
-  getAllowedDomains,
-  getAllowedHosts,
-  isAllowedOrigin,
-  parseHost,
-} from "@/utils";
 
-const allowedHosts = getAllowedHosts();
 const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
 const RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 const RECAPTCHA_BYPASS =
@@ -154,26 +147,6 @@ export async function POST(request: NextRequest): Promise<Response> {
   const userAgent = request.headers.get("user-agent") || "";
   if (unsafeUserAgents.test(userAgent)) {
     return new Response("Blocked", { status: 403 });
-  }
-
-  const origin = request.headers.get("origin");
-
-  if (!isAllowedOrigin(origin)) {
-    return new Response("Forbidden", { status: 403 });
-  }
-
-  const hostHeader =
-    request.headers.get("host") || request.headers.get("x-forwarded-host");
-  const host =
-    parseHost(hostHeader) ||
-    (origin ? parseHost(origin) : null) ||
-    request.nextUrl.host?.toLowerCase();
-  const isAllowedHost =
-    host === "localhost:3000" ||
-    (host && allowedHosts.some((allowedHost) => allowedHost === host));
-
-  if (!isAllowedHost) {
-    return new Response("Forbidden", { status: 403 });
   }
 
   const ip = getClientIp(request);
