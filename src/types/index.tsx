@@ -149,6 +149,7 @@ export type FormInputs = {
   email: string;
   message: string;
   honeypot?: string; // honeypot field for bot/spam protection
+  recaptchaToken?: string;
 };
 
 export type Review = {
