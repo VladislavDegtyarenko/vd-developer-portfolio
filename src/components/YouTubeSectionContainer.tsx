@@ -31,7 +31,7 @@ const YouTubeSectionContainer = (props: YouTubeSectionContainerProps) => {
 
   return (
     <>
-      <StyledSection>
+      <StyledSection id="youtube">
         <Container>
           <div className="inner">
             <SectionTitle>{title}</SectionTitle>

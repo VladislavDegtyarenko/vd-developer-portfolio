@@ -1,7 +1,7 @@
 "use client";
 
 // Core
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import styled from "styled-components";
 

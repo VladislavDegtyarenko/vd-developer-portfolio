@@ -22,10 +22,11 @@ const StyledModalWrapper = styled(m.div)<StyledModalWrapperProps>`
   height: 100%;
   height: 100dvh;
   z-index: 2;
+  backdrop-filter: blur(0.5rem);
 
-  &:after {
+  &::before {
     content: "";
-    display: inline-block;
+    display: block;
     background-color: ${({ theme }) => theme.bg};
     top: 0;
     left: 0;
@@ -35,11 +36,28 @@ const StyledModalWrapper = styled(m.div)<StyledModalWrapperProps>`
     height: 100%;
     position: absolute;
     z-index: -1;
-    opacity: 0.85;
+    opacity: 0.75;
   }
 `;
 
-const ModalWrapper = ({ closeModal, ...props }: ModalWrapperProps) => {
+const menuVariants = {
+  closed: {
+    opacity: 0.5,
+    clipPath: "circle(0% at top 16px right 16px)",
+    transition: { delay: 0.3, duration: 0.35 },
+  },
+  opened: {
+    opacity: 1,
+    clipPath: "circle(150% at top 16px right 16px)",
+    transition: { delay: 0.15, duration: 0.35 },
+  },
+};
+
+const ModalWrapper = ({
+  closeModal,
+  children,
+  ...props
+}: ModalWrapperProps) => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const isReducedMotion = useReducedMotion();
 
@@ -48,15 +66,19 @@ const ModalWrapper = ({ closeModal, ...props }: ModalWrapperProps) => {
       <StyledModalWrapper
         $scrollbarCompensation={scrollbarCompensation}
         {...(!isReducedMotion && {
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
+          initial: "closed",
+          animate: "opened",
+          exit: "closed",
+          variants: menuVariants,
+          transition: { duration: 0.15 * 3 },
         })}
         onClick={(e) => {
           if (e.target === e.currentTarget) closeModal();
         }}
         {...props}
-      ></StyledModalWrapper>
+      >
+        {children}
+      </StyledModalWrapper>
     </LazyMotion>
   );
 };

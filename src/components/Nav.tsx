@@ -1,13 +1,22 @@
 "use client";
 
+// Core
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { memo } from "react";
+import { motion } from "framer-motion";
 
 // Types
 import { MenuLinksProps, StyledLinksProps } from "../types";
 
 // UI
-import NavLinkItem from "./NavLinkItem";
+import NavItem from "./NavItem";
+
+// Data
+import navLinks from "../data/navLinks.json";
+import { useActiveHomepageSectionFallback } from "@/hooks/useActiveHomepageSectionFallback";
+
+const visibleNavLinks = navLinks.filter(({ isHidden }) => !isHidden);
 
 const StyledNav = styled.ul<StyledLinksProps>`
   display: grid;
@@ -29,69 +38,49 @@ const StyledNav = styled.ul<StyledLinksProps>`
         }}
 `;
 
-const navLinks = [
-  {
-    href: "/",
-    text: "Home",
-  },
-  // {
-  //   href: "/#about",
-  //   text: "About",
-  // },
-  // {
-  //   href: "/#projects",
-  //   text: "Projects",
-  // },
-  // {
-  //   href: "/#reviews",
-  //   text: "Reviews",
-  // },
-  {
-    href: "/#contact",
-    text: "Contact",
-  },
-  {
-    href: "/blog",
-    text: "Blog",
-  },
-  {
-    href: "https://www.youtube.com/@VladyslavDihtiarenko?sub_confirmation=1",
-    text: "YouTube",
-    isExternal: true,
-  },
-];
+function isLinkActive(
+  href: string,
+  pathname: string,
+  activeHomepageSection: string | null
+) {
+  if (pathname === "/") {
+    if (activeHomepageSection === "home" && href === "/") return true;
 
-function isLinkActive(href: string, pathname: string) {
-  if (href === "/") {
-    return pathname === href;
+    return (
+      Boolean(activeHomepageSection) && href.includes(activeHomepageSection!)
+    );
   }
 
-  return pathname.includes(href);
+  return href !== "/" && pathname.includes(href);
 }
+
+const MotionStyledNav = motion(StyledNav);
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();
+  const { activeHomepageSection } = useActiveHomepageSectionFallback();
 
   const handleClick = () => {
     if (isMobile && toggleMenu) toggleMenu();
   };
 
   return (
-    <StyledNav $isMobile={isMobile}>
-      {navLinks.map(({ text, href, isExternal, ...props }) => (
-        <NavLinkItem
+    <MotionStyledNav $isMobile={isMobile}>
+      {visibleNavLinks.map(({ text, href, isExternal, ...props }, index) => (
+        <NavItem
           key={text}
+          index={index}
           text={text}
           href={href}
           isMobile={isMobile}
-          isActive={isLinkActive(href, pathname)}
+          isActive={isLinkActive(href, pathname, activeHomepageSection)}
           isExternal={isExternal}
           onClick={handleClick}
           {...props}
         />
       ))}
-    </StyledNav>
+    </MotionStyledNav>
   );
 };
 
-export default Nav;
+export default memo(Nav);

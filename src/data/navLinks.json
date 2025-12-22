@@ -1,0 +1,33 @@
+[
+  {
+    "href": "/",
+    "text": "Home"
+  },
+  {
+    "href": "/#about",
+    "text": "About",
+    "isHidden": true
+  },
+  {
+    "href": "/#projects",
+    "text": "Projects"
+  },
+  {
+    "href": "/#reviews",
+    "text": "Reviews",
+    "isHidden": true
+  },
+  {
+    "href": "/blog",
+    "text": "Blog"
+  },
+  {
+    "href": "/#contact",
+    "text": "Contact"
+  },
+  {
+    "href": "https://www.youtube.com/@VladyslavDihtiarenko?sub_confirmation=1",
+    "text": "YouTube",
+    "isExternal": true
+  }
+]

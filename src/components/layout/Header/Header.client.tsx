@@ -1,10 +1,9 @@
 "use client";
 
-import { useContext, memo } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
-import useScrollDelta from "@/hooks/useScrollDelta";
 
 // UI
 import Container from "@/components/layout/Container";
@@ -12,16 +11,18 @@ import Logo from "@/components/icons/LOGO";
 import BurgerButton from "@/components/BurgerButton";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import Nav from "@/components/Nav";
-import MobileMenu from "../MobileMenu";
+import MobileMenu from "../../MobileMenu";
 
 // Contexts
 import MobileMenuContext from "@/contexts/MobileMenuContext";
 import ScrollLockContext from "@/contexts/ScrollLockContext";
+import { useIsMobileHeaderHidden } from "@/hooks/useIsMobileHeaderHidden";
+import { usePathname, useRouter } from "next/navigation";
 
 // Types
 type StyledHeaderProps = {
   $scrollbarCompensation: number | null;
-  $isHidden: boolean;
+  $isHiddenOnMobile: boolean;
 };
 
 const StyledHeader = styled.header<StyledHeaderProps>`
@@ -70,8 +71,8 @@ const StyledHeader = styled.header<StyledHeaderProps>`
 
   @media screen and (max-width: 991.98px) {
     padding: 1.25em 0;
-    ${({ $isHidden }) => ({
-      transform: `translateY(${$isHidden ? "-100%" : "0%"})`,
+    ${({ $isHiddenOnMobile }) => ({
+      transform: `translateY(${$isHiddenOnMobile ? "-100%" : "0%"})`,
     })}
   }
 
@@ -106,20 +107,19 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 `;
 
-const Header = () => {
+const HeaderClient = () => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // SCROLL
-  const { scrollPosition, scrolledUp, scrolledDown } = useScrollDelta();
-
-  const isHidden = scrollPosition > 250 && scrolledDown;
+  const isHiddenOnMobile = useIsMobileHeaderHidden();
 
   return (
     <>
       <StyledHeader
         $scrollbarCompensation={scrollbarCompensation}
-        $isHidden={isHidden}
+        $isHiddenOnMobile={isHiddenOnMobile}
       >
         <Container>
           <nav>
@@ -127,7 +127,14 @@ const Header = () => {
               prefetch={false}
               className="logo"
               href="/"
-              onClick={() => {
+              onClick={(e) => {
+                // Make "/" links scroll to top smoothly
+                if ("/" === pathname) {
+                  e.preventDefault();
+                  router.push(pathname, { scroll: false });
+                  scrollTo(0, 0);
+                }
+
                 if (menuIsOpen) {
                   toggleMenu();
                 }
@@ -148,4 +155,4 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+export default HeaderClient;
