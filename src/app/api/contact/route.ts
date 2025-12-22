@@ -81,6 +81,7 @@ const isRateLimited = (key: string) => {
 const verifyRecaptcha = async (token: string, remoteIp: string) => {
   const env = process.env.VERCEL_ENV ?? process.env.NODE_ENV;
   const isProd = env === "production";
+  console.log("isProd: ", isProd);
 
   if (RECAPTCHA_BYPASS || (!isProd && !recaptchaSecret)) {
     console.warn(
@@ -103,6 +104,7 @@ const verifyRecaptcha = async (token: string, remoteIp: string) => {
   }
 
   let response: Response;
+  console.log("params: ", params);
   try {
     response = await fetch(RECAPTCHA_VERIFY_URL, {
       method: "POST",
