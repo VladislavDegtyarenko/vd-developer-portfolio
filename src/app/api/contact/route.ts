@@ -121,11 +121,13 @@ const verifyRecaptcha = async (token: string, remoteIp: string) => {
     );
   }
 
+  console.log("response: ", response);
   if (!response.ok) {
     throw new Error("Failed to verify reCAPTCHA");
   }
 
   const data = await response.json();
+  console.log("data: ", data);
 
   const isScoreLow = typeof data.score === "number" && data.score < 0.5;
 
