@@ -9,8 +9,13 @@ import SectionDivider from "./SectionDivider";
 import { ReactNode } from "react";
 
 const StyledSection = styled(Section)`
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
   .wrapper {
-    margin-top: 2rem;
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));

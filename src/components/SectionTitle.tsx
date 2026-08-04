@@ -42,6 +42,7 @@ const StyledSectionTitle = styled(H2)`
     left: 16px;
     position: relative;
     display: block;
+    border-radius: 2px;
   }
 `;
 
@@ -64,7 +65,7 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
     animate(
       titleChars,
       { y: inView ? [16, 0] : [0, 16], opacity: inView ? [0, 1] : [1, 0] },
-      { duration: 0.5, delay: stagger(0.05) }
+      { duration: 0.5, delay: stagger(0.05) },
     );
 
     const insetStart = "inset(0 100% 0 0)";
@@ -75,7 +76,7 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
       {
         clipPath: inView ? [insetStart, insetEnd] : [insetEnd, insetStart],
       },
-      { duration: 0.8, delay: 0.15 }
+      { duration: 0.8 * (titleChars.length / 12), delay: 0.15 },
     );
   }, [titleRef, lineRef, inView, isReducedMotion]);
 

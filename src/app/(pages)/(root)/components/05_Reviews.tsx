@@ -8,16 +8,14 @@ import SectionTitle from "@/components/SectionTitle";
 import Container from "@/components/layout/Container";
 import SectionDescription from "@/components/SectionDescription";
 
-import ReviewCard from "@/components/ReviewCard";
-
-import { reviews } from "@/data/reviews";
 import REVIEWS from "@/data/reviews.json";
+import ReviewsList from "@/components/ReviewsList";
 
 const StyledReviews = styled(Section)`
-  .reviews {
-    &__descr {
-      margin-top: 48px;
-    }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 `;
 
@@ -28,14 +26,12 @@ const Reviews = () => {
     <>
       <StyledReviews id="reviews">
         <Container>
-          <SectionTitle>{title}</SectionTitle>
-          <SectionDescription className="reviews__descr">
-            {description}
-          </SectionDescription>
+          <div className="inner">
+            <SectionTitle>{title}</SectionTitle>
+            <SectionDescription>{description}</SectionDescription>
 
-          {reviews.map((review) => (
-            <ReviewCard key={review.name} {...review} />
-          ))}
+            <ReviewsList />
+          </div>
         </Container>
       </StyledReviews>
       <Container>

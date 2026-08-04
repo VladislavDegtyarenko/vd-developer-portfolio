@@ -6,6 +6,77 @@ export const reviews: Review[] = [
     reviewText: (
       <>
         <P1>
+          I had the pleasure of working with Vladislav and can genuinely say
+          he&apos;s one of those rare engineers who combines{" "}
+          <span className="bold-cyan">
+            strong development skills with a QA mindset.
+          </span>{" "}
+          He doesn&apos;t just implement a task - he digs into the
+          <span className="bold-white">&quot;why&quot;</span> behind it,
+          questions edge cases before they become bugs, and consistently gets to
+          the root of a problem rather than settling for a surface-level fix.
+        </P1>
+        <P1>
+          Beyond his day-to-day work, Vladislav has been an early and thoughtful
+          adopter of AI-assisted development tools like Claude and Cursor, and
+          he generously shared that knowledge with the team through several{" "}
+          <span className="bold-white">
+            hands-on mini workshops on integrating AI tooling into our workflow.
+          </span>{" "}
+          That kind of initiative - learning something new and then turning
+          around to upskill the whole team - says a lot about his mindset.
+        </P1>
+        <P1>
+          Any team would be lucky to have Vladislav. He&apos;s{" "}
+          <span className="bold-cyan">
+            diligent, detail-oriented, and brings a level of technical curiosity
+            that raises the bar for everyone around him.
+          </span>
+        </P1>
+      </>
+    ),
+    name: "Yaroslav Shcherbynskyi",
+    company: "B2SPIN Limited",
+    position: "Senior QA Engineer, QA Lead",
+    photo: "y-shcherbynskyi.jpg",
+  },
+  {
+    reviewText: (
+      <>
+        <P1>
+          I had the opportunity to work with Vlad and can confidently recommend
+          him as a{" "}
+          <span className="bold-cyan">
+            highly competent and experienced Frontend Engineer.
+          </span>
+        </P1>
+        <P1>
+          He combines{" "}
+          <span className="bold-white">
+            strong technical expertise with high responsibility
+          </span>{" "}
+          and delivers consistently high-quality results. Vlad has a solid
+          background in modern frontend technologies, excellent problem-solving
+          skills, and a proactive approach to challenges.
+        </P1>
+        <P1>
+          He is{" "}
+          <span className="bold-cyan">
+            extremely attentive to details, even the smallest ones,
+          </span>{" "}
+          ensuring that every aspect of his work meets the highest standards.
+        </P1>
+      </>
+    ),
+    name: "Dmitry Pashula",
+    position: "Frontend Engineer",
+    company: "Patrianna Ltd",
+    photo: "d-pashula.jpg",
+  },
+  {
+    reviewText: (
+      <>
+        <P1>
           We are absolutely thrilled with the work of the{" "}
           <span className="bold-white">Vladyslav</span> who{" "}
           <span className="bold-cyan">developed our new website</span> for the
@@ -64,9 +135,10 @@ export const reviews: Review[] = [
         </P1>
       </>
     ),
-    name: "Aleksei Bilous",
+    name: "Oleksii Bilous",
     position: "Client",
     company: "Fiverr",
+    photo: "o-bilous.jpeg",
   },
   {
     reviewText: (

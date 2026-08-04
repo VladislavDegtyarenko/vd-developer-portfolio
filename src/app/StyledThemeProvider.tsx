@@ -5,9 +5,24 @@ import { ThemeProvider } from "styled-components";
 import { StyledThemeProviderProps } from "@/types";
 import useMounted from "@/hooks/useMounted";
 
-const darkTheme = {
+export type AppTheme = {
+  bg: string;
+  cardBg: string;
+  cardBgHover: string;
+  shine: string;
+  cyan: string;
+  cyanHover: string;
+  error: string;
+  grey: string;
+  fg: string;
+  white: string;
+  overlay: string;
+};
+
+const darkTheme: AppTheme = {
   bg: "#050505",
   cardBg: "#242424",
+  cardBgHover: "#363636",
   shine: "#363636",
   cyan: "#1B9AAA",
   // cyan: "#1ECBE1",
@@ -19,9 +34,10 @@ const darkTheme = {
   overlay: "#242424",
 };
 
-const lightTheme = {
+const lightTheme: AppTheme = {
   bg: "#f6f6f6",
   cardBg: "#e4e4e4",
+  cardBgHover: "#dedede",
   shine: "#f2f2f2",
   cyan: "#1B9AAA",
   // cyan: "#1ECBE1",

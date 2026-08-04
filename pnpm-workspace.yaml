@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: true
+  fast-folder-size: true
+  sharp: true
+  unrs-resolver: true

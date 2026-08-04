@@ -11,7 +11,7 @@ import {
 // UI
 import { H4 } from "@/components/Text";
 import ExpertiseCard from "@/components/ExpertiseCard";
-import { ExpertiseGroup } from "@/types";
+import type { ExpertiseGroup } from "@/types";
 
 const StyledGroup = styled.div`
   display: grid;
@@ -82,8 +82,8 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
       </H4>
 
       <ul className="icons" ref={groupIconsRef}>
-        {groupCards.map(({ icon, title }, key) => (
-          <ExpertiseCard key={icon} icon={icon} title={title} />
+        {groupCards.map(({ icon, title }) => (
+          <ExpertiseCard key={title} icon={icon} title={title} />
         ))}
       </ul>
     </StyledGroup>

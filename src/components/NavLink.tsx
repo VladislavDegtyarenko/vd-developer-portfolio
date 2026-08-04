@@ -1,6 +1,6 @@
 // Core
 import styled from "styled-components";
-import { Variants, motion, useReducedMotion } from "framer-motion";
+import { type Variants, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 

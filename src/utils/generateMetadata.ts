@@ -79,8 +79,6 @@ export function generateMetadata({
       images: [fullImageUrl],
       // creator: "@vd-developer", // Optional: Add your Twitter username
     },
-    themeColor: "#1b9aaa",
-    colorScheme: "light dark",
     // icons: {
     //   icon: "/favicon.ico",
     //   // shortcut: "/favicon-32x32.png",

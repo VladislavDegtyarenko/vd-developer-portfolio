@@ -1,5 +1,6 @@
 // Analytics
 import { Analytics } from "@vercel/analytics/react";
+import type { Viewport } from "next";
 
 // Fonts
 import { Poppins } from "next/font/google";
@@ -16,6 +17,11 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackToTopBtn from "@/components/BackToTopBtn";
 import Providers from "./Providers";
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: "#1b9aaa",
+};
 
 export default function RootLayout({
   children,

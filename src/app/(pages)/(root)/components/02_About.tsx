@@ -1,99 +1,64 @@
 "use client";
 
-// Core
-import { useRef, memo, useState } from "react";
 import styled from "styled-components";
 
-// UI
-import Section from "@/components/Section";
-import SectionDivider from "@/components/SectionDivider";
-import SectionTitle from "@/components/SectionTitle";
-import SectionDescription from "@/components/SectionDescription";
 import Container from "@/components/layout/Container";
-// import ExpertiseGroup from "@/components/ExpertiseGroup";
-import ExpertiseCard from "@/components/ExpertiseCard";
-import { H4, P1, P2 } from "@/components/Text";
+import Section from "@/components/Section";
+import SectionTitle from "@/components/SectionTitle";
 
-// Data
 import data from "@/data/about.json";
+import Photo from "@/components/Photo";
+import SectionDescription from "@/components/SectionDescription";
 
-// Utils
-import { isObject } from "@/utils/isObject";
-import ExpertiseTable from "@/components/ExpertiseTable";
-
-// Styled
 const StyledAbout = styled(Section)`
-  .about {
-    &__subsection {
-      margin-top: 3em;
+  .inner {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      text-align: center;
     }
   }
 
-  .core-tools-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2.5rem;
-  }
-
-  h4 {
-    margin-top: 4rem;
-    text-align: center;
-  }
-
-  .postScriptum {
-    margin-top: 1.5rem;
-    text-align: center;
+  .about-content {
     color: ${({ theme }) => theme.grey};
-    font-style: italic;
+
+    > p {
+      padding: 0;
+      margin-top: 0;
+    }
+
+    > p + p {
+      margin-top: 1rem;
+    }
   }
 `;
 
-// Component
 const About = () => {
-  const {
-    title,
-    subtitle,
-    secondSubtitle,
-    coreTools,
-    expertiseTable,
-    expertiseTableTitle,
-    postScriptum,
-  } = data;
+  const { title, description } = data;
 
   return (
-    <>
-      <StyledAbout id="about">
-        <Container>
-          <div className="inner">
-            <SectionTitle>{title}</SectionTitle>
-            <SectionDescription>{subtitle}</SectionDescription>
-            <SectionDescription>{secondSubtitle}</SectionDescription>
-
-            {coreTools && Array.isArray(coreTools) && coreTools.length > 0 ? (
-              <div className="core-tools-wrapper">
-                {coreTools.map((card) => (
-                  <ExpertiseCard key={card.title} {...card} />
-                ))}
-              </div>
-            ) : null}
-
-            <ExpertiseTable
-              title={expertiseTableTitle}
-              table={expertiseTable}
-              isShowMoreDisabled
-            />
-
-            <P2 className="postScriptum">{postScriptum}</P2>
-          </div>
-        </Container>
-      </StyledAbout>
+    <StyledAbout id="about">
       <Container>
-        <SectionDivider />
+        <SectionTitle>{title}</SectionTitle>
+
+        <div className="inner">
+          <Photo />
+
+          <div className="about-content">
+            {description.map((p, i) => (
+              <SectionDescription key={i} textAlign="">
+                {p}
+              </SectionDescription>
+            ))}
+          </div>
+        </div>
       </Container>
-    </>
+    </StyledAbout>
   );
 };
 
-export default memo(About);
+export default About;

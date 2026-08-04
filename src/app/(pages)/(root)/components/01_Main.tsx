@@ -10,14 +10,14 @@ import { H1, H2, P1 } from "@/components/Text";
 import ScrollDownIcon from "@/components/icons/ScrollDown";
 
 import bg from "public/assets/bg.jpg";
-import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
 import {
   animate,
   stagger,
   useIsomorphicLayoutEffect,
   useReducedMotion,
 } from "framer-motion";
-import useViewportWidth from "@/hooks/useViewportWidth";
+
+import data from "@/data/main.json";
 
 const StyledMain = styled(Section)`
   padding: 0;
@@ -30,18 +30,28 @@ const StyledMain = styled(Section)`
   z-index: 1;
   white-space: pre-wrap;
 
+  .title {
+    white-space: pre-wrap;
+
+    span {
+      display: inline-flex;
+    }
+  }
+
   .bg {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    opacity: 0.2;
+    opacity: 0.1;
     pointer-events: none;
     user-select: none;
+
     img {
       object-fit: cover;
     }
+
     &:after {
       content: "";
       position: absolute;
@@ -64,66 +74,15 @@ const StyledMain = styled(Section)`
 
     &__content {
       display: flex;
-      justify-content: space-between;
-
-      @media screen and (max-width: 991.98px) {
-        flex-direction: column-reverse;
-        align-items: center;
-        text-align: center;
-      }
-    }
-
-    &__info {
-      margin-right: 16px;
-      display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-
-      @media screen and (max-width: 991.98px) {
-        align-items: center;
-      }
-    }
-
-    &__photo {
-      position: relative;
-      margin-right: calc(20px + var(--strokeWidth) * 2);
-      margin-top: 10px;
-      --photo-size: 210px;
-      @media screen and (max-width: 991.98px) {
-        --photo-size: 180px;
-        margin-bottom: 32px;
-      }
-
-      &_inner {
-        width: var(--photo-size);
-        height: var(--photo-size);
-        border-radius: var(--borderRadiusNormal);
-        border: solid var(--strokeWidth) ${({ theme }) => theme.cyan};
-        flex-shrink: 0;
-        position: relative;
-        background-color: ${({ theme }) => theme.bg};
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      &::before {
-        content: "";
-        display: block;
-        width: var(--photo-size);
-        height: var(--photo-size);
-        border-radius: var(--borderRadiusNormal);
-        border: solid var(--strokeWidth) ${({ theme }) => theme.cyan};
-        border-color: ${({ theme }) => theme.grey};
-        position: absolute;
-        top: calc(var(--photo-size) / 12);
-        left: calc(var(--photo-size) / 12);
-        box-sizing: border-box;
-      }
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      text-align: center;
+      width: 50rem;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &__scroll-btn {
@@ -161,25 +120,25 @@ const StyledMain = styled(Section)`
     color: ${({ theme }) => theme.cyan};
   }
 
-  .description {
-    color: ${({ theme }) => theme.grey};
-    span {
-      font-weight: 700;
-    }
+  .cta-container {
+    display: flex;
+    gap: 1rem;
   }
 
   .cta {
     text-decoration: none;
     font-weight: 700;
-    padding: 12px;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: var(--borderRadiusNormal);
-    color: ;
+    color:;
     cursor: pointer;
     border: none;
-    transition: background-color var(--duration), color var(--duration);
+    transition:
+      background-color var(--duration),
+      color var(--duration);
 
     @media (prefers-reduced-motion: reduce) {
       transition: none;
@@ -198,6 +157,17 @@ const StyledMain = styled(Section)`
         background-color: ${({ theme }) => theme.cyanHover};
       }
     }
+
+    &-secondary {
+      color: ${({ theme }) => theme.fg};
+      background-color: ${({ theme }) => theme.cardBg};
+
+      &:hover {
+        color: ${({ theme }) => theme.fg};
+        background-color: ${({ theme }) => theme.cardBgHover};
+      }
+    }
+
     p {
       font-weight: 700;
     }
@@ -209,8 +179,10 @@ const StyledMain = styled(Section)`
 `;
 
 const Main = () => {
+  const { title, btnPrimaryText, btnSecondaryText } = data;
+
   const contentRef = useRef<HTMLDivElement>(null);
-  const { width } = useViewportWidth();
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const isReducedMotion = useReducedMotion();
 
   useIsomorphicLayoutEffect(() => {
@@ -219,60 +191,29 @@ const Main = () => {
     }
 
     const contentWrapper = contentRef.current;
+    const titleElement = titleRef.current;
 
     if (!contentWrapper) return;
+    if (!titleElement) return;
 
-    const titleSpans = contentWrapper.querySelectorAll(".title span");
-    const subtitleSpans = contentWrapper.querySelectorAll(".subtitle span");
-    const description = contentWrapper.querySelector(".description")!;
-    const photoWrapper = contentWrapper.querySelector(".main__photo")!;
-    const ctaBtn = contentWrapper.querySelector(".cta")!;
+    const titleSpans = titleElement.querySelectorAll(".title span");
+    const ctaBtns = contentWrapper.querySelectorAll(".cta")!;
 
     const elementsToAnimate = [
       ...Array.from(titleSpans),
-      ...Array.from(subtitleSpans),
+      ...Array.from(ctaBtns),
     ];
 
     animate(
       elementsToAnimate,
       {
         opacity: [0, 1],
-      },
-      {
-        duration: 0.5,
-        delay: stagger(0.5),
-      }
-    );
-
-    animate(
-      description,
-      {
-        opacity: [0, 1],
+        y: [25, 0],
       },
       {
         duration: 0.7,
-        delay: 1.5,
-      }
-    );
-
-    animate(
-      photoWrapper,
-      {
-        opacity: [0, 1],
+        delay: stagger(0.3),
       },
-
-      { duration: 1, delay: width <= 991.98 ? 0 : 2 }
-    );
-
-    animate(
-      ctaBtn,
-      {
-        opacity: [0, 1],
-      },
-      {
-        duration: 0.7,
-        delay: 2,
-      }
     );
   }, [contentRef, isReducedMotion]);
 
@@ -292,29 +233,21 @@ const Main = () => {
         <div className="main">
           <Container>
             <div className="main__content" ref={contentRef}>
-              <div className="main__info">
-                <H2 as="h1" className="subtitle">
-                  <span className="accent">Frontend Developer</span>{" "}
-                  <span>who cares about</span> <span>UX and performance</span>
-                </H2>
-                <P1 className="description">
-                  I build responsive, fast-loading websites using React, Next.js
-                  and tasteful motion design.
-                </P1>
-                <a className="cta cta-primary" href="#contact">
-                  Get In Touch
+              <H2 as="h1" className="title" ref={titleRef}>
+                {title.split(" ").map((word, index) => (
+                  <span {...(index < 2 ? { className: "accent" } : {})}>
+                    {word}
+                    {index !== title.length ? " " : null}
+                  </span>
+                ))}
+              </H2>
+              <div className="cta-container">
+                <a className="cta cta-secondary" href="#about">
+                  {btnPrimaryText}
                 </a>
-              </div>
-              <div className="main__photo">
-                <div className="main__photo_inner">
-                  <Image
-                    src="/IMG_9693.JPG"
-                    sizes="(max-width: 991.98px) 464px, 624px"
-                    alt="Photo of Vladyslav Dihtiarneko, frontend developer"
-                    fill
-                    priority
-                  />
-                </div>
+                <a className="cta cta-primary" href="#contact">
+                  {btnSecondaryText}
+                </a>
               </div>
             </div>
           </Container>

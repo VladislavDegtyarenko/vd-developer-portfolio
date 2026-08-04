@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import Container from "@/components/layout/Container";
 import { H2, P1 } from "@/components/Text";
 import Image from "next/image";
-import HeroBg from "/public/assets/blog/FullSizeRender2.jpg";
+import HeroBg from "../../../public/assets/blog/FullSizeRender2.jpg";
 
 const Styled = styled.div`
   padding-top: 6rem;

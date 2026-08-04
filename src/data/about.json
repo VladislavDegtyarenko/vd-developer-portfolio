@@ -1,32 +1,8 @@
 {
-  "title": "Expertise",
-  "subtitle": "I work with modern tools like React, Next.js, TypeScript, and motion libraries to deliver responsive, accessible, and polished user experiences.",
-  "secondSubtitle": "Whether it’s integrating a headless CMS, managing state, or building reusable UI components — I focus on writing clean, maintainable code that scales.",
-  "coreTools": [
-    { "icon": "React.svg", "title": "React" },
-    { "icon": "Next.svg", "title": "Next.js" },
-    { "icon": "Redux.svg", "title": "Redux" },
-    { "icon": "TS.svg", "title": "Typescript" },
-    { "icon": "HTML.svg", "title": "HTML" },
-    { "icon": "CSS.svg", "title": "CSS" },
-    { "icon": "Jest.svg", "title": "Jest" }
-  ],
-  "expertiseTable": {
-    "Frontend": [
-      "React",
-      "Next.js",
-      "Typescript",
-      "Javascript",
-      "HTML",
-      "CSS",
-      "Firebase"
-    ],
-    "State": ["Redux", "MobX", "Zustand"],
-    "Styling": ["Tailwind", "SASS", "Styled Components"],
-    "CMS": ["Prismic.io", "Builder.io", "Strapi"],
-    "Animations": ["Framer Motion", "GSAP"],
-    "Quality": ["Jest", "ESLint", "Prettier"]
-  },
-  "expertiseTableTitle": "Tech stack",
-  "postScriptum": "💡 Tools are just tools — what matters is how you use them to solve real problems."
+  "title": "About me",
+  "description": [
+    "Im Vladyslav Dihtiarenko, a Senior Frontend Engineer working with Next.js ecosystem.",
+    "Crafting maintainable UIs for more than 5 years, with a focus on content-driven applications and animation websites.",
+    "Clarity, passion and thorough work is the key for delivering exceptional results."
+  ]
 }

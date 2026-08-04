@@ -51,6 +51,12 @@ const StyledContact = styled(Section)`
       }
     }
   }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 `;
 
 const Contact = () => {
@@ -60,32 +66,30 @@ const Contact = () => {
     <>
       <StyledContact id="contact">
         <Container>
-          <SectionTitle>{title}</SectionTitle>
-          <SectionDescription className="contact__descr">
-            {description}
-          </SectionDescription>
+          <div className="inner">
+            <SectionTitle>{title}</SectionTitle>
+            <SectionDescription className="contact__descr">
+              {description}
+            </SectionDescription>
 
-          <ContactForm />
+            <ContactForm />
 
-          <SectionDescription className="contact__descr">
-            Prefer email or socials? Find me here 👇
-          </SectionDescription>
+            <Socials />
 
-          <Socials />
-
-          {/* <div className="contact__download-cv">
+            {/* <div className="contact__download-cv">
             <motion.a
-              href="Vladyslav Dihtiarenko CV (Dec'23, One-Page)-compressed (1).pdf"
-              title={"Get my CV in PDF format"}
-              target="_blank"
-              initial={{ y: 32, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5 }}
+            href="Vladyslav Dihtiarenko CV (Dec'23, One-Page)-compressed (1).pdf"
+            title={"Get my CV in PDF format"}
+            target="_blank"
+            initial={{ y: 32, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
             >
-              <DownloadIcon />
-              {downloadCV}
+            <DownloadIcon />
+            {downloadCV}
             </motion.a>
-          </div> */}
+            </div> */}
+          </div>
         </Container>
       </StyledContact>
       <Container>

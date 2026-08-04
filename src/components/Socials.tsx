@@ -2,39 +2,45 @@ import styled from "styled-components";
 
 import { motion, useReducedMotion } from "framer-motion";
 
-import contactBtns from "@/data/contactBtns";
+import contactBtns from "@/data/contactBtns.json";
+import SectionDescription from "./SectionDescription";
 
 const StyledSocials = styled.div`
-  margin-top: 1em;
-  display: grid;
-  grid-auto-flow: column;
-  align-content: center;
-  gap: 1.5em;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-  @media screen and (max-width: 479.98px) {
-    grid-auto-flow: unset;
-    grid-template-columns: repeat(3, auto);
-  }
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+    gap: 1.5em;
+    justify-content: center;
 
-  a {
-    border-radius: var(--borderRadiusSmall);
-    width: 48px;
-    height: 48px;
-    text-decoration: none;
-    color: ${({ theme }) => theme.cyan};
-    transition: all var(--duration);
-    display: inline-block;
-    /* align-self: center; */
-
-    &:hover {
-      color: ${({ theme }) => theme.cyanHover};
+    @media screen and (max-width: 479.98px) {
+      grid-auto-flow: unset;
+      grid-template-columns: repeat(3, auto);
     }
 
-    > img,
-    > svg {
-      width: 100%;
-      height: 100%;
+    a {
+      border-radius: var(--borderRadiusSmall);
+      width: 48px;
+      height: 48px;
+      text-decoration: none;
+      color: ${({ theme }) => theme.cyan};
+      transition: all var(--duration);
+      display: inline-block;
+      /* align-self: center; */
+
+      &:hover {
+        color: ${({ theme }) => theme.cyanHover};
+      }
+
+      > img,
+      > svg {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 `;
@@ -44,10 +50,12 @@ const Socials = () => {
 
   return (
     <StyledSocials>
-      {contactBtns.map(({ href, ariaLabel, icon }, index) => {
-        const Icon = icon;
+      <SectionDescription className="contact__descr">
+        Prefer email or socials? Find me here 👇
+      </SectionDescription>
 
-        return (
+      <ul>
+        {contactBtns.map(({ href, ariaLabel, icon }, index) => (
           <motion.a
             href={href}
             target="_blank"
@@ -60,10 +68,10 @@ const Socials = () => {
               transition: { duration: 0.5, delay: 0.05 * index },
             })}
           >
-            <Icon />
+            <img src={icon} alt="" />
           </motion.a>
-        );
-      })}
+        ))}
+      </ul>
     </StyledSocials>
   );
 };
