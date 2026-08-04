@@ -55,7 +55,7 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
         y: 50,
         opacity: 0,
       },
-      { duration: 0 }
+      { duration: 0 },
     );
 
     if (!inView) return;
@@ -66,7 +66,7 @@ const ExpertiseGroup = ({ groupTitle, groupCards }: ExpertiseGroup) => {
         y: [50, 0],
         opacity: [0, 1],
       },
-      { duration: 0.7, delay: stagger(0.05) }
+      { duration: 0.7, delay: stagger(0.05) },
     );
   }, [groupTitleRef, groupIconsRef, inView]);
 

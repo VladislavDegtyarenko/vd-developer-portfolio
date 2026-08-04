@@ -22,7 +22,7 @@ const variants: Variants = {
   normal: (index) => ({
     opacity: 1,
     transition: {
-      delay: 0.05 * index,
+      delay: 0.125 * index,
       duration: 0.2,
     },
   }),
@@ -87,14 +87,14 @@ const NavItem = forwardRef<HTMLLIElement, NavItemProps>(
           animate: isActive ? "active" : "normal",
           exit: "hidden",
           whileHover: "hovered",
-          variants: !isMobile ? variants : mobileVariants,
+          variants: !isMobile ? {} : mobileVariants,
           custom: index,
         })}
       >
         <NavLink isMobile={isMobile} isActive={isActive} {...props} />
       </MotionStyledItem>
     );
-  }
+  },
 );
 
 NavItem.displayName = "NavItem";

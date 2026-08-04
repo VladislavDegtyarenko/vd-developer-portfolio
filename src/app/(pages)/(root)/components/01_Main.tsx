@@ -2,14 +2,12 @@
 
 import { memo, useRef } from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import Section from "@/components/Section";
 import SectionDivider from "@/components/SectionDivider";
 import Container from "@/components/layout/Container";
 import { H1, H2, P1 } from "@/components/Text";
 import ScrollDownIcon from "@/components/icons/ScrollDown";
 
-import bg from "public/assets/bg.jpg";
 import {
   animate,
   stagger,
@@ -18,6 +16,7 @@ import {
 } from "framer-motion";
 
 import data from "@/data/main.json";
+import HeroBackground from "@/components/HeroBackground";
 
 const StyledMain = styled(Section)`
   padding: 0;
@@ -35,36 +34,6 @@ const StyledMain = styled(Section)`
 
     span {
       display: inline-flex;
-    }
-  }
-
-  .bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.1;
-    pointer-events: none;
-    user-select: none;
-
-    img {
-      object-fit: cover;
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        transparent 70%,
-        ${({ theme }) => theme.bg} 100%
-      );
     }
   }
 
@@ -220,16 +189,8 @@ const Main = () => {
   return (
     <>
       <StyledMain id="home">
-        <div className="bg">
-          <Image
-            src={bg}
-            alt=""
-            placeholder="blur"
-            quality="50"
-            fill
-            priority
-          />
-        </div>
+        <HeroBackground />
+
         <div className="main">
           <Container>
             <div className="main__content" ref={contentRef}>

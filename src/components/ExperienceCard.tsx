@@ -72,12 +72,10 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
 
   .icons {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 
     margin-top: 1rem;
-
-    > *:not(:last-child) {
-      margin-right: 1rem;
-    }
   }
 `;
 
