@@ -5,12 +5,12 @@
     "icon": "/assets/socials/youtube.svg"
   },
   {
-    "href": "https://www.instagram.com/vladislavdegtyarenko/",
+    "href": "https://www.instagram.com/vladyslav.dihtiarenko/",
     "ariaLabel": "Contact me on Instagram",
     "icon": "/assets/socials/instagram.svg"
   },
   {
-    "href": "https://www.linkedin.com/in/vladislavdegtyarenko/",
+    "href": "https://www.linkedin.com/in/vladyslavdihtiarenko/",
     "ariaLabel": "Visit my LinkedIn profile",
     "icon": "/assets/socials/linkedin.svg"
   },
@@ -20,7 +20,7 @@
     "icon": "/assets/socials/github.svg"
   },
   {
-    "href": "https://t.me/Vladislav_Degtyarenko",
+    "href": "https://t.me/vladyslav_dihtiarenko",
     "ariaLabel": "Message me on Telegram",
     "icon": "/assets/socials/telegram.svg"
   },
