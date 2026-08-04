@@ -54,6 +54,7 @@ const GlobalStyle = createGlobalStyle`
     background-position: center center;
     background-size: cover;
     cursor: pointer;
+    border-radius: var(--borderRadiusNormal);
 }
 
   /* gradient */
