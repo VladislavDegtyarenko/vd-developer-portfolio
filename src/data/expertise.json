@@ -1,0 +1,25 @@
+{
+  "title": "Expertise",
+  "description": [
+    "My work goes beyond implementing screens. I help shape frontend architecture, simplify complex user flows, and turn evolving product requirements into reliable digital experiences.",
+    "I'm comfortable owning features end to end - from technical planning and CMS integration to performance, accessibility, testing, and production polish."
+  ],
+  "coreTools": [
+    { "icon": "React.svg", "title": "React" },
+    { "icon": "NextJS-Wide.svg", "title": "Next.js" },
+    { "icon": "TS.svg", "title": "TypeScript" },
+    { "icon": "Redux.svg", "title": "Redux Toolkit" },
+    {
+      "icon": ["Jest.svg", "Vitest.svg"],
+      "title": "Jest / Vitest"
+    },
+    {
+      "icon": ["prismicio.svg", "builderio.svg"],
+      "title": "Headless CMS"
+    },
+    {
+      "icon": ["GSAP.svg", "Framer-Motion.svg"],
+      "title": "GSAP / Framer Motion"
+    }
+  ]
+}

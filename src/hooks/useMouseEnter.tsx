@@ -2,7 +2,9 @@
 
 import { RefObject, useEffect, useState } from "react";
 
-export const useMouseEnter = (elementRef: RefObject<HTMLElement>) => {
+export const useMouseEnter = <T extends HTMLElement>(
+  elementRef: RefObject<T | null>
+) => {
   const [isMouseEntered, setIsMouseEntered] = useState(false);
 
   useEffect(() => {

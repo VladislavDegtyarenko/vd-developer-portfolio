@@ -1,8 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { useState, useRef, useContext, memo } from "react";
-import dynamic from "next/dynamic";
+import { memo } from "react";
 
 // UI
 import Section from "@/components/Section";
@@ -16,7 +15,11 @@ import ProjectsList from "@/components/ProjectsList";
 import PROJECTS from "@/data/projects.json";
 
 const StyledProjects = styled(Section)`
-  .projects {
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     &__descr {
       margin-top: 48px;
     }
@@ -93,7 +96,7 @@ const Projects = () => {
     <>
       <StyledProjects id="projects">
         <Container>
-          <div className="projects">
+          <div className="inner">
             <SectionTitle>{title}</SectionTitle>
             <SectionDescription className="projects__descr">
               {description}

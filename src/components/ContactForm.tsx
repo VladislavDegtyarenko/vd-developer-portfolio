@@ -21,7 +21,6 @@ const formElementVariants: Variants = {
 };
 
 const StyledContactForm = styled.div`
-  margin-top: 2.5em;
   min-height: 28.75em;
   display: grid;
   position: relative;
@@ -46,7 +45,7 @@ const StyledContactForm = styled.div`
     }
 
     > * + * {
-      margin-top: 1.5em;
+      margin-top: 1em;
     }
 
     input,
@@ -78,7 +77,9 @@ const StyledContactForm = styled.div`
       border: none;
       border-radius: 0.25em;
       border-bottom: solid 2px ${({ theme }) => theme.cardBg};
-      transition: background-color var(--duration), color var(--duration);
+      transition:
+        background-color var(--duration),
+        color var(--duration);
       &::placeholder {
         color: ${({ theme }) => theme.grey};
         opacity: 0.8;

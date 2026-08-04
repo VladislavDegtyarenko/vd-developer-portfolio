@@ -30,12 +30,12 @@ const StyledExperience = styled(Section)`
     margin-right: auto;
     max-width: 60rem;
     display: grid;
-    gap: 30px;
+    gap: 4rem;
   }
 `;
 
 const Experience = () => {
-  const { title, mainExperience, nonRelatedExperience } = EXPERIENCE;
+  const { title, mainExperience } = EXPERIENCE;
 
   return (
     <>

@@ -3,7 +3,7 @@ import { StaticImageData } from "next/image";
 
 export type DebounceFunction<T extends (...args: any[]) => any> = (
   func: T,
-  timeout?: number
+  timeout?: number,
 ) => (...args: Parameters<T>) => void;
 
 export interface BurgerButtonProps {
@@ -17,7 +17,6 @@ export type ToggleDarkMode = () => void;
 export type PreviewProject = (url: string) => void;
 export type GetScrollbarWidth = number;
 export type MenuIsOpen = boolean;
-export type ReviewCardRef = HTMLDivElement | null;
 export type ProjectModalRef = HTMLIFrameElement | null;
 export type TimeoutRef = ReturnType<typeof setInterval> | undefined;
 export type IsMobile = boolean;
@@ -51,7 +50,8 @@ export interface Icon {
 
 // DATA
 export interface Expertise {
-  icon: string;
+  /** A single icon or a pair of icons for a combined capability. */
+  icon: string | string[];
   title: string;
   description?: string;
 }
@@ -103,11 +103,6 @@ export interface SectionSubtitleProps {
   className?: string;
 }
 
-export interface SectionDescriptionProps {
-  className?: string;
-  children: string | ReactNode;
-}
-
 export interface ProjectModalProps {
   projectSrc: string;
   closeModal: CloseModal;
@@ -152,7 +147,7 @@ export type FormInputs = {
 };
 
 export type Review = {
-  reviewText: JSX.Element;
+  reviewText: ReactNode;
   name: string;
   position?: string;
   company?: string;

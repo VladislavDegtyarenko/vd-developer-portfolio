@@ -10,14 +10,15 @@ import {
 import styled from "styled-components";
 import Image from "next/image";
 
-import { Review, ReviewCardRef } from "../types";
-import { P1, P2 } from "@/components/Text";
+import { Review } from "../types";
+import { P2 } from "@/components/Text";
 import UserIcon from "@/components/UserIcon";
 
-interface ReviewCardProps extends Review {}
+type ReviewCardProps = Review & {
+  isLatest?: boolean;
+};
 
-const StyledReviewCard = styled.div`
-  margin-top: 48px;
+const StyledReviewCard = styled.li`
   padding: 32px;
   background: ${({ theme }) => theme.cardBg};
   border-radius: var(--borderRadiusNormal);
@@ -44,10 +45,8 @@ const StyledReviewCard = styled.div`
         color: ${({ theme }) => theme.cyan};
       }
       * {
-        @media screen and (max-width: 991.98px) {
-          font-size: 16px;
-          line-height: 24px;
-        }
+        font-size: 16px;
+        line-height: 24px;
       }
     }
     &__sign {
@@ -71,8 +70,31 @@ const StyledReviewCard = styled.div`
       color: ${({ theme }) => theme.cyan};
       font-weight: 700;
     }
+    &__author {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    &__badge {
+      padding: 2px 8px;
+      border: 1px solid ${({ theme }) => theme.cyan};
+      border-radius: 999px;
+      background: color-mix(
+        in srgb,
+        ${({ theme }) => theme.cyan} 12%,
+        transparent
+      );
+      color: ${({ theme }) => theme.fg};
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 16px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
     &__position {
       color: ${({ theme }) => theme.grey};
+      font-size: 14px;
     }
   }
 `;
@@ -83,8 +105,9 @@ const ReviewCard = ({
   position,
   company,
   photo,
+  isLatest = false,
 }: ReviewCardProps) => {
-  const ref = useRef<ReviewCardRef>(null);
+  const ref = useRef<HTMLLIElement>(null);
   const inView = useInView(ref, { once: true });
   const isReducedMotion = useReducedMotion();
 
@@ -119,7 +142,14 @@ const ReviewCard = ({
           )}
         </div>
         <div>
-          <P1 className="card__name">{name}</P1>
+          <div className="card__author">
+            <P2 className="card__name">{name}</P2>
+            {isLatest ? (
+              <span className="card__badge" aria-label="Latest review">
+                Latest
+              </span>
+            ) : null}
+          </div>
           <P2 className="card__position">
             {[position, company].filter(Boolean).join(", ")}
           </P2>

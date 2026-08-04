@@ -1,0 +1,32 @@
+[
+  {
+    "href": "https://www.youtube.com/@VladyslavDihtiarenko?sub_confirmation=1",
+    "ariaLabel": "Visit my YouTube channel",
+    "icon": "/assets/socials/youtube.svg"
+  },
+  {
+    "href": "https://www.instagram.com/vladislavdegtyarenko/",
+    "ariaLabel": "Contact me on Instagram",
+    "icon": "/assets/socials/instagram.svg"
+  },
+  {
+    "href": "https://www.linkedin.com/in/vladislavdegtyarenko/",
+    "ariaLabel": "Visit my LinkedIn profile",
+    "icon": "/assets/socials/linkedin.svg"
+  },
+  {
+    "href": "https://github.com/VladislavDegtyarenko/",
+    "ariaLabel": "Check out my GitHub profile",
+    "icon": "/assets/socials/github.svg"
+  },
+  {
+    "href": "https://t.me/Vladislav_Degtyarenko",
+    "ariaLabel": "Message me on Telegram",
+    "icon": "/assets/socials/telegram.svg"
+  },
+  {
+    "href": "mailto:vladislavdegtyarenko@gmail.com",
+    "ariaLabel": "Email me",
+    "icon": "/assets/socials/email.svg"
+  }
+]

@@ -5,10 +5,12 @@ import { getSlugs } from "@/utils/notion/getSlugs";
 import { generateMetadata as generateMetadataFunc } from "@/utils/generateMetadata";
 import { getPostBySlug } from "@/utils/notion/getPostBySlug";
 
-type BlogPostPageParams = { params: { postSlug: string } };
+type BlogPostPageParams = {
+  params: Promise<{ postSlug: string }>;
+};
 
 export async function generateMetadata({ params }: BlogPostPageParams) {
-  const { postSlug } = params;
+  const { postSlug } = await params;
 
   const post = await getPostBySlug(postSlug);
 
@@ -30,7 +32,7 @@ export const generateStaticParams = cache(async () => {
 });
 
 const BlogPostPage = async ({ params }: BlogPostPageParams) => {
-  const { postSlug } = params;
+  const { postSlug } = await params;
 
   return <BlogPostServer postSlug={postSlug} />;
 };

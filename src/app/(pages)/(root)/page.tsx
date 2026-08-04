@@ -1,6 +1,7 @@
 // Sections
 import Main from "./components/01_Main";
 import About from "./components/02_About";
+import Expertise from "./components/03_Expertise";
 import Experience from "./components/03_Experience";
 import Projects from "./components/04_Projects";
 import Reviews from "./components/05_Reviews";
@@ -23,8 +24,9 @@ export default function Page() {
     <>
       <Main />
       <About />
+      <Expertise />
       <Experience />
-      <Projects />
+      {/* <Projects /> */}
       <YouTubeSection />
       <Reviews />
       <Contact />

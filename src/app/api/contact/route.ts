@@ -38,7 +38,7 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   // Render the email
-  const html = render(ContactEmail({ name, email, message }));
+  const html = await render(ContactEmail({ name, email, message }));
 
   try {
     const responseMessage = await sendEmail({

@@ -3,6 +3,30 @@
   "description": "A concise overview of selected frontend development projects, showcasing skills and capabilities.\n\nIf you want to check my actual frontend skills, let's get a call",
   "projects": [
     {
+      "img": "minesweeper-game.jpg",
+      "title": "Minesweeper Game",
+      "description": "Play minesweeper game online! Choose between easy, medium and expert levels. Featuring daily challenges and a leaderboard. Built using Next.js, Clerk Auth, Neon DB. Mobile-friendly.",
+      "previewLink": "https://playminesweepergame.com/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/react-minesweeper",
+      "isVisible": true
+    },
+    {
+      "img": "2048 Game.jpg",
+      "title": "2048 Game",
+      "description": "A popular 2048 game built using React.js, featuring smooth animations, touch/swipe/keyboard controls and elegant dark theme you never saw before",
+      "previewLink": "https://preact-2048-game.vercel.app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/preact-2048-game",
+      "isVisible": true
+    },
+    {
+      "img": "Snake Game.jpg",
+      "title": "Snake Game",
+      "description": "A classic Snake Game clone, built using pure (Vanilla) JavaScript, with a nostalgic and classic gameplay experience.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/snake-game-js/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/snake-game-js",
+      "isVisible": true
+    },
+    {
       "img": "Airlogix.png",
       "title": "Airlogix.io",
       "description": "Multi-page website for Ukrainian drone manufacturer - Airlogix. Techs: Next.js, next-intl, Typescript, styled-components, Sendgrid API, Vercel",
@@ -44,7 +68,7 @@
       "title": "ReactGPT",
       "description": "I built my own ChatGPT with React/Typescript, featuring slick design (thanks to the shadcn/ui library), light/dark theme and ability to chose GPT version (3.5 or 4). Bundled with Vite",
       "previewLink": "https://vladislavdegtyarenko.github.io/react-gpt/",
-      "isVisible": true
+      "isVisible": false
     },
     {
       "img": "portfolio.jpg",
@@ -77,32 +101,6 @@
       "codeLink": "https://github.com/VladislavDegtyarenko/preact-password-generator",
       "isVisible": true
     },
-
-    {
-      "img": "minesweeper-game.jpg",
-      "title": "Minesweeper",
-      "description": "Play classic minesweeper game with fun! Choose between easy, medium and expert levels. Built using React.js.",
-      "previewLink": "https://vladislavdegtyarenko.github.io/react-minesweeper/",
-      "codeLink": "https://github.com/VladislavDegtyarenko/react-minesweeper",
-      "isVisible": true
-    },
-    {
-      "img": "2048 Game.jpg",
-      "title": "2048 Game",
-      "description": "A popular 2048 game built using React.js, featuring smooth animations, touch/swipe/keyboard controls and elegant dark theme you never saw before",
-      "previewLink": "https://preact-2048-game.vercel.app/",
-      "codeLink": "https://github.com/VladislavDegtyarenko/preact-2048-game",
-      "isVisible": true
-    },
-    {
-      "img": "Snake Game.jpg",
-      "title": "Snake Game",
-      "description": "A classic Snake Game clone, built using pure (Vanilla) JavaScript, with a nostalgic and classic gameplay experience.",
-      "previewLink": "https://vladislavdegtyarenko.github.io/snake-game-js/",
-      "codeLink": "https://github.com/VladislavDegtyarenko/snake-game-js",
-      "isVisible": true
-    },
-
     {
       "img": "Clock.jpg",
       "title": "Alarms & Clock Clone",

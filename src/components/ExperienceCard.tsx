@@ -16,13 +16,19 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  padding: ${({ $secondary }) => ($secondary ? "0" : "24px")};
-  border-radius: var(--borderRadiusNormal);
-  background-color: ${({ $secondary, theme }) =>
-    $secondary ? "transparent" : theme.cardBg};
+  padding-left: ${({ $secondary }) => ($secondary ? "0" : "24px")};
+  position: relative;
 
-  > * + * {
-    margin-top: 1em;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: block;
+    width: 1px;
+    border-radius: 4px;
+    background-color: ${({ theme }) => theme.cyan};
   }
 
   &.secondary {
@@ -43,7 +49,7 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
       color: ${({ theme }) => theme.cyan};
     }
   }
-  .position {
+  .company {
     color: ${({ theme }) => theme.cyan};
   }
   .descr {
@@ -60,15 +66,17 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
     gap: 0.5em;
 
     > * {
-      background-color: ${({ $secondary, theme }) =>
-        $secondary ? theme.cardBg : theme.bg};
+      background-color: ${({ theme }) => theme.cardBg};
     }
   }
 
   .icons {
     display: flex;
-    *:not(:last-child) {
-      margin-right: 16px;
+
+    margin-top: 1rem;
+
+    > *:not(:last-child) {
+      margin-right: 1rem;
     }
   }
 `;
@@ -78,14 +86,15 @@ const MotionStyledExperienceCard = motion(StyledExpCard);
 const Chip = styled(P2)`
   display: inline-block;
   border-radius: 2em;
-  padding: 0.25em 0.5em;
+  padding: 0.5em 1em;
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.grey};
 `;
 
 const Icon = styled.img`
-  width: 32px;
-  height: 32px;
+  min-width: 2rem;
+  max-width: 6rem;
+  height: 2rem;
   object-fit: contain;
 `;
 
@@ -127,10 +136,10 @@ const ExperienceCard = ({
         <div className="time-range">
           <P2>{timerange}</P2>
         </div>
-        <H4 as="h3" className="position">
-          {position}
+        <H4 as="h3" className="company">
+          {company}
         </H4>
-        <P1>{company}</P1>
+        <P1>{position}</P1>
         {chips && chips.length > 0 ? (
           <div className="chips">
             {chips.map((chip) => (

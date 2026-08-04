@@ -4,14 +4,16 @@ import { motion, useReducedMotion } from "framer-motion";
 
 import styled from "styled-components";
 import { P1 } from "./Text";
+import { PropsWithChildren } from "react";
 
-import { SectionDescriptionProps } from "../types";
+type SectionDescriptionProps = PropsWithChildren<{
+  className?: string;
+  textAlign?: string;
+}>;
 
-const StyledSectionDescription = styled(P1)`
-  text-align: center;
-  padding: 0 80px;
+const StyledSectionDescription = styled(P1)<{ $textAlign?: string }>`
+  ${({ $textAlign }) => ($textAlign === "center" ? `text-align: center;` : "")}
   color: ${({ theme }) => theme.grey};
-  margin-top: 40px;
   text-wrap: balance;
 
   @media screen and (max-width: 991.98px) {
@@ -25,19 +27,29 @@ const StyledSectionDescription = styled(P1)`
 
 const MotionDescription = motion(StyledSectionDescription);
 
-const SectionDescription = ({ children }: SectionDescriptionProps) => {
+const SectionDescription = ({
+  children,
+  className,
+  textAlign = "center",
+}: SectionDescriptionProps) => {
   const isReducedMotion = useReducedMotion();
 
   if (isReducedMotion) {
-    return <StyledSectionDescription>{children}</StyledSectionDescription>;
+    return (
+      <StyledSectionDescription className={className} $textAlign={textAlign}>
+        {children}
+      </StyledSectionDescription>
+    );
   }
 
   return (
     <MotionDescription
+      className={className}
       initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
+      $textAlign={textAlign}
     >
       {children}
     </MotionDescription>

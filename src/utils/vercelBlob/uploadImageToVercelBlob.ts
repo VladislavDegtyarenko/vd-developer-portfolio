@@ -1,5 +1,4 @@
 import { put } from "@vercel/blob";
-import fetch from "node-fetch";
 import sharp, { ResizeOptions } from "sharp";
 
 export type UploadImageToBlobArgs = {
@@ -15,7 +14,7 @@ export const uploadImageToVercelBlob = async ({
 }: UploadImageToBlobArgs) => {
   try {
     const res = await fetch(url);
-    const imageBuffer = await res.buffer();
+    const imageBuffer = Buffer.from(await res.arrayBuffer());
     const contentType = res.headers.get("content-type");
 
     if (!contentType || !contentType?.includes("image")) {
