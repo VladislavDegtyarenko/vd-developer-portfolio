@@ -10,7 +10,8 @@
   },
   {
     "href": "/#projects",
-    "text": "Projects"
+    "text": "Projects",
+    "isHidden": true
   },
   {
     "href": "/#reviews",
