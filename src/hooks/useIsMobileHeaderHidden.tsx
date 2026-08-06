@@ -1,12 +1,12 @@
 import { useScroll } from "./useScroll";
 import useViewportWidth from "./useViewportWidth";
 
-export const useIsMobileHeaderHidden = (): boolean => {
+export const useIsMobileHeaderHidden = () => {
   const { width } = useViewportWidth();
   const { scrollPosition, isScrolledDown } = useScroll({ threshold: 5 });
 
-  const isHiddenOnMobile =
-    width < 992 && scrollPosition > 250 && isScrolledDown;
+  const isMobile = width < 992;
+  const isHidden = isMobile && scrollPosition > 250 && isScrolledDown;
 
-  return isHiddenOnMobile;
+  return { isHidden, isMobile };
 };

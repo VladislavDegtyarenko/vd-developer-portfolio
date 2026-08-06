@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 // UI
 import Container from "@/components/layout/Container";
@@ -22,7 +22,6 @@ import { usePathname, useRouter } from "next/navigation";
 // Types
 type StyledHeaderProps = {
   $scrollbarCompensation: number | null;
-  $isHiddenOnMobile: boolean;
 };
 
 const StyledHeader = styled.header<StyledHeaderProps>`
@@ -37,11 +36,6 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   /* background-color: #050505bb; */
   backdrop-filter: blur(8px);
   top: 0;
-  transition: transform 0.5s;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
 
   &:after {
     content: "";
@@ -71,9 +65,6 @@ const StyledHeader = styled.header<StyledHeaderProps>`
 
   @media screen and (max-width: 991.98px) {
     padding: 1.25em 0;
-    ${({ $isHiddenOnMobile }) => ({
-      transform: `translateY(${$isHiddenOnMobile ? "-100%" : "0%"})`,
-    })}
   }
 
   nav {
@@ -107,19 +98,38 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 `;
 
+const MotionStyledHeader = motion.create(StyledHeader);
+
+const variants: Variants = {
+  initial: {
+    transform: `translateY(-100%)`,
+  },
+  animate: ({ isHidden }) => ({
+    transform: `translateY(${isHidden ? "-100%" : "0%"})`,
+  }),
+  exit: {
+    transform: `translateY(-100%)`,
+  },
+};
+
 const HeaderClient = () => {
   const { scrollbarCompensation } = useContext(ScrollLockContext);
   const { menuIsOpen, toggleMenu } = useContext(MobileMenuContext);
   const router = useRouter();
   const pathname = usePathname();
 
-  const isHiddenOnMobile = useIsMobileHeaderHidden();
+  const { isHidden, isMobile } = useIsMobileHeaderHidden();
 
   return (
     <>
-      <StyledHeader
+      <MotionStyledHeader
         $scrollbarCompensation={scrollbarCompensation}
-        $isHiddenOnMobile={isHiddenOnMobile}
+        variants={variants}
+        custom={{ isHidden }}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{ duration: isMobile ? 0.5 : 1 }}
       >
         <Container>
           <nav>
@@ -148,7 +158,7 @@ const HeaderClient = () => {
             <BurgerButton isOpen={menuIsOpen} toggleMenu={toggleMenu} />
           </nav>
         </Container>
-      </StyledHeader>
+      </MotionStyledHeader>
 
       <AnimatePresence>{menuIsOpen && <MobileMenu />}</AnimatePresence>
     </>
