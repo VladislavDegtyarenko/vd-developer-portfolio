@@ -47,8 +47,8 @@ type Props = {
   children: ReactNode;
 };
 
-const MotionHeading = motion(H4);
-const MotionStyledWrapper = motion(StyledWrapper);
+const MotionHeading = motion.create(H4);
+const MotionStyledWrapper = motion.create(StyledWrapper);
 
 const Wrapper = (props: Props) => {
   const { heading, children } = props;

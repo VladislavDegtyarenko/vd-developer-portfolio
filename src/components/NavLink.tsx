@@ -39,7 +39,7 @@ const StyledNavLink = styled(Link)<{ $isMobile?: boolean }>`
   }
 `;
 
-const MotionStyledNavLink = motion(StyledNavLink);
+const MotionStyledNavLink = motion.create(StyledNavLink);
 
 const linkVariants: Variants = {
   normal: ({ isMobile }) => ({

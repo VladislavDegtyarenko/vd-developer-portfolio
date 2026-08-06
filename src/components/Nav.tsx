@@ -41,7 +41,7 @@ const StyledNav = styled.ul<StyledLinksProps>`
 function isLinkActive(
   href: string,
   pathname: string,
-  activeHomepageSection: string | null
+  activeHomepageSection: string | null,
 ) {
   if (pathname === "/") {
     if (activeHomepageSection === "home" && href === "/") return true;
@@ -54,7 +54,7 @@ function isLinkActive(
   return href !== "/" && pathname.includes(href);
 }
 
-const MotionStyledNav = motion(StyledNav);
+const MotionStyledNav = motion.create(StyledNav);
 
 const Nav = ({ isMobile = false, toggleMenu }: MenuLinksProps) => {
   const pathname = usePathname();

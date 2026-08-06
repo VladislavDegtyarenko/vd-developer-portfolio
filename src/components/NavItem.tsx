@@ -73,7 +73,7 @@ const StyledItem = styled.li`
   position: relative;
 `;
 
-const MotionStyledItem = motion(StyledItem);
+const MotionStyledItem = motion.create(StyledItem);
 
 const NavItem = forwardRef<HTMLLIElement, NavItemProps>(
   ({ isActive, isMobile, index, ...props }, ref) => {

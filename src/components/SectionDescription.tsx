@@ -25,7 +25,7 @@ const StyledSectionDescription = styled(P1)<{ $textAlign?: string }>`
   }
 `;
 
-const MotionDescription = motion(StyledSectionDescription);
+const MotionDescription = motion.create(StyledSectionDescription);
 
 const SectionDescription = ({
   children,

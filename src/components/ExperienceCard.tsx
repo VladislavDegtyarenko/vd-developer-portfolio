@@ -79,7 +79,7 @@ const StyledExpCard = styled.div<StyledExpCardProps>`
   }
 `;
 
-const MotionStyledExperienceCard = motion(StyledExpCard);
+const MotionStyledExperienceCard = motion.create(StyledExpCard);
 
 const Chip = styled(P2)`
   display: inline-block;

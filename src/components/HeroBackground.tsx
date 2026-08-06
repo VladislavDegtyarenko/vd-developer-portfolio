@@ -33,7 +33,7 @@ const Styled = styled.div`
   }
 `;
 
-const MotionImage = motion(Image);
+const MotionImage = motion.create(Image);
 
 const HeroBackground = () => {
   return (

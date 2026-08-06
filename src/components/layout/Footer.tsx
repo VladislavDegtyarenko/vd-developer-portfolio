@@ -8,7 +8,7 @@ import styled from "styled-components";
 // UI
 import Container from "@/components/layout/Container";
 import { P2 } from "@/components/Text";
-const MotionP2 = motion(P2);
+const MotionP2 = motion.create(P2);
 
 const StyledFooter = styled.div`
   text-align: center;
