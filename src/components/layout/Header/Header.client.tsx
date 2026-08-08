@@ -64,7 +64,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 
   @media screen and (max-width: 991.98px) {
-    padding: 1.25em 0;
+    padding: 1rem 0;
   }
 
   nav {
