@@ -6,7 +6,7 @@
       "position": "Frontend Engineer",
       "company": "Patrianna Limited",
       "chips": ["Ukraine, Remote", "Full-time"],
-      "description": "Integrated and supported CMS and localization flows (Builder.io, Prismic, Crowdin) across multiple brands, making content management faster and easier.\nBuilt reusable UI component packages (modals, banners, promos) used across projects, cutting down code duplication and speeding up new releases.\nAutomated ~1,000 CMS test cases with a custom Node.js & Playwright script, greatly reducing manual QA effort and preventing regression bugs.\nDelivered 400+ features, bug fixes, and improvements in a fast-paced multi-brand environment.\nHelped maintain high code quality through regular code reviews, documentation, and release support.",
+      "description": "Owned frontend delivery for Builder.io, Prismic, and Crowdin CMS/localization flows across multiple brands.\nBuilt reusable shared-package features: offer popups management, banners, promotions, Builder custom components.\nClosed ~500 frontend tickets across features, bugs, and improvements.\nCovered ~2,000 CMS test cases by building a Node.js / Playwright QA automation workflow.\nSupported releases, code reviews, created documentation, and helped teammates ship consistently. ",
       "icons": [
         { "src": "React.svg", "alt": "React.js" },
         { "src": "NextJS-Wide.svg", "alt": "Next.js" },
