@@ -1,4 +1,4 @@
-export function splitStringUsingRegex(inputString: string): string[] {
+export function splitStringByRegex(inputString: string): string[] {
   const characters: string[] = [];
   const regex = /[\s\S]/gu;
 
