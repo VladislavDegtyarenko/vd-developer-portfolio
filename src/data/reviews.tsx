@@ -3,6 +3,50 @@ import { Review } from "@/types";
 
 export const reviews: Review[] = [
   {
+    name: "Vladyslava Siebova",
+    company: "Patrianna Ltd",
+    position: "QA Engineer | QA Manual | QC Engineer",
+    photo: "v-siebova.jpeg",
+    reviewText: (
+      <>
+        <P1>
+          I&apos;d like to highlight my very positive experience working with{" "}
+          <span className="bold-white">Vlad</span>. He is a{" "}
+          <span className="bold-cyan">strong frontend developer</span> who also
+          has a good understanding of CMS-related tasks and the overall content
+          side of the product.
+        </P1>
+        <P1>
+          What I especially appreciate is his ability to{" "}
+          <span className="bold-cyan">
+            look at tasks from a broader perspective.
+          </span>{" "}
+          He has worked with banners, promo windows, CMS, Builder, Prismic,
+          localization, and various content-related features, and is always
+          willing to{" "}
+          <span className="bold-white">
+            dive deeper into the logic behind a task
+          </span>{" "}
+          rather than simply implementing it.
+        </P1>
+        <P1>
+          I&apos;d also like to mention his work on{" "}
+          <span className="bold-cyan">test automation</span>. He has written
+          automated tests, which helped cover repetitive checks more efficiently
+          and reduced some of the manual workload for the QA team.
+        </P1>
+        <P1>
+          He is easy and comfortable to work with, open to discussions, willing
+          to help with complex issues, and responsive to feedback. Overall, I
+          consider him a{" "}
+          <span className="bold-cyan">reliable and versatile specialist,</span>{" "}
+          and I really appreciate the collaboration between frontend, CMS, and
+          QA that we&apos;ve had.
+        </P1>
+      </>
+    ),
+  },
+  {
     reviewText: (
       <>
         <P1>
