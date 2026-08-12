@@ -14,7 +14,6 @@ type SectionDescriptionProps = PropsWithChildren<{
 const StyledSectionDescription = styled(P1)<{ $textAlign?: string }>`
   ${({ $textAlign }) => ($textAlign === "center" ? `text-align: center;` : "")}
   color: ${({ theme }) => theme.grey};
-  text-wrap: balance;
 
   @media screen and (max-width: 991.98px) {
     padding: 0 40px;

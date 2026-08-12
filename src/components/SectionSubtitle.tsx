@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { H3 } from "./Text";
 
 import { SectionSubtitleProps } from "../types";
-import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
+import { splitStringByRegex } from "@/utils/splitStringByRegex";
 
 const StyledSectionSubtitle = styled(H3)`
   overflow: hidden;
@@ -19,7 +19,7 @@ const StyledSectionSubtitle = styled(H3)`
 const SectionSubtitle = ({ children }: SectionSubtitleProps) => {
   return (
     <StyledSectionSubtitle>
-      {splitStringUsingRegex(children).map((char, index) => (
+      {splitStringByRegex(children).map((char, index) => (
         <motion.span
           key={index}
           initial={{ opacity: 0 }}

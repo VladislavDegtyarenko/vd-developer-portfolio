@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 import { H2 } from "./Text";
 
-import { splitStringUsingRegex } from "@/functions/splitStringUsingRegex";
+import SplitTextByCharacters from "./SplitTextByCharacters";
 
 // TS
 import { SectionTitleProps } from "../types";
@@ -84,11 +84,9 @@ const SectionTitle = ({ children, id }: SectionTitleProps) => {
     <StyledSectionTitle id={id} as="div">
       <div>
         <h2 ref={titleRef}>
-          {splitStringUsingRegex(children).map((char, index) => (
-            <span key={index} style={{ opacity: isReducedMotion ? 1 : 0 }}>
-              {char}
-            </span>
-          ))}
+          <SplitTextByCharacters asFragment>
+            {children}
+          </SplitTextByCharacters>
         </h2>
         <div
           ref={lineRef}

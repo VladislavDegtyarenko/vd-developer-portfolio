@@ -196,7 +196,10 @@ const Main = () => {
             <div className="main__content" ref={contentRef}>
               <H2 as="h1" className="title" ref={titleRef}>
                 {title.split(" ").map((word, index) => (
-                  <span {...(index < 2 ? { className: "accent" } : {})}>
+                  <span
+                    {...(index < 2 ? { className: "accent" } : {})}
+                    key={index}
+                  >
                     {word}
                     {index !== title.length ? " " : null}
                   </span>
