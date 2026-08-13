@@ -7,11 +7,15 @@ Read .agents/blog/README.md first.
 
 Use the repo skills:
 - Use $write-blog-post to write, create, or update a Notion post.
+- Use $create-blog-cover when a new or updated post needs a cover image.
 - Use $publish-blog-post only when the user asks to publish.
-- For "write and publish", use both in that order.
+- For "write and publish", use $write-blog-post, $create-blog-cover when needed, then $publish-blog-post in that order.
+
+The cover pipeline is mandatory: create in Figma -> export a raster image -> upload it directly to the Notion post as a native file cover -> visually verify it in Notion -> on publish, run the asset sync into public/assets -> commit -> push main -> verify the automatic Vercel deployment. Never deploy a cover first and then point Notion at its production URL. Never claim a cover is attached based only on a successful API response.
+
+For native Notion cover uploads, use the connected Notion tool when it supports file_upload covers. If its attachment/update schemas cannot attach a local binary as a native cover, use the official Notion File Upload API with NOTION_TOKEN from .env.local. Browser/UI upload is only a last manual fallback. Never expose the token. Verify a fresh page response has cover.type = file and the returned URL serves the expected image.
 
 Use the connected Notion tools for database and page work.
-Use the image generation skill when the user asks for a new cover image.
 Use the GitHub publish skill for commit and push work.
 Use the Vercel deployment skill and browser tools for production checks.
 

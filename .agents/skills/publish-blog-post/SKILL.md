@@ -18,32 +18,13 @@ Publishing means the post and its image work on the production website.
 
 ## Image
 
-First check the cover type.
+The Notion post is the source of truth for the cover.
 
-### Notion file cover
-
-1. Fetch the page again to get a fresh Notion file URL.
-2. Keep the Notion cover unchanged.
-3. The sync command will download it into `public/assets/blog/posts`.
-
-### New local or generated cover
-
-1. Use the final image only. Remove temporary copies.
-2. Optimize it as WebP.
-3. Save it here:
-
-   ```text
-   public/assets/blog/posts/<page-id>/<slug>.webp
-   ```
-
-4. Set the Notion cover to:
-
-   ```text
-   https://vd-developer.online/assets/blog/posts/<page-id>/<slug>.webp
-   ```
-
-5. This is an `external` Notion cover. The sync command will not copy it because the file is already in `public`.
-6. Before deployment, check the local file directly. The post may not show the cover until the production URL exists.
+1. Use `$create-blog-cover` if a new cover has not been made yet.
+2. Open the actual Notion page and visually confirm that its thumbnail is visible before publishing.
+3. Fetch the page and confirm its cover is a native Notion `file`, not `external`, when cover metadata is available.
+4. Stop if the cover is missing, temporary, external, or only present as a local repository file. Do not deploy first as a workaround.
+5. Keep the Notion cover unchanged during asset sync.
 
 Use the same checks for body images. Do not continue with a missing or temporary image URL.
 
@@ -63,10 +44,11 @@ Use the same checks for body images. Do not continue with a missing or temporary
    ```
 
 4. Notion `file` images are saved under `public/assets/blog/posts`.
-5. A local cover must already be in that folder.
-6. Check the exact image with `file`.
-7. Open the image and check it visually.
-8. Stop if the expected image is missing or wrong.
+5. Read the sync output and confirm the cover source is `file` and its status is `downloaded`, `refreshed`, or `existing`. Treat `external`, `missing`, and `failed` as publication blockers.
+6. Use the local path reported by the sync command. Do not guess the output filename.
+7. Check the exact image with `file`.
+8. Open the imported image and compare it with the cover visible in Notion.
+9. Stop if the expected image is missing or wrong.
 
 ## Test
 

@@ -25,8 +25,8 @@ Read [references/writing-style.md](references/writing-style.md) before writing.
 7. For a new post, keep `Published` off.
 8. For an update, keep the current slug and published state unless the user asks to change them.
 9. Add the body as normal top-level Notion blocks. Use the right language for code blocks.
-10. If the user asks for a new cover, create or choose the image. Keep the local file for publishing. Do not assume the Notion tool can upload it as a file cover.
-11. Fetch the saved page again. Check the fields, body, links, code blocks, and cover.
+10. If the post needs a new cover, use `$create-blog-cover` after the page exists. It creates the image in Figma and uploads the raster export directly to Notion as a native file cover. It does not create the production asset.
+11. Open the actual Notion page and verify the cover is visible. Fetch the saved page again and check the fields, body, links, code blocks, and cover metadata when available.
 12. Give the user the Notion page link and say whether `Published` is on or off.
 
 Stop here unless the user asked to publish.

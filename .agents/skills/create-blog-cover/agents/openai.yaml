@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Blog Cover"
+  short_description: "Create and add branded blog covers"
+  default_prompt: "Use $create-blog-cover to make a branded cover for this blog post."
