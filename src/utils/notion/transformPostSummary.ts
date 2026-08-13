@@ -13,7 +13,7 @@ export const transformPostSummary = async (post: BlogPostResponse) => {
 
   // const resolvedCoverUrl = await resolveNotionImage(post.cover, { width: 640 });
   const resolvedCoverUrl = await resolveNotionImageLocally(post.cover, {
-    width: 640,
+    resizeOptions: { width: 640 },
   });
   // const blurDataUrl = resolvedCoverUrl
   //   ? await generateBlurDataUrl(resolvedCoverUrl)

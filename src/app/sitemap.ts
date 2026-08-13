@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
 import { PRODUCTION_DOMAIN } from "@/constants";
-import { getPosts } from "@/utils/notion/getPosts";
+import { queryBlogPosts } from "@/utils/notion/queryBlogPosts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPosts();
+  const posts = await queryBlogPosts();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -18,12 +18,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const postRoutes: MetadataRoute.Sitemap = (posts ?? []).map((post) => ({
-    url: `${PRODUCTION_DOMAIN}/blog/${post.slug}`,
-    ...(post.date && { lastModified: new Date(post.date) }),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  const postRoutes: MetadataRoute.Sitemap = posts.flatMap((post) => {
+    const slug = post.properties.Slug.rich_text[0]?.plain_text;
+    const date = post.properties.Date.date?.start;
+
+    if (!slug) {
+      return [];
+    }
+
+    return [
+      {
+        url: `${PRODUCTION_DOMAIN}/blog/${slug}`,
+        ...(date && { lastModified: new Date(date) }),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      },
+    ];
+  });
 
   return [...staticRoutes, ...postRoutes];
 }

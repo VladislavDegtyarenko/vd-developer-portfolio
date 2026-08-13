@@ -20,7 +20,7 @@ import { toSrcPath } from "../toSrcPath";
  * - If the image type is neither "external" nor "file", or download fails, it returns `null`.
  *
  * @param {NotionCoverImage} image - The Notion image object (must be of type "external" or "file").
- * @param {ResizeOptions} [resizeOptions={}] - Optional sharp resizing options used during image saving.
+ * @param {ResolveNotionImageLocallyOptions} [options={}] - Resize and refresh behavior.
  * @returns {Promise<string | null>} The local POSIX-style path to the image in `/public`, or the external URL, or `null`.
  */
 
@@ -32,54 +32,151 @@ const BLOG_POSTS_ASSETS_FOLDER = path.join(
   "posts"
 );
 
-export const resolveNotionImageLocally = async (
-  image: NotionCoverImage,
-  resizeOptions: ResizeOptions = {}
-): Promise<string | null> => {
-  if (image === null) return null;
+export type ResolveNotionImageLocallyOptions = {
+  resizeOptions?: ResizeOptions;
+  forceDownload?: boolean;
+};
 
-  // External images are not stored in AWS Cloud
-  if (image.type === "external") return image.external.url;
+export type NotionImageResolution = {
+  url: string | null;
+  localPath: string | null;
+  sourceType: "file" | "external" | "none";
+  status:
+    | "downloaded"
+    | "refreshed"
+    | "existing"
+    | "external"
+    | "missing"
+    | "failed";
+};
 
-  // Extra check if the notion image is a file
-  if (image.type !== "file") {
+export const getNotionImageLocalPath = (
+  image: NotionCoverImage
+): string | null => {
+  if (!image || image.type !== "file") {
     return null;
   }
 
-  const { url } = image.file;
+  const imageUrl = new URL(image.file.url);
+  const pathname = decodeURIComponent(imageUrl.pathname.slice(1));
+  // Keep the dynamic suffix visibly scoped so Next.js traces only blog assets.
+  const fullPath = path.join(
+    process.cwd(),
+    "public/assets/blog/posts",
+    pathname
+  );
+  const relativePath = path.relative(BLOG_POSTS_ASSETS_FOLDER, fullPath);
 
-  const imageUrl = new URL(url);
-  const pathname = decodeURIComponent(imageUrl.pathname.slice(1)); //remove leading slash
-  const fullPath = path.join(BLOG_POSTS_ASSETS_FOLDER, ...pathname.split("/"));
+  if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
+    throw new Error(`Notion image path escapes the blog assets folder: ${pathname}`);
+  }
+
+  return fullPath;
+};
+
+export const resolveNotionImageLocallyWithMetadata = async (
+  image: NotionCoverImage,
+  {
+    resizeOptions = {},
+    forceDownload = false,
+  }: ResolveNotionImageLocallyOptions = {}
+): Promise<NotionImageResolution> => {
+  if (image === null) {
+    return {
+      url: null,
+      localPath: null,
+      sourceType: "none",
+      status: "missing",
+    };
+  }
+
+  // External images are not stored in AWS Cloud
+  if (image.type === "external") {
+    return {
+      url: image.external.url,
+      localPath: null,
+      sourceType: "external",
+      status: "external",
+    };
+  }
+
+  // Extra check if the notion image is a file
+  if (image.type !== "file") {
+    return {
+      url: null,
+      localPath: null,
+      sourceType: "none",
+      status: "missing",
+    };
+  }
+
+  const { url } = image.file;
+  const fullPath = getNotionImageLocalPath(image);
+
+  if (!fullPath) {
+    return {
+      url: null,
+      localPath: null,
+      sourceType: "file",
+      status: "failed",
+    };
+  }
 
   const isFileExists = fs.existsSync(fullPath);
 
-  // Check if the file is not present in /public
-  if (!isFileExists) {
+  // Download a missing file, or deliberately refresh a stale local copy.
+  if (!isFileExists || forceDownload) {
     const newFile = await saveNotionImageToPublicFolder({
       url,
       pathname: fullPath,
       resizeOptions,
     });
-    // If the image is uploaded successfully, return a URL from Vercel Blob
     if (newFile?.url) {
-      // console.log(`Returned new image url: ${newBlob.url}`);
       const src = toSrcPath(newFile?.url);
 
-      return src;
+      return {
+        url: src,
+        localPath: fullPath,
+        sourceType: "file",
+        status: isFileExists ? "refreshed" : "downloaded",
+      };
     }
+
+    return {
+      url: null,
+      localPath: fullPath,
+      sourceType: "file",
+      status: "failed",
+    };
   }
 
-  // Otherwise, use the already uploaded image in Vercel Blob
   if (isFileExists) {
-    // console.warn(
-    //   `Returned already uploaded image to Vercel Blob: ${imageInVercelBlob.url}`
-    // );
     const src = toSrcPath(fullPath);
 
-    return src;
+    return {
+      url: src,
+      localPath: fullPath,
+      sourceType: "file",
+      status: "existing",
+    };
   }
 
-  // console.warn(`Returned null as image for url: ${url}`);
-  return null;
+  return {
+    url: null,
+    localPath: fullPath,
+    sourceType: "file",
+    status: "failed",
+  };
+};
+
+export const resolveNotionImageLocally = async (
+  image: NotionCoverImage,
+  options: ResolveNotionImageLocallyOptions = {}
+): Promise<string | null> => {
+  const resolution = await resolveNotionImageLocallyWithMetadata(
+    image,
+    options
+  );
+
+  return resolution.url;
 };

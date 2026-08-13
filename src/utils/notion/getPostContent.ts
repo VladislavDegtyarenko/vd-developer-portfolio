@@ -3,11 +3,9 @@ import { calcBlocksReadingTime } from "../calcBlocksReadingTime";
 import { BlogPostWithBlocks } from "@/types/notion";
 import { NotionBlock } from "@9gustin/react-notion-render";
 // import { resolveNotionImage } from "../vercelBlob/resolveNotionImage";
-import { fetchNotion } from "./fetchNotion";
 import { getPosts } from "./getPosts";
 import { cache } from "react";
-import { headers } from "./constants";
-import { resolveNotionImageLocally } from "./resolveNotionImageLocally";
+import { getPostBlocks, resolveNotionImagesInBlocks } from "./getPostBlocks";
 
 export const getPostContent = cache(async (slug: string) => {
   const posts = await getPosts(slug);
@@ -21,42 +19,8 @@ export const getPostContent = cache(async (slug: string) => {
   const blockId = postBySlug.id;
 
   try {
-    const url = `${process.env.NOTION_API_ENDPOINT}/v1/blocks/${blockId}/children?page_size=100`;
-    const options = {
-      method: "GET",
-      headers,
-    };
-
-    const data = await fetchNotion(url, options);
-
-    const blocks = await Promise.all(
-      data.results.map(async (block: any) => {
-        if (block.type === "image" && block.image) {
-          const notionImage = block.image as any;
-          // const imageUrl = await resolveNotionImage(notionImage);
-          const imageUrl = await resolveNotionImageLocally(notionImage);
-
-          if (imageUrl) {
-            return {
-              ...block,
-              image: {
-                ...block.image,
-                file: {
-                  ...block.image.file,
-                  url: imageUrl,
-                },
-              },
-            };
-          }
-        }
-
-        // if (block.type === "video" && block.video) {
-        //   console.log("block.video: ", block.video);
-        // }
-
-        return block;
-      })
-    );
+    const notionBlocks = await getPostBlocks(blockId);
+    const { blocks } = await resolveNotionImagesInBlocks(notionBlocks);
 
     // Typical image block url
     // https://prod-files-secure.s3.us-west-2.amazonaws.com/ - domain

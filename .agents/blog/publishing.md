@@ -8,7 +8,7 @@ Use this workflow only when the user asks to publish. For writing-only requests,
 - Website metadata maps exactly as follows: `Title` → title, `Description` → description/meta description, `Slug` → route, `Date` → displayed date/sort order, and `Tags` → tags/metadata keywords. `Published` controls whether `getPosts` returns the entry.
 - A non-empty `Title` and `Slug` are required by the current code. Set `Description`, `Date`, and appropriate existing `Tags` for a complete post even though the renderer tolerates some missing values.
 - Local access needs `NOTION_TOKEN`, `NOTION_API_ENDPOINT`, and `NOTION_DATABASE_ID`. They are present by name in `.env.local`; never print or commit their values. The old Vercel Blob helpers are not active in the current blog image path, so `BLOB_READ_WRITE_TOKEN` is not part of this workflow.
-- `getPostContent` fetches one page of at most 100 direct child blocks. Do not assume images nested inside unsupported structures or blocks after the first 100 will be synchronized or rendered; verify the actual page.
+- `getPostContent` fetches all paginated direct child blocks. Images nested inside unsupported child structures are not traversed recursively; verify the actual page.
 
 ## 1. Preflight
 
@@ -44,7 +44,7 @@ Use this workflow only when the user asks to publish. For writing-only requests,
   ```
 
 - Missing files are downloaded, resized to 640 px wide for covers (body images keep their dimensions), converted by Sharp to WebP quality 80, and written using the original filename and extension. The bytes can therefore be WebP even when the filename ends in `.jpg` or `.png`.
-- Existing paths are reused without downloading. If a cover was replaced but resolves to the same path, stop and confirm whether the tracked file is stale; do not assume the resolver overwrote it.
+- Existing paths are reused without downloading during normal rendering. Use `pnpm sync-blog-assets -- --slug <slug> --force` to deliberately refresh a stale local copy.
 
 ### Notion `external` image (no automatic persistence)
 
@@ -58,13 +58,14 @@ If the requested cover is local or generated, optimize it to WebP before adding 
 ## 4. Expose the post and synchronize assets
 
 1. Once content and metadata are ready, check `Published` in Notion. Production remains static until a successful deployment, but the local build query can now discover the post.
-2. Run the only current full synchronization trigger:
+2. Run the explicit synchronization command. Targeting the post keeps the change easy to inspect; add `--force` when correcting a stale or wrong local image:
 
    ```bash
-   pnpm build
+   pnpm sync-blog-assets -- --slug <slug>
+   pnpm sync-blog-assets -- --slug <slug> --force
    ```
 
-   The build statically enumerates all published slugs. `getPosts` resolves every cover; rendering each post calls `getPostContent`, which resolves fetched top-level image blocks.
+   Without `--slug`, the command synchronizes every published post. It exits non-zero when a requested post is missing or a Notion `file` image cannot be downloaded. `external` images are reported but intentionally left remote.
 3. Inspect the asset tree and working tree:
 
    ```bash
@@ -78,7 +79,7 @@ If the requested cover is local or generated, optimize it to WebP before adding 
    file public/assets/blog/posts/<expected-path>
    ```
 
-5. A successful build is insufficient if the expected asset is absent. `saveNotionImageToPublicFolder` logs download/MIME failures and returns `null`, and higher-level Notion failures can result in missing blog output. Stop and investigate expired signed URLs, cover type, unsupported/nested blocks, the 100-block limit, environment configuration, and fetch output.
+5. Run `pnpm build` after synchronization. A successful build is insufficient if the expected asset is absent. Stop and investigate expired signed URLs, cover type, unsupported nested blocks, environment configuration, and fetch output.
 
 ## 5. Validate locally
 

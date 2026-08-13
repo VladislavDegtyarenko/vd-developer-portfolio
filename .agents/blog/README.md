@@ -15,11 +15,7 @@ Publishing means the production article and cover have both been verified. A Not
 
 - Source: the Notion **Blog Database** (`Title`, `Description`, `Slug`, `Date`, `Tags`, `Published` plus the page cover and body blocks).
 - Query: `src/utils/notion/getPosts.ts` returns only entries with `Published` checked and a non-empty `Slug`, newest `Date` first.
-- Rendering: Next.js statically generates published post routes. Metadata comes from `transformPostSummary`; page content comes from the first 100 top-level Notion child blocks.
+- Rendering: Next.js statically generates published post routes. Metadata comes from `transformPostSummary`; page content comes from paginated top-level Notion child blocks.
 - Images: `resolveNotionImageLocally` downloads missing Notion `file` images into `public/assets/blog/posts`; `external` images remain remote and are not synchronized.
-- Trigger: there is no explicit sync script. `pnpm build` resolves every published cover and each fetched top-level image block; `pnpm dev` resolves only routes that are rendered.
+- Trigger: `pnpm sync-blog-assets` explicitly synchronizes every published cover and top-level image block. Add `-- --slug <slug>` to target one post and `--force` to overwrite existing local files. `pnpm build` still resolves missing assets for every published post, while `pnpm dev` resolves only routes that are rendered.
 - Deployment: pushing `main` triggers the Git-connected Vercel production project `vd-developer-portfolio`. Other branches produce previews.
-
-## Evaluated improvement (not implemented)
-
-The current weakness is that asset synchronization is a side effect of page rendering, and download failures return `null` after logging instead of necessarily failing the build. A future improvement should add `pnpm sync-blog-assets`, backed by a small script that reuses the existing Notion query and image resolver, visits every published cover and post body, reports the exact files resolved, and exits non-zero if an expected `file` image is absent. Keep `pnpm build` behavior unchanged. This needs a modest extraction of the current rendering-bound code and should be reviewed separately.
