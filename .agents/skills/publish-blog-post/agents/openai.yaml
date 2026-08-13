@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish Blog Post"
+  short_description: "Publish a blog post with its images"
+  default_prompt: "Use $publish-blog-post to publish a finished Notion blog post and verify production."

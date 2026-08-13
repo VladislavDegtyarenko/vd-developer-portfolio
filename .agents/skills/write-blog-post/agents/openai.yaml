@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Blog Post"
+  short_description: "Write and save a blog post in Notion"
+  default_prompt: "Use $write-blog-post to write a new blog post and save it as a Notion draft."
