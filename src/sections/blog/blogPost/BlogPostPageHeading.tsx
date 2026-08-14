@@ -58,7 +58,9 @@ const BlogPostPageHeading = ({
           />
         </div>
       )}
-      <H2 className="title">{title}</H2>
+      <H2 as="h1" className="title">
+        {title}
+      </H2>
       <div className="additional">
         {date && <P2>{formatDate(date)}</P2>}
         {tags && tags.length > 0 && (
