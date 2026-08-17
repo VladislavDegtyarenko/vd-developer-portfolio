@@ -1,4 +1,8 @@
-const Logo = () => {
+type LogoProps = {
+  secondaryColor?: string;
+};
+
+const Logo = ({ secondaryColor = "currentColor" }: LogoProps) => {
   return (
     <svg
       width="90"
@@ -28,14 +32,14 @@ const Logo = () => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M75.0882 1L71.0001 4.67931L82.8444 17.8397L71.0001 31L75.0882 34.6793L90.2439 17.8397L75.0882 1Z"
-          fill="currentColor"
+          fill={secondaryColor}
         />
         <path d="M66.894 -4L57.0923 37.5842H51.0576L60.8593 -4H66.894Z" fill="#1B9AAA" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
           d="M15.456 1.1604L19.5441 4.83971L7.69979 18.0001L19.5441 31.1604L15.456 34.8397L0.300293 18.0001L15.456 1.1604Z"
-          fill="currentColor"
+          fill={secondaryColor}
         />
       </g>
     </svg>

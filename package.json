@@ -16,6 +16,7 @@
     "preview": "next start",
     "build-preview": "next build && next start",
     "build-start": "next build && next start",
+    "cv:pdf": "node scripts/render-cv-pdf.mjs",
     "lint": "eslint ."
   },
   "dependencies": {
