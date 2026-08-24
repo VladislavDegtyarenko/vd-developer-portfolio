@@ -24,12 +24,13 @@ Then run from the `vd-developer-portfolio` root:
 pnpm cv:pdf
 ```
 
-The command builds the CV, compresses raster images in the generated `cv/out` directory, and writes both variants:
+The command builds the CV, compresses raster images in the generated `cv/out` directory, and writes all variants:
 
 ```text
 output/pdf/Vladyslav-Dihtiarenko-Frontend-Developer.pdf
 output/pdf/Vladyslav-Dihtiarenko-Frontend-Engineer-Supabase.pdf
 output/pdf/Vladyslav-Dihtiarenko-Frontend-Developer-Gismart.pdf
+output/pdf/Vladyslav-Dihtiarenko-Senior-Frontend-Developer-N-I-Bloom.pdf
 ```
 
 One variant can be exported independently:
@@ -38,7 +39,8 @@ One variant can be exported independently:
 pnpm cv:pdf general
 pnpm cv:pdf supabase
 pnpm cv:pdf gismart
+pnpm cv:pdf ni-bloom
 ```
 
-The web routes are `/` for the general CV, `/supabase` for the tailored Supabase version, and
-`/gismart` for the tailored Gismart version.
+The web routes are `/` for the general CV, `/supabase` for the tailored Supabase version,
+`/gismart` for the tailored Gismart version, and `/ni-bloom` for the tailored N. I Bloom version.
