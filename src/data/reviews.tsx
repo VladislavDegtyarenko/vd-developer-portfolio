@@ -50,7 +50,7 @@ export const reviews: Review[] = [
     reviewText: (
       <>
         <P1>
-          I had the pleasure of working with Vladislav and can genuinely say
+          I had the pleasure of working with Vladyslav and can genuinely say
           he&apos;s one of those rare engineers who combines{" "}
           <span className="bold-cyan">
             strong development skills with a QA mindset.
@@ -61,7 +61,7 @@ export const reviews: Review[] = [
           the root of a problem rather than settling for a surface-level fix.
         </P1>
         <P1>
-          Beyond his day-to-day work, Vladislav has been an early and thoughtful
+          Beyond his day-to-day work, Vladyslav has been an early and thoughtful
           adopter of AI-assisted development tools like Claude and Cursor, and
           he generously shared that knowledge with the team through several{" "}
           <span className="bold-white">
@@ -71,7 +71,7 @@ export const reviews: Review[] = [
           around to upskill the whole team - says a lot about his mindset.
         </P1>
         <P1>
-          Any team would be lucky to have Vladislav. He&apos;s{" "}
+          Any team would be lucky to have Vladyslav. He&apos;s{" "}
           <span className="bold-cyan">
             diligent, detail-oriented, and brings a level of technical curiosity
             that raises the bar for everyone around him.
@@ -189,7 +189,7 @@ export const reviews: Review[] = [
       <>
         <P1>
           I had the pleasure of working with{" "}
-          <span className="bold-white">Vladislav</span> on a headless project
+          <span className="bold-white">Vladyslav</span> on a headless project
           that utilized <span className="bold-cyan">React</span> and{" "}
           <span className="bold-cyan">Salesforce Commerce Cloud</span>. His
           exceptional skills as a frontend developer were evident from the
@@ -198,13 +198,13 @@ export const reviews: Review[] = [
           and his attention to detail was unparalleled.
         </P1>
         <P1>
-          Not only was <span className="bold-white">Vladislav</span> a talented
+          Not only was <span className="bold-white">Vladyslav</span> a talented
           developer, but he was also an incredibly responsible and reliable team
           player. His dedication to the project was unwavering, and he always
           went above and beyond to ensure the success of the project.
         </P1>
         <P1>
-          I am confident that <span className="bold-white">Vladislav</span> will
+          I am confident that <span className="bold-white">Vladyslav</span> will
           make a valuable contribution to any frontend development role he takes
           on, and <span className="bold-cyan">recommend him</span> without
           hesitation.

@@ -33,7 +33,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-    "qualities": [50, 75],
+    "qualities": [50, 75, 80],
   },
   logging: {
     fetches: {

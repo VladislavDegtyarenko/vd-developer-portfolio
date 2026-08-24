@@ -27,6 +27,21 @@ const pdfVariants = [
     route: "/gismart.html",
     filename: "Vladyslav-Dihtiarenko-Frontend-Developer-Gismart.pdf",
   },
+  {
+    key: "ni-bloom",
+    route: "/ni-bloom.html",
+    filename: "Vladyslav-Dihtiarenko-Senior-Frontend-Developer-N-I-Bloom.pdf",
+  },
+  {
+    key: "binance",
+    route: "/binance.html",
+    filename: "Vladyslav-Dihtiarenko-Senior-Frontend-Engineer-Binance.pdf",
+  },
+  {
+    key: "riseguide",
+    route: "/riseguide.html",
+    filename: "Vladyslav-Dihtiarenko-Senior-Frontend-Engineer-RiseGuide.pdf",
+  },
 ];
 const rasterExtensions = new Set([".avif", ".jpeg", ".jpg", ".png", ".webp"]);
 
@@ -243,7 +258,7 @@ async function main() {
 
   if (selectedVariants.length === 0) {
     throw new Error(
-      `Unknown CV variant "${requestedVariant}". Use all, general, supabase, or gismart.`,
+      `Unknown CV variant "${requestedVariant}". Use all, general, supabase, gismart, ni-bloom, binance, or riseguide.`,
     );
   }
 

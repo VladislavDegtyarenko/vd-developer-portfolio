@@ -27,6 +27,14 @@
       "isVisible": true
     },
     {
+      "img": "respect-studio.jpg",
+      "title": "Respect Studio",
+      "description": "Responsive website for a B2B marketing and LinkedIn lead generation agency. Developed using Next.js, Tailwind CSS and GSAP.",
+      "previewLink": "https://respect-studio-vd.vercel.app/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/respect-studio",
+      "isVisible": true
+    },
+    {
       "img": "Airlogix.png",
       "title": "Airlogix.io",
       "description": "Multi-page website for Ukrainian drone manufacturer - Airlogix. Techs: Next.js, next-intl, Typescript, styled-components, Sendgrid API, Vercel",

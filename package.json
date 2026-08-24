@@ -9,7 +9,7 @@
     "not op_mini all"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "rm -rf .next dist && next dev",
     "sync-blog-assets": "node --env-file=.env.local --import tsx scripts/sync-blog-assets.ts",
     "build": "next build",
     "start": "next start",
@@ -17,7 +17,12 @@
     "build-preview": "next build && next start",
     "build-start": "next build && next start",
     "cv:pdf": "node scripts/render-cv-pdf.mjs",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "thumbnail:capture": "node scripts/capture-project-screenshots.mjs",
+    "thumbnail:assemble": "node scripts/assemble-thumbnail-svg.mjs",
+    "project-thumbnail": "node scripts/create-project-thumbnail.mjs",
+    "svg:rasterize": "node scripts/rasterize-svg.mjs",
+    "test:svg-rasterize": "node scripts/test-rasterize-svg.mjs"
   },
   "dependencies": {
     "@9gustin/react-notion-render": "^3.11.3",
@@ -54,6 +59,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "playwright": "^1.62.1",
     "tsx": "^4.23.12"
   }
 }

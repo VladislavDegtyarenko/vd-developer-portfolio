@@ -48,12 +48,15 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
       }
     }
     &__heading {
+      color: ${({ theme }) => theme.white};
+
       p {
-        color: ${({ theme }) => theme.grey};
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        opacity: 0.8;
+        line-height: 1.25;
       }
     }
     &__main {
@@ -100,7 +103,9 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
       border-radius: var(--borderRadiusNormal);
       color: inherit;
       cursor: pointer;
-      transition: background-color var(--duration), color var(--duration);
+      transition:
+        background-color var(--duration),
+        color var(--duration);
       border: none;
       &:hover {
         color: #dddcdc;
@@ -137,7 +142,7 @@ const StyledSlide = styled.li<{ $soon?: boolean }>`
   }
 `;
 
-const ProjectSlide = ({
+const ProjectCard = ({
   img,
   title,
   description,
@@ -244,4 +249,4 @@ const ProjectSlide = ({
   );
 };
 
-export default ProjectSlide;
+export default ProjectCard;

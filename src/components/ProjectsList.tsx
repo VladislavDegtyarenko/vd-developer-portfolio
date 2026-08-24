@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import { useContext } from "react";
 
-import ProjectSlide from "@/components/ProjectSlide";
 import ProjectContext from "@/contexts/ProjectContext";
 import { Project } from "@/types";
+import ProjectCard from "@/components/ProjectCard";
 
 type ProjectsListProps = {
   projects: Project[];
@@ -55,7 +55,7 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
       <ul>
         {visibleProjects.map(
           ({ img, title, description, previewLink, codeLink, soon }) => (
-            <ProjectSlide
+            <ProjectCard
               key={title}
               img={img}
               title={title}
