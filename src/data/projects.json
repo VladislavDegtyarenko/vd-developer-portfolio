@@ -50,6 +50,21 @@
       "isVisible": true
     },
     {
+      "img": "Pass Gen.jpg",
+      "title": "Password Generator",
+      "description": "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
+      "previewLink": "https://vladislavdegtyarenko.github.io/preact-password-generator/",
+      "codeLink": "https://github.com/VladislavDegtyarenko/preact-password-generator",
+      "isVisible": true
+    },
+    {
+      "img": "portfolio.jpg",
+      "title": "Portfolio Website",
+      "description": "Vladyslav's portfolio website designed by himself and developed using Next.js, Typescript and Framer Motion. Featuring a brand new Notion API-driven blog and contact form that handles requests with Sendgrid API",
+      "codeLink": "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
+      "isVisible": true
+    },
+    {
       "img": "4-his.jpg",
       "title": "His.ua",
       "description": "Developed front-end for \"His,\" a Ukrainian brand for exclusive furniture.",
@@ -79,13 +94,6 @@
       "isVisible": false
     },
     {
-      "img": "portfolio.jpg",
-      "title": "Portfolio Website",
-      "description": "Vladyslav's portfolio website designed by himself and developed using Next.js, Typescript and Framer Motion. Featuring a brand new Notion API-driven blog and contact form that handles requests with Sendgrid API",
-      "codeLink": "https://github.com/VladislavDegtyarenko/vd-developer-portfolio",
-      "isVisible": true
-    },
-    {
       "img": "weather app.jpg",
       "title": "Weather App",
       "description": "A weather application developed using React, Redux, Material UI, Typescript and ChartJS, featuring a Microsoft-inspired interface.",
@@ -100,14 +108,6 @@
       "previewLink": "https://vladislavdegtyarenko.github.io/react-todo-app/",
       "codeLink": "https://github.com/VladislavDegtyarenko/react-todo-app",
       "isVisible": false
-    },
-    {
-      "img": "Pass Gen.jpg",
-      "title": "Password Generator",
-      "description": "A fast and secure Password Generator built using Preact and Web Crypto API for strong random password generation.",
-      "previewLink": "https://vladislavdegtyarenko.github.io/preact-password-generator/",
-      "codeLink": "https://github.com/VladislavDegtyarenko/preact-password-generator",
-      "isVisible": true
     },
     {
       "img": "Clock.jpg",

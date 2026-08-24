@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import { Variants, motion, useReducedMotion } from "framer-motion";
+import CONTACT_REASONS from "@/data/contactReasons.json";
 import { useContactForm } from "@/hooks/useContactForm";
 
 // UI
@@ -45,18 +46,16 @@ const StyledContactForm = styled.div`
     }
 
     > * + * {
-      margin-top: 1em;
+      margin-top: .5rem;
     }
 
     input,
+    select,
     textarea {
       width: 100%;
       color: ${({ theme }) => theme.fg};
       &:focus {
         outline: none;
-        border-bottom: solid 2px ${({ theme }) => theme.cyan};
-      }
-      &:not(:placeholder-shown) {
         border-bottom: solid 2px ${({ theme }) => theme.cyan};
       }
 
@@ -65,7 +64,13 @@ const StyledContactForm = styled.div`
       }
     }
 
+    input:not(:placeholder-shown),
+    textarea:not(:placeholder-shown) {
+      border-bottom: solid 2px ${({ theme }) => theme.cyan};
+    }
+
     input,
+    select,
     textarea,
     .submit {
       width: 100%;
@@ -83,6 +88,25 @@ const StyledContactForm = styled.div`
       &::placeholder {
         color: ${({ theme }) => theme.grey};
         opacity: 0.8;
+      }
+    }
+
+    select {
+      cursor: pointer;
+
+      &:invalid {
+        color: ${({ theme }) => theme.grey};
+        opacity: 0.8;
+      }
+
+      &:valid {
+        border-bottom: solid 2px ${({ theme }) => theme.cyan};
+        opacity: 1;
+      }
+
+      option {
+        color: ${({ theme }) => theme.fg};
+        background-color: ${({ theme }) => theme.cardBg};
       }
     }
 
@@ -154,6 +178,7 @@ const ContactForm = () => {
       ) : (
         <motion.form
           onSubmit={onSubmit}
+          noValidate
           {...(!isReducedMotion && {
             initial: "hidden",
             whileInView: "visible",
@@ -220,6 +245,43 @@ const ContactForm = () => {
             {errors.email ? (
               <span className="helperText errorMessage">
                 {errors.email.message}
+              </span>
+            ) : null}
+          </motion.label>
+          <motion.label
+            {...(!isReducedMotion && {
+              variants: formElementVariants,
+              transition: { duration: 0.7 },
+            })}
+          >
+            <select
+              {...register("reason", {
+                required: "Please choose a reason",
+              })}
+              defaultValue=""
+              required
+              aria-label="Reason for getting in touch"
+              aria-invalid={Boolean(errors.reason)}
+              aria-describedby={
+                errors.reason ? "contact-reason-error" : undefined
+              }
+              className={errors.reason?.message ? "error" : ""}
+            >
+              <option value="" disabled>
+                Contact reason
+              </option>
+              {CONTACT_REASONS.map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            {errors.reason ? (
+              <span
+                id="contact-reason-error"
+                className="helperText errorMessage"
+              >
+                {errors.reason.message}
               </span>
             ) : null}
           </motion.label>

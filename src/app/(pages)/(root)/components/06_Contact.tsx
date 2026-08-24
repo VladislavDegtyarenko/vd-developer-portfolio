@@ -20,7 +20,7 @@ import Socials from "@/components/Socials";
 const StyledContact = styled(Section)`
   .contact {
     &__descr {
-      margin-top: 48px;
+      margin-top: 0rem;
       color: ${({ theme }) => theme.fg};
     }
 

@@ -142,6 +142,7 @@ export interface ProjectContext {
 export type FormInputs = {
   name: string;
   email: string;
+  reason: string;
   message: string;
   honeypot?: string; // honeypot field for bot/spam protection
 };

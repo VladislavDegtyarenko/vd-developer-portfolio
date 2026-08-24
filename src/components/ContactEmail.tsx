@@ -12,13 +12,19 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-interface KoalaWelcomeEmailProps {
+interface ContactEmailProps {
   name: string;
   email: string;
+  reason: string;
   message: string;
 }
 
-export const ContactEmail = ({ name, email, message }: KoalaWelcomeEmailProps) => {
+export const ContactEmail = ({
+  name,
+  email,
+  reason,
+  message,
+}: ContactEmailProps) => {
   const htmlNewlinesAsBreakPoints = (text?: string | null) => {
     const nParagraphs = text?.split("\n").length || 0;
     return text?.split("\n").map((paragraph, index) => (
@@ -32,9 +38,7 @@ export const ContactEmail = ({ name, email, message }: KoalaWelcomeEmailProps) =
   return (
     <Html>
       <Head />
-      <Preview>
-        The sales intelligence platform that helps you uncover qualified leads.
-      </Preview>
+      <Preview>{`New contact request from ${name}: ${reason}`}</Preview>
       <Body style={main}>
         <Container style={container}>
           <Img
@@ -44,6 +48,9 @@ export const ContactEmail = ({ name, email, message }: KoalaWelcomeEmailProps) =
             alt="Koala"
             style={logo}
           />
+          <Text style={reasonText}>
+            <strong>Reason:</strong> {reason}
+          </Text>
           <Text style={paragraph}>{htmlNewlinesAsBreakPoints(message)}</Text>
           <Hr style={hr} />
           <Text style={footer}>{name}</Text>
@@ -77,6 +84,11 @@ const paragraph = {
   fontSize: "16px",
   lineHeight: "26px",
   color: "#000",
+};
+
+const reasonText = {
+  ...paragraph,
+  marginBottom: "20px",
 };
 
 const hr = {

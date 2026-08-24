@@ -1,0 +1,14 @@
+[
+  {
+    "value": "team",
+    "label": "I’d like to discuss a role on our team"
+  },
+  {
+    "value": "project",
+    "label": "I’d like to discuss a project"
+  },
+  {
+    "value": "chat",
+    "label": "I’d just like to chat"
+  }
+]

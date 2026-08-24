@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { render } from "@react-email/render";
 import ContactEmail from "@/components/ContactEmail";
+import CONTACT_REASONS from "@/data/contactReasons.json";
 import { sendEmail } from "@/utils/sendEmail";
 
 const allowedDomains = process.env.ALLOWED_DOMAINS?.split(",");
@@ -21,7 +22,7 @@ export async function POST(request: Request): Promise<Response> {
   const origin = request.headers.get("origin");
 
   const isAllowedOrigin =
-    origin === "http://localhost:3000" || // allow dev
+    origin?.includes("http://localhost:300") || // allow dev with 300* port
     (!!origin &&
       !!allowedDomains &&
       allowedDomains.some((domain) => origin.includes(domain)));
@@ -30,22 +31,35 @@ export async function POST(request: Request): Promise<Response> {
     return new Response("Forbidden", { status: 403 });
   }
 
-  const { email, name, message, honeypot } = await request.json();
+  const { email, name, message, reason, honeypot } = await request.json();
 
   // Silently escape bots/spammers
   if (honeypot) {
     return NextResponse.json({ ok: true });
   }
 
+  const reasonLabel = CONTACT_REASONS.find(
+    (contactReason) => contactReason.value === reason
+  )?.label;
+
+  if (!reasonLabel) {
+    return NextResponse.json(
+      { error: "Invalid contact reason" },
+      { status: 400 }
+    );
+  }
+
   // Render the email
-  const html = await render(ContactEmail({ name, email, message }));
+  const html = await render(
+    ContactEmail({ name, email, reason: reasonLabel, message })
+  );
 
   try {
     const responseMessage = await sendEmail({
       from: { name, email },
       subject: `${name} | Contact Form`,
       htmlContent: html,
-      textContent: message,
+      textContent: `Reason: ${reasonLabel}\n\n${message}`,
     });
     console.log("responseMessage: ", responseMessage);
 
