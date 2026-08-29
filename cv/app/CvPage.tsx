@@ -6,8 +6,8 @@ import styles from "./page.module.scss";
 const contactLinks = [
   {
     label: "Email",
-    value: "vladislavdegtyarenko@gmail.com",
-    href: "mailto:vladislavdegtyarenko@gmail.com",
+    value: "vladyslav.dihtiarenko@gmail.com",
+    href: "mailto:vladyslav.dihtiarenko@gmail.com",
     external: false,
   },
   {
