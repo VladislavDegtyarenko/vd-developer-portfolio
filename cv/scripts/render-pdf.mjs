@@ -1,48 +1,70 @@
-import { spawn, spawnSync } from "node:child_process";
-import { mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { spawn } from "node:child_process";
+import {
+  mkdir,
+  mkdtemp,
+  readdir,
+  readFile,
+  rename,
+  rm,
+  stat,
+  writeFile,
+} from "node:fs/promises";
 import { createServer } from "node:http";
+import { createRequire } from "node:module";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import sharp from "sharp";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
-const repositoryDirectory = path.resolve(scriptDirectory, "..");
-const cvDirectory = path.join(repositoryDirectory, "cv");
+const cvDirectory = path.resolve(scriptDirectory, "..");
+const require = createRequire(import.meta.url);
 const staticDirectory = path.join(cvDirectory, "out");
-const pdfDirectory = path.join(repositoryDirectory, "output", "pdf");
-const requestedVariant = process.argv[2] ?? "all";
-const pdfVariants = [
-  {
-    key: "general",
-    route: "/",
-    filename: "Vladyslav-Dihtiarenko-Frontend-Developer.pdf",
-  },
-  {
-    key: "supabase",
-    route: "/supabase.html",
-    filename: "Vladyslav-Dihtiarenko-Frontend-Engineer-Supabase.pdf",
-  },
-  {
-    key: "gismart",
-    route: "/gismart.html",
-    filename: "Vladyslav-Dihtiarenko-Frontend-Developer-Gismart.pdf",
-  },
-  {
-    key: "ni-bloom",
-    route: "/ni-bloom.html",
-    filename: "Vladyslav-Dihtiarenko-Senior-Frontend-Developer-N-I-Bloom.pdf",
-  },
-  {
-    key: "binance",
-    route: "/binance.html",
-    filename: "Vladyslav-Dihtiarenko-Senior-Frontend-Engineer-Binance.pdf",
-  },
-  {
-    key: "riseguide",
-    route: "/riseguide.html",
-    filename: "Vladyslav-Dihtiarenko-Senior-Frontend-Engineer-RiseGuide.pdf",
-  },
-];
+const pdfDirectory = path.join(cvDirectory, "output", "pdf");
+async function discoverVariants() {
+  const appDirectory = path.join(cvDirectory, "app");
+  const entries = await readdir(appDirectory, { withFileTypes: true });
+  const directories = [
+    "",
+    ...entries
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort(),
+  ];
+  const variants = [];
+  const filenames = new Set();
+
+  for (const directory of directories) {
+    const pageDirectory = path.join(appDirectory, directory);
+    if (!(await stat(path.join(pageDirectory, "page.tsx")).catch(() => null)))
+      continue;
+
+    const { cv } = await import(
+      pathToFileURL(path.join(pageDirectory, "cv-data.ts")).href
+    );
+    const key = directory || "general";
+    if (cv.variant !== key) {
+      throw new Error(
+        `Expected variant "${key}" in ${pageDirectory}/cv-data.ts.`,
+      );
+    }
+    const filename = cv.pdfFilename;
+    if (typeof filename !== "string" || !/^[\w .'-]+\.pdf$/.test(filename)) {
+      throw new Error(`Invalid PDF filename for ${key}.`);
+    }
+    if (filenames.has(filename)) {
+      throw new Error(`Duplicate PDF filename: ${filename}`);
+    }
+    filenames.add(filename);
+    variants.push({
+      key,
+      route: directory ? `/${directory}.html` : "/",
+      filename,
+    });
+  }
+
+  return variants;
+}
+
 const rasterExtensions = new Set([".avif", ".jpeg", ".jpg", ".png", ".webp"]);
 
 const mimeTypes = new Map([
@@ -67,16 +89,26 @@ function formatBytes(bytes) {
   return `${(bytes / 1024 ** 2).toFixed(2)} MiB`;
 }
 
-function run(command, args) {
-  const result = spawnSync(command, args, {
-    cwd: repositoryDirectory,
-    stdio: "inherit",
-  });
+function printPdfResults(results) {
+  const headers = ["Variant", "Output file", "Size"];
+  const rows = results.map((result) => [
+    result.variant,
+    result.filename,
+    result.size,
+  ]);
+  const widths = headers.map((header, index) =>
+    Math.max(header.length, ...rows.map((row) => row[index].length)),
+  );
+  const separator = `├${widths.map((width) => "─".repeat(width + 2)).join("┼")}┤`;
+  const formatRow = (row) =>
+    `│ ${row.map((cell, index) => cell.padEnd(widths[index])).join(" │ ")} │`;
 
-  if (result.error) throw result.error;
-  if (result.status !== 0) {
-    throw new Error(`${command} ${args.join(" ")} exited with code ${result.status}`);
-  }
+  console.log("\nGenerated PDF files:");
+  console.log(`┌${widths.map((width) => "─".repeat(width + 2)).join("┬")}┐`);
+  console.log(formatRow(headers));
+  console.log(separator);
+  for (const row of rows) console.log(formatRow(row));
+  console.log(`└${widths.map((width) => "─".repeat(width + 2)).join("┴")}┘`);
 }
 
 async function runAsync(command, args) {
@@ -84,7 +116,7 @@ async function runAsync(command, args) {
   try {
     result = await new Promise((resolve, reject) => {
       const child = spawn(command, args, {
-        cwd: repositoryDirectory,
+        cwd: cvDirectory,
         stdio: "inherit",
       });
 
@@ -94,7 +126,9 @@ async function runAsync(command, args) {
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "ENOENT") {
       throw new Error(
-        "WeasyPrint is required for CV export. On macOS, install it with: brew install weasyprint",
+        command === "weasyprint"
+          ? "WeasyPrint is required for CV export. Install it for your operating system and make sure the weasyprint command is available in PATH."
+          : `Command not found: ${command}`,
       );
     }
     throw error;
@@ -112,7 +146,8 @@ async function collectRasterImages(directory) {
       const entryPath = path.join(directory, entry.name);
 
       if (entry.isDirectory()) return collectRasterImages(entryPath);
-      if (rasterExtensions.has(path.extname(entry.name).toLowerCase())) return [entryPath];
+      if (rasterExtensions.has(path.extname(entry.name).toLowerCase()))
+        return [entryPath];
       return [];
     }),
   );
@@ -176,12 +211,17 @@ async function compressStaticImages() {
 }
 
 function resolveStaticPath(requestUrl) {
-  const pathname = decodeURIComponent(new URL(requestUrl ?? "/", "http://localhost").pathname);
+  const pathname = decodeURIComponent(
+    new URL(requestUrl ?? "/", "http://localhost").pathname,
+  );
   const relativePath = pathname.replace(/^\/+/, "") || "index.html";
   const resolvedPath = path.resolve(staticDirectory, relativePath);
   const staticRoot = `${path.resolve(staticDirectory)}${path.sep}`;
 
-  if (resolvedPath !== path.resolve(staticDirectory) && !resolvedPath.startsWith(staticRoot)) {
+  if (
+    resolvedPath !== path.resolve(staticDirectory) &&
+    !resolvedPath.startsWith(staticRoot)
+  ) {
     return null;
   }
 
@@ -198,7 +238,8 @@ async function createStaticServer() {
       }
 
       const fileStats = await stat(filePath).catch(() => null);
-      if (fileStats?.isDirectory()) filePath = path.join(filePath, "index.html");
+      if (fileStats?.isDirectory())
+        filePath = path.join(filePath, "index.html");
 
       const contents = await readFile(filePath);
       const contentType = mimeTypes.get(path.extname(filePath).toLowerCase());
@@ -218,14 +259,14 @@ async function createStaticServer() {
   });
 
   const address = server.address();
-  if (!address || typeof address === "string") throw new Error("Failed to start CV server.");
+  if (!address || typeof address === "string")
+    throw new Error("Failed to start CV server.");
 
   return { server, url: `http://127.0.0.1:${address.port}/` };
 }
 
 async function renderPdf(url, pdfPath) {
   await mkdir(path.dirname(pdfPath), { recursive: true });
-  await rm(pdfPath, { force: true });
 
   await runAsync("weasyprint", [
     "--quiet",
@@ -244,42 +285,75 @@ async function renderPdf(url, pdfPath) {
     url,
     pdfPath,
   ]);
-
-  const pdfStats = await stat(pdfPath);
-  console.log(`Created ${path.relative(repositoryDirectory, pdfPath)} (${formatBytes(pdfStats.size)})`);
 }
 
 async function main() {
-  const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+  const variants = await discoverVariants();
+  const args = process.argv.slice(2);
+  const requestedVariant = args[0] ?? "all";
+  if (args.length > 1) throw new Error("Pass one CV variant or all.");
+  if (requestedVariant === "--list") {
+    for (const variant of variants) console.log(variant.key);
+    return;
+  }
+  if (requestedVariant === "--help") {
+    console.log("Usage: npm run pdf -- [all|<variant>|--list]");
+    return;
+  }
   const selectedVariants =
     requestedVariant === "all"
-      ? pdfVariants
-      : pdfVariants.filter((variant) => variant.key === requestedVariant);
-
+      ? variants
+      : variants.filter((variant) => variant.key === requestedVariant);
   if (selectedVariants.length === 0) {
     throw new Error(
-      `Unknown CV variant "${requestedVariant}". Use all, general, supabase, gismart, ni-bloom, binance, or riseguide.`,
+      `Unknown CV variant "${requestedVariant}". Use all or: ${variants.map((variant) => variant.key).join(", ")}.`,
     );
   }
 
+  await runAsync("weasyprint", ["--version"]);
   console.log("Building the CV...");
-  run(pnpmCommand, ["--dir", cvDirectory, "run", "build"]);
+  await runAsync(process.execPath, [
+    require.resolve("next/dist/bin/next"),
+    "build",
+    "--webpack",
+  ]);
 
   console.log("Compressing generated images...");
   await compressStaticImages();
 
-  const { server, url } = await createStaticServer();
+  await mkdir(pdfDirectory, { recursive: true });
+  const stagingDirectory = await mkdtemp(path.join(pdfDirectory, ".render-"));
+  let server;
   try {
+    const staticServer = await createStaticServer();
+    server = staticServer.server;
     for (const variant of selectedVariants) {
-      const variantUrl = new URL(variant.route, url).href;
-      const outputPath = path.join(pdfDirectory, variant.filename);
-      console.log(`Rendering ${variant.key} A4 PDF with WeasyPrint...`);
-      await renderPdf(variantUrl, outputPath);
+      console.log(`Rendering ${variant.key} A4 PDF...`);
+      await renderPdf(
+        new URL(variant.route, staticServer.url).href,
+        path.join(stagingDirectory, variant.filename),
+      );
     }
+    // Keep existing PDFs until every requested version has rendered successfully.
+    const results = [];
+    for (const variant of selectedVariants) {
+      const outputPath = path.join(pdfDirectory, variant.filename);
+      await rename(path.join(stagingDirectory, variant.filename), outputPath);
+      const pdfStats = await stat(outputPath);
+      results.push({
+        variant: variant.key,
+        filename: path.relative(cvDirectory, outputPath),
+        size: formatBytes(pdfStats.size),
+      });
+    }
+    printPdfResults(results);
   } finally {
-    await new Promise((resolve, reject) => {
-      server.close((error) => (error ? reject(error) : resolve()));
-    });
+    if (server) {
+      await new Promise((resolve, reject) => {
+        server.close((error) => (error ? reject(error) : resolve()));
+      });
+    }
+    await rm(stagingDirectory, { recursive: true, force: true });
   }
 }
 

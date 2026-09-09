@@ -10,6 +10,7 @@ export default defineConfig([
     },
   },
   globalIgnores([
+    "cv/**",
     ".next/**",
     "dist/**",
     "out/**",

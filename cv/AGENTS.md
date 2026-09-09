@@ -7,3 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+For a vacancy-specific CV, use the local [`tailored-cv`](.agents/skills/tailored-cv/SKILL.md) skill. Read it before
+creating or updating a tailored variant. It defines the evidence, content, file structure, A4 fit, and verification
+requirements for this project.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CvPage } from "../CvPage";
-import { niBloomCv } from "../cv-data";
+import { CvPage } from "../../components/CvPage";
+import { cv } from "./cv-data";
 
 export const metadata: Metadata = {
   title: "Vladyslav Dihtiarenko - Senior Frontend Developer CV for N. I Bloom",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function NiBloomCvPage() {
-  return <CvPage content={niBloomCv} />;
+  return <CvPage content={cv} />;
 }

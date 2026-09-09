@@ -51,6 +51,7 @@
     "dist/dev/types/**/*.ts"
   ],
   "exclude": [
+    "cv",
     "node_modules",
     "dist"
   ]

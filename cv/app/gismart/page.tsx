@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CvPage } from "../CvPage";
-import { gismartCv } from "../cv-data";
+import { CvPage } from "../../components/CvPage";
+import { cv } from "./cv-data";
 
 export const metadata: Metadata = {
   title: "Vladyslav Dihtiarenko - Frontend Developer CV for Gismart",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function GismartCvPage() {
-  return <CvPage content={gismartCv} />;
+  return <CvPage content={cv} />;
 }

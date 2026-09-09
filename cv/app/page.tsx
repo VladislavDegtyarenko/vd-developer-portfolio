@@ -1,6 +1,6 @@
-import { CvPage } from "./CvPage";
-import { generalCv } from "./cv-data";
+import { CvPage } from "../components/CvPage";
+import { cv } from "./cv-data";
 
 export default function Home() {
-  return <CvPage content={generalCv} />;
+  return <CvPage content={cv} />;
 }

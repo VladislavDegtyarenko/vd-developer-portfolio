@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tailored CV"
+  short_description: "Create evidence-based tailored CV variants"
+  default_prompt: "Use $tailored-cv to create a vacancy-specific CV variant in this project."

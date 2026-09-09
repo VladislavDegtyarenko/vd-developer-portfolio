@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CvPage } from "../CvPage";
-import { binanceCv } from "../cv-data";
+import { CvPage } from "../../components/CvPage";
+import { cv } from "./cv-data";
 
 export const metadata: Metadata = {
   title: "Vladyslav Dihtiarenko - Senior Frontend Engineer CV for Binance",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function BinanceCvPage() {
-  return <CvPage content={binanceCv} />;
+  return <CvPage content={cv} />;
 }

@@ -1,0 +1,210 @@
+.document {
+  display: flex;
+  min-width: fit-content;
+  min-height: 100vh;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+}
+
+.page {
+  width: var(--a4-width);
+  min-height: var(--a4-height);
+  padding: 11mm 14mm 9mm;
+  border-top: 1.2mm solid var(--accent-bright);
+  color: var(--foreground);
+  background: var(--background);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 16%);
+  font-size: 3mm;
+  line-height: 1.4;
+}
+
+.hero {
+  padding-bottom: 4mm;
+  border-bottom: 0.3mm solid var(--border);
+
+  h1 {
+    font-size: 7.8mm;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+}
+
+.eyebrow {
+  margin-top: 1.5mm;
+  color: var(--accent-bright);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 3mm;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contactList {
+  margin-top: 3mm;
+  color: var(--muted);
+  font-size: 2.45mm;
+  font-style: normal;
+  line-height: 1.6;
+
+  a,
+  span {
+    display: inline-block;
+  }
+
+  a::before {
+    margin: 0 1.6mm;
+    color: var(--muted-dark);
+    content: "·";
+  }
+
+  a:first-child::before {
+    content: none;
+  }
+}
+
+.summary {
+  margin-top: 3mm;
+  color: var(--muted);
+  font-size: 3.05mm;
+  line-height: 1.48;
+}
+
+.skills,
+.experience,
+.languages {
+  margin-top: 4mm;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  margin-bottom: 2.5mm;
+  color: var(--accent-bright);
+  font-size: 3.8mm;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  break-after: avoid;
+
+  &::after {
+    height: 0.25mm;
+    flex: 1;
+    background: var(--border);
+    content: "";
+  }
+}
+
+.skillList {
+  color: var(--muted);
+  font-size: 2.85mm;
+  line-height: 1.45;
+
+  p + p {
+    margin-top: 0.8mm;
+  }
+
+  strong {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+}
+
+.role {
+  padding-left: 3.5mm;
+  border-left: 0.5mm solid var(--accent);
+  break-inside: avoid;
+
+  & + & {
+    margin-top: 3.3mm;
+  }
+
+  ul {
+    margin-top: 1.6mm;
+    padding-left: 4mm;
+    color: var(--muted);
+  }
+
+  li + li {
+    margin-top: 0.7mm;
+  }
+
+  li::marker {
+    color: var(--accent-bright);
+  }
+}
+
+.roleHeader {
+  h3 {
+    color: var(--foreground);
+    font-size: 3.5mm;
+    line-height: 1.15;
+  }
+
+  p {
+    margin-top: 0.6mm;
+    color: var(--muted-dark);
+    font-size: 2.6mm;
+    font-weight: 500;
+  }
+}
+
+.projects {
+  margin-top: 1.6mm;
+  color: var(--muted);
+
+  p + p {
+    margin-top: 1.2mm;
+  }
+
+  strong {
+    color: var(--foreground);
+  }
+}
+
+.roleSummary {
+  margin-top: 1.6mm;
+  color: var(--muted);
+}
+
+.technologies {
+  margin-top: 1.5mm;
+  color: var(--muted-dark);
+  font-size: 2.65mm;
+  line-height: 1.4;
+}
+
+.languages {
+  break-inside: avoid;
+
+  p {
+    color: var(--muted);
+    font-size: 2.85mm;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4mm;
+  padding-top: 2.4mm;
+  border-top: 0.25mm solid var(--border);
+  color: var(--muted-dark);
+  font-size: 2.5mm;
+}
+
+@media print {
+  .document {
+    display: block;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .page {
+    box-shadow: none;
+  }
+}

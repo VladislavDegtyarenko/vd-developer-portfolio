@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CvPage } from "../CvPage";
-import { supabaseCv } from "../cv-data";
+import { CvPage } from "../../components/CvPage";
+import { cv } from "./cv-data";
 
 export const metadata: Metadata = {
   title: "Vladyslav Dihtiarenko — Frontend Engineer CV for Supabase",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function SupabaseCvPage() {
-  return <CvPage content={supabaseCv} />;
+  return <CvPage content={cv} />;
 }
